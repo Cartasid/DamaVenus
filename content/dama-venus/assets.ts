@@ -14,8 +14,8 @@ export type PrioritizedAsset = {
 export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "home-release-cover",
-    finalPath: "/assets/dama-venus/home/dama-venus-home-release-cover.jpg",
-    sourcePath: "assets/source/releases/current-chapter-cover.jpg",
+    finalPath: "/assets/dama-venus/home/dv_home_release_cover_primary_color_4x5_v01.jpg",
+    sourcePath: "public/assets/dama-venus/curated/dv_curated_release_cover_primary_color_4x5_v01.jpg",
     area: "home",
     recommendedModuleType: "image",
     altDraft: "Current Chapter cover",
@@ -26,8 +26,8 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "home-visual-preview",
-    finalPath: "/assets/dama-venus/visuals/dama-venus-visuals-preview.jpg",
-    sourcePath: "assets/source/visuals/frames-in-motion.jpg",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_story_frame01_bw_16x9_v01.jpeg",
+    sourcePath: "public/assets/dama-venus/curated/dv_curated_visual_story_frame01_bw_16x9_v01.jpeg",
     area: "home",
     recommendedModuleType: "image",
     altDraft: "Frames in Motion preview",
@@ -38,8 +38,8 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "press-epk",
-    finalPath: "/assets/dama-venus/press/dama-venus-press-epk.jpg",
-    sourcePath: "assets/source/press/dama-venus-epk.pdf",
+    finalPath: "/assets/dama-venus/press/dv_press_portrait_main_color_3x4_v01.jpeg",
+    sourcePath: "public/assets/dama-venus/curated/dv_curated_press_portrait_main_color_3x4_v01.jpeg",
     area: "press",
     recommendedModuleType: "document",
     altDraft: "Dama Venus EPK",
