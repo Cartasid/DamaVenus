@@ -3,15 +3,16 @@ import type { ReactNode } from "react";
 import "./globals.css";
 import SiteFooter from "@/components/layout/site-footer";
 import SiteHeader from "@/components/layout/site-header";
+import { siteConfig } from "@/content/data/site.config";
 
 export const metadata: Metadata = {
-  title: "Dama Venus",
-  description: "Official website"
+  title: siteConfig.metadata.title,
+  description: siteConfig.metadata.description
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="de">
+    <html lang={siteConfig.language}>
       <body className="min-h-screen flex flex-col">
         <a href="#main-content" className="skip-link">
           Zum Inhalt springen
