@@ -219,6 +219,12 @@ Aktueller Schwerpunkt: **Kuratierung und technische Normalisierung des bereits i
 - HEIC-Dateien noch nicht in web-/pipeline-sichere Zielformate überführt
 - Naming/Ordnung noch nicht auf die Zielstruktur aus Kapitel 8 normalisiert
 
+### Technischer Grenzfall: HEIC in der Preparation-Pipeline (verbindlich)
+- Das Preparation-Script versucht HEIC-Dateien zuerst direkt über verfügbares Tooling zu verarbeiten (`magick`, `convert`, `heif-convert`, `sips`).
+- Wenn kein HEIC-Tooling verfügbar ist, gilt verbindlich der Fallback: **markierter Skip pro Variante** (`status: skipped-heic`), Eintrag einer **TODO-Liste** im Report und **nicht-blockierender Exitcode**.
+- Die Nicht-Blockierung gilt ausschließlich für den klar markierten Fall „HEIC-Skip wegen fehlendem Tooling“; alle anderen Verarbeitungsfehler bleiben build-blockierend.
+- Der Metadaten-Report muss dafür einen eigenen Abschnitt `heicStatus` ausgeben (Support-Status, gewähltes Tool, Fallback-Nutzung, Skip-Zähler, TODO-Liste).
+
 ### Konkrete Empfehlungen für Nachlieferung
 1. Mindestens 20–40 Realassets in einem ersten Pool bereitstellen (Portraits, Editorial-Stills, Wide Frames, Detailshots).
 2. Davon gezielt:
