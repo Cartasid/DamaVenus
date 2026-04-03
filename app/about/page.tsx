@@ -6,6 +6,13 @@ import { assetMap } from "@/content/data/site.config";
 export default function AboutPage() {
   const { aboutBio, aboutIntro, aboutKeyStatements, aboutVisualModules } = aboutPageModel;
   const aboutCta = aboutIntro.primaryCtaPattern;
+  const cropFocusToObjectPosition: Record<string, string> = {
+    "face-center": "50% 36%",
+    "upper-face-focus": "50% 30%",
+    "mid-frame-subject": "50% 42%",
+    "gaze-axis-center": "52% 40%",
+    "wide-environment": "50% 50%"
+  };
 
   const featuredPortraits = [...aboutVisualModules.featuredPortraits].sort(
     (a, b) => a.sectionPriority - b.sectionPriority
@@ -13,21 +20,34 @@ export default function AboutPage() {
   const supportingVisuals = [...aboutVisualModules.supportingVisuals].sort(
     (a, b) => a.sectionPriority - b.sectionPriority
   );
+  const primarySupportingVisual =
+    supportingVisuals.find((visual) => visual.role !== "reserve") ??
+    supportingVisuals.find((visual) => visual.role === "reserve");
   const keyStatements = [...aboutKeyStatements].sort((a, b) => a.sectionPriority - b.sectionPriority);
 
   const leadPortrait = featuredPortraits[0];
   const leadPortraitAsset = leadPortrait ? assetMap[leadPortrait.assetId] : undefined;
+  const leadPortraitObjectPosition = leadPortrait
+    ? cropFocusToObjectPosition[leadPortrait.cropFocusHint] ?? "50% 50%"
+    : "50% 50%";
+  const supportingVisualAsset = primarySupportingVisual
+    ? assetMap[primarySupportingVisual.assetId]
+    : undefined;
+  const supportingVisualObjectPosition = primarySupportingVisual
+    ? cropFocusToObjectPosition[primarySupportingVisual.cropFocusHint] ?? "50% 50%"
+    : "50% 50%";
 
   return (
-    <section className="space-y-6" aria-labelledby="about-title">
+    <section className="space-y-8" aria-labelledby="about-title">
       {leadPortraitAsset ? (
-        <article className="overflow-hidden rounded-lg border border-white/10" aria-label="Intro">
+        <article className="space-y-3 overflow-hidden rounded-lg border border-white/10" aria-label="Intro">
           <div className="relative aspect-[4/5] sm:aspect-[3/4]">
             <Image
               src={leadPortraitAsset.src}
               alt={leadPortrait.altTextNote ?? leadPortraitAsset.alt ?? "Lead portrait"}
               fill
               className="object-cover"
+              style={{ objectPosition: leadPortraitObjectPosition }}
               sizes="(min-width: 640px) 420px, 100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/15" aria-hidden="true" />
@@ -52,44 +72,34 @@ export default function AboutPage() {
         </header>
       )}
 
-      <section className="space-y-2" aria-label="Haltung">
+      <section className="space-y-3" aria-label="Haltung">
         <p className="text-sm text-muted">{aboutBio.mediumText}</p>
       </section>
 
-      <section className="space-y-2 rounded-lg border border-white/10 p-4" aria-label="Kurzprofil">
+      <section className="space-y-3 rounded-lg border border-white/10 p-4" aria-label="Kurzprofil">
         <p className="text-xs uppercase tracking-wide text-muted">Short Bio</p>
         <p className="text-sm text-muted">{aboutBio.shortText}</p>
       </section>
 
-      {supportingVisuals.length ? (
-        <section className="grid gap-3 sm:grid-cols-2" aria-label="Supporting Visuals">
-          {supportingVisuals.map((visual) => {
-            const asset = assetMap[visual.assetId];
-            if (!asset) {
-              return null;
-            }
-
-            const ratioClass = visual.role === "reserve" ? "aspect-[3/4]" : "aspect-[4/5]";
-
-            return (
-              <article key={visual.assetId} className="space-y-2">
-                <div className={`relative ${ratioClass} overflow-hidden rounded-md border border-white/10`}>
-                  <Image
-                    src={asset.src}
-                    alt={visual.altTextNote ?? asset.alt ?? "Supporting visual"}
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 768px) 280px, 48vw"
-                  />
-                </div>
-              </article>
-            );
-          })}
+      {primarySupportingVisual && supportingVisualAsset ? (
+        <section className="space-y-3" aria-label="Supporting Visuals">
+          <article>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-md border border-white/10">
+              <Image
+                src={supportingVisualAsset.src}
+                alt={primarySupportingVisual.altTextNote ?? supportingVisualAsset.alt ?? "Supporting visual"}
+                fill
+                className="object-cover"
+                style={{ objectPosition: supportingVisualObjectPosition }}
+                sizes="(min-width: 768px) 360px, 100vw"
+              />
+            </div>
+          </article>
         </section>
       ) : null}
 
       {aboutBio.longArtistNote ? (
-        <section className="space-y-2 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-label="Artist Note">
+        <section className="space-y-3 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-label="Artist Note">
           <p className="text-sm text-muted">{aboutBio.longArtistNote}</p>
         </section>
       ) : null}
