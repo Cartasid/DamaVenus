@@ -27,24 +27,22 @@ export default function AboutPage() {
 
   const leadPortrait = featuredPortraits[0];
   const leadPortraitAsset = leadPortrait ? assetMap[leadPortrait.assetId] : undefined;
-  const leadPortraitObjectPosition = leadPortrait
-    ? cropFocusToObjectPosition[leadPortrait.cropFocusHint] ?? "50% 50%"
-    : "50% 50%";
-  const supportingVisualAsset = primarySupportingVisual
-    ? assetMap[primarySupportingVisual.assetId]
-    : undefined;
-  const supportingVisualObjectPosition = primarySupportingVisual
-    ? cropFocusToObjectPosition[primarySupportingVisual.cropFocusHint] ?? "50% 50%"
-    : "50% 50%";
+  const resolveAltText = (role: string, preferredAlt?: string, fallbackAlt?: string) => {
+    if (role === "decorative") {
+      return "";
+    }
+
+    return preferredAlt ?? fallbackAlt ?? "Portrait of Dama Venus";
+  };
 
   return (
     <section className="space-y-8" aria-labelledby="about-title">
       {leadPortraitAsset ? (
-        <article className="space-y-3 overflow-hidden rounded-lg border border-white/10" aria-label="Intro">
+        <article className="overflow-hidden rounded-lg border border-white/10">
           <div className="relative aspect-[4/5] sm:aspect-[3/4]">
             <Image
               src={leadPortraitAsset.src}
-              alt={leadPortrait.altTextNote ?? leadPortraitAsset.alt ?? "Lead portrait"}
+              alt={resolveAltText(leadPortrait.role, leadPortrait.altTextNote, leadPortraitAsset.alt)}
               fill
               className="object-cover"
               style={{ objectPosition: leadPortraitObjectPosition }}
@@ -64,7 +62,7 @@ export default function AboutPage() {
         </article>
       ) : (
         <header className="space-y-2">
-          <p className="text-sm uppercase tracking-wide text-muted">{aboutIntro.title}</p>
+          <h2 className="text-sm uppercase tracking-wide text-muted">{aboutIntro.title}</h2>
           <h1 id="about-title" className="font-display text-3xl font-bold">
             {aboutIntro.introLine}
           </h1>
@@ -72,44 +70,37 @@ export default function AboutPage() {
         </header>
       )}
 
-      <section className="space-y-3" aria-label="Haltung">
+      <section className="space-y-2" aria-labelledby="about-bio-heading">
+        <h2 id="about-bio-heading" className="text-xs uppercase tracking-wide text-muted">
+          Haltung
+        </h2>
         <p className="text-sm text-muted">{aboutBio.mediumText}</p>
       </section>
 
-      <section className="space-y-3 rounded-lg border border-white/10 p-4" aria-label="Kurzprofil">
-        <p className="text-xs uppercase tracking-wide text-muted">Short Bio</p>
+      <section className="space-y-2 rounded-lg border border-white/10 p-4" aria-labelledby="about-short-bio-heading">
+        <h3 id="about-short-bio-heading" className="text-xs uppercase tracking-wide text-muted">
+          Short Bio
+        </h3>
         <p className="text-sm text-muted">{aboutBio.shortText}</p>
       </section>
 
-      {primarySupportingVisual && supportingVisualAsset ? (
-        <section className="space-y-3" aria-label="Supporting Visuals">
-          <article>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-md border border-white/10">
-              <Image
-                src={supportingVisualAsset.src}
-                alt={primarySupportingVisual.altTextNote ?? supportingVisualAsset.alt ?? "Supporting visual"}
-                fill
-                className="object-cover"
-                style={{ objectPosition: supportingVisualObjectPosition }}
-                sizes="(min-width: 768px) 360px, 100vw"
-              />
-            </div>
-          </article>
-        </section>
-      ) : null}
-
       {aboutBio.longArtistNote ? (
-        <section className="space-y-3 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-label="Artist Note">
+        <section className="space-y-2 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-labelledby="about-artist-note-heading">
+          <h3 id="about-artist-note-heading" className="text-xs uppercase tracking-wide text-muted">
+            Artist Note
+          </h3>
           <p className="text-sm text-muted">{aboutBio.longArtistNote}</p>
         </section>
       ) : null}
 
-      <section className="space-y-3 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-label="Arbeitsweise">
-        <p className="text-xs uppercase tracking-wide text-muted">Arbeitsweise</p>
-        <ul className="grid gap-2 sm:grid-cols-2" aria-label="Methodik und Haltung">
+      <section className="space-y-3 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-labelledby="about-method-heading">
+        <h2 id="about-method-heading" className="text-xs uppercase tracking-wide text-muted">
+          Arbeitsweise
+        </h2>
+        <ul className="grid gap-2 sm:grid-cols-2">
           {keyStatements.map((statement) => (
             <li key={statement.id} className="rounded-md border border-white/10 p-3 text-sm text-muted">
-              <p className="font-medium text-foreground">{statement.title}</p>
+              <h3 className="font-medium text-foreground">{statement.title}</h3>
               <p>{statement.shortText}</p>
             </li>
           ))}
@@ -121,6 +112,36 @@ export default function AboutPage() {
           {aboutCta.label}
         </Link>
       </div>
+
+      {supportingVisuals.length ? (
+        <section className="grid gap-3 sm:grid-cols-2" aria-labelledby="about-supporting-visuals-heading">
+          <h2 id="about-supporting-visuals-heading" className="sr-only">
+            Supporting Visuals
+          </h2>
+          {supportingVisuals.map((visual) => {
+            const asset = assetMap[visual.assetId];
+            if (!asset) {
+              return null;
+            }
+
+            const ratioClass = visual.role === "reserve" ? "aspect-[3/4]" : "aspect-[4/5]";
+
+            return (
+              <article key={visual.assetId} className="space-y-2">
+                <div className={`relative ${ratioClass} overflow-hidden rounded-md border border-white/10`}>
+                  <Image
+                    src={asset.src}
+                    alt={resolveAltText(visual.role, visual.altTextNote, asset.alt)}
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 280px, 48vw"
+                  />
+                </div>
+              </article>
+            );
+          })}
+        </section>
+      ) : null}
     </section>
   );
 }
