@@ -17,7 +17,14 @@ export const assetMap: Record<string, AssetMapItem> = Object.fromEntries(
     asset.id,
     {
       src: asset.finalPath,
-      alt: asset.altDraft
+      alt: asset.altDraft,
+      cropHint: asset.cropHint,
+      focusHint: asset.focusHint,
+      priority: asset.priority,
+      swColorMode: asset.swColorMode,
+      overlaySuitability: asset.overlaySuitability,
+      role: asset.role,
+      copyKey: asset.copyKey
     }
   ])
 );

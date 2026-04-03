@@ -2,9 +2,26 @@ export type AssetRef = {
   id: string;
 };
 
+export type AssetSwColorMode = "excellent" | "good" | "limited" | "n/a";
+
+export type AssetOverlaySuitability =
+  | "supports-dark-overlay"
+  | "supports-light-overlay"
+  | "no-overlay"
+  | "n/a";
+
+export type AssetRole = "decorative" | "informative";
+
 export type AssetMapItem = {
   src: string;
   alt?: string;
+  cropHint: string;
+  focusHint: string;
+  priority: number;
+  swColorMode: AssetSwColorMode;
+  overlaySuitability: AssetOverlaySuitability;
+  role: AssetRole;
+  copyKey?: string;
 };
 
 export type CTA = {
