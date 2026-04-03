@@ -118,3 +118,19 @@
 3. **Explizit offene Punkte unterhalb des Folds (nicht finalisiert)**
    - Die restlichen Homepage-Module/Sequenzen unterhalb des Einstiegs bleiben weiterhin offen in Detailausbau und Produktionsreife (Content-Finalisierung, Asset-Kuration, Feintuning je Modul).
    - Insbesondere die vollständige dramaturgische Sequenz nach dem Einstieg ist nicht als final abgenommen; abgeschlossen ist ausschließlich die Above-the-fold-Definition.
+
+## Update 2026-04-03 – Schritt 09b Home-Module unterhalb des Folds (Status konkretisiert)
+1. **Fertig umgesetzte Home-Module unterhalb des Folds**
+   - Als umgesetzt/funktional eingebunden gelten aktuell die Sektionen: **Featured Release**, **Visual Story**, **Statement**, **Press/EPK** und **Contact/Newsletter** (jeweils als eigene Homepage-Abschnitte unterhalb des Above-the-fold-Einstiegs).
+2. **Konkret eingebundene produktionsnahe Copy aus `05_copywriting.md`**
+   - Featured Release: „**Current Chapter**“ + „**New music, framed in shadow and light.**“ + CTA „**Listen Now**“.
+   - Visual Story: „**Frames in Motion**“ + „**Portraits, details, and atmosphere—curated in sequence.**“ + CTA „**View Visuals**“.
+   - Statement: „**I don’t chase volume. I shape presence.**“.
+   - Press/EPK: „**Press & EPK**“ + „**Images, bio, and release facts for press inquiries.**“ + CTA „**Open EPK**“.
+   - Contact/Newsletter: „**Let’s Create the Next Chapter.**“ + „**For bookings, collaborations, and selected requests.**“ (CTA derzeit „Send Inquiry“ als funktionsfähige Kontaktführung).
+3. **Weiterhin vorläufig / nicht final**
+   - Finale Asset-Kuration pro Modul (inkl. endgültiger Auswahl/Abnahme der Bild-/Visual-Varianten) bleibt offen.
+   - Faktische Endstände für Press/EPK/Bio/Release-Details, verifizierte Kontakt-/Zuständigkeitsdaten sowie vollständige Credits/Downloads sind weiterhin nicht vollständig finalisiert.
+   - Motion-Details und Feintuning je Sektion sind noch nicht als final abgenommen.
+4. **Nächster Umsetzungsschritt**
+   - Nächster konkreter Schritt ist ein gezielter **Polishing-Pass** für die unterhalb-des-Folds-Module: Motion-Feintuning, Accessibility-/Kontrast-/Fokus-Review sowie Performance-Pass (Assets, Loading, Rendering) vor finaler Abnahme.
