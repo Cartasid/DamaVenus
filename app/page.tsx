@@ -1,15 +1,14 @@
 import {
   homepageIntro,
-  homepageRelease,
-  homepageServices,
-  homepageStatement,
-  homepageVisuals
+  homepageModules
 } from "@/content/data/homepage.data";
 import { assetMap, siteConfig } from "@/content/data/site.config";
 
 export default function HomePage() {
-  const releaseCover = assetMap[homepageRelease.coverAsset.id];
-  const visualsPreview = homepageVisuals.asset ? assetMap[homepageVisuals.asset.id] : undefined;
+  const resolvedModules = homepageModules.map((module) => ({
+    ...module,
+    asset: "asset" in module ? assetMap[module.asset.id] : undefined
+  }));
 
   return (
     <section aria-labelledby="home-title" className="space-y-8">
@@ -21,27 +20,56 @@ export default function HomePage() {
         <p className="text-lg">{homepageIntro.statement}</p>
       </div>
 
-      <div className="space-y-2">
-        <h2 className="font-display text-2xl font-semibold">{homepageRelease.title}</h2>
-        <p className="text-muted">{homepageRelease.description}</p>
-        <p className="text-xs text-muted">Asset: {releaseCover?.src}</p>
-      </div>
+      {resolvedModules.map((module) => {
+        if (module.type === "release") {
+          return (
+            <div key={module.id} className="space-y-2">
+              <h2 className="font-display text-2xl font-semibold">{module.title}</h2>
+              <p className="text-muted">{module.description}</p>
+              {module.asset ? (
+                <img
+                  src={module.asset.src}
+                  alt={module.asset.alt ?? ""}
+                  className="h-48 w-full rounded-md object-cover"
+                />
+              ) : null}
+              <p className="text-xs text-muted">
+                {module.asset?.overlayOrTransparencyNote ?? "No overlay note"}
+              </p>
+              <p className="text-xs text-muted">
+                {module.asset?.bwColorSuitability ?? "No BW/color hint"}
+              </p>
+            </div>
+          );
+        }
 
-      <div className="space-y-2">
-        <h2 className="font-display text-2xl font-semibold">{homepageVisuals.headline}</h2>
-        <p className="text-muted">{homepageVisuals.subhead}</p>
-        <p className="text-xs text-muted">Asset: {visualsPreview?.src}</p>
-      </div>
-
-      <p className="font-display text-xl">{homepageStatement.headline}</p>
-
-      <div className="space-y-2">
-        <h2 className="font-display text-2xl font-semibold">{homepageServices.headline}</h2>
-        <p className="text-muted">{homepageServices.subhead}</p>
-        <ul className="list-inside list-disc text-muted">
-          {homepageServices.body?.map((service) => <li key={service}>{service}</li>)}
-        </ul>
-      </div>
+        return (
+          <div key={module.id} className="space-y-2">
+            <h2 className="font-display text-2xl font-semibold">{module.headline}</h2>
+            {module.subhead ? <p className="text-muted">{module.subhead}</p> : null}
+            {module.asset ? (
+              <>
+                <img
+                  src={module.asset.src}
+                  alt={module.asset.alt ?? ""}
+                  className="h-48 w-full rounded-md object-cover"
+                />
+                <p className="text-xs text-muted">
+                  {module.asset.overlayOrTransparencyNote ?? "No overlay note"}
+                </p>
+                <p className="text-xs text-muted">
+                  {module.asset.bwColorSuitability ?? "No BW/color hint"}
+                </p>
+              </>
+            ) : null}
+            {"body" in module && module.body ? (
+              <ul className="list-inside list-disc text-muted">
+                {module.body.map((service) => <li key={service}>{service}</li>)}
+              </ul>
+            ) : null}
+          </div>
+        );
+      })}
     </section>
   );
 }
