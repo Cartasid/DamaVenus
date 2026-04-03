@@ -5,44 +5,68 @@ import { assetMap } from "@/content/data/site.config";
 
 export default function MusicPage() {
   const featured = musicData.releases.find((release) => release.id === musicData.featuredReleaseId) ?? musicData.releases[0];
-  const selectedSingles = musicData.releases.filter((release) => !release.featured);
+  const selectedReleases = [...musicData.releases]
+    .sort((a, b) => a.priority - b.priority)
+    .filter((release) => release.id !== featured.id);
+  const leadSecondary = selectedReleases[0];
+  const followUpReleases = selectedReleases.slice(1);
 
-  const featuredAsset = assetMap[featured.coverAsset.id];
+  const featuredAsset = assetMap[featured.coverAsset.id] ?? (featured.alternateVisualAsset ? assetMap[featured.alternateVisualAsset.id] : undefined);
 
   return (
     <section className="space-y-10">
-      <header className="space-y-3">
-        <p className="text-xs uppercase tracking-[0.2em] text-muted">{musicData.intro.label}</p>
-        <h1 className="font-display text-3xl font-bold">{musicData.intro.headline}</h1>
-        <p className="max-w-2xl text-muted">{musicData.intro.subhead}</p>
-      </header>
+      <header className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.03] p-5 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
+        <div className="space-y-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-muted">{musicData.intro.label}</p>
+          <h1 className="font-display text-3xl font-semibold md:text-4xl">{musicData.intro.headline}</h1>
+          <p className="max-w-xl text-sm text-muted md:text-base">{musicData.intro.subhead}</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-muted">Featured Release · {featured.title}</p>
+        </div>
 
-      <article id={featured.id} className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.03] p-5 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center">
         {featuredAsset ? (
           <Image
             src={featuredAsset.src}
             alt={featuredAsset.alt ?? featured.title}
             width={1200}
             height={1500}
+            priority
             sizes="(max-width: 768px) 100vw, 40vw"
             className="h-72 w-full rounded-md object-cover"
           />
+        ) : null}
+
+        <div>
+          <Link href={featured.primaryCta.href} className="first-impression-cta">
+            {featured.primaryCta.label}
+          </Link>
+        </div>
+      </header>
+
+      <article id={featured.id} className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.03] p-5 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center">
+        {featuredAsset ? (
+          <div className="aspect-[4/5] w-full overflow-hidden rounded-md">
+            <Image
+              src={featuredAsset.src}
+              alt={featuredAsset.alt ?? featured.title}
+              width={1200}
+              height={1500}
+              sizes="(max-width: 768px) 100vw, 40vw"
+              className="h-full w-full object-cover"
+            />
+          </div>
         ) : null}
         <div className="space-y-3">
           <p className="text-xs uppercase tracking-[0.2em] text-muted">Featured Release</p>
           <h2 className="font-display text-2xl font-semibold">{featured.title}</h2>
           {featured.subtitle ? <p className="text-sm text-muted">{featured.subtitle}</p> : null}
           <p className="text-sm text-muted">{featured.shortText}</p>
-          <p className="text-xs text-muted">
-            {featured.releaseDate ?? "TBA"} · {featured.releaseType}
-          </p>
           <div className="flex flex-wrap gap-3">
             <Link href={featured.primaryCta.href} className="first-impression-cta">
-              {featured.primaryCta.label}
+              {musicData.ctaLabels.listen}
             </Link>
             {featured.watchLinks?.[0] ? (
               <Link href={featured.watchLinks[0].href} className="first-impression-cta">
-                {featured.watchLinks[0].label}
+                {musicData.ctaLabels.watch}
               </Link>
             ) : null}
           </div>
@@ -63,8 +87,32 @@ export default function MusicPage() {
                 </Link>
               </li>
             );
-          })}
-        </ul>
+          })() : null}
+          <ul className="grid gap-3 md:grid-cols-2">
+            {followUpReleases.map((release) => {
+              const releaseAsset = assetMap[release.coverAsset.id];
+              return (
+                <li key={release.id} id={release.id} className="space-y-3 rounded-lg border border-white/10 p-4">
+                  {releaseAsset ? (
+                    <Image
+                      src={releaseAsset.src}
+                      alt={releaseAsset.alt ?? release.title}
+                      width={900}
+                      height={900}
+                      sizes="(max-width: 768px) 100vw, 30vw"
+                      className="h-40 w-full rounded-md object-cover"
+                    />
+                  ) : null}
+                  <h3 className="font-display text-lg">{release.title}</h3>
+                  <p className="text-sm text-muted">{release.shortText}</p>
+                  <Link href={release.primaryCta.href} className="first-impression-cta">
+                    {release.primaryCta.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </section>
 
       <section id="visual-releases" className="space-y-3">
