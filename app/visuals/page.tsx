@@ -10,6 +10,30 @@ export default function VisualsPage() {
     const baseAlt = asset.alt?.trim() || "Visual";
     return altTextNotes ? `${baseAlt} — ${altTextNotes}` : baseAlt;
   };
+  const getSequenceMediaClass = (
+    asset: (typeof assetMap)[string] | undefined,
+    phase: "sw-first" | "mid-peak" | "cooldown"
+  ) => {
+    const phaseClass =
+      phase === "sw-first"
+        ? "grayscale saturate-0 brightness-95"
+        : phase === "mid-peak"
+          ? "grayscale-0 saturate-[1.2] brightness-100"
+          : "grayscale-[55%] saturate-[0.55] brightness-95";
+    const swColorClass =
+      asset?.swColorMode === "excellent"
+        ? phase === "mid-peak"
+          ? "contrast-110"
+          : "contrast-105"
+        : asset?.swColorMode === "good"
+          ? "contrast-105"
+          : "contrast-100";
+    return [phaseClass, swColorClass].filter(Boolean).join(" ");
+  };
+  const getOverlayClass = (asset: (typeof assetMap)[string] | undefined, module: "intro" | "lead" | "series" | "editorial" | "portrait" | "quiet" | "linked") => {
+    const overlayStrength = asset?.overlaySuitability === "supports-dark-overlay" ? "strong" : "subtle";
+    return `visual-overlay visual-overlay--${module} visual-overlay--${overlayStrength}`;
+  };
 
   const sortedEntries = [...visualsData.entries].sort((a, b) => a.order - b.order || a.priority - b.priority);
 
@@ -35,7 +59,7 @@ export default function VisualsPage() {
             width={1400}
             height={900}
             sizes="(max-width: 768px) 100vw, 60vw"
-            className="h-64 w-full rounded-md object-cover"
+            className={`h-64 w-full rounded-md object-cover ${getSequenceMediaClass(openerAsset, "sw-first")}`}
           />
         ) : null}
         <div className="space-y-2">
@@ -54,8 +78,9 @@ export default function VisualsPage() {
               fill
               priority
               sizes="(max-width: 768px) 100vw, 75vw"
-              className="object-cover"
+              className={`object-cover ${getSequenceMediaClass(leadAsset, "sw-first")}`}
             />
+            <div className={getOverlayClass(leadAsset, "lead")} aria-hidden="true" />
           </div>
           <h2 id={`${leadSequenceEntry.id}-lead-title`} className="font-display text-2xl font-semibold">
             {leadSequenceEntry.title}
@@ -81,7 +106,7 @@ export default function VisualsPage() {
                   width={1200}
                   height={1200}
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="h-44 w-full rounded-md object-cover"
+                  className={`h-44 w-full rounded-md object-cover ${getSequenceMediaClass(asset, "mid-peak")}`}
                 />
               ) : null;
             })}
@@ -104,8 +129,9 @@ export default function VisualsPage() {
                     alt={resolveAlt(asset, entry.altTextNotes)}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover"
+                    className={`object-cover ${getSequenceMediaClass(asset, "mid-peak")}`}
                   />
+                  <div className={getOverlayClass(asset, "editorial")} aria-hidden="true" />
                 </div>
               ) : null;
             })}
@@ -124,7 +150,7 @@ export default function VisualsPage() {
             width={1300}
             height={1600}
             sizes="(max-width: 768px) 100vw, 60vw"
-            className="h-[28rem] w-full rounded-md object-cover"
+            className={`h-[28rem] w-full rounded-md object-cover ${getSequenceMediaClass(portraitAsset, "mid-peak")}`}
           />
         </section>
       ) : null}
@@ -144,8 +170,9 @@ export default function VisualsPage() {
                     alt={resolveAlt(asset, entry.altTextNotes)}
                     fill
                     sizes="(max-width: 768px) 50vw, 33vw"
-                    className="object-cover"
+                    className={`object-cover ${getSequenceMediaClass(asset, "cooldown")}`}
                   />
+                  <div className={getOverlayClass(asset, "quiet")} aria-hidden="true" />
                 </div>
               ) : null;
             })}
@@ -167,8 +194,9 @@ export default function VisualsPage() {
                   alt={resolveAlt(linkedVisualAsset, linkedVisual.altTextNotes)}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
+                  className={`object-cover ${getSequenceMediaClass(linkedVisualAsset, "cooldown")}`}
                 />
+                <div className={getOverlayClass(linkedVisualAsset, "linked")} aria-hidden="true" />
               </div>
               <span className="text-sm text-muted">{visualsData.intro.cta.label}</span>
             </Link>

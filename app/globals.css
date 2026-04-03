@@ -60,6 +60,35 @@ button:focus-visible,
   @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-surface focus:px-3 focus:py-2;
 }
 
+.visual-overlay {
+  @apply pointer-events-none absolute inset-0;
+}
+
+.visual-overlay--subtle {
+  @apply bg-gradient-to-t from-black/40 via-black/20 to-transparent;
+}
+
+.visual-overlay--strong {
+  @apply bg-gradient-to-t from-black/70 via-black/45 to-black/10;
+}
+
+.visual-overlay--intro.visual-overlay--subtle,
+.visual-overlay--series.visual-overlay--subtle,
+.visual-overlay--portrait.visual-overlay--subtle {
+  @apply from-black/35 via-black/15;
+}
+
+.visual-overlay--lead.visual-overlay--strong,
+.visual-overlay--editorial.visual-overlay--strong,
+.visual-overlay--linked.visual-overlay--strong {
+  @apply from-black/80 via-black/55 to-black/15;
+}
+
+.visual-overlay--quiet.visual-overlay--strong,
+.visual-overlay--quiet.visual-overlay--subtle {
+  @apply from-black/55 via-black/30 to-black/5;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .first-impression-tile,
   .first-impression-cta,
