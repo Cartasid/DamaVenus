@@ -237,3 +237,20 @@
    - Finale Credits, verifizierbare Zitate und formal bestätigte Quellenangaben sind noch nicht vollständig finalisiert.
 5. **Nächster Schritt**
    - Im nächsten Schritt erfolgt der finale Build der Seite **`/about`** auf Basis der jetzt priorisierten Daten-, Text- und Asset-Struktur.
+
+## Update 2026-04-03 – Schritt 12a `/about` Status konkretisiert (final/nahezu final)
+1. **Auf `/about` jetzt final bzw. nahezu final**
+   - **Intro-Frame/oberer Einstieg:** stabil umgesetzt mit klarer About-Einstiegsstruktur (Label, Headline, Intro-Text) als reproduzierbarer Startpunkt.
+   - **Lead-Portrait-Integration:** primäres Lead-Portrait ist integriert und wird über das Asset-Mapping robust ausgesteuert.
+   - **Bio-Hierarchie (short/medium):** short- und medium-Bio sind als priorisierte Text-Hierarchie gesetzt und konsistent in der Seite verankert.
+   - **CTA-Endpunkt:** der primäre Endpunkt ist stabil auf die Kontaktführung gesetzt (`/contact`).
+2. **Stabile Komponenten/Datenquellen (mit Pfaden)**
+   - `app/about/page.tsx`
+   - `content/data/about.data.ts`
+   - `content/data/site.config.ts` (Asset-Map-Referenzierung)
+   - `content/dama-venus/assets.ts` (About-Asset-IDs/-Priorisierung)
+3. **Offene Restpunkte (klar getrennt)**
+   - **Finale Fact-Validierung:** belastbare/verifizierte Bio-Fakten, Quellen, Credits und ggf. zitierfähige Details sind noch final zu bestätigen.
+   - **Letzter Visual-/Contrast-Feinschliff:** abschließender Polishing-Pass für visuelle Feingewichtung, Kontrast und finale Qualitätsabnahme bleibt ausstehend.
+4. **Expliziter nächster Schritt**
+   - Nächster Umsetzungsschritt ist die **Vorbereitung und Umsetzung von `Press/EPK`**.
