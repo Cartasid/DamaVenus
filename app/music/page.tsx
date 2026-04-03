@@ -19,30 +19,29 @@ export default function MusicPage() {
 
       <article id={featured.id} className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.03] p-5 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center">
         {featuredAsset ? (
-          <Image
-            src={featuredAsset.src}
-            alt={featuredAsset.alt ?? featured.title}
-            width={1200}
-            height={1500}
-            sizes="(max-width: 768px) 100vw, 40vw"
-            className="h-72 w-full rounded-md object-cover"
-          />
+          <div className="aspect-[4/5] w-full overflow-hidden rounded-md">
+            <Image
+              src={featuredAsset.src}
+              alt={featuredAsset.alt ?? featured.title}
+              width={1200}
+              height={1500}
+              sizes="(max-width: 768px) 100vw, 40vw"
+              className="h-full w-full object-cover"
+            />
+          </div>
         ) : null}
         <div className="space-y-3">
           <p className="text-xs uppercase tracking-[0.2em] text-muted">Featured Release</p>
           <h2 className="font-display text-2xl font-semibold">{featured.title}</h2>
           {featured.subtitle ? <p className="text-sm text-muted">{featured.subtitle}</p> : null}
           <p className="text-sm text-muted">{featured.shortText}</p>
-          <p className="text-xs text-muted">
-            {featured.releaseDate ?? "TBA"} · {featured.releaseType}
-          </p>
           <div className="flex flex-wrap gap-3">
             <Link href={featured.primaryCta.href} className="first-impression-cta">
-              {featured.primaryCta.label}
+              {musicData.ctaLabels.listen}
             </Link>
             {featured.watchLinks?.[0] ? (
               <Link href={featured.watchLinks[0].href} className="first-impression-cta">
-                {featured.watchLinks[0].label}
+                {musicData.ctaLabels.watch}
               </Link>
             ) : null}
           </div>
