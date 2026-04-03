@@ -1,4 +1,5 @@
 import type { AssetMapItem } from "@/lib/types";
+import { prioritizedAssets } from "@/content/dama-venus/assets";
 
 export const siteConfig = {
   name: "Dama Venus",
@@ -11,17 +12,12 @@ export const siteConfig = {
   footerLine: "Dama Venus — Music. Image. Presence."
 } as const;
 
-export const assetMap: Record<string, AssetMapItem> = {
-  "home-release-cover": {
-    src: "/assets/releases/current-chapter-cover.jpg",
-    alt: "Current Chapter cover"
-  },
-  "home-visual-preview": {
-    src: "/assets/visuals/frames-in-motion.jpg",
-    alt: "Frames in Motion preview"
-  },
-  "press-epk": {
-    src: "/assets/press/dama-venus-epk.pdf",
-    alt: "Dama Venus EPK"
-  }
-};
+export const assetMap: Record<string, AssetMapItem> = Object.fromEntries(
+  prioritizedAssets.map((asset) => [
+    asset.id,
+    {
+      src: asset.finalPath,
+      alt: asset.altDraft
+    }
+  ])
+);
