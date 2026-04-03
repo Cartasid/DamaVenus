@@ -134,3 +134,19 @@
    - Motion-Details und Feintuning je Sektion sind noch nicht als final abgenommen.
 4. **Nächster Umsetzungsschritt**
    - Nächster konkreter Schritt ist ein gezielter **Polishing-Pass** für die unterhalb-des-Folds-Module: Motion-Feintuning, Accessibility-/Kontrast-/Fokus-Review sowie Performance-Pass (Assets, Loading, Rendering) vor finaler Abnahme.
+
+## Update 2026-04-03 – Schritt 09c Qualitätsstatus Homepage (Review-Ready)
+1. **Umgesetzte Qualitätsverbesserungen (konkret)**
+   - **Responsive:** Above-the-fold-Komposition und unterhalb-des-Folds-Module sind in ihrer mobilen/desktopseitigen Priorisierung konsistent geführt; Interaktionen bleiben ohne Hover-Abhängigkeit nutzbar.
+   - **Accessibility (A11y):** Fokuszustände, Kontrastführung und Touch-/Interaktionsziele wurden im Homepage-Flow gezielt nachgeschärft und als Qualitätskriterium angewendet.
+   - **Motion:** Motion-Verhalten wurde für ruhige, reduzierte Übergänge abgestimmt; übermäßige Bewegung wurde zugunsten Lesbarkeit/Orientierung reduziert.
+   - **Bildlogik:** Die SW→Farbe-Dramaturgie sowie die zustandsbasierte Asset-/Overlay-Logik wurden konsistent auf den Home-Einstieg und die Modulführung angewendet.
+2. **Jetzt reviewfähig/stabil**
+   - **Above-the-fold** ist reviewfähig/stabil (Lead + Intro + Support + eingebettete Navigation inkl. Zustands-/Farblogik).
+   - Unterhalb des Folds sind die Module **Featured Release**, **Visual Story**, **Statement**, **Press/EPK** und **Contact/Newsletter** als reviewfähige/stabile Basis umgesetzt.
+3. **Offene Restpunkte (explizit getrennt)**
+   - **Finale Asset-Kuration:** Endgültige Auswahl/Abnahme der Bild- und Visual-Varianten pro Modul ist noch offen.
+   - **Press-/EPK-Daten:** Verifizierte Press-Zitate, belastbare Release-/Bio-Enddaten, vollständige Credits/Downloads und finale Pressekontakte sind noch nicht final.
+   - **Polish-Restarbeiten:** Letztes Motion-/A11y-/Performance-Feintuning vor finaler Gesamtfreigabe bleibt ausstehend.
+4. **Nächster empfohlener Schritt**
+   - Mit Priorität die Seite **`/visuals`** als nächste Produktionsseite ausarbeiten (Modul-Feinschnitt + Asset-Kuration + Qualitäts-Pass), danach **`/music`** anschließen.
