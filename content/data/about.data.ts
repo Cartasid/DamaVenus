@@ -1,35 +1,77 @@
 import type { CTA } from "@/lib/types";
 
-export const aboutIntro = {
-  label: "About",
-  title: "Built on atmosphere.",
-  introLine: "Dama Venus creates cinematic music and visual narratives with a dark editorial edge.",
-  cta: {
-    label: "Read More",
-    href: "/about"
+export const aboutPageModel = {
+  aboutIntro: {
+    title: "About",
+    introLine: "Built on atmosphere.",
+    shortText:
+      "Dama Venus creates cinematic music and visual narratives with a dark editorial edge.",
+    sectionPriority: 1,
+    primaryCtaPattern: {
+      label: "Read More",
+      href: "/about"
+    }
+  },
+  aboutBio: {
+    shortText:
+      "Dama Venus creates cinematic music and visual narratives with a dark editorial edge.",
+    mediumText:
+      "Each project is crafted as a complete aesthetic world."
+  },
+  aboutKeyStatements: [
+    {
+      id: "cinematic-worldbuilding",
+      title: "Cinematic worldbuilding",
+      text: "Dama Venus creates cinematic music and visual narratives.",
+      sectionPriority: 1
+    },
+    {
+      id: "editorial-edge",
+      title: "Dark editorial edge",
+      text: "The work is shaped with a dark editorial edge.",
+      sectionPriority: 2
+    },
+    {
+      id: "complete-aesthetic-world",
+      title: "Complete aesthetic worlds",
+      text: "Each project is crafted as a complete aesthetic world.",
+      sectionPriority: 3
+    }
+  ],
+  aboutVisualModules: {
+    featuredPortraits: [
+      {
+        assetId: "about-featured-portrait-01",
+        cropFocusHint: "face-center",
+        altTextNote: "Primary portrait for About entry section.",
+        role: "entry",
+        sectionPriority: 1
+      }
+    ],
+    supportingVisuals: [
+      {
+        assetId: "about-supporting-visual-01",
+        cropFocusHint: "mid-frame-subject",
+        altTextNote: "Supporting atmospheric visual for About section.",
+        role: "supporting",
+        sectionPriority: 2
+      },
+      {
+        assetId: "about-supporting-visual-02",
+        cropFocusHint: "wide-environment",
+        altTextNote: "Secondary visual extending the cinematic mood.",
+        role: "secondary",
+        sectionPriority: 3
+      }
+    ],
+    quotesOrCaptions: []
   }
 } as const;
 
-export const featuredPortraits = [
-  {
-    id: "about-lead-portrait",
-    assetId: "home-lead-portrait",
-    title: "Lead Portrait",
-    altText: "Dama Venus lead portrait"
-  }
-] as const;
-
-export const aboutBio = {
-  shortText: "Each project is crafted as a complete aesthetic world.",
-  mediumText: "The work connects sound, imagery, and staging into one coherent artistic language.",
-  longArtistNote:
-    "Optional artist note for extended context. Remove this field if no long-form note should be displayed."
-} as const;
-
-export const aboutKeyStatements = [
-  { id: "presence", text: "I don’t chase volume. I shape presence.", priority: 1 },
-  { id: "worldbuilding", text: "Every release is built as a full visual and sonic world.", priority: 2 },
-  { id: "direction", text: "Direction, performance, and atmosphere are developed as one system.", priority: 3 }
-] as const;
-
-export const aboutCta: CTA = aboutIntro.cta;
+// Compatibility export for existing consumers. Primary source is `aboutPageModel`.
+export const aboutContent: SectionContent = {
+  label: aboutPageModel.aboutIntro.title,
+  headline: aboutPageModel.aboutIntro.introLine,
+  body: [aboutPageModel.aboutBio.shortText, aboutPageModel.aboutBio.mediumText],
+  cta: aboutPageModel.aboutIntro.primaryCtaPattern
+};
