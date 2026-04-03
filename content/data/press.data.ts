@@ -9,7 +9,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["press-epk"],
     order: 1,
     priority: 1,
-    ctaLabel: "Open EPK",
+    ctaLabel: "Zum Press & EPK Überblick",
     target: "/press",
     isPrimaryVisible: true
   },
@@ -21,7 +21,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["press-epk"],
     order: 2,
     priority: 2,
-    ctaLabel: "View Artist Profile",
+    ctaLabel: "Zum Künstlerprofil",
     target: "/about"
   },
   {
@@ -32,7 +32,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["press-epk"],
     order: 3,
     priority: 3,
-    ctaLabel: "Copy Bio Snippet",
+    ctaLabel: "Sehr kurze Bio verwenden",
     target: "/press#very-short-bio"
   },
   {
@@ -46,7 +46,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["press-epk"],
     order: 4,
     priority: 4,
-    ctaLabel: "Use Short Bio",
+    ctaLabel: "Kurze Bio übernehmen",
     target: "/press#short-bio"
   },
   {
@@ -60,7 +60,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["press-epk"],
     order: 5,
     priority: 5,
-    ctaLabel: "Use Press Description",
+    ctaLabel: "Pressetext übernehmen",
     target: "/press#press-ready-description"
   },
   {
@@ -71,7 +71,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["press-featured-portrait-primary", "press-featured-portrait-secondary", "press-editorial-landscape", "press-detail-still"],
     order: 6,
     priority: 6,
-    ctaLabel: "Open Image Selection",
+    ctaLabel: "Zur freigegebenen Bildauswahl",
     target: "/visuals"
   },
   {
@@ -82,7 +82,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["music-current-chapter-cover"],
     order: 7,
     priority: 7,
-    ctaLabel: "Open Listening Links",
+    ctaLabel: "Zu den offiziellen Hör-Links",
     target: "/music"
   },
   {
@@ -93,7 +93,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["music-current-chapter-visual", "music-nocturne-line-visual"],
     order: 8,
     priority: 8,
-    ctaLabel: "Open Video Links",
+    ctaLabel: "Zu den offiziellen Video-Links",
     target: "/visuals"
   },
   {
@@ -104,7 +104,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: [],
     order: 9,
     priority: 9,
-    ctaLabel: "Open Link Hub",
+    ctaLabel: "Zu den offiziellen Profil-Links",
     target: "/contact"
   },
   {
@@ -115,7 +115,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: [],
     order: 10,
     priority: 10,
-    ctaLabel: "Contact",
+    ctaLabel: "Pressekontakt aufnehmen",
     target: "/contact",
     isPrimaryVisible: true
   },
@@ -127,7 +127,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["press-epk", "press-featured-portrait-primary", "press-editorial-landscape"],
     order: 11,
     priority: 11,
-    ctaLabel: "Open Downloads",
+    ctaLabel: "Downloads auf Anfrage verfügbar",
     target: "/press#downloads"
   }
 ];
