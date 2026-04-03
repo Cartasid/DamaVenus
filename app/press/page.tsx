@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { pressEpkBlocks } from "@/content/data/press.data";
-import { assetMap } from "@/content/data/site.config";
 
 const primaryBlockIds = ["pageIntro", "artistSummary", "veryShortBio", "featuredPressImages", "contactBlock"];
 const secondaryBlockIds = ["shortBio", "pressReadyDescription", "musicListeningLinks", "videoVisualLinks", "socialStreamingLinks", "downloads"];
@@ -33,28 +32,10 @@ function renderBlock(block: (typeof pressEpkBlocks)[number], options?: { purpose
     <article key={block.id} className="space-y-2 rounded-lg border border-white/10 p-4">
       {options?.purpose ? <p className="text-xs uppercase tracking-[0.2em] text-muted">{options.purpose}</p> : null}
       <h2 className="font-display text-2xl font-semibold">{block.title}</h2>
-      <p className="text-xs uppercase tracking-[0.2em] text-muted">{block.shortDescriptor}</p>
       {renderBody(block.body)}
-      {ctaVariant === "primary" ? (
-        <Link href={block.target} className="first-impression-cta">
-          {block.ctaLabel}
-        </Link>
-      ) : null}
-      {ctaVariant === "text" ? (
-        <Link href={block.target} className="text-sm font-medium underline underline-offset-4">
-          {block.ctaLabel}
-        </Link>
-      ) : null}
-      {ctaVariant === "request" ? <p className="text-sm font-medium text-muted">{block.ctaLabel}</p> : null}
-      {block.linkedAssets.length ? (
-        <ul className="space-y-1 text-xs text-muted">
-          {block.linkedAssets.map((assetId) => (
-            <li key={assetId}>
-              {assetId}: {assetMap[assetId]?.src ?? "Asset not found"}
-            </li>
-          ))}
-        </ul>
-      ) : null}
+      <Link href={block.target} className="first-impression-cta">
+        {block.ctaLabel}
+      </Link>
     </article>
   );
 }
@@ -84,8 +65,8 @@ export default function PressPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-display text-2xl font-semibold">Secondary Press Blocks</h2>
-        {secondaryInfoBlocks.map((block, index) => renderBlock(block, { ctaVariant: index === 0 ? "primary" : "text" }))}
+        <h2 className="font-display text-2xl font-semibold">Press Highlights</h2>
+        {secondaryInfoBlocks.map((block) => renderBlock(block))}
         {secondaryLinkGroups.map((group) => {
           const groupBlocks = group.blockIds
             .map((id) => secondaryBlocks.find((block) => block.id === id))
