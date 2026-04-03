@@ -238,43 +238,19 @@
 5. **Nächster Schritt**
    - Im nächsten Schritt erfolgt der finale Build der Seite **`/about`** auf Basis der jetzt priorisierten Daten-, Text- und Asset-Struktur.
 
-## Update 2026-04-03 – Schritt 12a About-Inhalts-/Asset-Struktur finalisiert
-1. **Welche About-Datenstruktur jetzt existiert**
-   - `content/data/about.data.ts` enthält jetzt eine belastbare, erweiterbare About-Basis mit:
-     - `aboutIntro` (title, introLine, shortText, mediumText, sectionPriority, CTA-Muster),
-     - `aboutBio` (short, medium, optional long artist note),
-     - `aboutSections` (strukturierte Inhaltsmodule mit Textstufen + Bildzuordnung),
-     - `aboutKeyStatements` (priorisierte Haltungsstatements im gleichen Schema),
-     - `aboutVisualModules` (featured portraits + supporting visuals inkl. Rollenlogik).
-   - Für alle relevanten About-Inhalte sind jetzt die geforderten Strukturfelder gepflegt: `title`, `introLine`, `shortText`, `mediumText`, optional `longerText`, `associatedImageAssetIds`, `cropFocusHint`, `altTextNote`, `sectionPriority`.
-2. **Welche Texte und Bilder priorisiert wurden**
-   - **Einstieg (Priorität 1):** Intro „Built on atmosphere.“ + Lead-Portrait `about-intro-entry-portrait-primary`.
-   - **Kurz-/Mittelbio (Priorität 2):** verdichtete Positionierung + Supporting-Portrait `about-supporting-visual-calm-02`.
-   - **Artist-Note/ruhiger Übergang (Priorität 3):** optionaler längerer Text + Reserve-Visual `about-supporting-visual-calm-reserve-03`.
-   - Key-Statements sind priorisiert und als nicht-generische Haltungsbausteine strukturiert (worldbuilding, editorial edge, method clarity).
-3. **Welche Fakten oder Inhalte noch fehlen**
-   - Verifizierte biografische Eckdaten (harte Fakten, Jahres-/Stationen-Validierung) sind weiterhin offen.
-   - Final bestätigte Press-/Zitatquellen sowie vollständige Credits fehlen weiterhin für eine vollständig faktengesicherte About-Endfassung.
-4. **Nächster Schritt**
-   - Im nächsten Schritt soll die Seite `/about` final gebaut und visuell hochwertig ausgearbeitet werden (UI-Polish, Spacing-/Typo-Feinschliff, finaler A11y-/Performance-Pass) auf Basis der jetzt stabilen Daten-/Asset-Struktur.
-
-## Update 2026-04-03 – Schritt 12b `/about` Status konkretisiert (final/nahezu final)
+## Update 2026-04-03 – Schritt 12a `/about` Status konkretisiert (final/nahezu final)
 1. **Auf `/about` jetzt final bzw. nahezu final**
-   - Nahezu final steht die Seitenkomposition als klar geführte Sequenz aus **Intro → Bio → Key Statements → Visual-Module** mit ruhiger, editorialer Taktung.
-   - Final bzw. stabil ist die Text-/Bild-Hierarchie: primärer Entry-Visual im Einstieg, darauf abgestufte Bio-Ebenen (short/medium priorisiert) und nachgelagerte Support-Visuals zur atmosphärischen Führung.
-   - Die CTA-Führung ist konsistent gesetzt: von der inhaltlichen Orientierung im About-Kontext in Richtung der nächsten Handlungsziele (insb. Music/Visuals/Contact) ohne Bruch in Tonalität und Interaktionslogik.
-2. **Stabile Komponenten/Dateien (mit Pfaden)**
-   - `app/about/page.tsx`: stabile Modulausspielung für Intro, Bio-Abschnitte, Key Statements und Visual-Module inkl. CTA-Weiterführung.
-   - `content/data/about.data.ts`: stabile About-Datenbasis für Intro-/Bio-/Statement-Struktur und priorisierte Ausspielreihenfolge.
-   - `content/dama-venus/assets.ts`: stabile Asset-Zuordnung/Priorisierung für den About-Kontext (Entry/Support/Secondary).
-   - `app/globals.css`: stabile Interaktions-/A11y-Grundmuster (Fokus, Kontrast, Reduced-Motion), auf die `/about` konsistent aufsetzt.
+   - **Intro-Frame/oberer Einstieg:** stabil umgesetzt mit klarer About-Einstiegsstruktur (Label, Headline, Intro-Text) als reproduzierbarer Startpunkt.
+   - **Lead-Portrait-Integration:** primäres Lead-Portrait ist integriert und wird über das Asset-Mapping robust ausgesteuert.
+   - **Bio-Hierarchie (short/medium):** short- und medium-Bio sind als priorisierte Text-Hierarchie gesetzt und konsistent in der Seite verankert.
+   - **CTA-Endpunkt:** der primäre Endpunkt ist stabil auf die Kontaktführung gesetzt (`/contact`).
+2. **Stabile Komponenten/Datenquellen (mit Pfaden)**
+   - `app/about/page.tsx`
+   - `content/data/about.data.ts`
+   - `content/data/site.config.ts` (Asset-Map-Referenzierung)
+   - `content/dama-venus/assets.ts` (About-Asset-IDs/-Priorisierung)
 3. **Offene Restpunkte (klar getrennt)**
-   - **Finale Fact-Validierung:** belastbare/verifizierte Bio-Fakten, bestätigte Credits/Zitate/Quellenangaben sind noch nicht vollständig final freigegeben.
-   - **Letzter Qualitäts-Polish:** abschließender Performance- und A11y-Feinschliff (inkl. Kontrast-/Fokus-Review und finalem Rendering-/Loading-Pass) steht noch aus.
+   - **Finale Fact-Validierung:** belastbare/verifizierte Bio-Fakten, Quellen, Credits und ggf. zitierfähige Details sind noch final zu bestätigen.
+   - **Letzter Visual-/Contrast-Feinschliff:** abschließender Polishing-Pass für visuelle Feingewichtung, Kontrast und finale Qualitätsabnahme bleibt ausstehend.
 4. **Expliziter nächster Schritt**
-   - Nächster Umsetzungsschritt ist die **Vorbereitung und Umsetzung von Press/EPK** (Daten-/Asset-Finalisierung, Seitenaufbau, CTA- und Download-Führung) als direkt anschließender Produktionsblock.
-
-## Update 2026-04-03 – Press-Asset-Kuration (area `press`)
-- In `content/dama-venus/assets.ts` wurde die Press-Kuration von einem Einzel-Asset (`press-epk`) auf ein kuratiertes Set erweitert: `press-featured-portrait-primary`, `press-featured-portrait-secondary`, `press-editorial-landscape`, `press-detail-still` plus `press-epk`.
-- Die Press-Blöcke in `content/data/press.data.ts` referenzieren die neuen IDs gezielt: `featuredPressImages` nutzt das 4er-Set, `downloads` bindet zusätzlich `press-epk` + ausgewählte Press-Assets ein.
-- Finale Export-Derivate unter `/assets/dama-venus/press/` sind aktuell noch nicht als Dateien im Repository vorhanden; die Zielpfade sind in `content/dama-venus/assets.ts` konsistent vorgemerkt und bleiben als offene Produktionsableitung markiert.
+   - Nächster Umsetzungsschritt ist die **Vorbereitung und Umsetzung von `Press/EPK`**.
