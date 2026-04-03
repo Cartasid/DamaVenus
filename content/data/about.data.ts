@@ -41,27 +41,27 @@ export const aboutPageModel = {
   aboutVisualModules: {
     featuredPortraits: [
       {
-        assetId: "about-featured-portrait-01",
+        assetId: "about-intro-entry-portrait-primary",
         cropFocusHint: "face-center",
         altTextNote: "Primary portrait for About entry section.",
-        role: "entry",
-        priority: 1
+        role: "lead-portrait",
+        sectionPriority: 1
       }
     ],
     supportingVisuals: [
       {
-        assetId: "about-supporting-visual-01",
+        assetId: "about-supporting-visual-calm-02",
         cropFocusHint: "mid-frame-subject",
-        altTextNote: "Supporting atmospheric visual for About section.",
+        altTextNote: "Supporting visual close to text for calm transitions.",
         role: "supporting",
         priority: 2
       },
       {
-        assetId: "about-supporting-visual-02",
+        assetId: "about-supporting-visual-calm-reserve-03",
         cropFocusHint: "wide-environment",
-        altTextNote: "Secondary visual extending the cinematic mood.",
-        role: "secondary",
-        priority: 3
+        altTextNote: "Optional reserve visual, clearly lower priority.",
+        role: "reserve",
+        sectionPriority: 3
       }
     ],
     quotesOrCaptions: []

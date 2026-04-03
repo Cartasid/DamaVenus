@@ -1,16 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import { aboutBio, aboutCta, aboutIntro, aboutKeyStatements, featuredPortraits, supportingVisuals } from "@/content/data/about.data";
+import { aboutPageModel } from "@/content/data/about.data";
 import { assetMap } from "@/content/data/site.config";
 
 export default function AboutPage() {
+  const { aboutBio, aboutIntro, aboutKeyStatements, aboutVisualModules } = aboutPageModel;
+  const aboutCta = aboutIntro.primaryCtaPattern;
+  const featuredPortraits = aboutVisualModules.featuredPortraits;
+  const supportingVisuals = aboutVisualModules.supportingVisuals;
+
   const leadPortrait = featuredPortraits[0];
   const leadPortraitAsset = leadPortrait ? assetMap[leadPortrait.assetId] : undefined;
-  const rhythmVisuals = supportingVisuals
-    .slice(0, 2)
+  const resolvedSupportingVisuals = supportingVisuals
     .map((visual) => ({ visual, asset: assetMap[visual.assetId] }))
     .filter((entry) => Boolean(entry.asset));
-  const keyStatements = [...aboutKeyStatements].sort((a, b) => a.priority - b.priority);
+  const keyStatements = [...aboutKeyStatements].sort((a, b) => a.sectionPriority - b.sectionPriority);
 
   return (
     <section className="space-y-6" aria-labelledby="about-title">
@@ -41,15 +45,39 @@ export default function AboutPage() {
         <p className="text-sm text-muted">{aboutBio.shortText}</p>
       </section>
 
-      {rhythmVisuals[0]?.asset ? (
-        <section className="relative aspect-[16/10] overflow-hidden rounded-md border border-white/10" aria-label="Visual Transition">
-          <Image
-            src={rhythmVisuals[0].asset.src}
-            alt={rhythmVisuals[0].visual.altText ?? rhythmVisuals[0].asset.alt ?? "Supporting visual"}
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
+      <section className="space-y-2" aria-label="Haltung">
+        <p className="text-sm text-muted">{aboutBio.mediumText}</p>
+      </section>
+
+      {resolvedSupportingVisuals.length ? (
+        <section className="grid gap-3 sm:grid-cols-2" aria-label="Supporting Visuals">
+          {resolvedSupportingVisuals.map(({ visual, asset }) => {
+            if (!asset) {
+              return null;
+            }
+
+            const ratioClass = visual.role === "reserve" ? "aspect-[3/4]" : "aspect-[4/5]";
+
+            return (
+              <article key={visual.assetId} className="space-y-2">
+                <div className={`relative ${ratioClass} overflow-hidden rounded-md border border-white/10`}>
+                  <Image
+                    src={asset.src}
+                    alt={visual.altTextNote ?? asset.alt ?? "Supporting visual"}
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 280px, 48vw"
+                  />
+                </div>
+              </article>
+            );
+          })}
+        </section>
+      ) : null}
+
+      {aboutBio.longArtistNote ? (
+        <section className="space-y-2 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-label="Artist Note">
+          <p className="text-sm text-muted">{aboutBio.longArtistNote}</p>
         </section>
       ) : null}
 
