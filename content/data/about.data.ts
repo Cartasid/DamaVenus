@@ -8,8 +8,8 @@ export const aboutPageModel = {
       "Dama Venus creates cinematic music and visual narratives with a dark editorial edge.",
     priority: 1,
     primaryCtaPattern: {
-      label: "Read More",
-      href: "/about"
+      label: "Contact",
+      href: "/contact"
     }
   },
   aboutBio: {
