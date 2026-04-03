@@ -27,11 +27,13 @@ export default function HomePage() {
 
   const supportMediaClass = [
     "h-48 w-full rounded-md object-cover transition duration-300",
-    supportAsset?.swColorMode === "excellent"
-      ? "grayscale-[30%] saturate-110"
-      : supportAsset?.swColorMode === "good"
-        ? "grayscale-[20%] saturate-105"
-        : "grayscale-[10%]",
+    supportModule?.id === "featuredRelease"
+      ? ""
+      : supportAsset?.swColorMode === "excellent"
+        ? "grayscale-[30%] saturate-110"
+        : supportAsset?.swColorMode === "good"
+          ? "grayscale-[20%] saturate-105"
+          : "grayscale-[10%]",
     supportAsset?.overlaySuitability === "no-overlay" ? "contrast-105" : "contrast-110"
   ]
     .filter(Boolean)
