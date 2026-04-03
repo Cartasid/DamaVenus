@@ -139,18 +139,15 @@ Entscheidungsregel pro Asset:
 ## 8. Datei- und Ordnerstrategie
 
 ### 8.1 Zielstruktur
-Empfohlene Medienstruktur (anzulegen, sobald Assets vorliegen):
+Empfohlene Medienstruktur (Web-Pfade):
 
-- `assets/raw/` (unbearbeitete Originale)
-- `assets/curated/` (kuratiertes Master-Set)
-- `assets/curated/homepage/`
-- `assets/curated/music/`
-- `assets/curated/visuals/`
-- `assets/curated/about/`
-- `assets/curated/press/`
-- `assets/curated/contact/`
-- `assets/exports/web/` (optimierte Web-Varianten)
-- `assets/exports/mobile/` (mobile-spezifische Varianten)
+- `public/assets/dama-venus/curated/` — **kuratiert** (freigegebene Master-Auswahl als redaktionelle Referenz)
+- `public/assets/dama-venus/home/` — **web-ready** (optimierte Varianten für Startseite)
+- `public/assets/dama-venus/music/` — **web-ready** (optimierte Varianten für Music/Release)
+- `public/assets/dama-venus/visuals/` — **web-ready** (optimierte Varianten für Visuals/Portfolio)
+- `public/assets/dama-venus/about/` — **web-ready** (optimierte Varianten für About)
+- `public/assets/dama-venus/press/` — **web-ready** (optimierte Varianten für Press/EPK)
+- `public/assets/dama-venus/raw/` — **Quelle** (optionaler Spiegel der Originale, nur bei fachlich begründetem Spiegelbedarf)
 
 ### 8.2 Naming-Konvention
 Format:
