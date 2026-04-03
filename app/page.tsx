@@ -5,6 +5,7 @@ import { assetMap, siteConfig } from "@/content/data/site.config";
 
 export default function HomePage() {
   const leadModule =
+    homepageCoreModules.find((module) => module.id === "lead") ??
     homepageCoreModules.find((module) => module.id === "visuals") ??
     homepageCoreModules.find((module) => module.id === "featuredRelease") ??
     homepageCoreModules.find((module) => Boolean(module.assetId));
