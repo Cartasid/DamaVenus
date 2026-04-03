@@ -6,13 +6,7 @@ import { assetMap } from "@/content/data/site.config";
 export default function AboutPage() {
   const { aboutBio, aboutIntro, aboutKeyStatements, aboutVisualModules } = aboutPageModel;
   const aboutCta = aboutIntro.primaryCtaPattern;
-  const cropFocusToObjectPosition: Record<string, string> = {
-    "face-center": "50% 36%",
-    "upper-face-focus": "50% 30%",
-    "mid-frame-subject": "50% 42%",
-    "gaze-axis-center": "52% 40%",
-    "wide-environment": "50% 50%"
-  };
+  const showArtistNote = false;
 
   const featuredPortraits = [...aboutVisualModules.featuredPortraits].sort(
     (a, b) => a.sectionPriority - b.sectionPriority
@@ -20,10 +14,9 @@ export default function AboutPage() {
   const supportingVisuals = [...aboutVisualModules.supportingVisuals].sort(
     (a, b) => a.sectionPriority - b.sectionPriority
   );
-  const primarySupportingVisual =
-    supportingVisuals.find((visual) => visual.role !== "reserve") ??
-    supportingVisuals.find((visual) => visual.role === "reserve");
-  const keyStatements = [...aboutKeyStatements].sort((a, b) => a.sectionPriority - b.sectionPriority);
+  const keyStatements = [...aboutKeyStatements]
+    .sort((a, b) => a.sectionPriority - b.sectionPriority)
+    .map((statement) => statement.shortText);
 
   const leadPortrait = featuredPortraits[0];
   const leadPortraitAsset = leadPortrait ? assetMap[leadPortrait.assetId] : undefined;
@@ -70,17 +63,12 @@ export default function AboutPage() {
         </header>
       )}
 
-      <section className="space-y-2" aria-labelledby="about-bio-heading">
-        <h2 id="about-bio-heading" className="text-xs uppercase tracking-wide text-muted">
-          Haltung
-        </h2>
+      <section className="space-y-2" aria-label="Positionierung">
         <p className="text-sm text-muted">{aboutBio.mediumText}</p>
       </section>
 
-      <section className="space-y-2 rounded-lg border border-white/10 p-4" aria-labelledby="about-short-bio-heading">
-        <h3 id="about-short-bio-heading" className="text-xs uppercase tracking-wide text-muted">
-          Short Bio
-        </h3>
+      <section className="space-y-2 rounded-lg border border-white/10 p-4" aria-label="Haltung">
+        <p className="text-xs uppercase tracking-wide text-muted">Short Bio</p>
         <p className="text-sm text-muted">{aboutBio.shortText}</p>
       </section>
 
@@ -142,6 +130,25 @@ export default function AboutPage() {
           })}
         </section>
       ) : null}
+
+      {showArtistNote && aboutBio.longArtistNote ? (
+        <section className="space-y-2 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-label="Artist Note">
+          <p className="text-sm text-muted">{aboutBio.longArtistNote}</p>
+        </section>
+      ) : null}
+
+      <section className="space-y-3 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-label="Arbeitsweise">
+        <p className="text-xs uppercase tracking-wide text-muted">Arbeitsweise</p>
+        <p className="text-sm text-muted" aria-label="Methodik-Block">
+          {keyStatements.join(" • ")}
+        </p>
+      </section>
+
+      <div>
+        <Link href={aboutCta.href} className="first-impression-cta">
+          {aboutCta.label}
+        </Link>
+      </div>
     </section>
   );
 }

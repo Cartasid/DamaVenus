@@ -29,9 +29,9 @@ export const aboutPageModel = {
   },
   aboutBio: {
     shortText:
-      "Dama Venus works between music, image, and presence—focused, cinematic, and precise.",
+      "The line stays reduced: calm pressure, clear form, no excess.",
     mediumText:
-      "The work connects sonic storytelling with visual direction. Releases are built as complete atmospheres, not isolated tracks or standalone visuals.",
+      "Dama Venus composes one coherent language across sound, image, and timing.",
     longArtistNote:
       "The approach stays reduced: fewer words, clearer mood, stronger form. Feminine strength, modern mystique, and controlled intensity remain the constant line across each chapter."
   },
@@ -81,9 +81,9 @@ export const aboutPageModel = {
   aboutKeyStatements: [
     {
       id: "cinematic-worldbuilding",
-      title: "Cinematic worldbuilding",
+      title: "Positioning",
       introLine: "Image and frequency move together.",
-      shortText: "Projects are built as coherent worlds, not disconnected deliverables.",
+      shortText: "Projects are built as one atmosphere, not as separate assets.",
       mediumText:
         "Each release is conceived as one narrative arc across sound, image, and atmosphere.",
       associatedImageAssetIds: ["about-intro-entry-portrait-primary"],
@@ -93,9 +93,9 @@ export const aboutPageModel = {
     },
     {
       id: "editorial-edge",
-      title: "Dark editorial edge",
+      title: "Stance",
       introLine: "Controlled intensity over volume.",
-      shortText: "The tone remains dark, elegant, and precise.",
+      shortText: "The tone is restrained, dark, and precise.",
       mediumText:
         "Visual and musical decisions follow one editorial language with deliberate restraint.",
       associatedImageAssetIds: ["about-supporting-visual-calm-02"],
@@ -105,9 +105,9 @@ export const aboutPageModel = {
     },
     {
       id: "method-clarity",
-      title: "Method clarity",
+      title: "Method",
       introLine: "A complete aesthetic line.",
-      shortText: "Concept, execution, and tone follow one direction.",
+      shortText: "Concept, execution, and rhythm follow one direction.",
       mediumText:
         "The method keeps the experience compact, atmospheric, and legible across formats.",
       associatedImageAssetIds: ["about-supporting-visual-calm-reserve-03"],
