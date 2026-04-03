@@ -4,7 +4,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
   {
     id: "pageIntro",
     title: "Press & EPK",
-    shortDescriptor: "Route entry and orientation block for editorial visitors.",
+    shortDescriptor: "Press overview with key artist materials.",
     body: "Images, bio, and release facts for press inquiries.",
     linkedAssets: ["press-epk"],
     order: 1,
@@ -16,7 +16,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
   {
     id: "artistSummary",
     title: "Artist Summary",
-    shortDescriptor: "Concise framing for positioning and editorial context.",
+    shortDescriptor: "Concise artist positioning for editorial context.",
     body: "Dama Venus creates cinematic music and visual narratives with a dark editorial edge.",
     linkedAssets: ["press-epk"],
     order: 2,
@@ -27,7 +27,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
   {
     id: "veryShortBio",
     title: "Very Short Bio",
-    shortDescriptor: "Single-line bio for quick press snippets.",
+    shortDescriptor: "One-line artist bio for quick press use.",
     body: "Cinematic pop artist blending mood-first sound and visual storytelling.",
     linkedAssets: ["press-epk"],
     order: 3,
@@ -38,7 +38,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
   {
     id: "shortBio",
     title: "Short Bio",
-    shortDescriptor: "Short-form artist text for media kits and lineups.",
+    shortDescriptor: "Short artist text for media kits and lineups.",
     body: [
       "Dama Venus composes each release as one coherent atmosphere across sound and image.",
       "The artistic language stays reduced, focused, and editorial in tone."
@@ -52,7 +52,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
   {
     id: "pressReadyDescription",
     title: "Press-ready Description",
-    shortDescriptor: "Longer approved language block for publications.",
+    shortDescriptor: "Expanded artist description for publication.",
     body: [
       "Dama Venus develops releases as cinematic chapters with controlled intensity and clear visual identity.",
       "Music direction, imagery, and cadence are built as one aesthetic line for editorial clarity."
@@ -66,7 +66,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
   {
     id: "featuredPressImages",
     title: "Featured Press Images",
-    shortDescriptor: "Primary approved image selection for editorial usage.",
+    shortDescriptor: "Selected approved visuals for editorial use.",
     body: "Portrait and campaign visuals approved for press publication.",
     linkedAssets: ["press-featured-portrait-primary", "press-featured-portrait-secondary", "press-editorial-landscape", "press-detail-still"],
     order: 6,
@@ -77,7 +77,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
   {
     id: "musicListeningLinks",
     title: "Music Listening Links",
-    shortDescriptor: "Primary listening destinations for review and coverage.",
+    shortDescriptor: "Official listening destinations for coverage.",
     body: "Official links for streaming and direct listening contexts.",
     linkedAssets: ["music-current-chapter-cover"],
     order: 7,
@@ -88,7 +88,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
   {
     id: "videoVisualLinks",
     title: "Video & Visual Links",
-    shortDescriptor: "Visual release links and official video references.",
+    shortDescriptor: "Official video and visual release links.",
     body: "Curated video links for editorial embedding and visual references.",
     linkedAssets: ["music-current-chapter-visual", "music-nocturne-line-visual"],
     order: 8,
@@ -99,7 +99,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
   {
     id: "socialStreamingLinks",
     title: "Social & Streaming Links",
-    shortDescriptor: "Cross-platform presence for publication footer blocks.",
+    shortDescriptor: "Official social and streaming profiles.",
     body: "Official social and streaming endpoints for profile linking.",
     linkedAssets: [],
     order: 9,
@@ -110,7 +110,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
   {
     id: "contactBlock",
     title: "Contact",
-    shortDescriptor: "Direct press contact routing and response path.",
+    shortDescriptor: "Direct contact point for press inquiries.",
     body: "For interviews, features, and media usage requests, use the direct contact route.",
     linkedAssets: [],
     order: 10,
@@ -122,7 +122,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
   {
     id: "downloads",
     title: "Downloads",
-    shortDescriptor: "Reserved block for downloadable press package assets.",
+    shortDescriptor: "Download section for press assets.",
     body: "Downloads will be published in this section.",
     linkedAssets: ["press-epk", "press-featured-portrait-primary", "press-editorial-landscape"],
     order: 11,
