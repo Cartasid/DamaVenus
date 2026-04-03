@@ -17,7 +17,7 @@
 - Für die spätere Asset-Verwendung ist folgende Grundlogik gesetzt: 3–6 Lead-Assets als visuelle Hauptträger, asymmetrische Homepage-Komposition mit 5 Kernkacheln (1 Lead + 2 primär + 2 sekundär), SW→Farbe als dramaturgische Steuerung.
 
 ## Offene Punkte
-- Im Repository fehlen derzeit reale Bild-/Videoassets; eine konkrete visuelle Kuratierung auf Dateiebene ist daher noch ausstehend.
+- Reale Bildassets wurden in `/pics` ingestiert, aber eine konkrete visuelle Kuratierung auf Dateiebene ist noch ausstehend.
 - Konkrete Seitenlayouts (Desktop/Mobile) pro Seitentyp sind noch nicht ausgearbeitet.
 - Die genaue Modulreihenfolge inklusive Inhaltspriorisierung je Seite ist noch festzulegen.
 - Motion-Spezifikation auf Komponentenebene (Timing, Trigger, Übergangsregeln) ist noch zu konkretisieren.
@@ -78,3 +78,10 @@
 
 ## Nächster empfohlener Schritt (aktualisiert)
 - Implementierungsschritt **Visuals/Music-Ausbau + Asset-Integration**: zuerst modulare Inhaltsbausteine für `/visuals` und `/music` mit bestehender Shell-/Token-Basis ausbauen, parallel Asset-Mapping in `content/data` vorbereiten und verfügbare reale Assets priorisiert integrieren.
+
+## Update 2026-04-03 – Asset-Ingest `/pics`
+- Asset-Ingest durchgeführt: im Ordner `/pics` wurden 35 Bilddateien gefunden; Formate: `.jpg` (17), `.jpeg` (11), `.png` (2), `.webp` (3), `.heic` (2); Videoformate sind im Ingest nicht enthalten.
+- Pipeline-Stand: Rohdaten sind gesammelt, eine kuratorische Bewertung nach `03_asset_strategy.md` (Lead/Secondary-Auswahl, Rollenmapping je Seite, Crop-/SW-Farbe-Entscheidung) ist als nächster Verarbeitungsschritt offen.
+- Priorisierungslogik für die Verarbeitung: zuerst potenzielle Lead-Assets für Homepage (3–6), danach Secondary-Set (6–12), anschließend Press-/EPK-geeignete Varianten und mobile/exportierte Derivate.
+- Offene Risiken: insbesondere HEIC-Kompatibilität (Decoder/Browser/Pipeline), inkonsistente Dateibenennung (UUID/Kamera-Defaults), gemischte Extension-Cases sowie sehr kleine WebP-Dateien mit möglichem Qualitätsrisiko.
+- Nächster Schritt: formale Asset-Inventur + Kurationsrunde mit Zuordnung pro Seite/Modul und Entscheidung, welche Dateien zuerst in die Zielstruktur aus Kapitel 8 der Asset-Strategie überführt werden.
