@@ -159,3 +159,19 @@
 - Priorisierte Releases im aktuellen Stand: `current-chapter` (featured, Prio 1), `midnight-signal` (selected, Prio 2), `afterglow-cut` (coming soon, Prio 3), `nocturne-line-visual` (visual release, Prio 4).
 - Weiterhin fehlende Inhalte: verifizierte finale Plattform-URLs pro realem Release, final kuratierte Musik-spezifische Bildmaster in `public/assets/dama-venus/music/`, belastbare veröffentlichte Metadaten (exakte Credits/ISRC/Label-Infos) und finale Video-URLs.
 - Nächster Schritt: finale visuelle Ausgestaltung und Modul-Politur der Music-Seite auf Basis der jetzt stabilen Daten-/Asset-Struktur.
+
+## Update 2026-04-03 – Schritt 10a `/music` Status konkretisiert (final/nahezu final)
+1. **Auf `/music` jetzt final bzw. nahezu final**
+   - Finalisiert sind die Modulbausteine **Intro**, **Featured Release**, **Selected Releases** und **Visual Releases (Watch-Führung)** als reproduzierbare Seitenstruktur auf Datenbasis.
+   - Das **CTA-Muster** ist seitenweit konsistent: primäre Listen-/Watch-Aktionen als `first-impression-cta`, sekundäre Aktionen kontextabhängig als ergänzende Links.
+   - Die **Mobile-/A11y-Basis** ist stabil gesetzt: Fokuszustände, Touch-Targets, reduzierte Motion-Fallbacks und nicht-hover-abhängige Bedienbarkeit sind als Basis vorhanden.
+2. **Stabilisierte Komponenten/Patterns (konkret, mit Pfaden + Modulen)**
+   - `app/music/page.tsx`: Modulstruktur und Rendering für `intro`, `featured`, `selected-releases`, `visual-releases` inkl. CTA-/Asset-Logik über Datenquellen.
+   - `content/data/music.data.ts`: stabiles Music-Datenmodell mit `musicIntro`, `musicReleases`, `musicVisualReleases`, `musicData` sowie `featuredReleaseId` und `ctaLabels`.
+   - `content/dama-venus/assets.ts`: stabilisierte Asset-IDs und Priorisierung für Music (`music-current-chapter-cover`, `music-current-chapter-visual`, `music-midnight-signal-cover`, `music-afterglow-cut-cover`, `music-nocturne-line-visual`).
+   - `app/globals.css`: wiederverwendbares Interaktions-/A11y-Pattern über `first-impression-cta`, `focus-token` und `prefers-reduced-motion`-Regeln.
+3. **Restpunkte (klar getrennt)**
+   - **Fehlende finale Links/Assets:** finale Plattform-URLs je Release, finale Watch-/Video-URLs, final kuratierte Bildmaster unter `public/assets/dama-venus/music/`.
+   - **Verbleibendes Fine-Tuning:** letztes visuelles Polishing (Abstände/Hierarchie), CTA-Text-Feinschliff pro Release-Status, abschließender Motion-/Kontrast-Feinschnitt vor Finalabnahme.
+4. **Expliziter nächster Schritt**
+   - Nächster Umsetzungsschritt ist die **Vorbereitung und Finalisierung der Visuals-Datenbasis** (strukturiertes Modul-/Asset-Mapping für `/visuals` inkl. finaler Watch-/Gallery-Referenzen), bevor der abschließende Gesamt-Polish von Music + Visuals durchgeführt wird.
