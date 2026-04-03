@@ -32,6 +32,20 @@ export default function HomePage() {
   ]
     .filter(Boolean)
     .join(" ");
+  const leadOverlayVariant =
+    leadAsset?.overlaySuitability === "supports-dark-overlay" && leadAsset?.swColorMode !== "limited" ? "balanced" : "strong";
+  const leadOverlayClass = [
+    "absolute inset-x-3 bottom-3 rounded-md p-4 text-white backdrop-blur-sm",
+    leadOverlayVariant === "strong"
+      ? "bg-gradient-to-t from-black/90 via-black/75 to-black/45"
+      : "bg-gradient-to-t from-black/75 via-black/55 to-black/30"
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const leadHeadlineClass =
+    leadOverlayVariant === "strong" ? "font-display text-3xl font-bold leading-tight text-white md:text-4xl" : "font-display text-3xl font-bold leading-tight text-white/95 md:text-4xl";
+  const leadDescriptorClass = leadOverlayVariant === "strong" ? "text-sm uppercase tracking-wide text-white/90" : "text-sm uppercase tracking-wide text-white/80";
+  const leadStatementClass = leadOverlayVariant === "strong" ? "mt-2 text-sm leading-snug text-white/95" : "mt-2 text-sm leading-snug text-white/90";
 
   const supportMediaClass = [
     "h-48 w-full rounded-md object-cover transition duration-300",
@@ -54,12 +68,12 @@ export default function HomePage() {
           {leadAsset ? (
             <img src={leadAsset.src} alt={leadAsset.alt ?? leadModule?.alt ?? ""} className={leadMediaClass} />
           ) : null}
-          <div className="absolute inset-x-3 bottom-3 rounded-md bg-black/65 p-4 text-white backdrop-blur-sm">
-            <h1 id="home-title" className="font-display text-3xl font-bold leading-tight md:text-4xl">
+          <div className={leadOverlayClass}>
+            <h1 id="home-title" className={leadHeadlineClass}>
               {siteConfig.name}
             </h1>
-            <p className="text-sm uppercase tracking-wide text-white/80">{siteConfig.brandDescriptor}</p>
-            <p className="mt-2 text-sm leading-snug text-white/90">{homepageIntro.statement}</p>
+            <p className={leadDescriptorClass}>{siteConfig.brandDescriptor}</p>
+            <p className={leadStatementClass}>{homepageIntro.statement}</p>
           </div>
         </article>
 
