@@ -119,12 +119,52 @@ export default function MusicPage() {
         <h2 className="font-display text-2xl font-semibold">Visual Releases</h2>
         <ul className="space-y-3">
           {musicData.visualReleases.map((release) => {
+            const releaseAsset = assetMap[release.coverAsset.id];
+            const watchAction = release.watchLinks?.[0];
+            const secondaryAction = release.secondaryCta ?? (!watchAction ? release.primaryCta : undefined);
+            const primaryWatchLabel = watchAction
+              ? watchAction.label.toLowerCase().includes("watch")
+                ? watchAction.label
+                : `Watch ${release.title}`
+              : null;
+            const secondaryLabel = secondaryAction
+              ? secondaryAction.label === "Open"
+                ? `Open ${release.title}`
+                : secondaryAction.label
+              : null;
+
             return (
               <li key={release.id} className="rounded-lg border border-white/10 p-4">
-                <p className="text-sm text-muted">{release.title}</p>
-                <Link href={release.primaryCta.href} className="first-impression-cta mt-2 inline-block">
-                  {release.primaryCta.label}
-                </Link>
+                <article className="space-y-3" aria-labelledby={`${release.id}-title`}>
+                  {watchAction && releaseAsset ? (
+                    <Image
+                      src={releaseAsset.src}
+                      alt={releaseAsset.alt ?? `${release.title} visual still`}
+                      width={1200}
+                      height={675}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="h-44 w-full rounded-md object-cover"
+                    />
+                  ) : null}
+                  <h3 id={`${release.id}-title`} className="font-display text-xl">
+                    {release.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {watchAction && primaryWatchLabel ? (
+                      <Link href={watchAction.href} className="first-impression-cta">
+                        {primaryWatchLabel}
+                      </Link>
+                    ) : null}
+                    {secondaryAction && secondaryLabel ? (
+                      <Link href={secondaryAction.href} className={watchAction ? "text-sm text-muted underline-offset-4 hover:underline" : "first-impression-cta"}>
+                        {secondaryLabel}
+                      </Link>
+                    ) : null}
+                  </div>
+                  <p className="text-xs text-muted">
+                    Asset hints: {releaseAsset?.cropHint} · {releaseAsset?.focusHint}
+                  </p>
+                </article>
               </li>
             );
           })}
