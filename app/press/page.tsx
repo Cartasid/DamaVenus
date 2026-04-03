@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { pressEpkBlocks } from "@/content/data/press.data";
-import { assetMap } from "@/content/data/site.config";
 
 const primaryBlockIds = ["veryShortBio", "featuredPressImages", "contactBlock"];
 const secondaryBlockIds = ["shortBio", "pressReadyDescription", "musicListeningLinks", "videoVisualLinks", "socialStreamingLinks", "downloads"];
@@ -26,7 +25,9 @@ function renderBody(body: string | string[]) {
   return <p className="text-sm text-muted">{body}</p>;
 }
 
-function renderBlock(block: (typeof pressEpkBlocks)[number], purpose?: string) {
+function renderBlock(block: (typeof pressEpkBlocks)[number], options?: { purpose?: string; ctaVariant?: "primary" | "text" | "request" }) {
+  const ctaVariant = options?.ctaVariant ?? "text";
+
   return (
     <article key={block.id} className="space-y-2 rounded-lg border border-white/10 p-4">
       {purpose ? <p className="text-xs uppercase tracking-[0.2em] text-muted">{purpose}</p> : null}
@@ -36,15 +37,6 @@ function renderBlock(block: (typeof pressEpkBlocks)[number], purpose?: string) {
       <Link href={block.target} className="first-impression-cta">
         {block.ctaLabel}
       </Link>
-      {block.linkedAssets.length ? (
-        <ul className="space-y-1 text-xs text-muted">
-          {block.linkedAssets.map((assetId) => (
-            <li key={assetId}>
-              {assetId}: {assetMap[assetId]?.src ?? "Asset not found"}
-            </li>
-          ))}
-        </ul>
-      ) : null}
     </article>
   );
 }
@@ -64,6 +56,10 @@ export default function PressPage() {
   const secondaryInfoBlocks = secondaryBlocks.filter(
     (block) => !secondaryLinkGroups.some((group) => group.blockIds.includes(block.id))
   );
+  const contactBlock = secondaryBlocks.find((block) => block.id === "contactBlock");
+
+  const contactBlock = primaryBlocks.find((block) => block.id === "contactBlock");
+  const primaryLeadBlocks = primaryBlocks.filter((block) => block.id !== "contactBlock");
 
   return (
     <section className="space-y-8">
@@ -86,15 +82,22 @@ export default function PressPage() {
 
       <section className="space-y-4">
         <h2 className="font-display text-2xl font-semibold">Secondary Press Blocks</h2>
-        {secondaryInfoBlocks.map((block) => renderBlock(block))}
+        {secondaryInfoBlocks.filter((block) => block.id !== "contactBlock").map((block) => renderBlock(block))}
         {secondaryLinkGroups.map((group) => {
           const groupBlocks = group.blockIds
             .map((id) => secondaryBlocks.find((block) => block.id === id))
             .filter((block): block is (typeof pressEpkBlocks)[number] => Boolean(block));
 
-          return groupBlocks.map((block) => renderBlock(block, group.purpose));
+          return groupBlocks.map((block) =>
+            renderBlock(block, {
+              purpose: group.purpose,
+              ctaVariant: block.id === "downloads" ? "request" : "text"
+            })
+          );
         })}
       </section>
+
+      {contactBlock ? <section className="space-y-4">{renderBlock(contactBlock, "contact")}</section> : null}
     </section>
   );
 }
