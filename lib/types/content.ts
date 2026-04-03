@@ -50,6 +50,34 @@ export type ReleaseItem = {
   coverAsset: AssetRef;
 };
 
+export type MusicReleaseType = "single" | "visual-release" | "upcoming" | "archive";
+export type MusicReleaseStatus = "active" | "coming-soon" | "archived";
+
+export type MusicAction = {
+  kind: "listen" | "watch" | "explore" | "open" | "view-release";
+  label: string;
+  href: string;
+};
+
+export type MusicRelease = {
+  id: string;
+  title: string;
+  subtitle?: string;
+  shortText: string;
+  releaseType: MusicReleaseType;
+  status: MusicReleaseStatus;
+  releaseDate?: string;
+  year?: string;
+  featured: boolean;
+  priority: number;
+  coverAsset: AssetRef;
+  alternateVisualAsset?: AssetRef;
+  listeningLinks: MusicAction[];
+  watchLinks?: MusicAction[];
+  primaryCta: MusicAction;
+  secondaryCta?: MusicAction;
+};
+
 export type PressMaterialItem = {
   id: string;
   title: string;

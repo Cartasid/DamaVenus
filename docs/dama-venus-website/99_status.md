@@ -150,3 +150,12 @@
    - **Polish-Restarbeiten:** Letztes Motion-/A11y-/Performance-Feintuning vor finaler Gesamtfreigabe bleibt ausstehend.
 4. **Nächster empfohlener Schritt**
    - Mit Priorität die Seite **`/visuals`** als nächste Produktionsseite ausarbeiten (Modul-Feinschnitt + Asset-Kuration + Qualitäts-Pass), danach **`/music`** anschließen.
+
+## Update 2026-04-03 – Schritt 10 Music-Datenbasis finalisiert
+- `content/data/music.data.ts` wurde von einer einfachen Hero-/Single-Struktur auf eine erweiterbare, release-zentrierte Datenbasis umgestellt: Intro, CTA-Label-Set, `featuredReleaseId`, strukturierte `releases`, `visualReleases` sowie Status-/Typ-/Prioritätslogik (`active`, `coming-soon`, `single`, `visual-release`, `upcoming`).
+- Pro Music-Eintrag sind jetzt konsistent modelliert: `title`, `subtitle`, `releaseType`, `status`, `releaseDate`/`year`, `shortText`, `coverAsset`, optionales `alternateVisualAsset`, `listeningLinks`, optionale `watchLinks`, `primaryCta` und optionale `secondaryCta`.
+- Die Asset-Zuordnung für Music wurde in `content/dama-venus/assets.ts` konkret ergänzt (`music-current-chapter-cover`, `music-current-chapter-visual`, `music-midnight-signal-cover`, `music-afterglow-cut-cover`, `music-nocturne-line-visual`) inkl. Alt-Entwürfen, Crop-/Fokus-Hinweisen, SW/Farbe- und Overlay-Eignung.
+- Die Route `/music` nutzt jetzt die neue Datenstruktur und rendert daraus die vorbereitenden Module „Featured Release“, „Selected Releases“ und „Visual Releases“, ohne Release-Daten hart in JSX zu verdrahten.
+- Priorisierte Releases im aktuellen Stand: `current-chapter` (featured, Prio 1), `midnight-signal` (selected, Prio 2), `afterglow-cut` (coming soon, Prio 3), `nocturne-line-visual` (visual release, Prio 4).
+- Weiterhin fehlende Inhalte: verifizierte finale Plattform-URLs pro realem Release, final kuratierte Musik-spezifische Bildmaster in `public/assets/dama-venus/music/`, belastbare veröffentlichte Metadaten (exakte Credits/ISRC/Label-Infos) und finale Video-URLs.
+- Nächster Schritt: finale visuelle Ausgestaltung und Modul-Politur der Music-Seite auf Basis der jetzt stabilen Daten-/Asset-Struktur.
