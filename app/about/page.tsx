@@ -6,6 +6,7 @@ import { assetMap } from "@/content/data/site.config";
 export default function AboutPage() {
   const { aboutBio, aboutIntro, aboutKeyStatements, aboutVisualModules } = aboutPageModel;
   const aboutCta = aboutIntro.primaryCtaPattern;
+  const showArtistNote = false;
 
   const featuredPortraits = [...aboutVisualModules.featuredPortraits].sort(
     (a, b) => a.sectionPriority - b.sectionPriority
@@ -13,7 +14,9 @@ export default function AboutPage() {
   const supportingVisuals = [...aboutVisualModules.supportingVisuals].sort(
     (a, b) => a.sectionPriority - b.sectionPriority
   );
-  const keyStatements = [...aboutKeyStatements].sort((a, b) => a.sectionPriority - b.sectionPriority);
+  const keyStatements = [...aboutKeyStatements]
+    .sort((a, b) => a.sectionPriority - b.sectionPriority)
+    .map((statement) => statement.shortText);
 
   const leadPortrait = featuredPortraits[0];
   const leadPortraitAsset = leadPortrait ? assetMap[leadPortrait.assetId] : undefined;
@@ -52,11 +55,11 @@ export default function AboutPage() {
         </header>
       )}
 
-      <section className="space-y-2" aria-label="Haltung">
+      <section className="space-y-2" aria-label="Positionierung">
         <p className="text-sm text-muted">{aboutBio.mediumText}</p>
       </section>
 
-      <section className="space-y-2 rounded-lg border border-white/10 p-4" aria-label="Kurzprofil">
+      <section className="space-y-2 rounded-lg border border-white/10 p-4" aria-label="Haltung">
         <p className="text-xs uppercase tracking-wide text-muted">Short Bio</p>
         <p className="text-sm text-muted">{aboutBio.shortText}</p>
       </section>
@@ -88,7 +91,7 @@ export default function AboutPage() {
         </section>
       ) : null}
 
-      {aboutBio.longArtistNote ? (
+      {showArtistNote && aboutBio.longArtistNote ? (
         <section className="space-y-2 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-label="Artist Note">
           <p className="text-sm text-muted">{aboutBio.longArtistNote}</p>
         </section>
@@ -96,14 +99,9 @@ export default function AboutPage() {
 
       <section className="space-y-3 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-label="Arbeitsweise">
         <p className="text-xs uppercase tracking-wide text-muted">Arbeitsweise</p>
-        <ul className="grid gap-2 sm:grid-cols-2" aria-label="Methodik und Haltung">
-          {keyStatements.map((statement) => (
-            <li key={statement.id} className="rounded-md border border-white/10 p-3 text-sm text-muted">
-              <p className="font-medium text-foreground">{statement.title}</p>
-              <p>{statement.shortText}</p>
-            </li>
-          ))}
-        </ul>
+        <p className="text-sm text-muted" aria-label="Methodik-Block">
+          {keyStatements.join(" • ")}
+        </p>
       </section>
 
       <div>
