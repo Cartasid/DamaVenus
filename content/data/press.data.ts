@@ -148,6 +148,10 @@ export const pressMaterials: PressMaterialItem[] = [
     id: "epk",
     title: "Electronic Press Kit",
     description: "Approved media material for editorial use.",
+    type: "download",
+    accessMode: "request",
+    url: "/contact",
+    notes: "Download folgt im nächsten Schritt; Bereitstellung aktuell auf Anfrage.",
     asset: { id: "press-epk" }
   }
 ];
