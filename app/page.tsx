@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { homepageCoreModules, homepageIntro } from "@/content/data/homepage.data";
 import { navigationItems } from "@/content/data/navigation.data";
 import { assetMap, siteConfig } from "@/content/data/site.config";
@@ -52,7 +53,15 @@ export default function HomePage() {
       <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:items-start">
         <article className="relative">
           {leadAsset ? (
-            <img src={leadAsset.src} alt={leadAsset.alt ?? leadModule?.alt ?? ""} className={leadMediaClass} />
+            <Image
+              src={leadAsset.src}
+              alt={leadAsset.alt ?? leadModule?.alt ?? ""}
+              width={1600}
+              height={900}
+              priority
+              sizes="(max-width: 768px) 100vw, 66vw"
+              className={leadMediaClass}
+            />
           ) : null}
           <div className="absolute inset-x-3 bottom-3 rounded-md bg-black/65 p-4 text-white backdrop-blur-sm">
             <h1 id="home-title" className="font-display text-3xl font-bold leading-tight md:text-4xl">
@@ -82,7 +91,14 @@ export default function HomePage() {
                 <h2 className="font-display text-xl font-semibold">{supportModule.copy.headline}</h2>
                 {supportModule.copy.subline ? <p className="text-sm text-muted">{supportModule.copy.subline}</p> : null}
                 {supportAsset ? (
-                  <img src={supportAsset.src} alt={supportAsset.alt ?? supportModule.alt} className={supportMediaClass} />
+                  <Image
+                    src={supportAsset.src}
+                    alt={supportAsset.alt ?? supportModule.alt ?? ""}
+                    width={1200}
+                    height={800}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className={supportMediaClass}
+                  />
                 ) : null}
                 <span className="first-impression-cta">{supportCta.label}</span>
               </Link>
@@ -91,7 +107,14 @@ export default function HomePage() {
                 <h2 className="font-display text-xl font-semibold">{supportModule.copy.headline}</h2>
                 {supportModule.copy.subline ? <p className="text-sm text-muted">{supportModule.copy.subline}</p> : null}
                 {supportAsset ? (
-                  <img src={supportAsset.src} alt={supportAsset.alt ?? supportModule.alt} className={supportMediaClass} />
+                  <Image
+                    src={supportAsset.src}
+                    alt={supportAsset.alt ?? supportModule.alt ?? ""}
+                    width={1200}
+                    height={800}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className={supportMediaClass}
+                  />
                 ) : null}
               </article>
             )
@@ -102,9 +125,12 @@ export default function HomePage() {
       <section aria-labelledby="featured-release-title" className="mt-16 rounded-lg border border-white/10 bg-white/[0.03] p-6 md:mt-20">
         <div className="grid gap-5 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:items-center">
           {featuredReleaseAsset ? (
-            <img
+            <Image
               src={featuredReleaseAsset.src}
               alt={featuredReleaseAsset.alt ?? featuredReleaseModule?.alt ?? ""}
+              width={1400}
+              height={900}
+              sizes="(max-width: 768px) 100vw, 66vw"
               className="h-64 w-full rounded-md object-cover"
             />
           ) : null}
@@ -124,7 +150,14 @@ export default function HomePage() {
 
       <section aria-labelledby="visual-story-title" className="mt-24 grid gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
         {visualsAsset ? (
-          <img src={visualsAsset.src} alt={visualsAsset.alt ?? visualsModule?.alt ?? ""} className="h-72 w-full rounded-lg object-cover" />
+          <Image
+            src={visualsAsset.src}
+            alt={visualsAsset.alt ?? visualsModule?.alt ?? ""}
+            width={1400}
+            height={900}
+            sizes="(max-width: 768px) 100vw, 60vw"
+            className="h-72 w-full rounded-lg object-cover"
+          />
         ) : null}
         <article className="rounded-lg border border-white/10 bg-black/30 p-5">
           <h2 id="visual-story-title" className="font-display text-2xl font-semibold">
@@ -158,7 +191,16 @@ export default function HomePage() {
               </Link>
             ) : null}
           </article>
-          {pressAsset ? <img src={pressAsset.src} alt={pressAsset.alt ?? pressModule?.alt ?? ""} className="h-52 w-full rounded-md object-cover" /> : null}
+          {pressAsset ? (
+            <Image
+              src={pressAsset.src}
+              alt={pressAsset.alt ?? pressModule?.alt ?? ""}
+              width={1200}
+              height={800}
+              sizes="(max-width: 768px) 100vw, 60vw"
+              className="h-52 w-full rounded-md object-cover"
+            />
+          ) : null}
         </div>
       </section>
 
