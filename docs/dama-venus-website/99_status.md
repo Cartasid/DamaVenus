@@ -102,3 +102,19 @@
 - Above the fold ist jetzt konkret festgelegt: **Lead + Intro + Support + Nav** als klarer Einstieg, inklusive verbindlicher SW→Farbe-Logik und mobiler Priorisierung ohne Hover-Abhängigkeit.
 - Im oberen Bereich sind die Kernkomponenten als finalisiert markiert: Lead-Bereich, Intro-Layer, Support-Elemente und Hauptnavigation (inkl. der zugehörigen Farb-/State-Logik für den Einstieg).
 - Als nächster Schritt bleiben die offenen Punkte **unterhalb des Folds**: finale Modulausarbeitung und inhaltliche Produktionsreife für die nachgelagerten Homepage-Sektionen; die gesamte Homepage wird damit explizit **nicht** als vollständig final markiert.
+
+## Update 2026-04-03 – Schritt 09a Konkretisierung Above the fold
+1. **Konkret finaler Above-the-fold-Inhalt**
+   - Der Einstieg ist als zweispaltige First-View-Komposition umgesetzt: links die Lead-Fläche, rechts die eingebettete Orientierung.
+   - In der Lead-Fläche stehen Name/Lead („Dama Venus“), Brand-Descriptor und Intro-Statement („Where image becomes frequency.“) als Intro-Layer direkt auf dem Asset.
+   - Rechts ist eine Support-Kachel (aktuell priorisiert über `featuredRelease`) inklusive CTA eingebunden.
+   - Die Navigation ist above the fold eingebettet („Home Orientierung“) und nutzt die zentralen `navigationItems` statt separater Hero-Navigation.
+   - Die SW/Farb-Logik ist zustandsbasiert an Asset-Metadaten gekoppelt (u. a. `swColorMode`, `overlaySuitability`) und steuert Grayscale-/Kontrastklassen für Lead/Support.
+   - Mobile-Verhalten bleibt priorisiert ohne Hover-Abhängigkeit: Orientierung + Support bleiben als eigenständige Blöcke, Interaktion ist per Link/Touch verfügbar.
+2. **Finalisierte Komponenten und Datenquellen**
+   - Finalisiert in `app/page.tsx`: Auswahl-Logik für Lead/Support-Module, Intro-Overlay, eingebettete Navigation sowie CTA-/Asset-Rendering für den Above-the-fold-Bereich.
+   - Finalisiert in `app/globals.css`: Klassen für `first-impression-*`, `home-composition` und Interaktions-/Fokuszustände der eingebetteten First-View-Elemente.
+   - Finalisierte Datenquellen in `content/data`: `homepage.data.ts` (Intro + Core-Module inkl. SW/Farb-Hinweisen), `navigation.data.ts` (Nav-Items) und `site.config.ts` (Brand-Descriptor + Asset-Mapping).
+3. **Explizit offene Punkte unterhalb des Folds (nicht finalisiert)**
+   - Die restlichen Homepage-Module/Sequenzen unterhalb des Einstiegs bleiben weiterhin offen in Detailausbau und Produktionsreife (Content-Finalisierung, Asset-Kuration, Feintuning je Modul).
+   - Insbesondere die vollständige dramaturgische Sequenz nach dem Einstieg ist nicht als final abgenommen; abgeschlossen ist ausschließlich die Above-the-fold-Definition.
