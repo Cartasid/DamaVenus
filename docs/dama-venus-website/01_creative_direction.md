@@ -54,3 +54,5 @@ Don’t: Von der festgelegten Farbpalette und Tonalität abweichen.
 
 ## 10. Konsequenzen für die späteren Schritte
 Für Design, Prototyping und Umsetzung gilt diese Creative Direction als verbindlicher Entscheidungsrahmen. In den nächsten Schritten werden Layoutsystem, Komponentenlogik, Motion-Verhalten und Content-Produktion strikt an dieser Leitlinie ausgerichtet. Abweichungen sind nur zulässig, wenn sie die Markenwirkung nachweisbar stärken und nicht verwässern. Damit wird sichergestellt, dass Strategie, Gestaltung und technische Umsetzung konsistent auf eine starke, unverwechselbare Dama-Venus-Website einzahlen.
+
+Die technische Leitplanke aus dem Project Brief bleibt dabei unverändert verbindlich: Umsetzung mit Next.js, React und Tailwind CSS, komponentenbasiert, responsiv über relevante Breakpoints, performance-orientiert, mitgedachter Accessibility und image-first in Struktur und Rendering.
