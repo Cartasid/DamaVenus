@@ -14,7 +14,7 @@ export type PrioritizedAsset = {
 export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "home-release-cover",
-    finalPath: "/assets/releases/current-chapter-cover.jpg",
+    finalPath: "/assets/dama-venus/home/dama-venus-home-release-cover.jpg",
     sourcePath: "assets/source/releases/current-chapter-cover.jpg",
     area: "home",
     recommendedModuleType: "image",
@@ -26,7 +26,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "home-visual-preview",
-    finalPath: "/assets/visuals/frames-in-motion.jpg",
+    finalPath: "/assets/dama-venus/visuals/dama-venus-visuals-preview.jpg",
     sourcePath: "assets/source/visuals/frames-in-motion.jpg",
     area: "home",
     recommendedModuleType: "image",
@@ -38,7 +38,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "press-epk",
-    finalPath: "/assets/press/dama-venus-epk.pdf",
+    finalPath: "/assets/dama-venus/press/dama-venus-press-epk.jpg",
     sourcePath: "assets/source/press/dama-venus-epk.pdf",
     area: "press",
     recommendedModuleType: "document",
