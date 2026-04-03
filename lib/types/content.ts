@@ -95,5 +95,9 @@ export type PressMaterialItem = {
   id: string;
   title: string;
   description: string;
+  type: "bio" | "image" | "one-sheet" | "download" | "external-link";
+  accessMode: "direct" | "request" | "restricted";
+  url: string;
+  notes: string;
   asset: AssetRef;
 };
