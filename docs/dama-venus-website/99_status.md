@@ -6,6 +6,7 @@
 - Das Schwarzweiß-zu-Farbe-Motiv ist als verbindliches dramaturgisches Prinzip für die Startseite entschieden.
 - Die reduzierte Sitemap, die Komponentenlogik, die Interaktionsprinzipien sowie Do/Don’t-Regeln sind als Arbeitsgrundlage beschlossen.
 - Konsistenzabgleich zwischen `00_project_brief.md` und `01_creative_direction.md` ist durchgeführt; technische Leitplanken wurden in der Creative Direction explizit nachgezogen.
+- Die Asset-Strategie ist als eigener Schritt dokumentiert (`03_asset_strategy.md`) und für die Folgearbeit verbindlich gemacht.
 
 ## Verbindliche Entscheidungen
 - Die in `01_creative_direction.md` dokumentierte Creative Direction ist für die Folgearbeiten maßgeblich.
@@ -13,8 +14,10 @@
 - Die reduzierte Informationsarchitektur mit den Hauptseiten Startseite, Portfolio, Über, Leistungen, Kontakt/Buchung ist gesetzt.
 - Interaktionen bleiben ruhig, präzise und funktional; Lesbarkeit, Kontrast und klare Handlungsführung haben Vorrang.
 - Technische Leitplanken sind verbindlich und deckungsgleich in Brief und Creative Direction festgehalten: Next.js, React, Tailwind CSS, komponentenbasierter Aufbau, Responsiveness, Performance, Accessibility und image-first.
+- Für die spätere Asset-Verwendung ist folgende Grundlogik gesetzt: 3–6 Lead-Assets als visuelle Hauptträger, asymmetrische Homepage-Komposition mit 5 Kernkacheln (1 Lead + 2 primär + 2 sekundär), SW→Farbe als dramaturgische Steuerung.
 
 ## Offene Punkte
+- Im Repository fehlen derzeit reale Bild-/Videoassets; eine konkrete visuelle Kuratierung auf Dateiebene ist daher noch ausstehend.
 - Konkrete Seitenlayouts (Desktop/Mobile) pro Seitentyp sind noch nicht ausgearbeitet.
 - Die genaue Modulreihenfolge inklusive Inhaltspriorisierung je Seite ist noch festzulegen.
 - Motion-Spezifikation auf Komponentenebene (Timing, Trigger, Übergangsregeln) ist noch zu konkretisieren.
@@ -22,10 +25,11 @@
 - Formaler Konsistenzcheck für Folge-Dokumente (ab `02_...`) gegen Brief + Creative Direction ist als laufender Qualitätsschritt fortzuführen.
 
 ## Nächster empfohlener Schritt
-- Ein strukturiertes Layout-/Wireframe-Framework pro Hauptseite erstellen (Startseite, Portfolio, Über, Leistungen, Kontakt/Buchung) und jedes Modul direkt gegen die beschlossene Creative Direction validieren.
+- `docs/dama-venus-website/04_homepage_concept.md` ausarbeiten: konkrete Startseiten-Dramaturgie, Modulreihenfolge, Rasterlogik, Breakpoint-Verhalten und Bildrollen auf Basis der in `03_asset_strategy.md` festgelegten Asset-Logik.
 
 ## Relevante Dateien für den nächsten Schritt
 - `docs/dama-venus-website/00_project_brief.md` (verbindliche Ziele, Wirkung, technische Leitplanken)
 - `docs/dama-venus-website/01_creative_direction.md` (verbindliche Creative Direction als Bewertungsmaßstab)
+- `docs/dama-venus-website/03_asset_strategy.md` (verbindliche Asset-, Crop-, SW/Farbe- und Rollenlogik)
 - `docs/dama-venus-website/99_status.md` (aktueller Arbeitsstand und offene Punkte)
-- `docs/dama-venus-website/02_ia_ux_wireframe_framework.md` (im nächsten Schritt neu anzulegen; Ergebnisdokument für Seitenstruktur, Modulreihenfolge und Layoutlogik)
+- `docs/dama-venus-website/04_homepage_concept.md` (im nächsten Schritt neu anzulegen)
