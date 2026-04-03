@@ -237,3 +237,23 @@
    - Finale Credits, verifizierbare Zitate und formal bestätigte Quellenangaben sind noch nicht vollständig finalisiert.
 5. **Nächster Schritt**
    - Im nächsten Schritt erfolgt der finale Build der Seite **`/about`** auf Basis der jetzt priorisierten Daten-, Text- und Asset-Struktur.
+
+## Update 2026-04-03 – Schritt 12a About-Inhalts-/Asset-Struktur finalisiert
+1. **Welche About-Datenstruktur jetzt existiert**
+   - `content/data/about.data.ts` enthält jetzt eine belastbare, erweiterbare About-Basis mit:
+     - `aboutIntro` (title, introLine, shortText, mediumText, sectionPriority, CTA-Muster),
+     - `aboutBio` (short, medium, optional long artist note),
+     - `aboutSections` (strukturierte Inhaltsmodule mit Textstufen + Bildzuordnung),
+     - `aboutKeyStatements` (priorisierte Haltungsstatements im gleichen Schema),
+     - `aboutVisualModules` (featured portraits + supporting visuals inkl. Rollenlogik).
+   - Für alle relevanten About-Inhalte sind jetzt die geforderten Strukturfelder gepflegt: `title`, `introLine`, `shortText`, `mediumText`, optional `longerText`, `associatedImageAssetIds`, `cropFocusHint`, `altTextNote`, `sectionPriority`.
+2. **Welche Texte und Bilder priorisiert wurden**
+   - **Einstieg (Priorität 1):** Intro „Built on atmosphere.“ + Lead-Portrait `about-intro-entry-portrait-primary`.
+   - **Kurz-/Mittelbio (Priorität 2):** verdichtete Positionierung + Supporting-Portrait `about-supporting-visual-calm-02`.
+   - **Artist-Note/ruhiger Übergang (Priorität 3):** optionaler längerer Text + Reserve-Visual `about-supporting-visual-calm-reserve-03`.
+   - Key-Statements sind priorisiert und als nicht-generische Haltungsbausteine strukturiert (worldbuilding, editorial edge, method clarity).
+3. **Welche Fakten oder Inhalte noch fehlen**
+   - Verifizierte biografische Eckdaten (harte Fakten, Jahres-/Stationen-Validierung) sind weiterhin offen.
+   - Final bestätigte Press-/Zitatquellen sowie vollständige Credits fehlen weiterhin für eine vollständig faktengesicherte About-Endfassung.
+4. **Nächster Schritt**
+   - Im nächsten Schritt soll die Seite `/about` final gebaut und visuell hochwertig ausgearbeitet werden (UI-Polish, Spacing-/Typo-Feinschliff, finaler A11y-/Performance-Pass) auf Basis der jetzt stabilen Daten-/Asset-Struktur.
