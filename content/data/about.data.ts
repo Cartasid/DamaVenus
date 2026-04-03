@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/lib/types";
+import type { CTA } from "@/lib/types";
 
 export const aboutPageModel = {
   aboutIntro: {
