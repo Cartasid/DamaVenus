@@ -6,6 +6,13 @@ import { assetMap } from "@/content/data/site.config";
 export default function AboutPage() {
   const { aboutBio, aboutIntro, aboutKeyStatements, aboutVisualModules } = aboutPageModel;
   const aboutCta = aboutIntro.primaryCtaPattern;
+  const cropFocusToObjectPosition: Record<string, string> = {
+    "face-center": "50% 36%",
+    "upper-face-focus": "50% 30%",
+    "mid-frame-subject": "50% 42%",
+    "gaze-axis-center": "52% 40%",
+    "wide-environment": "50% 50%"
+  };
 
   const featuredPortraits = [...aboutVisualModules.featuredPortraits].sort(
     (a, b) => a.sectionPriority - b.sectionPriority
@@ -13,6 +20,9 @@ export default function AboutPage() {
   const supportingVisuals = [...aboutVisualModules.supportingVisuals].sort(
     (a, b) => a.sectionPriority - b.sectionPriority
   );
+  const primarySupportingVisual =
+    supportingVisuals.find((visual) => visual.role !== "reserve") ??
+    supportingVisuals.find((visual) => visual.role === "reserve");
   const keyStatements = [...aboutKeyStatements].sort((a, b) => a.sectionPriority - b.sectionPriority);
 
   const leadPortrait = featuredPortraits[0];
@@ -26,7 +36,7 @@ export default function AboutPage() {
   };
 
   return (
-    <section className="space-y-6" aria-labelledby="about-title">
+    <section className="space-y-8" aria-labelledby="about-title">
       {leadPortraitAsset ? (
         <article className="overflow-hidden rounded-lg border border-white/10">
           <div className="relative aspect-[4/5] sm:aspect-[3/4]">
@@ -35,6 +45,7 @@ export default function AboutPage() {
               alt={resolveAltText(leadPortrait.role, leadPortrait.altTextNote, leadPortraitAsset.alt)}
               fill
               className="object-cover"
+              style={{ objectPosition: leadPortraitObjectPosition }}
               sizes="(min-width: 640px) 420px, 100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/15" aria-hidden="true" />
