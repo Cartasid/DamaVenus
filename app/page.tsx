@@ -15,7 +15,6 @@ export default function HomePage() {
 
   const leadAsset = leadModule?.assetId ? assetMap[leadModule.assetId] : undefined;
   const supportAsset = supportModule?.assetId ? assetMap[supportModule.assetId] : undefined;
-  const leadCta = leadModule?.copy.cta;
   const supportCta = supportModule?.copy.cta;
 
   const leadMediaClass = [
@@ -41,62 +40,48 @@ export default function HomePage() {
     .join(" ");
 
   return (
-    <section aria-labelledby="home-title" className="home-composition space-y-8">
-      <nav aria-label="Home Orientierung" className="border-b border-white/10 pb-4">
-        <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
-          {navigationItems.map((item) => (
-            <li key={item.href}>
-              <Link href={item.href} className="interactive-hint">
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      <div className="grid gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:items-start">
-        <article className="space-y-3">
-          <h1 id="home-title" className="font-display text-4xl font-bold">
-            {siteConfig.name}
-          </h1>
+    <section aria-labelledby="home-title" className="home-composition">
+      <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:items-start">
+        <article className="relative">
           {leadAsset ? (
             <img src={leadAsset.src} alt={leadAsset.alt ?? leadModule?.alt ?? ""} className={leadMediaClass} />
           ) : null}
-          {leadModule ? (
-            leadCta ? (
-              <Link href={leadCta.href} className="first-impression-tile block min-h-11 space-y-3 rounded-lg p-3">
-                <p className="text-muted">
-                  {leadModule.copy.headline}
-                  {leadModule.copy.subline ? ` — ${leadModule.copy.subline}` : ""}
-                </p>
-                <span className="first-impression-cta">{leadCta.label}</span>
-              </Link>
-            ) : (
-              <p className="text-muted">
-                {leadModule.copy.headline}
-                {leadModule.copy.subline ? ` — ${leadModule.copy.subline}` : ""}
-              </p>
-            )
-          ) : null}
+          <div className="absolute inset-x-3 bottom-3 rounded-md bg-black/65 p-4 text-white backdrop-blur-sm">
+            <h1 id="home-title" className="font-display text-3xl font-bold leading-tight md:text-4xl">
+              {siteConfig.name}
+            </h1>
+            <p className="text-sm uppercase tracking-wide text-white/80">{siteConfig.brandDescriptor}</p>
+            <p className="mt-2 text-sm leading-snug text-white/90">{homepageIntro.statement}</p>
+          </div>
         </article>
 
-        <aside className="space-y-6">
-          <p className="text-lg leading-tight">{homepageIntro.statement}</p>
+        <aside className="space-y-4">
+          <nav aria-label="Home Orientierung" className="first-impression-tile rounded-lg p-3">
+            <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted">
+              {navigationItems.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="interactive-hint">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           {supportModule ? (
             supportCta ? (
               <Link href={supportCta.href} className="first-impression-tile block min-h-11 space-y-3 rounded-lg p-3">
-                <h2 className="font-display text-2xl font-semibold">{supportModule.copy.headline}</h2>
-                {supportModule.copy.subline ? <p className="text-muted">{supportModule.copy.subline}</p> : null}
-                <span className="first-impression-cta">{supportCta.label}</span>
+                <h2 className="font-display text-xl font-semibold">{supportModule.copy.headline}</h2>
+                {supportModule.copy.subline ? <p className="text-sm text-muted">{supportModule.copy.subline}</p> : null}
                 {supportAsset ? (
                   <img src={supportAsset.src} alt={supportAsset.alt ?? supportModule.alt} className={supportMediaClass} />
                 ) : null}
+                <span className="first-impression-cta">{supportCta.label}</span>
               </Link>
             ) : (
-              <article className="space-y-3">
-                <h2 className="font-display text-2xl font-semibold">{supportModule.copy.headline}</h2>
-                {supportModule.copy.subline ? <p className="text-muted">{supportModule.copy.subline}</p> : null}
+              <article className="first-impression-tile space-y-3 rounded-lg p-3">
+                <h2 className="font-display text-xl font-semibold">{supportModule.copy.headline}</h2>
+                {supportModule.copy.subline ? <p className="text-sm text-muted">{supportModule.copy.subline}</p> : null}
                 {supportAsset ? (
                   <img src={supportAsset.src} alt={supportAsset.alt ?? supportModule.alt} className={supportMediaClass} />
                 ) : null}
