@@ -257,3 +257,19 @@
    - Final bestätigte Press-/Zitatquellen sowie vollständige Credits fehlen weiterhin für eine vollständig faktengesicherte About-Endfassung.
 4. **Nächster Schritt**
    - Im nächsten Schritt soll die Seite `/about` final gebaut und visuell hochwertig ausgearbeitet werden (UI-Polish, Spacing-/Typo-Feinschliff, finaler A11y-/Performance-Pass) auf Basis der jetzt stabilen Daten-/Asset-Struktur.
+
+## Update 2026-04-03 – Schritt 12b `/about` Status konkretisiert (final/nahezu final)
+1. **Auf `/about` jetzt final bzw. nahezu final**
+   - Nahezu final steht die Seitenkomposition als klar geführte Sequenz aus **Intro → Bio → Key Statements → Visual-Module** mit ruhiger, editorialer Taktung.
+   - Final bzw. stabil ist die Text-/Bild-Hierarchie: primärer Entry-Visual im Einstieg, darauf abgestufte Bio-Ebenen (short/medium priorisiert) und nachgelagerte Support-Visuals zur atmosphärischen Führung.
+   - Die CTA-Führung ist konsistent gesetzt: von der inhaltlichen Orientierung im About-Kontext in Richtung der nächsten Handlungsziele (insb. Music/Visuals/Contact) ohne Bruch in Tonalität und Interaktionslogik.
+2. **Stabile Komponenten/Dateien (mit Pfaden)**
+   - `app/about/page.tsx`: stabile Modulausspielung für Intro, Bio-Abschnitte, Key Statements und Visual-Module inkl. CTA-Weiterführung.
+   - `content/data/about.data.ts`: stabile About-Datenbasis für Intro-/Bio-/Statement-Struktur und priorisierte Ausspielreihenfolge.
+   - `content/dama-venus/assets.ts`: stabile Asset-Zuordnung/Priorisierung für den About-Kontext (Entry/Support/Secondary).
+   - `app/globals.css`: stabile Interaktions-/A11y-Grundmuster (Fokus, Kontrast, Reduced-Motion), auf die `/about` konsistent aufsetzt.
+3. **Offene Restpunkte (klar getrennt)**
+   - **Finale Fact-Validierung:** belastbare/verifizierte Bio-Fakten, bestätigte Credits/Zitate/Quellenangaben sind noch nicht vollständig final freigegeben.
+   - **Letzter Qualitäts-Polish:** abschließender Performance- und A11y-Feinschliff (inkl. Kontrast-/Fokus-Review und finalem Rendering-/Loading-Pass) steht noch aus.
+4. **Expliziter nächster Schritt**
+   - Nächster Umsetzungsschritt ist die **Vorbereitung und Umsetzung von Press/EPK** (Daten-/Asset-Finalisierung, Seitenaufbau, CTA- und Download-Führung) als direkt anschließender Produktionsblock.
