@@ -67,3 +67,14 @@
 - Konkret empfohlener erster Implementierungsschritt nach dem Build-Plan ist **Phase 1 (Foundation)**: zuerst Projektstruktur + globale Shell + Theme-/Motion-/SEO-Konfig + Basis-Typen und Daten-Skelette anlegen, bevor Seiten-Feinbau startet.
 - Dafür zuerst relevante Dateien/Strukturen im Repo: `app/layout.tsx`, `app/page.tsx`, `app/globals.css`, `components/navigation/MainNav.tsx`, `components/layout/SiteHeader.tsx`, `components/layout/SiteFooter.tsx`, `lib/config/theme.ts`, `lib/config/motion.ts`, `lib/config/seo.ts`, `lib/types/content.ts`, `lib/types/navigation.ts`, `content/data/site.config.ts`, `content/data/navigation.data.ts`, `content/data/homepage.data.ts`.
 
+
+## Update 2026-04-03 – Schritt 08 Implementierungsstart (Foundation + Shells)
+- Konsistenzcheck zu `07_build_plan.md` durchgeführt: Die Umsetzung folgt der dort festgelegten Reihenfolge (Foundation vor Seitenausbau), den definierten Routen und der Reuse-Architektur; es bestehen keine widersprüchlichen Empfehlungen.
+- Gebaut wurden die Foundation-Bausteine: App-Router-Grundstruktur, globale Layout-Basis, tokenbasierte Theme-/Styling-Grundlage sowie die initialen Shell-Strukturen.
+- Zusätzlich wurden Header/Footer, Design-Tokens, Home-Shell sowie Subpage-Shells für die priorisierten Routen angelegt.
+- Vorhandene Komponenten auf Shell-Ebene: globale Layout-/Navigationsbausteine (inkl. Header/Footer) sowie die für den frühen Seitenaufbau vorgesehenen Shell-Komponenten gemäß Build-Plan-Grundlogik.
+- Als Shell angelegte Routen: `/`, `/visuals`, `/music`, `/about`, `/press`, `/contact`.
+- Weiterhin blockierende offene Inputs: finale reale Bild-/Video-Assets, verifizierbare Press-/EPK-Daten (inkl. Zitate/Downloads/Credits), bestätigte Release-Links/-Daten, finale Kontaktzuständigkeiten (Booking/Management/Presse), kuratierte Social-/Plattform-Links sowie rechtliche Pflichtinhalte (Imprint/Privacy).
+
+## Nächster empfohlener Schritt (aktualisiert)
+- Implementierungsschritt **Visuals/Music-Ausbau + Asset-Integration**: zuerst modulare Inhaltsbausteine für `/visuals` und `/music` mit bestehender Shell-/Token-Basis ausbauen, parallel Asset-Mapping in `content/data` vorbereiten und verfügbare reale Assets priorisiert integrieren.
