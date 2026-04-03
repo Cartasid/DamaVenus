@@ -14,8 +14,14 @@ a {
   @apply text-accent underline-offset-4 hover:underline;
 }
 
-a:focus-visible {
-  @apply rounded-sm outline-none ring-2 ring-offset-2 ring-offset-background ring-accent;
+.focus-token:focus-visible {
+  @apply outline-2 outline-offset-2 outline-accent ring-2 ring-offset-2 ring-offset-background ring-accent;
+}
+
+a:focus-visible,
+button:focus-visible,
+.first-impression-cta:focus-visible {
+  @apply focus-token rounded-sm;
 }
 
 .first-impression-tile {
@@ -27,7 +33,7 @@ a:focus-visible {
 }
 
 .first-impression-tile:focus-visible {
-  @apply ring-2 ring-offset-2 ring-offset-background ring-primary;
+  @apply focus-token rounded-sm;
 }
 
 .first-impression-cta {
