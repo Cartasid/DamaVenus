@@ -44,7 +44,7 @@
 - Für den nächsten Schritt wurden konkrete Copywriting-Bausteine vorbereitet (Opening-Zeile, Modul-Headlines, Release-Microcopy, Statement-Varianten, CTA-Set, Press/EPK- und Contact-Texte, Navigation-Labels, Footer-Microcopy).
 
 ## Nächster empfohlener Schritt (aktualisiert)
-- `docs/dama-venus-website/05_copywriting.md` ausarbeiten und die im Homepage-Konzept definierten Textbausteine in finale, tonal konsistente Micro- und Modul-Copy überführen.
+- `docs/dama-venus-website/07_build_plan.md` ausarbeiten und die beschlossene Unterseitenlogik in einen priorisierten, umsetzbaren Build-Plan mit klaren Ready-/Done-Kriterien überführen.
 
 ## Update 2026-04-03 – Schritt 05 Copywriting
 - In `05_copywriting.md` wurde textlich festgelegt: Opening-Line, Lead-/Modul-Headlines, Release-Teaser, Statement-Varianten, CTA-Set, Press/EPK-, Contact-/Booking-, Navigation- und Footer-Microcopy als verbindlicher Copy-Rahmen.
@@ -52,3 +52,10 @@
 - Bereits produktionsnah vorliegend sind: modulbezogene Headlines und Subline-Varianten, CTA-Formulierungen, Kontakt-/Booking-Texte, Press-/EPK-Einstiegstexte sowie Navigations- und Footer-Copy.
 - Noch fehlende Fakten/Inputs für finale Produktionsreife: belastbare Bio-Fakten, bestätigte Release-Daten/-Links, verifizierbare Press-Zitate, finale Plattform-/Social-Links, Management-/Booking-/Presse-Kontakte, vollständige Credits sowie kuratierte Download-Assets (EPK, hi-res Press-Fotos, Logos).
 - Als nächster Schritt ist `docs/dama-venus-website/06_subpages.md` auszuarbeiten.
+
+## Update 2026-04-03 – Schritt 06 Subpages
+- In `06_subpages.md` wurde verbindlich festgelegt, dass die Unterseiten **About, Music, Visuals, Press/EPK und Contact** als eigenständige, aber markenkonsistente Kapitel mit klarer Dramaturgie und CTA-Führung umgesetzt werden.
+- Für die Seitenstruktur wurde priorisiert: **Visuals** vor **Music**, danach **About**, anschließend **Contact**, zuletzt **Press/EPK**, jeweils mit klarer Blueprint-Reihenfolge statt generischer Template-Logik.
+- Als wiederverwendbare Sektionen wurden beschlossen: Page Intro Frame, Lead Visual Block, Context Block, Feature Block, Statement/Quote Panel, Primary CTA Block und Section Break.
+- Noch fehlende Inhalte/Fakten für produktionsreife Umsetzung sind insbesondere reale/kuratierte Assets, belastbare Press-/EPK-Daten (inkl. Zitate, Downloads, Credits) sowie finalisierte Kontakt- und Zuständigkeitsdaten für Booking/Management/Presse.
+- Eindeutiger nächster Schritt ist `docs/dama-venus-website/07_build_plan.md`.
