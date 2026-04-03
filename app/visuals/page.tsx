@@ -4,6 +4,13 @@ import { visualsData } from "@/content/data/visuals.data";
 import { assetMap } from "@/content/data/site.config";
 
 export default function VisualsPage() {
+  const resolveAlt = (asset: (typeof assetMap)[string] | undefined, altTextNotes?: string) => {
+    if (!asset) return "";
+    if (asset.role === "decorative") return "";
+    const baseAlt = asset.alt?.trim() || "Visual";
+    return altTextNotes ? `${baseAlt} — ${altTextNotes}` : baseAlt;
+  };
+
   const sortedEntries = [...visualsData.entries].sort((a, b) => a.order - b.order || a.priority - b.priority);
 
   const leadSequenceEntry = sortedEntries.find((entry) => entry.role === "lead");
@@ -16,14 +23,15 @@ export default function VisualsPage() {
   const openerAsset = visualsData.intro.asset ? assetMap[visualsData.intro.asset.id] : undefined;
   const leadAsset = leadSequenceEntry?.assets[0] ? assetMap[leadSequenceEntry.assets[0]] : undefined;
   const portraitAsset = portraitFeature?.assets[0] ? assetMap[portraitFeature.assets[0]] : undefined;
+  const linkedVisualAsset = linkedVisual?.assets[0] ? assetMap[linkedVisual.assets[0]] : undefined;
 
   return (
-    <section className="space-y-10">
+    <main className="space-y-10" aria-labelledby="visuals-page-title">
       <header className="grid gap-4 rounded-lg border border-white/10 bg-white/[0.03] p-5 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
         {openerAsset ? (
           <Image
             src={openerAsset.src}
-            alt={openerAsset.alt ?? visualsData.intro.headline}
+            alt={resolveAlt(openerAsset)}
             width={1400}
             height={900}
             sizes="(max-width: 768px) 100vw, 60vw"
@@ -32,7 +40,7 @@ export default function VisualsPage() {
         ) : null}
         <div className="space-y-2">
           <p className="text-xs uppercase tracking-[0.2em] text-muted">{visualsData.intro.label}</p>
-          <h1 className="font-display text-3xl font-semibold">{visualsData.intro.headline}</h1>
+          <h1 id="visuals-page-title" className="font-display text-3xl font-semibold">{visualsData.intro.headline}</h1>
           <p className="text-sm text-muted">{visualsData.intro.subhead}</p>
         </div>
       </header>
@@ -42,7 +50,7 @@ export default function VisualsPage() {
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-md md:aspect-[3/4]">
             <Image
               src={leadAsset.src}
-              alt={leadAsset.alt ?? leadSequenceEntry.title}
+              alt={resolveAlt(leadAsset, leadSequenceEntry.altTextNotes)}
               fill
               priority
               sizes="(max-width: 768px) 100vw, 75vw"
@@ -69,7 +77,7 @@ export default function VisualsPage() {
                 <Image
                   key={assetId}
                   src={asset.src}
-                  alt={asset.alt ?? entry.title}
+                  alt={resolveAlt(asset, entry.altTextNotes)}
                   width={1200}
                   height={1200}
                   sizes="(max-width: 768px) 100vw, 33vw"
@@ -93,7 +101,7 @@ export default function VisualsPage() {
                 <div key={assetId} className="relative aspect-video w-full overflow-hidden rounded-md md:aspect-[3/2]">
                   <Image
                     src={asset.src}
-                    alt={asset.alt ?? entry.title}
+                    alt={resolveAlt(asset, entry.altTextNotes)}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover"
@@ -112,7 +120,7 @@ export default function VisualsPage() {
           </h2>
           <Image
             src={portraitAsset.src}
-            alt={portraitAsset.alt ?? portraitFeature.title}
+            alt={resolveAlt(portraitAsset, portraitFeature.altTextNotes)}
             width={1300}
             height={1600}
             sizes="(max-width: 768px) 100vw, 60vw"
@@ -133,7 +141,7 @@ export default function VisualsPage() {
                 <div key={assetId} className="relative aspect-square w-full overflow-hidden rounded-md">
                   <Image
                     src={asset.src}
-                    alt={asset.alt ?? entry.title}
+                    alt={resolveAlt(asset, entry.altTextNotes)}
                     fill
                     sizes="(max-width: 768px) 50vw, 33vw"
                     className="object-cover"
@@ -151,9 +159,18 @@ export default function VisualsPage() {
             {linkedVisual.title}
           </h2>
           {linkedVisual.shortText ? <p className="text-sm text-muted">{linkedVisual.shortText}</p> : null}
-          {visualsData.intro.cta ? (
-            <Link href={visualsData.intro.cta.href} className="first-impression-cta">
-              {visualsData.intro.cta.label}
+          {visualsData.intro.cta && linkedVisualAsset ? (
+            <Link href={visualsData.intro.cta.href} className="first-impression-tile block space-y-3 rounded-md p-2">
+              <div className="relative aspect-[9/16] w-full overflow-hidden rounded-md md:aspect-[3/2]">
+                <Image
+                  src={linkedVisualAsset.src}
+                  alt={resolveAlt(linkedVisualAsset, linkedVisual.altTextNotes)}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+              <span className="text-sm text-muted">{visualsData.intro.cta.label}</span>
             </Link>
           ) : null}
         </section>
@@ -166,6 +183,6 @@ export default function VisualsPage() {
           </Link>
         </footer>
       ) : null}
-    </section>
+    </main>
   );
 }
