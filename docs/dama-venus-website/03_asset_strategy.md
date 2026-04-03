@@ -10,15 +10,21 @@ Ziel ist, die spätere Homepage- und Seitenkomposition nicht generisch, sondern 
 ## 2. Überblick über den vorhandenen Asset-Bestand
 
 ### 2.1 Ergebnis der Repo-Sichtung (Stand: 2026-04-03)
-Im Repository sind aktuell **keine nutzbaren Bild- oder Videoassets** für die Website enthalten (keine `.jpg/.jpeg/.png/.webp/.avif/.gif/.tif/.tiff/.bmp/.heic/.svg/.mp4/.mov` im Projektbestand).
+Im Verzeichnis `/pics` liegen aktuell **35 Bildassets** vor (keine Videoassets). Verfügbare Dateitypen:
+- `.jpg`: 17
+- `.jpeg`: 11
+- `.png`: 2
+- `.webp`: 3
+- `.heic`: 2
 
 ### 2.2 Relevanzbewertung
-- **Relevante Assets vorhanden:** nein
-- **Nicht relevante Dateien:** aktuell ausschließlich Markdown-Dokumente (Strategie-/Statusdokumentation)
-- **Strukturzustand:** Asset-Struktur für Medien ist derzeit nicht angelegt
+- **Relevante Assets vorhanden:** ja (erstes Rohinventar in `/pics`)
+- **Grobe Motivgruppen im Bestand:** Cinderela-Serie (12), IMG_-Kameraexporte (7), UUID-/Device-Exports (10), plus einzelne Spezialassets (Tamiris, Spotify Canvas, AI-Generated, WebP-Exports)
+- **Strukturzustand:** Assets sind vorhanden, aber noch nicht kuratiert und noch nicht in die Zielstruktur nach Kapitel 8 überführt
 
 ### 2.3 Konsequenz
-Es kann in diesem Schritt **keine finale visuelle Kuratierung einzelner Realbilder** durchgeführt werden. Stattdessen wird eine präzise, produktionsreife Strategie definiert, nach der der Asset-Bestand im nächsten Schritt strukturiert eingesammelt und bewertet werden kann.
+Eine finale visuelle Kuratierung einzelner Lead-/Secondary-Assets ist weiterhin offen; der nächste Schritt ist die strukturierte Bewertung des vorhandenen Rohbestands aus `/pics` nach den Kriterien aus Kapitel 3.
+Technische Auffälligkeiten im Inventar: HEIC-Dateien (2) mit potenziellen Kompatibilitätsrisiken, stark heterogene Dateigrößen (u. a. sehr kleine WebP-Exports), inkonsistente Naming-Patterns (UUID, Kamera-Defaults, gemischte Groß-/Kleinschreibung bei Extensions).
 
 ---
 
@@ -43,7 +49,7 @@ Ausschlusskriterien:
 ---
 
 ## 4. Bewertete Hauptassets
-Da aktuell keine Medienassets im Repo liegen, sind noch keine konkreten Dateinamen als Hauptassets festlegbar.
+Auf Basis des aktuellen Rohinventars sind noch keine finalen Lead-Assets festgelegt; die konkrete Dateiauswahl folgt nach Kuratierung gemäß Kapitel 3.
 
 **Verbindliche Entscheidungsregel für die nächste Asset-Runde:**
 - Aus dem ersten realen Asset-Pool werden **3–6 Lead-Assets** definiert, die die Website visuell tragen.
@@ -202,19 +208,19 @@ Aus dem aktuellen Stand ergeben sich folgende klare Vorgaben:
 2. Ein **asymmetrisches Raster** mit Portrait-Priorität ist voraussichtlich passender als ein starres gleichförmiges Grid.
 3. **Selektive Full-Bleed-Elemente** sind sinnvoll, aber nur mit robusten Kompositionen.
 4. Die Dramaturgie bleibt: **ruhiger SW-Einstieg → gezielte Farböffnung → kontrolliertes Ausklingen**.
-5. Die finale Homepage-Konzeption (`04_homepage_concept.md`) muss auf den real verfügbaren 3–6 Lead-Assets aufbauen, nicht auf Platzhalterannahmen.
+5. Die finale Homepage-Konzeption (`04_homepage_concept.md`) muss auf den nach Kuratierung bestätigten 3–6 Lead-Assets aus dem vorhandenen `/pics`-Bestand aufbauen, nicht auf Platzhalterannahmen.
 
 ---
 
 ## 11. Offene Lücken / Empfehlungen
-Aktueller Blocker: **fehlender Asset-Bestand im Repo**.
+Aktueller Schwerpunkt: **Kuratierung und technische Normalisierung des bereits ingestierten Asset-Bestands**.
 
 ### Kritische Lücken
-- keine kuratierbaren Realbilder für Homepage
-- keine Press-/EPK-geeigneten Masterassets
-- keine belastbare Querformatbasis für Full-Bleed-Entscheidungen
-- keine Detailshots/Section-Break-Assets
-- keine release-spezifischen Motive im Bestand
+- noch keine final kuratierten Lead-/Secondary-Assets für Homepage
+- Press-/EPK-Eignung der vorhandenen Dateien noch nicht validiert
+- Querformat- und Full-Bleed-Tauglichkeit noch nicht assetweise geprüft
+- HEIC-Dateien noch nicht in web-/pipeline-sichere Zielformate überführt
+- Naming/Ordnung noch nicht auf die Zielstruktur aus Kapitel 8 normalisiert
 
 ### Konkrete Empfehlungen für Nachlieferung
 1. Mindestens 20–40 Realassets in einem ersten Pool bereitstellen (Portraits, Editorial-Stills, Wide Frames, Detailshots).
@@ -224,4 +230,3 @@ Aktueller Blocker: **fehlender Asset-Bestand im Repo**.
    - 4–6 Detail-/Mood-Shots für Übergänge
    - 4–6 technisch saubere Press-Bilder
 3. Nach Upload direkt eine detaillierte Inventur (`03_asset_inventory.md`) erstellen und 3–6 Lead-Assets finalisieren.
-
