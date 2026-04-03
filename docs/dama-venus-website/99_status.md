@@ -273,3 +273,17 @@
    - `content/data/press.data.ts`
    - `content/dama-venus/assets.ts`
    - `app/press/page.tsx`
+
+## Update 2026-04-03 – Schritt 13a `/press` Status konkretisiert (final/nahezu final)
+1. **Auf `/press` final bzw. nahezu final umgesetzt (konkrete Sektionen)**
+   - Als final/nahezu final umgesetzt gelten die Sektionen **Intro**, **Press/EPK Overview**, **Press Assets/Downloads**, **Press Facts/Bio-Snapshot** und **Press Contact/Inquiry-CTA** als konsistente Seitenstruktur.
+2. **Stabile Komponenten/Patterns (konkret, mit Dateien)**
+   - `app/press/page.tsx`: stabile Modulausspielung und Sektionenreihenfolge für `/press`.
+   - `content/data/press.data.ts`: stabiles Datenmodell für Press/EPK-Inhalte, Faktenblöcke, Download-/Link-Referenzen und Kontaktführung.
+   - `app/globals.css`: wiederverwendete, stabile Interaktions-/A11y-Patterns (Fokuszustände, Reduced-Motion-Basis), die auf `/press` konsistent genutzt werden.
+3. **Offene Restpunkte**
+   - **Finale externe Links:** letzte Verifizierung/Freigabe für externe Press-/Plattform-/Referenz-Links.
+   - **Download-Auslieferung:** finale Bereitstellung und Prüfung der Download-Artefakte inkl. stabiler Auslieferungspfade.
+   - **Finaler Qualitäts-Pass:** letzter A11y-/Mobile-/Polish-Durchlauf vor Gesamtfreigabe.
+4. **Expliziter nächster Schritt**
+   - Als nächster Umsetzungsschritt folgt die **Vorbereitung und Finalisierung von `/contact`**.
