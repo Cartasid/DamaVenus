@@ -53,13 +53,11 @@ export default function MusicPage() {
         <h2 className="font-display text-2xl font-semibold">Selected Releases</h2>
         <ul className="grid gap-4 md:grid-cols-2">
           {selectedSingles.map((release) => {
-            const releaseAsset = assetMap[release.coverAsset.id];
             return (
               <li key={release.id} id={release.id} className="space-y-2 rounded-lg border border-white/10 p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-muted">{release.status}</p>
                 <h3 className="font-display text-xl">{release.title}</h3>
                 <p className="text-sm text-muted">{release.shortText}</p>
-                {releaseAsset ? <p className="text-xs text-muted">Asset: {releaseAsset.src}</p> : null}
                 <Link href={release.primaryCta.href} className="first-impression-cta">
                   {release.primaryCta.label}
                 </Link>
@@ -73,13 +71,9 @@ export default function MusicPage() {
         <h2 className="font-display text-2xl font-semibold">Visual Releases</h2>
         <ul className="space-y-3">
           {musicData.visualReleases.map((release) => {
-            const releaseAsset = assetMap[release.coverAsset.id];
             return (
               <li key={release.id} className="rounded-lg border border-white/10 p-4">
                 <p className="text-sm text-muted">{release.title}</p>
-                <p className="text-xs text-muted">
-                  Asset hints: {releaseAsset?.cropHint} · {releaseAsset?.focusHint}
-                </p>
                 <Link href={release.primaryCta.href} className="first-impression-cta mt-2 inline-block">
                   {release.primaryCta.label}
                 </Link>
