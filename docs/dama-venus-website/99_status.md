@@ -85,3 +85,9 @@
 - Priorisierungslogik für die Verarbeitung: zuerst potenzielle Lead-Assets für Homepage (3–6), danach Secondary-Set (6–12), anschließend Press-/EPK-geeignete Varianten und mobile/exportierte Derivate.
 - Offene Risiken: insbesondere HEIC-Kompatibilität (Decoder/Browser/Pipeline), inkonsistente Dateibenennung (UUID/Kamera-Defaults), gemischte Extension-Cases sowie sehr kleine WebP-Dateien mit möglichem Qualitätsrisiko.
 - Nächster Schritt: formale Asset-Inventur + Kurationsrunde mit Zuordnung pro Seite/Modul und Entscheidung, welche Dateien zuerst in die Zielstruktur aus Kapitel 8 der Asset-Strategie überführt werden.
+
+## Update 2026-04-03 – HEIC-Handling im Preparation-Script
+- Das Preparation-Script wurde um einen HEIC-Verarbeitungsversuch über lokales Tooling erweitert (Priorität: `magick`, `convert`, `heif-convert`, `sips`).
+- Bei fehlender HEIC-Unterstützung greift jetzt ein expliziter, markierter Fallback-Pfad: Varianten werden als `skipped-heic` ausgewiesen, eine TODO-Liste wird im Report geführt und der Exitcode bleibt für diesen Fall bewusst nicht-blockierend.
+- Der Metadaten-Output enthält jetzt zusätzlich den Abschnitt `heicStatus` mit Support-Status, erkanntem Tool, Fallback-Nutzung sowie Skip-/TODO-Informationen.
+- Der technische Grenzfall „HEIC ohne verfügbares Tooling“ ist in `03_asset_strategy.md` als verbindliche Pipeline-Regel dokumentiert.
