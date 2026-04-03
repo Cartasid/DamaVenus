@@ -5,6 +5,9 @@ export type AssetRef = {
 export type AssetMapItem = {
   src: string;
   alt?: string;
+  focusOrCropHint?: string;
+  bwColorSuitability?: string;
+  overlayOrTransparencyNote?: string;
 };
 
 export type CTA = {

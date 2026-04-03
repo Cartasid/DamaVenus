@@ -1,4 +1,5 @@
 import type { ReleaseItem, SectionContent } from "@/lib/types";
+import type { AssetRef } from "@/lib/types";
 
 export const homepageIntro = {
   statement: "Where image becomes frequency."
@@ -42,3 +43,68 @@ export const homepageServices: SectionContent = {
     href: "/contact"
   }
 };
+
+export type HomepageModule =
+  | {
+      id: "release";
+      type: "release";
+      title: string;
+      description: string;
+      cta: ReleaseItem["cta"];
+      asset: AssetRef;
+    }
+  | {
+      id: "visuals";
+      type: "section";
+      headline: string;
+      subhead?: string;
+      cta?: SectionContent["cta"];
+      asset: AssetRef;
+    }
+  | {
+      id: "statement";
+      type: "section";
+      headline: string;
+      subhead?: string;
+      cta?: SectionContent["cta"];
+    }
+  | {
+      id: "services";
+      type: "section";
+      headline: string;
+      subhead?: string;
+      body?: string[];
+      cta?: SectionContent["cta"];
+    };
+
+export const homepageModules: HomepageModule[] = [
+  {
+    id: "release",
+    type: "release",
+    title: homepageRelease.title,
+    description: homepageRelease.description,
+    cta: homepageRelease.cta,
+    asset: homepageRelease.coverAsset
+  },
+  {
+    id: "visuals",
+    type: "section",
+    headline: homepageVisuals.headline,
+    subhead: homepageVisuals.subhead,
+    cta: homepageVisuals.cta,
+    asset: homepageVisuals.asset as AssetRef
+  },
+  {
+    id: "statement",
+    type: "section",
+    headline: homepageStatement.headline
+  },
+  {
+    id: "services",
+    type: "section",
+    headline: homepageServices.headline,
+    subhead: homepageServices.subhead,
+    body: homepageServices.body,
+    cta: homepageServices.cta
+  }
+];
