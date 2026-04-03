@@ -26,7 +26,6 @@ export default function VisualsPage() {
             alt={openerAsset.alt ?? visualsData.intro.headline}
             width={1400}
             height={900}
-            priority
             sizes="(max-width: 768px) 100vw, 60vw"
             className="h-64 w-full rounded-md object-cover"
           />
@@ -40,14 +39,16 @@ export default function VisualsPage() {
 
       {leadSequenceEntry && leadAsset ? (
         <article className="space-y-3 rounded-lg border border-white/10 p-4" aria-labelledby={`${leadSequenceEntry.id}-lead-title`}>
-          <Image
-            src={leadAsset.src}
-            alt={leadAsset.alt ?? leadSequenceEntry.title}
-            width={1600}
-            height={1000}
-            sizes="100vw"
-            className="h-80 w-full rounded-md object-cover"
-          />
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-md md:aspect-[3/4]">
+            <Image
+              src={leadAsset.src}
+              alt={leadAsset.alt ?? leadSequenceEntry.title}
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 75vw"
+              className="object-cover"
+            />
+          </div>
           <h2 id={`${leadSequenceEntry.id}-lead-title`} className="font-display text-2xl font-semibold">
             {leadSequenceEntry.title}
           </h2>
@@ -89,15 +90,15 @@ export default function VisualsPage() {
             {entry.assets.map((assetId) => {
               const asset = assetMap[assetId];
               return asset ? (
-                <Image
-                  key={assetId}
-                  src={asset.src}
-                  alt={asset.alt ?? entry.title}
-                  width={1200}
-                  height={900}
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="h-40 w-full rounded-md object-cover"
-                />
+                <div key={assetId} className="relative aspect-video w-full overflow-hidden rounded-md md:aspect-[3/2]">
+                  <Image
+                    src={asset.src}
+                    alt={asset.alt ?? entry.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
               ) : null;
             })}
           </div>
@@ -129,15 +130,15 @@ export default function VisualsPage() {
             {entry.assets.map((assetId) => {
               const asset = assetMap[assetId];
               return asset ? (
-                <Image
-                  key={assetId}
-                  src={asset.src}
-                  alt={asset.alt ?? entry.title}
-                  width={900}
-                  height={900}
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="h-36 w-full rounded-md object-cover"
-                />
+                <div key={assetId} className="relative aspect-square w-full overflow-hidden rounded-md">
+                  <Image
+                    src={asset.src}
+                    alt={asset.alt ?? entry.title}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
               ) : null;
             })}
           </div>
