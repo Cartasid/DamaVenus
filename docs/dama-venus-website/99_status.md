@@ -25,11 +25,23 @@
 - Formaler Konsistenzcheck für Folge-Dokumente (ab `02_...`) gegen Brief + Creative Direction ist als laufender Qualitätsschritt fortzuführen.
 
 ## Nächster empfohlener Schritt
-- `docs/dama-venus-website/04_homepage_concept.md` ausarbeiten: konkrete Startseiten-Dramaturgie, Modulreihenfolge, Rasterlogik, Breakpoint-Verhalten und Bildrollen auf Basis der in `03_asset_strategy.md` festgelegten Asset-Logik.
+- `docs/dama-venus-website/05_copywriting.md` ausarbeiten: modulbezogene Microcopy, Headlines, CTA-Set, Release- und Statement-Texte gemäß der in `04_homepage_concept.md` festgelegten Dramaturgie und Hierarchie.
 
 ## Relevante Dateien für den nächsten Schritt
 - `docs/dama-venus-website/00_project_brief.md` (verbindliche Ziele, Wirkung, technische Leitplanken)
 - `docs/dama-venus-website/01_creative_direction.md` (verbindliche Creative Direction als Bewertungsmaßstab)
 - `docs/dama-venus-website/03_asset_strategy.md` (verbindliche Asset-, Crop-, SW/Farbe- und Rollenlogik)
+- `docs/dama-venus-website/04_homepage_concept.md` (verbindliche Homepage-Dramaturgie, Modul- und Reihenfolgelogik)
 - `docs/dama-venus-website/99_status.md` (aktueller Arbeitsstand und offene Punkte)
-- `docs/dama-venus-website/04_homepage_concept.md` (im nächsten Schritt neu anzulegen)
+
+## Update 2026-04-03 – Schritt 04 Homepage Concept
+- `04_homepage_concept.md` wurde ausgearbeitet und als verbindliche Startseitenkonzeption dokumentiert.
+- Die Homepage-Struktur wurde auf eine **editoriale 5-Kernmodule-Komposition** priorisiert (Lead + Release + Visual Story + Statement + Press/EPK + Contact in klarer Dramaturgie, ergänzt um Intro-Layer und Footer).
+- Kernmodule wurden festgelegt: Lead Media Tile, Featured Release Tile, Visual Tile, Statement Tile, Press/EPK Tile, Contact/Newsletter Tile sowie Navigation/Intro Layer und Section Break/Text Panel.
+- Above-the-fold wurde als nicht-klassisches Hero-System definiert: bilddominanter Einstieg mit minimaler Orientierung statt Banner-Hero.
+- Scroll- und Mobile-Prinzip sind konkretisiert: sequenzielle Verdichtung, mobile Neupriorisierung ohne Hover-Abhängigkeit.
+- Accessibility-/UX-Konsequenzen wurden für die spätere Umsetzung verbindlich abgeleitet (Fokuszustände, Kontrast, Touch-Ziele, reduzierte Motion).
+- Für den nächsten Schritt wurden konkrete Copywriting-Bausteine vorbereitet (Opening-Zeile, Modul-Headlines, Release-Microcopy, Statement-Varianten, CTA-Set, Press/EPK- und Contact-Texte, Navigation-Labels, Footer-Microcopy).
+
+## Nächster empfohlener Schritt (aktualisiert)
+- `docs/dama-venus-website/05_copywriting.md` ausarbeiten und die im Homepage-Konzept definierten Textbausteine in finale, tonal konsistente Micro- und Modul-Copy überführen.
