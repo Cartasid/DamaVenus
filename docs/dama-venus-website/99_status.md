@@ -219,3 +219,21 @@
    - **Endpolish:** letzter visueller Feinschliff (Spacing/Hierarchie), abschließender A11y-/Kontrast-Check und finaler Performance-Pass.
 4. **Expliziter nächster Schritt**
    - Nach Abschluss des Visuals-Polish folgt die Umsetzung der nächsten Seiten in dieser Reihenfolge: **About**, danach **Press**, danach **Contact**.
+
+## Update 2026-04-03 – Schritt 12 About-Datenbasis strukturiert/priorisiert
+1. **Welche About-Datenstruktur jetzt existiert**
+   - Für `/about` liegt jetzt ein strukturiertes Modell mit den Bereichen **Intro**, **Bio**, **Key Statements** und **Visual-Module** vor.
+   - Die Struktur trennt klar zwischen textlicher Einführung, Bio-Ebenen, inhaltlichen Kernstatements und modularem Visual-Einstieg inkl. Support-Visuals.
+2. **Welche Texte priorisiert wurden**
+   - Priorisiert sind **short** und **medium** Bio-Texte als primäre Ausspielung für den ersten About-Build.
+   - **Optional long** bleibt als nachgelagerte Erweiterung vorgesehen und wird erst mit finaler Faktenlage produktionsreif gesetzt.
+   - Key Statements sind als priorisierte Kernbotschaften für die About-Seite gesetzt und in fester Reihenfolge vorgesehen.
+3. **Welche Assets priorisiert wurden**
+   - **Einstieg (Entry/Lead):** primäres Intro-Porträt als visuelle Hauptführung für den About-Einstieg.
+   - **Support:** unterstützende ruhige Visuals zur atmosphärischen Ergänzung des Intro-/Bio-Bereichs.
+   - **Sekundär:** ein zusätzliches Reserve-/Secondary-Visual als fallbackfähige Ergänzung mit niedrigerer Priorität.
+4. **Explizit fehlende Fakten/Inhalte**
+   - Verifizierte Bio-Facts (belastbare biografische Eckdaten) fehlen weiterhin.
+   - Finale Credits, verifizierbare Zitate und formal bestätigte Quellenangaben sind noch nicht vollständig finalisiert.
+5. **Nächster Schritt**
+   - Im nächsten Schritt erfolgt der finale Build der Seite **`/about`** auf Basis der jetzt priorisierten Daten-, Text- und Asset-Struktur.
