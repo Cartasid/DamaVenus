@@ -12,9 +12,17 @@ export default function HomePage() {
   const supportModule =
     homepageCoreModules.find((module) => module.id === "featuredRelease" && module.id !== leadModule?.id) ??
     homepageCoreModules.find((module) => module.id !== leadModule?.id && Boolean(module.assetId));
+  const featuredReleaseModule = homepageCoreModules.find((module) => module.id === "featuredRelease");
+  const visualsModule = homepageCoreModules.find((module) => module.id === "visuals");
+  const statementModule = homepageCoreModules.find((module) => module.id === "statement");
+  const pressModule = homepageCoreModules.find((module) => module.id === "press");
+  const contactNewsletterModule = homepageCoreModules.find((module) => module.id === "contactNewsletter");
 
   const leadAsset = leadModule?.assetId ? assetMap[leadModule.assetId] : undefined;
   const supportAsset = supportModule?.assetId ? assetMap[supportModule.assetId] : undefined;
+  const featuredReleaseAsset = featuredReleaseModule?.assetId ? assetMap[featuredReleaseModule.assetId] : undefined;
+  const visualsAsset = visualsModule?.assetId ? assetMap[visualsModule.assetId] : undefined;
+  const pressAsset = pressModule?.assetId ? assetMap[pressModule.assetId] : undefined;
   const supportCta = supportModule?.copy.cta;
 
   const leadMediaClass = [
@@ -90,6 +98,84 @@ export default function HomePage() {
           ) : null}
         </aside>
       </div>
+
+      <section aria-labelledby="featured-release-title" className="mt-16 rounded-lg border border-white/10 bg-white/[0.03] p-6 md:mt-20">
+        <div className="grid gap-5 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:items-center">
+          {featuredReleaseAsset ? (
+            <img
+              src={featuredReleaseAsset.src}
+              alt={featuredReleaseAsset.alt ?? featuredReleaseModule?.alt ?? ""}
+              className="h-64 w-full rounded-md object-cover"
+            />
+          ) : null}
+          <div className="space-y-3">
+            <h2 id="featured-release-title" className="font-display text-2xl font-semibold">
+              {featuredReleaseModule?.copy.headline}
+            </h2>
+            {featuredReleaseModule?.copy.subline ? <p className="text-sm text-muted">{featuredReleaseModule.copy.subline}</p> : null}
+            {featuredReleaseModule?.copy.cta ? (
+              <Link href={featuredReleaseModule.copy.cta.href} className="first-impression-cta">
+                {featuredReleaseModule.copy.cta.label}
+              </Link>
+            ) : null}
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="visual-story-title" className="mt-24 grid gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
+        {visualsAsset ? (
+          <img src={visualsAsset.src} alt={visualsAsset.alt ?? visualsModule?.alt ?? ""} className="h-72 w-full rounded-lg object-cover" />
+        ) : null}
+        <article className="rounded-lg border border-white/10 bg-black/30 p-5">
+          <h2 id="visual-story-title" className="font-display text-2xl font-semibold">
+            {visualsModule?.copy.headline}
+          </h2>
+          {visualsModule?.copy.subline ? <p className="mt-2 text-sm text-muted">{visualsModule.copy.subline}</p> : null}
+          {visualsModule?.copy.cta ? (
+            <Link href={visualsModule.copy.cta.href} className="mt-4 inline-block first-impression-cta">
+              {visualsModule.copy.cta.label}
+            </Link>
+          ) : null}
+        </article>
+      </section>
+
+      <section aria-labelledby="statement-title" className="mt-20 rounded-md border-l-2 border-white/20 pl-5 md:mt-24 md:pl-8">
+        <h2 id="statement-title" className="font-display text-2xl font-semibold text-white/90">
+          {statementModule?.copy.headline}
+        </h2>
+      </section>
+
+      <section aria-labelledby="press-epk-title" className="mt-16 rounded-lg border border-white/10 bg-white/[0.02] p-6 md:mt-20">
+        <div className="grid gap-5 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center">
+          <article className="space-y-3">
+            <h2 id="press-epk-title" className="font-display text-2xl font-semibold">
+              {pressModule?.copy.headline}
+            </h2>
+            {pressModule?.copy.subline ? <p className="text-sm text-muted">{pressModule.copy.subline}</p> : null}
+            {pressModule?.copy.cta ? (
+              <Link href={pressModule.copy.cta.href} className="first-impression-cta">
+                {pressModule.copy.cta.label}
+              </Link>
+            ) : null}
+          </article>
+          {pressAsset ? <img src={pressAsset.src} alt={pressAsset.alt ?? pressModule?.alt ?? ""} className="h-52 w-full rounded-md object-cover" /> : null}
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="contact-newsletter-title"
+        className="mt-24 rounded-t-xl border-t border-white/10 bg-gradient-to-b from-transparent via-white/[0.02] to-white/[0.05] px-6 pb-14 pt-12"
+      >
+        <h2 id="contact-newsletter-title" className="font-display text-2xl font-semibold">
+          {contactNewsletterModule?.copy.headline}
+        </h2>
+        {contactNewsletterModule?.copy.subline ? <p className="mt-2 text-sm text-muted">{contactNewsletterModule.copy.subline}</p> : null}
+        {contactNewsletterModule?.copy.cta ? (
+          <Link href={contactNewsletterModule.copy.cta.href} className="mt-4 inline-block first-impression-cta">
+            {contactNewsletterModule.copy.cta.label}
+          </Link>
+        ) : null}
+      </section>
     </section>
   );
 }
