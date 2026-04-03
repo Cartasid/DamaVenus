@@ -78,6 +78,19 @@ export type MusicRelease = {
   secondaryCta?: MusicAction;
 };
 
+export type PressEpkBlock = {
+  id: string;
+  title: string;
+  shortDescriptor: string;
+  body: string | string[];
+  linkedAssets: string[];
+  order: number;
+  priority: number;
+  ctaLabel: string;
+  target: string;
+  isPrimaryVisible?: boolean;
+};
+
 export type PressMaterialItem = {
   id: string;
   title: string;

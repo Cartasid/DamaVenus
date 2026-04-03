@@ -1,11 +1,145 @@
-import type { PressMaterialItem, SectionContent } from "@/lib/types";
+import type { PressEpkBlock, PressMaterialItem, SectionContent } from "@/lib/types";
+
+export const pressEpkBlocks: PressEpkBlock[] = [
+  {
+    id: "pageIntro",
+    title: "Press & EPK",
+    shortDescriptor: "Route entry and orientation block for editorial visitors.",
+    body: "Images, bio, and release facts for press inquiries.",
+    linkedAssets: ["press-epk"],
+    order: 1,
+    priority: 1,
+    ctaLabel: "Open EPK",
+    target: "/press",
+    isPrimaryVisible: true
+  },
+  {
+    id: "artistSummary",
+    title: "Artist Summary",
+    shortDescriptor: "Concise framing for positioning and editorial context.",
+    body: "Dama Venus creates cinematic music and visual narratives with a dark editorial edge.",
+    linkedAssets: ["press-epk"],
+    order: 2,
+    priority: 2,
+    ctaLabel: "View Artist Profile",
+    target: "/about"
+  },
+  {
+    id: "veryShortBio",
+    title: "Very Short Bio",
+    shortDescriptor: "Single-line bio for quick press snippets.",
+    body: "Cinematic pop artist blending mood-first sound and visual storytelling.",
+    linkedAssets: ["press-epk"],
+    order: 3,
+    priority: 3,
+    ctaLabel: "Copy Bio Snippet",
+    target: "/press#very-short-bio"
+  },
+  {
+    id: "shortBio",
+    title: "Short Bio",
+    shortDescriptor: "Short-form artist text for media kits and lineups.",
+    body: [
+      "Dama Venus composes each release as one coherent atmosphere across sound and image.",
+      "The artistic language stays reduced, focused, and editorial in tone."
+    ],
+    linkedAssets: ["press-epk"],
+    order: 4,
+    priority: 4,
+    ctaLabel: "Use Short Bio",
+    target: "/press#short-bio"
+  },
+  {
+    id: "pressReadyDescription",
+    title: "Press-ready Description",
+    shortDescriptor: "Longer approved language block for publications.",
+    body: [
+      "Dama Venus develops releases as cinematic chapters with controlled intensity and clear visual identity.",
+      "Music direction, imagery, and cadence are built as one aesthetic line for editorial clarity."
+    ],
+    linkedAssets: ["press-epk"],
+    order: 5,
+    priority: 5,
+    ctaLabel: "Use Press Description",
+    target: "/press#press-ready-description"
+  },
+  {
+    id: "featuredPressImages",
+    title: "Featured Press Images",
+    shortDescriptor: "Primary approved image selection for editorial usage.",
+    body: "Portrait and campaign visuals approved for press publication.",
+    linkedAssets: ["visuals-cinderela-lead-241", "visuals-cinderela-frame-243", "visuals-portrait-tamiris-12"],
+    order: 6,
+    priority: 6,
+    ctaLabel: "Open Image Selection",
+    target: "/visuals"
+  },
+  {
+    id: "musicListeningLinks",
+    title: "Music Listening Links",
+    shortDescriptor: "Primary listening destinations for review and coverage.",
+    body: "Official links for streaming and direct listening contexts.",
+    linkedAssets: ["music-current-chapter-cover"],
+    order: 7,
+    priority: 7,
+    ctaLabel: "Open Listening Links",
+    target: "/music"
+  },
+  {
+    id: "videoVisualLinks",
+    title: "Video & Visual Links",
+    shortDescriptor: "Visual release links and official video references.",
+    body: "Curated video links for editorial embedding and visual references.",
+    linkedAssets: ["music-current-chapter-visual", "music-nocturne-line-visual"],
+    order: 8,
+    priority: 8,
+    ctaLabel: "Open Video Links",
+    target: "/visuals"
+  },
+  {
+    id: "socialStreamingLinks",
+    title: "Social & Streaming Links",
+    shortDescriptor: "Cross-platform presence for publication footer blocks.",
+    body: "Official social and streaming endpoints for profile linking.",
+    linkedAssets: [],
+    order: 9,
+    priority: 9,
+    ctaLabel: "Open Link Hub",
+    target: "/contact"
+  },
+  {
+    id: "contactBlock",
+    title: "Contact",
+    shortDescriptor: "Direct press contact routing and response path.",
+    body: "For interviews, features, and media usage requests, use the direct contact route.",
+    linkedAssets: [],
+    order: 10,
+    priority: 10,
+    ctaLabel: "Contact",
+    target: "/contact",
+    isPrimaryVisible: true
+  },
+  {
+    id: "downloads",
+    title: "Downloads",
+    shortDescriptor: "Reserved block for downloadable press package assets.",
+    body: "Downloads will be published in this section.",
+    linkedAssets: ["press-epk"],
+    order: 11,
+    priority: 11,
+    ctaLabel: "Open Downloads",
+    target: "/press#downloads"
+  }
+];
+
+const primaryIntroBlock = pressEpkBlocks.find((block) => block.id === "pageIntro") ?? pressEpkBlocks[0];
 
 export const pressContent: SectionContent = {
-  headline: "Press & EPK",
-  subhead: "Images, bio, and release facts for press inquiries.",
+  headline: primaryIntroBlock.title,
+  subhead: typeof primaryIntroBlock.body === "string" ? primaryIntroBlock.body : primaryIntroBlock.body[0],
   cta: {
-    label: "Open EPK",
-    href: "/press"
+    label: primaryIntroBlock.ctaLabel,
+    href: primaryIntroBlock.target
   }
 };
 
