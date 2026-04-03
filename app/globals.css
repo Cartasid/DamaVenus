@@ -11,7 +11,7 @@ body {
 }
 
 a {
-  @apply text-accent underline-offset-4 hover:underline;
+  @apply text-primary underline-offset-4 hover:underline;
 }
 
 .focus-token:focus-visible {
@@ -37,7 +37,15 @@ button:focus-visible,
 }
 
 .first-impression-cta {
-  @apply inline-block text-accent underline underline-offset-4;
+  @apply inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-black no-underline transition duration-200;
+}
+
+.first-impression-cta:hover {
+  @apply brightness-110;
+}
+
+.first-impression-cta:focus-visible {
+  @apply ring-2 ring-offset-2 ring-offset-background ring-accent;
 }
 
 .home-composition a {
@@ -45,7 +53,7 @@ button:focus-visible,
 }
 
 .home-composition a.interactive-hint {
-  @apply text-accent underline-offset-4 hover:underline;
+  @apply text-muted underline-offset-4 hover:text-primary hover:underline;
 }
 
 .skip-link {
