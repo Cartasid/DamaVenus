@@ -1,3 +1,9 @@
+import type {
+  AssetOverlaySuitability,
+  AssetRole,
+  AssetSwColorMode
+} from "@/lib/types";
+
 export type PrioritizedAsset = {
   id: string;
   finalPath: string;
@@ -5,10 +11,13 @@ export type PrioritizedAsset = {
   area: "home" | "music" | "visuals" | "about" | "press";
   recommendedModuleType: string;
   altDraft: string;
-  focusOrCropHint: string;
-  bwColorSuitability: string;
+  cropHint: string;
+  focusHint: string;
+  swColorMode: AssetSwColorMode;
+  overlaySuitability: AssetOverlaySuitability;
   priority: number;
-  overlayOrTransparencyNote?: string;
+  role: AssetRole;
+  copyKey?: string;
 };
 
 export const prioritizedAssets: PrioritizedAsset[] = [
@@ -19,10 +28,12 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     area: "home",
     recommendedModuleType: "image",
     altDraft: "Current Chapter cover",
-    focusOrCropHint: "Center crop; keep title and artist fully visible",
-    bwColorSuitability: "good",
+    cropHint: "Center crop",
+    focusHint: "Keep title and artist fully visible",
+    swColorMode: "good",
+    overlaySuitability: "no-overlay",
     priority: 1,
-    overlayOrTransparencyNote: "No overlay"
+    role: "informative"
   },
   {
     id: "home-visual-preview",
@@ -31,10 +42,12 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     area: "home",
     recommendedModuleType: "image",
     altDraft: "Frames in Motion preview",
-    focusOrCropHint: "Landscape crop with subject centered",
-    bwColorSuitability: "excellent",
+    cropHint: "Landscape crop",
+    focusHint: "Subject centered",
+    swColorMode: "excellent",
+    overlaySuitability: "supports-dark-overlay",
     priority: 2,
-    overlayOrTransparencyNote: "Supports dark overlay"
+    role: "decorative"
   },
   {
     id: "press-epk",
@@ -43,8 +56,11 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     area: "press",
     recommendedModuleType: "document",
     altDraft: "Dama Venus EPK",
-    focusOrCropHint: "N/A for PDF",
-    bwColorSuitability: "n/a",
-    priority: 1
+    cropHint: "N/A for PDF",
+    focusHint: "N/A for PDF",
+    swColorMode: "n/a",
+    overlaySuitability: "n/a",
+    priority: 1,
+    role: "informative"
   }
 ];
