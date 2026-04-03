@@ -154,3 +154,32 @@ export const homepageCoreModules: HomepageModule[] = [
     }
   }
 ];
+
+const expectedHomeModuleCtas: Partial<Record<HomepageModuleId, CTA>> = {
+  featuredRelease: { label: "Listen Now", href: "/music" },
+  visuals: { label: "View Visuals", href: "/visuals" },
+  press: { label: "Open EPK", href: "/press" },
+  contactNewsletter: { label: "Send Inquiry", href: contactContent.cta?.href ?? "/contact" }
+};
+
+const primaryToSecondaryCtaSequence: HomepageModuleId[] = ["featuredRelease", "visuals", "press", "contactNewsletter"];
+
+function validateHomeModuleCtasAndFlow(modules: HomepageModule[]): void {
+  const moduleById = new Map(modules.map((module) => [module.id, module]));
+
+  for (const [moduleId, expectedCta] of Object.entries(expectedHomeModuleCtas) as [HomepageModuleId, CTA][]) {
+    const cta = moduleById.get(moduleId)?.copy.cta;
+    if (!cta || cta.label !== expectedCta.label || cta.href !== expectedCta.href) {
+      throw new Error(`Invalid CTA config for home module: ${moduleId}`);
+    }
+  }
+
+  const sequenceIndexes = primaryToSecondaryCtaSequence.map((moduleId) => modules.findIndex((module) => module.id === moduleId));
+  for (let index = 1; index < sequenceIndexes.length; index += 1) {
+    if (sequenceIndexes[index - 1] === -1 || sequenceIndexes[index] === -1 || sequenceIndexes[index - 1] > sequenceIndexes[index]) {
+      throw new Error("Invalid home CTA sequence: expected Release/Visuals -> Press/EPK -> Contact");
+    }
+  }
+}
+
+validateHomeModuleCtasAndFlow(homepageCoreModules);
