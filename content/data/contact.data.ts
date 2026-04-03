@@ -1,6 +1,6 @@
-import type { SectionContent } from "@/lib/types";
+import type { ContactPageContent } from "@/lib/types";
 
-export const contactContent: SectionContent = {
+export const contactContent: ContactPageContent = {
   headline: "Let’s Create the Next Chapter.",
   subhead: "For bookings, collaborations, and selected requests.",
   cta: {
