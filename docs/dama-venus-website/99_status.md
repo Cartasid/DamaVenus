@@ -254,3 +254,22 @@
    - **Letzter Visual-/Contrast-Feinschliff:** abschließender Polishing-Pass für visuelle Feingewichtung, Kontrast und finale Qualitätsabnahme bleibt ausstehend.
 4. **Expliziter nächster Schritt**
    - Nächster Umsetzungsschritt ist die **Vorbereitung und Umsetzung von `Press/EPK`**.
+
+## Update 2026-04-03 – Schritt 13 Press-/EPK-Struktur konkretisiert
+1. **Press-/EPK-Struktur + Datenmodell (jetzt vorhanden)**
+   - Für Press/EPK liegt eine benannte Blockstruktur in `pressEpkBlocks` vor: `pageIntro`, `artistSummary`, `veryShortBio`, `shortBio`, `pressReadyDescription`, `featuredPressImages`, `musicListeningLinks`, `videoVisualLinks`, `socialStreamingLinks`, `contactBlock`, `downloads`.
+   - Das Datenmodell pro Block ist konsistent über `id`, `title`, `shortDescriptor`, `body`, `linkedAssets`, `order`, `priority`, `ctaLabel`, `target` und optional `isPrimaryVisible` abgebildet.
+   - Zusätzlich ist `pressMaterials` als Material-/Download-Modell vorhanden (u. a. `type`, `accessMode`, `url`, `notes`, Asset-Referenz).
+2. **Priorisierte Inhalte/Assets (inkl. primär/sekundär)**
+   - Primär priorisierte Press-Blöcke: `pageIntro`, `artistSummary`, `veryShortBio`, `featuredPressImages`, `contactBlock`.
+   - Sekundär priorisierte Press-Blöcke: `shortBio`, `pressReadyDescription`, `musicListeningLinks`, `videoVisualLinks`, `socialStreamingLinks`, `downloads`.
+   - Priorisierte Press-Assets (Reihenfolge): `press-featured-portrait-primary` (Prio 1), `press-featured-portrait-secondary` (Prio 2), `press-editorial-landscape` (Prio 3), `press-detail-still` (Prio 4), `press-epk` (Prio 5).
+3. **Fehlende Downloads/Links (explizit offen)**
+   - Externe finale Download-Auslieferung des EPK ist noch offen; aktuell ist der Zugriff als Anfrage-/Kontaktpfad geführt.
+   - Finale externe Listening-/Video-/Social-Links für einen publikationsreifen Press-Linkblock sind weiterhin offen und noch nicht als belastbare Endlinks abgeschlossen.
+4. **Nächster Schritt**
+   - Im nächsten Schritt soll die Seite **`/press` final gebaut bzw. polished** werden (finale UI-Ausspielung, Feinschliff, finale Link-/Download-Anbindung).
+5. **Reproduzierbare Referenzdateien für den Nachfolge-Schritt**
+   - `content/data/press.data.ts`
+   - `content/dama-venus/assets.ts`
+   - `app/press/page.tsx`
