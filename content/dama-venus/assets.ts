@@ -401,9 +401,65 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     role: "decorative"
   },
   {
+    id: "press-featured-portrait-primary",
+    finalPath: "/assets/dama-venus/press/dv_press_featured_portrait_primary_color_3x4_v01.jpg",
+    sourcePath: "pics/Cinderela-241.jpg",
+    area: "press",
+    recommendedModuleType: "featured-press-image",
+    altDraft: "Featured press portrait of Dama Venus, primary selection",
+    cropHint: "Portrait 3:4 crop with headroom",
+    focusHint: "Keep face centered and maintain eye-line in upper third",
+    swColorMode: "excellent",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 1,
+    role: "informative"
+  },
+  {
+    id: "press-featured-portrait-secondary",
+    finalPath: "/assets/dama-venus/press/dv_press_featured_portrait_secondary_bw_3x4_v01.jpg",
+    sourcePath: "pics/Cinderela-243.JPEG",
+    area: "press",
+    recommendedModuleType: "featured-press-image",
+    altDraft: "Secondary featured press portrait of Dama Venus",
+    cropHint: "Portrait 3:4 crop with balanced shoulder framing",
+    focusHint: "Keep face and shoulders centered for editorial crops",
+    swColorMode: "excellent",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 2,
+    role: "informative"
+  },
+  {
+    id: "press-editorial-landscape",
+    finalPath: "/assets/dama-venus/press/dv_press_editorial_landscape_bw_16x9_v01.jpg",
+    sourcePath: "pics/Cinderela-210.JPEG",
+    area: "press",
+    recommendedModuleType: "featured-press-image",
+    altDraft: "Editorial landscape press image for wide placements",
+    cropHint: "Landscape 16:9 crop with text-safe negative space",
+    focusHint: "Keep subject centered for stable responsive trims",
+    swColorMode: "good",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 3,
+    role: "informative"
+  },
+  {
+    id: "press-detail-still",
+    finalPath: "/assets/dama-venus/press/dv_press_detail_still_bw_1x1_v01.jpg",
+    sourcePath: "pics/Unnamed-1.jpg",
+    area: "press",
+    recommendedModuleType: "featured-press-image",
+    altDraft: "Detail still from Dama Venus press visual sequence",
+    cropHint: "Square 1:1 crop preserving center detail",
+    focusHint: "Maintain central texture and avoid clipping key detail",
+    swColorMode: "good",
+    overlaySuitability: "no-overlay",
+    priority: 4,
+    role: "decorative"
+  },
+  {
     id: "press-epk",
-    finalPath: "/assets/dama-venus/press/dv_press_portrait_main_color_3x4_v01.jpeg",
-    sourcePath: "public/assets/dama-venus/curated/dv_curated_press_portrait_main_color_3x4_v01.jpeg",
+    finalPath: "/assets/dama-venus/press/dv_press_epk_document_v01.pdf",
+    sourcePath: "public/assets/dama-venus/curated/dv_curated_press_epk_document_v01.pdf",
     area: "press",
     recommendedModuleType: "document",
     altDraft: "Dama Venus EPK",
@@ -411,7 +467,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     focusHint: "N/A for PDF",
     swColorMode: "n/a",
     overlaySuitability: "n/a",
-    priority: 1,
+    priority: 5,
     role: "informative"
   }
 ];

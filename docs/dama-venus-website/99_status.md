@@ -273,3 +273,8 @@
    - **Letzter Qualitäts-Polish:** abschließender Performance- und A11y-Feinschliff (inkl. Kontrast-/Fokus-Review und finalem Rendering-/Loading-Pass) steht noch aus.
 4. **Expliziter nächster Schritt**
    - Nächster Umsetzungsschritt ist die **Vorbereitung und Umsetzung von Press/EPK** (Daten-/Asset-Finalisierung, Seitenaufbau, CTA- und Download-Führung) als direkt anschließender Produktionsblock.
+
+## Update 2026-04-03 – Press-Asset-Kuration (area `press`)
+- In `content/dama-venus/assets.ts` wurde die Press-Kuration von einem Einzel-Asset (`press-epk`) auf ein kuratiertes Set erweitert: `press-featured-portrait-primary`, `press-featured-portrait-secondary`, `press-editorial-landscape`, `press-detail-still` plus `press-epk`.
+- Die Press-Blöcke in `content/data/press.data.ts` referenzieren die neuen IDs gezielt: `featuredPressImages` nutzt das 4er-Set, `downloads` bindet zusätzlich `press-epk` + ausgewählte Press-Assets ein.
+- Finale Export-Derivate unter `/assets/dama-venus/press/` sind aktuell noch nicht als Dateien im Repository vorhanden; die Zielpfade sind in `content/dama-venus/assets.ts` konsistent vorgemerkt und bleiben als offene Produktionsableitung markiert.
