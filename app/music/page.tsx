@@ -75,29 +75,17 @@ export default function MusicPage() {
 
       <section id="selected-releases" className="space-y-3">
         <h2 className="font-display text-2xl font-semibold">Selected Releases</h2>
-        <div className="space-y-4">
-          {leadSecondary ? (() => {
-            const releaseAsset = assetMap[leadSecondary.coverAsset.id];
+        <ul className="grid gap-4 md:grid-cols-2">
+          {selectedSingles.map((release) => {
             return (
-              <article id={leadSecondary.id} className="grid gap-4 rounded-lg border border-white/10 bg-white/[0.02] p-4 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
-                {releaseAsset ? (
-                  <Image
-                    src={releaseAsset.src}
-                    alt={releaseAsset.alt ?? leadSecondary.title}
-                    width={1200}
-                    height={1500}
-                    sizes="(max-width: 768px) 100vw, 48vw"
-                    className="h-56 w-full rounded-md object-cover"
-                  />
-                ) : null}
-                <div className="space-y-3">
-                  <h3 className="font-display text-xl">{leadSecondary.title}</h3>
-                  <p className="text-sm text-muted">{leadSecondary.shortText}</p>
-                  <Link href={leadSecondary.primaryCta.href} className="first-impression-cta">
-                    {leadSecondary.primaryCta.label}
-                  </Link>
-                </div>
-              </article>
+              <li key={release.id} id={release.id} className="space-y-2 rounded-lg border border-white/10 p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-muted">{release.status}</p>
+                <h3 className="font-display text-xl">{release.title}</h3>
+                <p className="text-sm text-muted">{release.shortText}</p>
+                <Link href={release.primaryCta.href} className="first-impression-cta">
+                  {release.primaryCta.label}
+                </Link>
+              </li>
             );
           })() : null}
           <ul className="grid gap-3 md:grid-cols-2">
@@ -131,13 +119,9 @@ export default function MusicPage() {
         <h2 className="font-display text-2xl font-semibold">Visual Releases</h2>
         <ul className="space-y-3">
           {musicData.visualReleases.map((release) => {
-            const releaseAsset = assetMap[release.coverAsset.id];
             return (
               <li key={release.id} className="rounded-lg border border-white/10 p-4">
                 <p className="text-sm text-muted">{release.title}</p>
-                <p className="text-xs text-muted">
-                  Asset hints: {releaseAsset?.cropHint} · {releaseAsset?.focusHint}
-                </p>
                 <Link href={release.primaryCta.href} className="first-impression-cta mt-2 inline-block">
                   {release.primaryCta.label}
                 </Link>
