@@ -58,9 +58,9 @@ export const pressEpkBlocks: PressEpkBlock[] = [
       "Music direction, imagery, and cadence are built as one aesthetic line for editorial clarity."
     ],
     linkedAssets: ["press-epk"],
-    order: 5,
-    priority: 5,
-    ctaLabel: "Pressetext übernehmen",
+    order: 11,
+    priority: 11,
+    ctaLabel: "Use Press Description",
     target: "/press#press-ready-description"
   },
   {
@@ -69,9 +69,9 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     shortDescriptor: "Selected approved visuals for editorial use.",
     body: "Portrait and campaign visuals approved for press publication.",
     linkedAssets: ["press-featured-portrait-primary", "press-featured-portrait-secondary", "press-editorial-landscape", "press-detail-still"],
-    order: 6,
-    priority: 6,
-    ctaLabel: "Zur freigegebenen Bildauswahl",
+    order: 5,
+    priority: 5,
+    ctaLabel: "Open Image Selection",
     target: "/visuals"
   },
   {
@@ -80,9 +80,9 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     shortDescriptor: "Official listening destinations for coverage.",
     body: "Official links for streaming and direct listening contexts.",
     linkedAssets: ["music-current-chapter-cover"],
-    order: 7,
-    priority: 7,
-    ctaLabel: "Zu den offiziellen Hör-Links",
+    order: 6,
+    priority: 6,
+    ctaLabel: "Open Listening Links",
     target: "/music"
   },
   {
@@ -91,9 +91,9 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     shortDescriptor: "Official video and visual release links.",
     body: "Curated video links for editorial embedding and visual references.",
     linkedAssets: ["music-current-chapter-visual", "music-nocturne-line-visual"],
-    order: 8,
-    priority: 8,
-    ctaLabel: "Zu den offiziellen Video-Links",
+    order: 7,
+    priority: 7,
+    ctaLabel: "Open Video Links",
     target: "/visuals"
   },
   {
@@ -102,9 +102,9 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     shortDescriptor: "Official social and streaming profiles.",
     body: "Official social and streaming endpoints for profile linking.",
     linkedAssets: [],
-    order: 9,
-    priority: 9,
-    ctaLabel: "Zu den offiziellen Profil-Links",
+    order: 8,
+    priority: 8,
+    ctaLabel: "Open Link Hub",
     target: "/contact"
   },
   {
@@ -125,9 +125,9 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     shortDescriptor: "Download section for press assets.",
     body: "Downloads will be published in this section.",
     linkedAssets: ["press-epk", "press-featured-portrait-primary", "press-editorial-landscape"],
-    order: 11,
-    priority: 11,
-    ctaLabel: "Downloads auf Anfrage verfügbar",
+    order: 9,
+    priority: 9,
+    ctaLabel: "Open Downloads",
     target: "/press#downloads"
   }
 ];

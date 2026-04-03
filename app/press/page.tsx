@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { pressEpkBlocks } from "@/content/data/press.data";
 
-const primaryBlockIds = ["pageIntro", "artistSummary", "veryShortBio", "featuredPressImages", "contactBlock"];
-const secondaryBlockIds = ["shortBio", "pressReadyDescription", "musicListeningLinks", "videoVisualLinks", "socialStreamingLinks", "downloads"];
+const primaryBlockIds = ["pageIntro", "artistSummary", "veryShortBio", "shortBio", "featuredPressImages"];
+const secondaryBlockIds = ["musicListeningLinks", "videoVisualLinks", "socialStreamingLinks", "downloads", "contactBlock"];
 
 const secondaryLinkGroups: Array<{ purpose: "listen" | "watch" | "social" | "download"; blockIds: string[] }> = [
   { purpose: "listen", blockIds: ["musicListeningLinks"] },
@@ -52,21 +52,18 @@ export default function PressPage() {
   const secondaryInfoBlocks = secondaryBlocks.filter(
     (block) => !secondaryLinkGroups.some((group) => group.blockIds.includes(block.id))
   );
+  const contactBlock = secondaryBlocks.find((block) => block.id === "contactBlock");
 
   const contactBlock = primaryBlocks.find((block) => block.id === "contactBlock");
   const primaryLeadBlocks = primaryBlocks.filter((block) => block.id !== "contactBlock");
 
   return (
     <section className="space-y-8">
-      <section className="space-y-4">
-        {primaryLeadBlocks.map((block, index) =>
-          renderBlock(block, { ctaVariant: index === 0 ? "primary" : "text" })
-        )}
-      </section>
+      <section className="space-y-4">{primaryBlocks.map((block) => renderBlock(block))}</section>
 
       <section className="space-y-4">
-        <h2 className="font-display text-2xl font-semibold">Press Highlights</h2>
-        {secondaryInfoBlocks.map((block) => renderBlock(block))}
+        <h2 className="font-display text-2xl font-semibold">Secondary Press Blocks</h2>
+        {secondaryInfoBlocks.filter((block) => block.id !== "contactBlock").map((block) => renderBlock(block))}
         {secondaryLinkGroups.map((group) => {
           const groupBlocks = group.blockIds
             .map((id) => secondaryBlocks.find((block) => block.id === id))
@@ -81,11 +78,7 @@ export default function PressPage() {
         })}
       </section>
 
-      {contactBlock ? (
-        <section className="space-y-4">
-          {renderBlock(contactBlock, { purpose: "contact", ctaVariant: "primary" })}
-        </section>
-      ) : null}
+      {contactBlock ? <section className="space-y-4">{renderBlock(contactBlock, "contact")}</section> : null}
     </section>
   );
 }
