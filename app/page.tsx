@@ -14,6 +14,8 @@ export default function HomePage() {
 
   const leadAsset = leadModule?.assetId ? assetMap[leadModule.assetId] : undefined;
   const supportAsset = supportModule?.assetId ? assetMap[supportModule.assetId] : undefined;
+  const leadCta = leadModule?.copy.cta;
+  const supportCta = supportModule?.copy.cta;
 
   const leadMediaClass = [
     "h-[28rem] w-full rounded-lg object-cover",
@@ -58,10 +60,20 @@ export default function HomePage() {
             <img src={leadAsset.src} alt={leadAsset.alt ?? leadModule?.alt ?? ""} className={leadMediaClass} />
           ) : null}
           {leadModule ? (
-            <p className="text-muted">
-              {leadModule.copy.headline}
-              {leadModule.copy.subline ? ` — ${leadModule.copy.subline}` : ""}
-            </p>
+            leadCta ? (
+              <Link href={leadCta.href} className="first-impression-tile block min-h-11 space-y-3 rounded-lg p-3">
+                <p className="text-muted">
+                  {leadModule.copy.headline}
+                  {leadModule.copy.subline ? ` — ${leadModule.copy.subline}` : ""}
+                </p>
+                <span className="first-impression-cta">{leadCta.label}</span>
+              </Link>
+            ) : (
+              <p className="text-muted">
+                {leadModule.copy.headline}
+                {leadModule.copy.subline ? ` — ${leadModule.copy.subline}` : ""}
+              </p>
+            )
           ) : null}
         </article>
 
@@ -69,13 +81,24 @@ export default function HomePage() {
           <p className="text-lg leading-tight">{homepageIntro.statement}</p>
 
           {supportModule ? (
-            <article className="space-y-3">
-              <h2 className="font-display text-2xl font-semibold">{supportModule.copy.headline}</h2>
-              {supportModule.copy.subline ? <p className="text-muted">{supportModule.copy.subline}</p> : null}
-              {supportAsset ? (
-                <img src={supportAsset.src} alt={supportAsset.alt ?? supportModule.alt} className={supportMediaClass} />
-              ) : null}
-            </article>
+            supportCta ? (
+              <Link href={supportCta.href} className="first-impression-tile block min-h-11 space-y-3 rounded-lg p-3">
+                <h2 className="font-display text-2xl font-semibold">{supportModule.copy.headline}</h2>
+                {supportModule.copy.subline ? <p className="text-muted">{supportModule.copy.subline}</p> : null}
+                <span className="first-impression-cta">{supportCta.label}</span>
+                {supportAsset ? (
+                  <img src={supportAsset.src} alt={supportAsset.alt ?? supportModule.alt} className={supportMediaClass} />
+                ) : null}
+              </Link>
+            ) : (
+              <article className="space-y-3">
+                <h2 className="font-display text-2xl font-semibold">{supportModule.copy.headline}</h2>
+                {supportModule.copy.subline ? <p className="text-muted">{supportModule.copy.subline}</p> : null}
+                {supportAsset ? (
+                  <img src={supportAsset.src} alt={supportAsset.alt ?? supportModule.alt} className={supportMediaClass} />
+                ) : null}
+              </article>
+            )
           ) : null}
         </aside>
       </div>

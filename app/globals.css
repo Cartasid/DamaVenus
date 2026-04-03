@@ -14,6 +14,26 @@ a {
   @apply text-accent underline-offset-4 hover:underline;
 }
 
+a:focus-visible {
+  @apply rounded-sm outline-none ring-2 ring-offset-2 ring-offset-background ring-accent;
+}
+
+.first-impression-tile {
+  @apply text-primary no-underline transition duration-200;
+}
+
+.first-impression-tile:hover {
+  @apply opacity-95 scale-[1.01];
+}
+
+.first-impression-tile:focus-visible {
+  @apply ring-2 ring-offset-2 ring-offset-background ring-primary;
+}
+
+.first-impression-cta {
+  @apply inline-block text-accent underline underline-offset-4;
+}
+
 .home-composition a {
   @apply text-muted no-underline;
 }
