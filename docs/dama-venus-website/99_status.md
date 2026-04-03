@@ -175,3 +175,32 @@
    - **Verbleibendes Fine-Tuning:** letztes visuelles Polishing (Abstände/Hierarchie), CTA-Text-Feinschliff pro Release-Status, abschließender Motion-/Kontrast-Feinschnitt vor Finalabnahme.
 4. **Expliziter nächster Schritt**
    - Nächster Umsetzungsschritt ist die **Vorbereitung und Finalisierung der Visuals-Datenbasis** (strukturiertes Modul-/Asset-Mapping für `/visuals` inkl. finaler Watch-/Gallery-Referenzen), bevor der abschließende Gesamt-Polish von Music + Visuals durchgeführt wird.
+
+## Update 2026-04-03 – Schritt 11 Visuals-Datenbasis strukturiert/finalisiert
+1. **Welche Visuals-Struktur jetzt existiert**
+   - In `content/data/visuals.data.ts` liegt jetzt eine strukturierte, komponentenfähige Datenbasis vor:
+     - `visualsIntro` (Page Intro Frame),
+     - `visualsEntries` (kuratierte Einträge mit Typ/Rolle/Priorität/Layout),
+     - `visualsData.groups` (featured series, image groups, standalone portraits, stills, linked visuals),
+     - `visualsData.renderingModules` für spätere Ausspielung in `grid`, `series-section`, `large-image-block`, `editorial-image-row`, `linked-visual-module`.
+   - Pro Eintrag sind konsistent modelliert: `title`, optionale `subtitle`, `type`, `assets`, `shortText` (nur wenn nötig), `order`, `priority`, `layoutWeight`, `cropFocusHint`, `bwColorSuitability`, `altTextNotes`, sowie Funktionsrolle (`lead`, `supporting`, `quiet-spacer`).
+2. **Welche Assets priorisiert wurden**
+   - Visuals-Priorisierung in `content/dama-venus/assets.ts` ergänzt (Bereich `area: "visuals"`), inkl. kuratorischer Rollen-/Modulzuordnung:
+     - Lead/Serie: `visuals-cinderela-lead-241`, `visuals-cinderela-frame-243`, `visuals-cinderela-frame-288`
+     - Supporting/Editorial-Row: `visuals-uuid-6824`, `visuals-cinderela-landscape-210`, `visuals-uuid-3493`
+     - Standalone Portrait: `visuals-portrait-tamiris-12`
+     - Quiet Stills/Spacer: `visuals-still-unnamed-1`, `visuals-still-unnamed-2`, `visuals-still-unnamed-3`
+     - Linked Visual: `visuals-linked-current-chapter`
+   - Eignungslogik ist pro Asset gepflegt (`cropHint`, `focusHint`, `swColorMode`, `overlaySuitability`, `role`, `priority`).
+3. **Welche Bildgruppen festgelegt wurden**
+   - `featured visual series`: Cinderela Series (dramatischer Hauptträger)
+   - `image groups`: Night Signals (Color-Akzent) + Still Fragments (ruhiger Spacer-Block)
+   - `standalone portraits`: Tamiris Portrait
+   - `stills`: drei quadratische atmosphärische Still-Frames
+   - `optional linked visual`: Current Chapter Visual Link
+4. **Welche Lücken bleiben**
+   - Finale visuelle Qualitätsabnahme auf Pixel-/Retuscheebene ist noch offen (der Schritt fokussiert Struktur + Zuordnung).
+   - HEIC-Dateien (`IMG_7138.HEIC`, `IMG_7221.HEIC`) sind weiterhin nicht als priorisierte Visuals-Webassets eingebunden.
+   - Finale Export-/Derivatstrecke in `public/assets/dama-venus/visuals/` bleibt als nachgelagerter Produktionsschritt offen.
+5. **Nächster Schritt**
+   - Als nächstes soll die **Visuals-Seite final gebaut** werden: modulare UI-Ausspielung auf Basis der neuen Datenstruktur (Series/Rows/Large-Block/Linked-Module), abschließendes visuelles Polishing, A11y-/Kontrast-Feinschliff und finaler Performance-Pass.
