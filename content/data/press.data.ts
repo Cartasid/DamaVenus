@@ -58,8 +58,8 @@ export const pressEpkBlocks: PressEpkBlock[] = [
       "Music direction, imagery, and cadence are built as one aesthetic line for editorial clarity."
     ],
     linkedAssets: ["press-epk"],
-    order: 5,
-    priority: 5,
+    order: 11,
+    priority: 11,
     ctaLabel: "Use Press Description",
     target: "/press#press-ready-description"
   },
@@ -69,8 +69,8 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     shortDescriptor: "Primary approved image selection for editorial usage.",
     body: "Portrait and campaign visuals approved for press publication.",
     linkedAssets: ["press-featured-portrait-primary", "press-featured-portrait-secondary", "press-editorial-landscape", "press-detail-still"],
-    order: 6,
-    priority: 6,
+    order: 5,
+    priority: 5,
     ctaLabel: "Open Image Selection",
     target: "/visuals"
   },
@@ -80,8 +80,8 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     shortDescriptor: "Primary listening destinations for review and coverage.",
     body: "Official links for streaming and direct listening contexts.",
     linkedAssets: ["music-current-chapter-cover"],
-    order: 7,
-    priority: 7,
+    order: 6,
+    priority: 6,
     ctaLabel: "Open Listening Links",
     target: "/music"
   },
@@ -91,8 +91,8 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     shortDescriptor: "Visual release links and official video references.",
     body: "Curated video links for editorial embedding and visual references.",
     linkedAssets: ["music-current-chapter-visual", "music-nocturne-line-visual"],
-    order: 8,
-    priority: 8,
+    order: 7,
+    priority: 7,
     ctaLabel: "Open Video Links",
     target: "/visuals"
   },
@@ -102,8 +102,8 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     shortDescriptor: "Cross-platform presence for publication footer blocks.",
     body: "Official social and streaming endpoints for profile linking.",
     linkedAssets: [],
-    order: 9,
-    priority: 9,
+    order: 8,
+    priority: 8,
     ctaLabel: "Open Link Hub",
     target: "/contact"
   },
@@ -125,8 +125,8 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     shortDescriptor: "Reserved block for downloadable press package assets.",
     body: "Downloads will be published in this section.",
     linkedAssets: ["press-epk", "press-featured-portrait-primary", "press-editorial-landscape"],
-    order: 11,
-    priority: 11,
+    order: 9,
+    priority: 9,
     ctaLabel: "Open Downloads",
     target: "/press#downloads"
   }
