@@ -204,3 +204,18 @@
    - Finale Export-/Derivatstrecke in `public/assets/dama-venus/visuals/` bleibt als nachgelagerter Produktionsschritt offen.
 5. **Nächster Schritt**
    - Als nächstes soll die **Visuals-Seite final gebaut** werden: modulare UI-Ausspielung auf Basis der neuen Datenstruktur (Series/Rows/Large-Block/Linked-Module), abschließendes visuelles Polishing, A11y-/Kontrast-Feinschliff und finaler Performance-Pass.
+
+## Update 2026-04-03 – Schritt 11a `/visuals` Status konkretisiert (final/nahezu final)
+1. **Auf `/visuals` jetzt final bzw. nahezu final**
+   - Nahezu final stehen die Modulblöcke **Intro**, **Featured Series**, **Image Groups**, **Standalone Portraits**, **Stills** und **Linked Visual** als reproduzierbare Seitenstruktur auf Datenbasis.
+   - Final bzw. stabil ist die kuratorische Reihenfolge (Lead → Supporting → Quiet Spacer) inklusive priorisierter Bildgruppen und Rollenlogik für die Ausspielung.
+2. **Stabile Komponenten/Patterns (konkret, mit Pfaden)**
+   - `app/visuals/page.tsx`: stabile Modulausspielung für Intro, Gruppen-/Serienlogik und Linked-Visual-Modul auf Basis der Visuals-Daten.
+   - `content/data/visuals.data.ts`: stabiles Visuals-Datenmodell (`visualsIntro`, `visualsEntries`, `visualsData.groups`, `visualsData.renderingModules`) als zentrale Struktur.
+   - `content/dama-venus/assets.ts`: stabile Asset-IDs/Prioritäten und Rollenhinweise für den Bereich `area: "visuals"`.
+   - `app/globals.css`: stabile Interaktions-/A11y-Patterns (inkl. Fokus- und Reduced-Motion-Basis), auf die `/visuals` mit aufsetzt.
+3. **Offene Restpunkte (klar getrennt)**
+   - **Letzte Asset-Exports:** finale Derivate/Exports für `public/assets/dama-venus/visuals/` und finale Qualitätsabnahme einzelner Bildvarianten.
+   - **Endpolish:** letzter visueller Feinschliff (Spacing/Hierarchie), abschließender A11y-/Kontrast-Check und finaler Performance-Pass.
+4. **Expliziter nächster Schritt**
+   - Nach Abschluss des Visuals-Polish folgt die Umsetzung der nächsten Seiten in dieser Reihenfolge: **About**, danach **Press**, danach **Contact**.
