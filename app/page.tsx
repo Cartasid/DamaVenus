@@ -1,75 +1,69 @@
-import {
-  homepageIntro,
-  homepageModules
-} from "@/content/data/homepage.data";
+import Link from "next/link";
+import { homepageCoreModules, homepageIntro } from "@/content/data/homepage.data";
+import { navigationItems } from "@/content/data/navigation.data";
 import { assetMap, siteConfig } from "@/content/data/site.config";
 
 export default function HomePage() {
-  const resolvedModules = homepageModules.map((module) => ({
-    ...module,
-    asset: "asset" in module ? assetMap[module.asset.id] : undefined
-  }));
+  const leadModule =
+    homepageCoreModules.find((module) => module.id === "featuredRelease") ??
+    homepageCoreModules.find((module) => Boolean(module.assetId));
+  const supportModule =
+    homepageCoreModules.find((module) => module.id === "visuals") ??
+    homepageCoreModules.find((module) => module.id !== leadModule?.id && Boolean(module.assetId));
+
+  const leadAsset = leadModule?.assetId ? assetMap[leadModule.assetId] : undefined;
+  const supportAsset = supportModule?.assetId ? assetMap[supportModule.assetId] : undefined;
 
   return (
     <section aria-labelledby="home-title" className="space-y-8">
-      <div className="space-y-3">
-        <h1 id="home-title" className="font-display text-4xl font-bold">
-          {siteConfig.name}
-        </h1>
-        <p className="text-muted">{siteConfig.brandDescriptor}</p>
-        <p className="text-lg">{homepageIntro.statement}</p>
-      </div>
+      <nav aria-label="Home Orientierung" className="border-b border-white/10 pb-4">
+        <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+          {navigationItems.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href}>{item.label}</Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-      {resolvedModules.map((module) => {
-        if (module.type === "release") {
-          return (
-            <div key={module.id} className="space-y-2">
-              <h2 className="font-display text-2xl font-semibold">{module.title}</h2>
-              <p className="text-muted">{module.description}</p>
-              {module.asset ? (
+      <div className="grid gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:items-start">
+        <article className="space-y-3">
+          <h1 id="home-title" className="font-display text-4xl font-bold">
+            {siteConfig.name}
+          </h1>
+          {leadAsset ? (
+            <img
+              src={leadAsset.src}
+              alt={leadAsset.alt ?? leadModule?.alt ?? ""}
+              className="h-[28rem] w-full rounded-lg object-cover"
+            />
+          ) : null}
+          {leadModule ? (
+            <p className="text-muted">
+              {leadModule.copy.headline}
+              {leadModule.copy.subline ? ` — ${leadModule.copy.subline}` : ""}
+            </p>
+          ) : null}
+        </article>
+
+        <aside className="space-y-6">
+          <p className="text-lg leading-tight">{homepageIntro.statement}</p>
+
+          {supportModule ? (
+            <article className="space-y-3">
+              <h2 className="font-display text-2xl font-semibold">{supportModule.copy.headline}</h2>
+              {supportModule.copy.subline ? <p className="text-muted">{supportModule.copy.subline}</p> : null}
+              {supportAsset ? (
                 <img
-                  src={module.asset.src}
-                  alt={module.asset.alt ?? ""}
+                  src={supportAsset.src}
+                  alt={supportAsset.alt ?? supportModule.alt}
                   className="h-48 w-full rounded-md object-cover"
                 />
               ) : null}
-              <p className="text-xs text-muted">
-                {module.asset?.overlayOrTransparencyNote ?? "No overlay note"}
-              </p>
-              <p className="text-xs text-muted">
-                {module.asset?.bwColorSuitability ?? "No BW/color hint"}
-              </p>
-            </div>
-          );
-        }
-
-        return (
-          <div key={module.id} className="space-y-2">
-            <h2 className="font-display text-2xl font-semibold">{module.headline}</h2>
-            {module.subhead ? <p className="text-muted">{module.subhead}</p> : null}
-            {module.asset ? (
-              <>
-                <img
-                  src={module.asset.src}
-                  alt={module.asset.alt ?? ""}
-                  className="h-48 w-full rounded-md object-cover"
-                />
-                <p className="text-xs text-muted">
-                  {module.asset.overlayOrTransparencyNote ?? "No overlay note"}
-                </p>
-                <p className="text-xs text-muted">
-                  {module.asset.bwColorSuitability ?? "No BW/color hint"}
-                </p>
-              </>
-            ) : null}
-            {"body" in module && module.body ? (
-              <ul className="list-inside list-disc text-muted">
-                {module.body.map((service) => <li key={service}>{service}</li>)}
-              </ul>
-            ) : null}
-          </div>
-        );
-      })}
+            </article>
+          ) : null}
+        </aside>
+      </div>
     </section>
   );
 }
