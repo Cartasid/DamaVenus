@@ -72,6 +72,7 @@ type HomepageModule = {
 export const homepageCoreModules: HomepageModule[] = [
   {
     id: "lead",
+    assetId: "home-lead-portrait",
     alt: "Dama Venus homepage lead section",
     cropFocusHint: "center-face",
     priority: "high",
