@@ -25,10 +25,12 @@ function renderBody(body: string | string[]) {
   return <p className="text-sm text-muted">{body}</p>;
 }
 
-function renderBlock(block: (typeof pressEpkBlocks)[number], purpose?: string) {
+function renderBlock(block: (typeof pressEpkBlocks)[number], options?: { purpose?: string; ctaVariant?: "primary" | "text" | "request" }) {
+  const ctaVariant = options?.ctaVariant ?? "text";
+
   return (
     <article key={block.id} className="space-y-2 rounded-lg border border-white/10 p-4">
-      {purpose ? <p className="text-xs uppercase tracking-[0.2em] text-muted">{purpose}</p> : null}
+      {options?.purpose ? <p className="text-xs uppercase tracking-[0.2em] text-muted">{options.purpose}</p> : null}
       <h2 className="font-display text-2xl font-semibold">{block.title}</h2>
       {renderBody(block.body)}
       <Link href={block.target} className="first-impression-cta">
@@ -51,9 +53,16 @@ export default function PressPage() {
     (block) => !secondaryLinkGroups.some((group) => group.blockIds.includes(block.id))
   );
 
+  const contactBlock = primaryBlocks.find((block) => block.id === "contactBlock");
+  const primaryLeadBlocks = primaryBlocks.filter((block) => block.id !== "contactBlock");
+
   return (
     <section className="space-y-8">
-      <section className="space-y-4">{primaryBlocks.map((block) => renderBlock(block, block.id === "contactBlock" ? "contact" : undefined))}</section>
+      <section className="space-y-4">
+        {primaryLeadBlocks.map((block, index) =>
+          renderBlock(block, { ctaVariant: index === 0 ? "primary" : "text" })
+        )}
+      </section>
 
       <section className="space-y-4">
         <h2 className="font-display text-2xl font-semibold">Press Highlights</h2>
@@ -63,9 +72,20 @@ export default function PressPage() {
             .map((id) => secondaryBlocks.find((block) => block.id === id))
             .filter((block): block is (typeof pressEpkBlocks)[number] => Boolean(block));
 
-          return groupBlocks.map((block) => renderBlock(block, group.purpose));
+          return groupBlocks.map((block) =>
+            renderBlock(block, {
+              purpose: group.purpose,
+              ctaVariant: block.id === "downloads" ? "request" : "text"
+            })
+          );
         })}
       </section>
+
+      {contactBlock ? (
+        <section className="space-y-4">
+          {renderBlock(contactBlock, { purpose: "contact", ctaVariant: "primary" })}
+        </section>
+      ) : null}
     </section>
   );
 }
