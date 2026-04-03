@@ -113,8 +113,9 @@ export const homepageCoreModules: HomepageModule[] = [
   },
   {
     id: "statement",
+    assetId: "home-statement-editorial",
     alt: "Typographic statement module",
-    cropFocusHint: "n/a-text-only",
+    cropFocusHint: "center-safe-text",
     priority: "medium",
     swColorLogic: "inherit-site-palette",
     overlaySuitability: "high",
@@ -124,7 +125,7 @@ export const homepageCoreModules: HomepageModule[] = [
   },
   {
     id: "press",
-    assetId: "press-epk",
+    assetId: "home-press-preview",
     assetPath: "/press",
     alt: "Press and EPK access module",
     cropFocusHint: "center-subject",
@@ -139,9 +140,10 @@ export const homepageCoreModules: HomepageModule[] = [
   },
   {
     id: "contactNewsletter",
+    assetId: "home-contact-newsletter",
     assetPath: contactContent.cta?.href,
     alt: "Contact and newsletter call-to-action module",
-    cropFocusHint: "n/a-text-only",
+    cropFocusHint: "center-safe-text",
     priority: "low",
     swColorLogic: "accent-contrast",
     overlaySuitability: "high",

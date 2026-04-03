@@ -64,6 +64,48 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     role: "decorative"
   },
   {
+    id: "home-statement-editorial",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_story_frame01_bw_16x9_v01.jpeg",
+    sourcePath: "public/assets/dama-venus/curated/dv_curated_visual_story_frame01_bw_16x9_v01.jpeg",
+    area: "home",
+    recommendedModuleType: "image",
+    altDraft: "Editorial background for homepage statement",
+    cropHint: "Landscape crop",
+    focusHint: "Maintain central negative space for text",
+    swColorMode: "excellent",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 3,
+    role: "decorative"
+  },
+  {
+    id: "home-contact-newsletter",
+    finalPath: "/assets/dama-venus/home/dv_home_release_cover_primary_color_4x5_v01.jpg",
+    sourcePath: "public/assets/dama-venus/curated/dv_curated_release_cover_primary_color_4x5_v01.jpg",
+    area: "home",
+    recommendedModuleType: "image",
+    altDraft: "Contact and newsletter module visual",
+    cropHint: "Center crop",
+    focusHint: "Keep central motif visible",
+    swColorMode: "good",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 4,
+    role: "decorative"
+  },
+  {
+    id: "home-press-preview",
+    finalPath: "/assets/dama-venus/home/dv_home_lead_portrait_main_color_3x4_v01.jpeg",
+    sourcePath: "public/assets/dama-venus/curated/dv_curated_press_portrait_main_color_3x4_v01.jpeg",
+    area: "home",
+    recommendedModuleType: "image",
+    altDraft: "Home press preview portrait",
+    cropHint: "Portrait crop",
+    focusHint: "Keep face centered with headroom",
+    swColorMode: "excellent",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 5,
+    role: "informative"
+  },
+  {
     id: "press-epk",
     finalPath: "/assets/dama-venus/press/dv_press_portrait_main_color_3x4_v01.jpeg",
     sourcePath: "public/assets/dama-venus/curated/dv_curated_press_portrait_main_color_3x4_v01.jpeg",
