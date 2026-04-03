@@ -287,3 +287,20 @@
    - **Finaler Qualitäts-Pass:** letzter A11y-/Mobile-/Polish-Durchlauf vor Gesamtfreigabe.
 4. **Expliziter nächster Schritt**
    - Als nächster Umsetzungsschritt folgt die **Vorbereitung und Finalisierung von `/contact`**.
+
+## Update 2026-04-03 – Schritt 14 Contact-Struktur konkretisiert
+1. **Welche Contact-Struktur jetzt existiert**
+   - Aktuell ist auf `/contact` eine klare Basisstruktur umgesetzt: **Intro (Headline + Subhead)** und **primäre CTA**.
+   - Intro/Scope sind gesetzt über „Let’s Create the Next Chapter.“ und „For bookings, collaborations, and selected requests.“; die primäre Aktion ist ein Inquiry-CTA.
+   - **Formularfelder** und **Success-State** sind als nächster Ausbauschritt vorgesehen, aber noch nicht als finaler UI-/Datenflow auf der Route umgesetzt.
+   - Als optionaler Kontaktpfad ist derzeit der direkte Mail-Entry aktiv; zusätzliche dedizierte Pfade (z. B. getrennte Flows für Booking vs. Press) sind noch nicht final ausgeroutet.
+2. **Welche Felder/Texte final festgelegt wurden**
+   - Final festgelegt für den aktuellen Contact-Stand sind: Headline „Let’s Create the Next Chapter.“, Subhead „For bookings, collaborations, and selected requests.“ und CTA-Label „Send Inquiry“.
+   - Der aktuell gesetzte CTA-Zielpfad ist `mailto:booking@damavenus.com`.
+   - Für Formularfelder selbst liegt im aktuellen Build noch kein final implementiertes Feldset vor; finalisiert ist derzeit der Copy-/CTA-Rahmen für den Kontakt-Einstieg.
+3. **Welche realen Kontaktinformationen noch fehlen**
+   - Es fehlen weiterhin belastbar bestätigte, produktionsreife Kontaktendpunkte für **Booking** und **Press** (inkl. finaler Verantwortlichkeiten).
+   - Optional benötigte, aber noch nicht bestätigte Angaben: dedizierte Telefonnummer sowie klare Routing-Regeln für unterschiedliche Inquiry-Typen (z. B. Booking, Press, Kollaboration).
+   - Für den endgültigen Betrieb sind damit noch Freigaben zu Mail-Adressen, Zuständigkeiten und Response-/Weiterleitungslogik erforderlich.
+4. **Klarer nächster Schritt**
+   - Nächster konkreter Umsetzungsschritt ist der **finale UI-Build der `/contact`-Seite** inklusive echter Submit-Logik, Success-State und produktionsreifer Mail-/Routing-Anbindung.
