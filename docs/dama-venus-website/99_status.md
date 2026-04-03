@@ -44,7 +44,7 @@
 - Für den nächsten Schritt wurden konkrete Copywriting-Bausteine vorbereitet (Opening-Zeile, Modul-Headlines, Release-Microcopy, Statement-Varianten, CTA-Set, Press/EPK- und Contact-Texte, Navigation-Labels, Footer-Microcopy).
 
 ## Nächster empfohlener Schritt (aktualisiert)
-- `docs/dama-venus-website/07_build_plan.md` ausarbeiten und die beschlossene Unterseitenlogik in einen priorisierten, umsetzbaren Build-Plan mit klaren Ready-/Done-Kriterien überführen.
+- Implementierungsstart mit **Phase 1 (Foundation)** gemäß `docs/dama-venus-website/07_build_plan.md`: App-Router-Grundstruktur, globale Layout-Shell, tokenbasiertes Theme-Setup und typed `content/data`-Grundgerüst zuerst umsetzen.
 
 ## Update 2026-04-03 – Schritt 05 Copywriting
 - In `05_copywriting.md` wurde textlich festgelegt: Opening-Line, Lead-/Modul-Headlines, Release-Teaser, Statement-Varianten, CTA-Set, Press/EPK-, Contact-/Booking-, Navigation- und Footer-Microcopy als verbindlicher Copy-Rahmen.
@@ -59,3 +59,11 @@
 - Als wiederverwendbare Sektionen wurden beschlossen: Page Intro Frame, Lead Visual Block, Context Block, Feature Block, Statement/Quote Panel, Primary CTA Block und Section Break.
 - Noch fehlende Inhalte/Fakten für produktionsreife Umsetzung sind insbesondere reale/kuratierte Assets, belastbare Press-/EPK-Daten (inkl. Zitate, Downloads, Credits) sowie finalisierte Kontakt- und Zuständigkeitsdaten für Booking/Management/Presse.
 - Eindeutiger nächster Schritt ist `docs/dama-venus-website/07_build_plan.md`.
+
+## Update 2026-04-03 – Schritt 07 Build Plan
+- Die Konzeptphase ist vollständig dokumentiert; mit `00` bis `07` liegen Brief, Creative Direction, Asset-Strategie, Homepage-Konzept, Copywriting, Subpages und Build-Plan als geschlossene Entscheidungsbasis vor.
+- Als bindend gelten jetzt die technischen Entscheidungen aus `07_build_plan.md`: App-Router-Routing mit den Routen `/`, `/visuals`, `/music`, `/about`, `/press`, `/contact`; globales 12/8/4-Layout-System; komponentenbasierte Reuse-Architektur; typisiertes Content-/Datenmodell in `content/data`; definierte Asset- und Performance-Strategie; Motion-/A11y-/SEO-Baselines; sowie die feste Build-Reihenfolge von Foundation bis Quality Pass.
+- Weiterhin fehlen als offene Inputs: finale reale Assets, verifizierbare Bio-Fakten, bestätigte Release-Links, belastbare Press-Kontakte, kuratierte Download-Pakete, verbindliches Contact-Mailhandling, finale Social-Links, vollständige Credits, rechtliche Seiten (Imprint/Privacy) sowie ggf. Anforderungen für Mehrsprachigkeit.
+- Konkret empfohlener erster Implementierungsschritt nach dem Build-Plan ist **Phase 1 (Foundation)**: zuerst Projektstruktur + globale Shell + Theme-/Motion-/SEO-Konfig + Basis-Typen und Daten-Skelette anlegen, bevor Seiten-Feinbau startet.
+- Dafür zuerst relevante Dateien/Strukturen im Repo: `app/layout.tsx`, `app/page.tsx`, `app/globals.css`, `components/navigation/MainNav.tsx`, `components/layout/SiteHeader.tsx`, `components/layout/SiteFooter.tsx`, `lib/config/theme.ts`, `lib/config/motion.ts`, `lib/config/seo.ts`, `lib/types/content.ts`, `lib/types/navigation.ts`, `content/data/site.config.ts`, `content/data/navigation.data.ts`, `content/data/homepage.data.ts`.
+
