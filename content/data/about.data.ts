@@ -1,4 +1,4 @@
-import type { CTA } from "@/lib/types";
+import type { CTA, SectionContent } from "@/lib/types";
 
 export const aboutPageModel = {
   aboutIntro: {
@@ -6,7 +6,7 @@ export const aboutPageModel = {
     introLine: "Built on atmosphere.",
     shortText:
       "Dama Venus creates cinematic music and visual narratives with a dark editorial edge.",
-    sectionPriority: 1,
+    priority: 1,
     primaryCtaPattern: {
       label: "Read More",
       href: "/about"
@@ -23,19 +23,19 @@ export const aboutPageModel = {
       id: "cinematic-worldbuilding",
       title: "Cinematic worldbuilding",
       text: "Dama Venus creates cinematic music and visual narratives.",
-      sectionPriority: 1
+      priority: 1
     },
     {
       id: "editorial-edge",
       title: "Dark editorial edge",
       text: "The work is shaped with a dark editorial edge.",
-      sectionPriority: 2
+      priority: 2
     },
     {
       id: "complete-aesthetic-world",
       title: "Complete aesthetic worlds",
       text: "Each project is crafted as a complete aesthetic world.",
-      sectionPriority: 3
+      priority: 3
     }
   ],
   aboutVisualModules: {
@@ -45,7 +45,7 @@ export const aboutPageModel = {
         cropFocusHint: "face-center",
         altTextNote: "Primary portrait for About entry section.",
         role: "entry",
-        sectionPriority: 1
+        priority: 1
       }
     ],
     supportingVisuals: [
@@ -54,14 +54,14 @@ export const aboutPageModel = {
         cropFocusHint: "mid-frame-subject",
         altTextNote: "Supporting atmospheric visual for About section.",
         role: "supporting",
-        sectionPriority: 2
+        priority: 2
       },
       {
         assetId: "about-supporting-visual-02",
         cropFocusHint: "wide-environment",
         altTextNote: "Secondary visual extending the cinematic mood.",
         role: "secondary",
-        sectionPriority: 3
+        priority: 3
       }
     ],
     quotesOrCaptions: []
@@ -75,3 +75,17 @@ export const aboutContent: SectionContent = {
   body: [aboutPageModel.aboutBio.shortText, aboutPageModel.aboutBio.mediumText],
   cta: aboutPageModel.aboutIntro.primaryCtaPattern
 };
+
+export const aboutIntro = {
+  label: aboutPageModel.aboutIntro.title,
+  title: aboutPageModel.aboutIntro.title,
+  introLine: aboutPageModel.aboutIntro.introLine,
+  shortText: aboutPageModel.aboutIntro.shortText,
+  priority: aboutPageModel.aboutIntro.priority
+} as const;
+
+export const aboutBio = aboutPageModel.aboutBio;
+export const aboutKeyStatements = aboutPageModel.aboutKeyStatements;
+export const featuredPortraits = aboutPageModel.aboutVisualModules.featuredPortraits;
+export const supportingVisuals = aboutPageModel.aboutVisualModules.supportingVisuals;
+export const aboutCta: CTA = aboutPageModel.aboutIntro.primaryCtaPattern;
