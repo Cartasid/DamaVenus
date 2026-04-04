@@ -384,3 +384,8 @@
 6. **Verbleibende Risiken**
    - `next build` bricht weiterhin mit einem bereits bestehenden Datenfehler (`Invalid CTA config for home module: press`) ab; nicht Teil dieses Abschluss-Passes.
    - Rechtstexte sind aktuell Platzhalter und müssen vor Go-Live juristisch/fachlich final ersetzt werden.
+
+## Update 2026-04-04 – Design-System/Tokens
+- Ungültige Tailwind-Klasse `text-foreground` wurde im Repo bereinigt und auf das vorhandene Theme-Token `text-primary` umgestellt (About-Key-Statements).
+- Repo-weiter Suchlauf auf `text-foreground` durchgeführt; es bleiben keine Vorkommen offen.
+

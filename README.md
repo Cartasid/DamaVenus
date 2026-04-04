@@ -11,3 +11,8 @@
 
 - Build-Blocker außerhalb dieses Scopes: `Invalid CTA config for home module: press`.
 - Rechtliche Inhalte auf `/privacy` und `/imprint` sind noch Platzhalter.
+
+## Design-System / Tokens
+
+- Ungültige Klasse `text-foreground` wurde entfernt; für About-Statements wird jetzt das vorhandene Token `text-primary` verwendet.
+- Repo-weiter Check auf `text-foreground`: keine verbleibenden Verwendungen.
