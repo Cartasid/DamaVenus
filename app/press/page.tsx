@@ -26,6 +26,7 @@ function renderBody(body: string | string[]) {
 }
 
 function renderBlock(block: (typeof pressEpkBlocks)[number], options?: { purpose?: string; ctaVariant?: "primary" | "text" | "request" }) {
+  const purpose = options?.purpose;
   const ctaVariant = options?.ctaVariant ?? "text";
 
   return (
@@ -56,8 +57,6 @@ export default function PressPage() {
   const secondaryInfoBlocks = secondaryBlocks.filter(
     (block) => !secondaryLinkGroups.some((group) => group.blockIds.includes(block.id))
   );
-  const contactBlock = secondaryBlocks.find((block) => block.id === "contactBlock");
-
   const contactBlock = primaryBlocks.find((block) => block.id === "contactBlock");
   const primaryLeadBlocks = primaryBlocks.filter((block) => block.id !== "contactBlock");
 
@@ -77,7 +76,7 @@ export default function PressPage() {
 
       <section className="space-y-4">
         <h2 className="font-display text-2xl font-semibold">Primary Press Blocks</h2>
-        {primaryBlocks.map((block) => renderBlock(block, block.id === "contactBlock" ? "contact" : undefined))}
+        {primaryLeadBlocks.map((block) => renderBlock(block))}
       </section>
 
       <section className="space-y-4">
@@ -97,7 +96,7 @@ export default function PressPage() {
         })}
       </section>
 
-      {contactBlock ? <section className="space-y-4">{renderBlock(contactBlock, "contact")}</section> : null}
+      {contactBlock ? <section className="space-y-4">{renderBlock(contactBlock, { purpose: "contact" })}</section> : null}
     </section>
   );
 }

@@ -6,7 +6,6 @@ import { assetMap } from "@/content/data/site.config";
 export default function AboutPage() {
   const { aboutBio, aboutIntro, aboutKeyStatements, aboutVisualModules } = aboutPageModel;
   const aboutCta = aboutIntro.primaryCtaPattern;
-  const showArtistNote = false;
 
   const featuredPortraits = [...aboutVisualModules.featuredPortraits].sort(
     (a, b) => a.sectionPriority - b.sectionPriority
@@ -14,12 +13,11 @@ export default function AboutPage() {
   const supportingVisuals = [...aboutVisualModules.supportingVisuals].sort(
     (a, b) => a.sectionPriority - b.sectionPriority
   );
-  const keyStatements = [...aboutKeyStatements]
-    .sort((a, b) => a.sectionPriority - b.sectionPriority)
-    .map((statement) => statement.shortText);
+  const keyStatements = [...aboutKeyStatements].sort((a, b) => a.sectionPriority - b.sectionPriority);
 
   const leadPortrait = featuredPortraits[0];
   const leadPortraitAsset = leadPortrait ? assetMap[leadPortrait.assetId] : undefined;
+  const leadPortraitObjectPosition = "center";
   const resolveAltText = (role: string, preferredAlt?: string, fallbackAlt?: string) => {
     if (role === "decorative") {
       return "";
@@ -131,24 +129,6 @@ export default function AboutPage() {
         </section>
       ) : null}
 
-      {showArtistNote && aboutBio.longArtistNote ? (
-        <section className="space-y-2 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-label="Artist Note">
-          <p className="text-sm text-muted">{aboutBio.longArtistNote}</p>
-        </section>
-      ) : null}
-
-      <section className="space-y-3 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-label="Arbeitsweise">
-        <p className="text-xs uppercase tracking-wide text-muted">Arbeitsweise</p>
-        <p className="text-sm text-muted" aria-label="Methodik-Block">
-          {keyStatements.join(" • ")}
-        </p>
-      </section>
-
-      <div>
-        <Link href={aboutCta.href} className="first-impression-cta">
-          {aboutCta.label}
-        </Link>
-      </div>
     </section>
   );
 }
