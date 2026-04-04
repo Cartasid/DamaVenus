@@ -104,7 +104,7 @@ cd /opt/dama-venus
 
 ---
 
-## 8) Produktions-ENV erstellen
+## 8) Produktions-ENV erstellen (inkl. Contact-Provider)
 
 ```bash
 cp .env.production.example .env.production
@@ -116,10 +116,35 @@ Mindestens setzen:
 - `NODE_ENV=production`
 - `PORT=3000`
 - `NEXT_PUBLIC_SITE_URL=https://example.com`
+- `CONTACT_PROVIDER` (`noop`, `webhook` oder `resend`)
+
+Provider-spezifisch ergänzen:
+
+- Für `CONTACT_PROVIDER=webhook`:
+  - `CONTACT_WEBHOOK_URL`
+  - Optional `CONTACT_API_KEY`
+  - Optional `CONTACT_TO_EMAIL`
+- Für `CONTACT_PROVIDER=resend`:
+  - `RESEND_API_KEY`
+  - `CONTACT_TO_EMAIL`
+  - `CONTACT_FROM_EMAIL`
 
 ---
 
-## 9) App bauen und starten (Docker)
+## 9) Asset-Preparation (bei neuen Bildern aus `pics/`)
+
+Die Asset-Pipeline ist ein separater Schritt und **nicht** Teil von `./scripts/deploy-prod.sh` oder des Docker-Builds.
+
+Bei neuen/angepassten Bildquellen aus `pics/` vor dem Deploy ausführen:
+
+```bash
+cd /opt/dama-venus
+node scripts/prepare-dama-venus-assets.mjs
+```
+
+---
+
+## 10) App bauen und starten (Docker)
 
 ```bash
 cd /opt/dama-venus
@@ -135,7 +160,7 @@ docker compose -f docker-compose.prod.yml logs --tail=100 app
 
 ---
 
-## 10) Nginx-Konfiguration aktivieren (Initial ohne TLS)
+## 11) Nginx-Konfiguration aktivieren (Initial ohne TLS)
 
 Datei ins System übernehmen:
 
@@ -166,7 +191,7 @@ sudo systemctl enable nginx
 
 ---
 
-## 11) SSL-Zertifikat anfordern (Let's Encrypt)
+## 12) SSL-Zertifikat anfordern (Let's Encrypt)
 
 Certbot ergänzt automatisch TLS-Serverblöcke und Redirect-Regeln in der aktiven Nginx-Site:
 
@@ -190,7 +215,7 @@ sudo certbot renew --dry-run
 
 ---
 
-## 12) HTTPS und Redirect prüfen
+## 13) HTTPS und Redirect prüfen
 
 ```bash
 curl -I http://example.com
@@ -204,7 +229,7 @@ Erwartung:
 
 ---
 
-## 13) Update-/Redeploy-Prozess
+## 14) Update-/Redeploy-Prozess
 
 ```bash
 cd /opt/dama-venus
@@ -220,7 +245,7 @@ cd /opt/dama-venus
 
 ---
 
-## 14) Betrieb: Logs, Restart, Status
+## 15) Betrieb: Logs, Restart, Status
 
 Container-Logs live:
 
@@ -253,7 +278,7 @@ sudo systemctl status docker
 
 ---
 
-## 15) Troubleshooting (konkret)
+## 16) Troubleshooting (konkret)
 
 Port-Bindings prüfen:
 
