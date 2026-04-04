@@ -4,10 +4,26 @@ import { FormEvent, useState } from "react";
 import { contactContent } from "@/content/data/contact.data";
 
 type SubmitState = "idle" | "pending" | "success" | "error";
+type ContactErrorCode = "validation_error" | "rate_limit_error" | "provider_error" | "unknown_error";
+
+type ContactApiResult = {
+  ok?: boolean;
+  code?: ContactErrorCode;
+  message?: string;
+};
+
+const VALIDATION_MESSAGES = {
+  fullName: "Bitte gib einen Namen mit mindestens 2 Zeichen an.",
+  email: "Bitte gib eine gültige E-Mail-Adresse an.",
+  message: "Bitte gib eine Nachricht mit mindestens 10 Zeichen an."
+} as const;
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function ContactForm() {
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Partial<Record<"fullName" | "email" | "message", string>>>({});
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -16,12 +32,34 @@ export function ContactForm() {
     const formData = new FormData(form);
 
     const payload = {
-      fullName: String(formData.get("fullName") || ""),
-      email: String(formData.get("email") || ""),
-      message: String(formData.get("message") || ""),
-      companyWebsite: String(formData.get("companyWebsite") || "")
+      fullName: String(formData.get("fullName") || "").trim(),
+      email: String(formData.get("email") || "").trim(),
+      message: String(formData.get("message") || "").trim(),
+      companyWebsite: String(formData.get("companyWebsite") || "").trim()
     };
 
+    const nextFieldErrors: Partial<Record<"fullName" | "email" | "message", string>> = {};
+
+    if (payload.fullName.length < 2) {
+      nextFieldErrors.fullName = VALIDATION_MESSAGES.fullName;
+    }
+
+    if (!EMAIL_REGEX.test(payload.email)) {
+      nextFieldErrors.email = VALIDATION_MESSAGES.email;
+    }
+
+    if (payload.message.length < 10) {
+      nextFieldErrors.message = VALIDATION_MESSAGES.message;
+    }
+
+    if (Object.keys(nextFieldErrors).length > 0) {
+      setFieldErrors(nextFieldErrors);
+      setSubmitState("error");
+      setErrorMessage("Bitte prüfe die markierten Felder.");
+      return;
+    }
+
+    setFieldErrors({});
     setSubmitState("pending");
     setErrorMessage("");
 
@@ -32,7 +70,7 @@ export function ContactForm() {
         body: JSON.stringify(payload)
       });
 
-      const result = (await response.json()) as { ok?: boolean; message?: string };
+      const result = (await response.json()) as ContactApiResult;
 
       if (!response.ok || !result.ok) {
         setSubmitState("error");
@@ -54,6 +92,9 @@ export function ContactForm() {
 
       {contactContent.form.fields.map((field) => {
         const helperId = `${field.id}-help`;
+        const errorId = `${field.id}-error`;
+        const fieldError = fieldErrors[field.name as "fullName" | "email" | "message"];
+        const describedBy = fieldError ? `${helperId} ${errorId}` : helperId;
         const isRequired = field.required ? " *" : "";
 
         return (
@@ -64,7 +105,15 @@ export function ContactForm() {
             </label>
 
             {field.type === "textarea" ? (
-              <textarea id={field.id} name={field.name} rows={6} className="w-full" aria-describedby={helperId} required={field.required} />
+              <textarea
+                id={field.id}
+                name={field.name}
+                rows={6}
+                className="w-full"
+                aria-describedby={describedBy}
+                aria-invalid={fieldError ? true : undefined}
+                required={field.required}
+              />
             ) : (
               <input
                 id={field.id}
@@ -72,7 +121,8 @@ export function ContactForm() {
                 type={field.type}
                 autoComplete={field.type === "email" ? "email" : undefined}
                 className="w-full"
-                aria-describedby={helperId}
+                aria-describedby={describedBy}
+                aria-invalid={fieldError ? true : undefined}
                 required={field.required}
               />
             )}
@@ -80,6 +130,11 @@ export function ContactForm() {
             <p id={helperId} className="typo-body-s">
               {field.helperText}
             </p>
+            {fieldError ? (
+              <p id={errorId} className="typo-body-s" role="alert">
+                {fieldError}
+              </p>
+            ) : null}
           </div>
         );
       })}
