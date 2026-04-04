@@ -8,13 +8,6 @@ export default function ContactPage() {
         <p className="text-muted">{contactContent.intro.subhead}</p>
       </header>
 
-      <section className="space-y-2" aria-label="Primary contact path">
-        <h2 className="text-sm font-semibold">{contactContent.primaryContact.label}</h2>
-        <a href={`mailto:${contactContent.primaryContact.email}`} className="text-sm underline">
-          {contactContent.primaryContact.email}
-        </a>
-      </section>
-
       <form className="space-y-4" aria-label="Contact form">
         {contactContent.form.fields.map((field) => (
           <div key={field.id} className="space-y-1">
@@ -29,6 +22,7 @@ export default function ContactPage() {
                 rows={6}
                 required={field.required}
                 placeholder={field.placeholder}
+                aria-describedby={`${field.id}-help`}
                 className="w-full"
               />
             ) : (
@@ -38,10 +32,14 @@ export default function ContactPage() {
                 type={field.type}
                 required={field.required}
                 placeholder={field.placeholder}
+                autoComplete={field.type === "email" ? "email" : "name"}
+                aria-describedby={`${field.id}-help`}
                 className="w-full"
               />
             )}
-            <p className="text-xs text-muted">{field.helperText}</p>
+            <p id={`${field.id}-help`} className="text-xs text-muted">
+              {field.helperText}
+            </p>
           </div>
         ))}
 
