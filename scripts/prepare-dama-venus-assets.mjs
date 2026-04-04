@@ -10,6 +10,7 @@ const CONFIG = {
   outputRootDir: path.resolve('public/assets/dama-venus'),
   outputMapJsonPath: path.resolve('public/assets/dama-venus/asset-map.json'),
   outputMapTsPath: path.resolve('public/assets/dama-venus/asset-map.ts'),
+  prioritizedAssetsTsPath: path.resolve('content/dama-venus/assets.ts'),
   allowedExtensions: ['.jpg', '.jpeg', '.png', '.webp', '.heic'],
   bereiche: [
     { key: 'homepage', keywords: ['home', 'hero', 'spotify_canvas'] },
@@ -234,6 +235,110 @@ function buildTsMapContent(mapObject) {
   ].join('\n');
 }
 
+async function parsePrioritizedAssetTargets() {
+  const source = await fs.readFile(CONFIG.prioritizedAssetsTsPath, 'utf8');
+  const pairs = [];
+  const objectPattern = /{[\s\S]*?}/g;
+
+  for (const objectMatch of source.matchAll(objectPattern)) {
+    const objectContent = objectMatch[0];
+    const finalPathMatch = objectContent.match(/finalPath:\s*"([^"]+)"/);
+    const sourcePathMatch = objectContent.match(/sourcePath:\s*"([^"]+)"/);
+    if (finalPathMatch && sourcePathMatch) {
+      pairs.push({
+        finalPath: finalPathMatch[1],
+        sourcePath: sourcePathMatch[1],
+      });
+    }
+  }
+
+  return pairs.sort((a, b) => a.finalPath.localeCompare(b.finalPath));
+}
+
+function resolveRepoPath(relativeOrAbsolutePath) {
+  const normalized = relativeOrAbsolutePath.replace(/^\/+/, '');
+  return path.resolve(normalized);
+}
+
+async function ensurePrioritizedAssetOutputs(detectedHeicTool) {
+  const pairs = await parsePrioritizedAssetTargets();
+  const steps = [];
+
+  for (const pair of pairs) {
+    const targetPath = resolveRepoPath(path.join('public', pair.finalPath.replace(/^\/+/, '')));
+    const sourcePath = resolveRepoPath(pair.sourcePath);
+    const sourceExt = path.extname(sourcePath).toLowerCase();
+    const targetExt = path.extname(targetPath).toLowerCase();
+
+    try {
+      await fs.access(sourcePath);
+    } catch (_error) {
+      steps.push({
+        finalPath: pair.finalPath,
+        sourcePath: pair.sourcePath,
+        status: 'missing-source',
+      });
+      counters.skipped += 1;
+      continue;
+    }
+
+    let sourceForOutput = sourcePath;
+    if (sourceExt === '.heic') {
+      const sharpCanProcessHeic = await canProcessHeicWithSharp(sourcePath);
+      if (!sharpCanProcessHeic && detectedHeicTool) {
+        const heicFallbackTarget = `${targetPath}.heic-fallback.jpg`;
+        const converted = await processHeicVariant(sourcePath, heicFallbackTarget, detectedHeicTool);
+        if (!converted) {
+          steps.push({
+            finalPath: pair.finalPath,
+            sourcePath: pair.sourcePath,
+            status: 'heic-convert-failed',
+          });
+          counters.errors += 1;
+          continue;
+        }
+        sourceForOutput = heicFallbackTarget;
+      } else if (!sharpCanProcessHeic) {
+        steps.push({
+          finalPath: pair.finalPath,
+          sourcePath: pair.sourcePath,
+          status: 'heic-skipped-no-tooling',
+        });
+        counters.skipped += 1;
+        continue;
+      }
+    }
+
+    if (sourceExt === targetExt) {
+      await copyVariant(sourceForOutput, targetPath);
+      steps.push({
+        finalPath: pair.finalPath,
+        sourcePath: pair.sourcePath,
+        status: 'copied',
+      });
+      continue;
+    }
+
+    const targetFormat = targetExt === '.webp' ? 'webp' : 'jpeg';
+    await processSharpDerivative(sourceForOutput, targetPath, {
+      format: targetFormat,
+      quality: CONFIG.qualities.base,
+    });
+    steps.push({
+      finalPath: pair.finalPath,
+      sourcePath: pair.sourcePath,
+      status: 'converted',
+      format: targetFormat,
+    });
+  }
+
+  mapping.prioritizedAssets = {
+    source: path.relative(process.cwd(), CONFIG.prioritizedAssetsTsPath),
+    count: pairs.length,
+    steps,
+  };
+}
+
 async function run() {
   await ensureDir(CONFIG.outputRootDir);
   const detectedHeicTool = await detectHeicTool();
@@ -446,6 +551,8 @@ async function run() {
   }
 
   mapping.items.sort((a, b) => a.source.localeCompare(b.source));
+  await ensurePrioritizedAssetOutputs(detectedHeicTool);
+  mapping.generatedAt = new Date().toISOString();
 
   await fs.writeFile(CONFIG.outputMapJsonPath, JSON.stringify(mapping, null, 2) + '\n', 'utf8');
   await fs.writeFile(CONFIG.outputMapTsPath, buildTsMapContent(mapping), 'utf8');
