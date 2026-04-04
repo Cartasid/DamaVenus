@@ -46,6 +46,9 @@ Pipeline-Logik:
 - Generiert Mapping-Dateien:
   - `public/assets/dama-venus/asset-map.json`
   - `public/assets/dama-venus/asset-map.ts`
+- `sharp` ist die zentrale Bild-Engine für Konvertierung/Optimierung (JPEG/WebP) und Zuschnitte innerhalb der Pipeline.
+- Für `.heic` prüft das Script zuerst, ob `sharp` das jeweilige Bild direkt dekodieren kann; wenn ja, ist **kein** externes Tool nötig.
+- Nur wenn `sharp` ein `.heic` nicht direkt verarbeiten kann, nutzt das Script als Fallback ein externes Tool (`magick`, `convert`, `heif-convert` oder `sips`); fehlt dieses Tool, werden betroffene HEIC-Dateien als non-blocking Skip markiert.
 
 ## Content-Schicht
 - Zentrale Inhaltsdaten liegen in `content/data/*.data.ts`.
