@@ -1,7 +1,27 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { visualsData } from "@/content/data/visuals.data";
 import { assetMap } from "@/content/data/site.config";
+
+export const metadata: Metadata = {
+  title: { absolute: "Visuals | Dama Venus" },
+  description: "Explore curated visuals, portraits, and editorial sequences shaped in the signature of Dama Venus.",
+  openGraph: {
+    title: "Visuals | Dama Venus",
+    description: "Explore curated visuals, portraits, and editorial sequences shaped in the signature of Dama Venus.",
+    url: "/visuals",
+    images: [{ url: "/og-default.svg" }]
+  },
+  twitter: {
+    title: "Visuals | Dama Venus",
+    description: "Explore curated visuals, portraits, and editorial sequences shaped in the signature of Dama Venus.",
+    images: ["/og-default.svg"]
+  },
+  alternates: {
+    canonical: "/visuals"
+  }
+};
 
 export default function VisualsPage() {
   const resolveAlt = (asset: (typeof assetMap)[string] | undefined, altTextNotes?: string) => {
@@ -50,8 +70,8 @@ export default function VisualsPage() {
   const linkedVisualAsset = linkedVisual?.assets[0] ? assetMap[linkedVisual.assets[0]] : undefined;
 
   return (
-    <main className="space-y-10" aria-labelledby="visuals-page-title">
-      <header className="grid gap-4 rounded-lg border border-white/10 bg-white/[0.03] p-5 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
+    <section className="section-stack-md" aria-labelledby="visuals-page-title">
+      <header className="grid gap-4 rounded-lg border border-white/10 bg-surface/60 p-5 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
         {openerAsset ? (
           <Image
             src={openerAsset.src}
@@ -63,9 +83,9 @@ export default function VisualsPage() {
           />
         ) : null}
         <div className="space-y-2">
-          <p className="text-xs uppercase tracking-[0.2em] text-muted">{visualsData.intro.label}</p>
-          <h1 id="visuals-page-title" className="font-display text-3xl font-semibold">{visualsData.intro.headline}</h1>
-          <p className="text-sm text-muted">{visualsData.intro.subhead}</p>
+          <p className="typo-label">{visualsData.intro.label}</p>
+          <h1 id="visuals-page-title" className="typo-h1">{visualsData.intro.headline}</h1>
+          <p className="typo-body-m max-w-2xl">{visualsData.intro.subhead}</p>
         </div>
       </header>
 
@@ -82,19 +102,19 @@ export default function VisualsPage() {
             />
             <div className={getOverlayClass(leadAsset, "lead")} aria-hidden="true" />
           </div>
-          <h2 id={`${leadSequenceEntry.id}-lead-title`} className="font-display text-2xl font-semibold">
+          <h2 id={`${leadSequenceEntry.id}-lead-title`} className="typo-h2">
             {leadSequenceEntry.title}
           </h2>
-          {leadSequenceEntry.shortText ? <p className="text-sm text-muted">{leadSequenceEntry.shortText}</p> : null}
+          {leadSequenceEntry.shortText ? <p className="typo-body-m">{leadSequenceEntry.shortText}</p> : null}
         </article>
       ) : null}
 
       {seriesEntries.map((entry) => (
         <section key={entry.id} className="space-y-3" aria-labelledby={`${entry.id}-series-title`}>
-          <h2 id={`${entry.id}-series-title`} className="font-display text-2xl font-semibold">
+          <h2 id={`${entry.id}-series-title`} className="typo-h2">
             {entry.title}
           </h2>
-          {entry.subtitle ? <p className="text-sm text-muted">{entry.subtitle}</p> : null}
+          {entry.subtitle ? <p className="typo-body-m">{entry.subtitle}</p> : null}
           <div className="grid gap-3 md:grid-cols-3">
             {entry.assets.map((assetId) => {
               const asset = assetMap[assetId];
@@ -116,7 +136,7 @@ export default function VisualsPage() {
 
       {editorialRows.map((entry) => (
         <section key={entry.id} className="space-y-3" aria-labelledby={`${entry.id}-editorial-title`}>
-          <h2 id={`${entry.id}-editorial-title`} className="font-display text-2xl font-semibold">
+          <h2 id={`${entry.id}-editorial-title`} className="typo-h2">
             {entry.title}
           </h2>
           <div className="grid gap-3 md:grid-cols-3">
@@ -141,7 +161,7 @@ export default function VisualsPage() {
 
       {portraitFeature && portraitAsset ? (
         <section className="space-y-3" aria-labelledby={`${portraitFeature.id}-portrait-title`}>
-          <h2 id={`${portraitFeature.id}-portrait-title`} className="font-display text-2xl font-semibold">
+          <h2 id={`${portraitFeature.id}-portrait-title`} className="typo-h2">
             {portraitFeature.title}
           </h2>
           <Image
@@ -157,7 +177,7 @@ export default function VisualsPage() {
 
       {quietStills.map((entry) => (
         <section key={entry.id} className="space-y-3" aria-labelledby={`${entry.id}-stills-title`}>
-          <h2 id={`${entry.id}-stills-title`} className="font-display text-xl font-semibold text-muted">
+          <h2 id={`${entry.id}-stills-title`} className="typo-h3 text-muted">
             {entry.title}
           </h2>
           <div className="grid gap-3 md:grid-cols-3">
@@ -181,11 +201,11 @@ export default function VisualsPage() {
       ))}
 
       {linkedVisual ? (
-        <section className="space-y-3 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-labelledby={`${linkedVisual.id}-linked-title`}>
-          <h2 id={`${linkedVisual.id}-linked-title`} className="font-display text-2xl font-semibold">
+        <section className="space-y-3 rounded-lg border border-white/10 bg-surface/50 p-4" aria-labelledby={`${linkedVisual.id}-linked-title`}>
+          <h2 id={`${linkedVisual.id}-linked-title`} className="typo-h2">
             {linkedVisual.title}
           </h2>
-          {linkedVisual.shortText ? <p className="text-sm text-muted">{linkedVisual.shortText}</p> : null}
+          {linkedVisual.shortText ? <p className="typo-body-m">{linkedVisual.shortText}</p> : null}
           {visualsData.intro.cta && linkedVisualAsset ? (
             <Link href={visualsData.intro.cta.href} className="first-impression-tile block space-y-3 rounded-md p-2">
               <div className="relative aspect-[9/16] w-full overflow-hidden rounded-md md:aspect-[3/2]">
@@ -198,7 +218,7 @@ export default function VisualsPage() {
                 />
                 <div className={getOverlayClass(linkedVisualAsset, "linked")} aria-hidden="true" />
               </div>
-              <span className="text-sm text-muted">{visualsData.intro.cta.label}</span>
+              <span className="typo-body-m">{visualsData.intro.cta.label}</span>
             </Link>
           ) : null}
         </section>
@@ -206,11 +226,11 @@ export default function VisualsPage() {
 
       {visualsData.intro.cta ? (
         <footer className="rounded-lg border border-white/10 p-5">
-          <Link href={visualsData.intro.cta.href} className="first-impression-cta">
+          <Link href={visualsData.intro.cta.href} className="cta-primary">
             {visualsData.intro.cta.label}
           </Link>
         </footer>
       ) : null}
-    </main>
+    </section>
   );
 }

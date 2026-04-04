@@ -1,9 +1,28 @@
 import type { AssetMapItem } from "@/lib/types";
 import { prioritizedAssets } from "@/content/dama-venus/assets";
 
+const SITE_URL_FALLBACK = "https://damavenus.com";
+
+export function resolveSiteUrl(): string {
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+
+  if (!envUrl) {
+    return SITE_URL_FALLBACK;
+  }
+
+  try {
+    return new URL(envUrl).toString().replace(/\/$/, "");
+  } catch {
+    return SITE_URL_FALLBACK;
+  }
+}
+
 export const siteConfig = {
   name: "Dama Venus",
-  language: "de",
+  /** Primary site language for UI, metadata, and document language attributes. */
+  primaryLanguage: "en",
+  language: "en",
+  url: resolveSiteUrl(),
   metadata: {
     title: "Dama Venus",
     description: "Music. Image. Presence."

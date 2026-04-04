@@ -3,15 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run prepare:dama-venus-assets && next dev",
+    "build": "npm run prepare:dama-venus-assets && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "tsc --noEmit --pretty false",
+    "prepare:dama-venus-assets": "node scripts/prepare-dama-venus-assets.mjs",
+    "typecheck": "tsc --noEmit",
+    "build:check": "npm run build && npm run build:verify",
+    "check": "npm run lint && npm run typecheck",
+    "build:verify": "node scripts/validate-production-artifacts.mjs"
   },
   "dependencies": {
-    "next": "15.3.1",
+    "next": "15.3.6",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "sharp": "0.34.5"
   },
   "devDependencies": {
     "@types/node": "22.15.3",

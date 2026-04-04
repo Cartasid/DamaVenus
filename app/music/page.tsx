@@ -1,7 +1,27 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { musicData } from "@/content/data/music.data";
 import { assetMap } from "@/content/data/site.config";
+
+export const metadata: Metadata = {
+  title: { absolute: "Music | Dama Venus" },
+  description: "Listen to selected releases and visual chapters from the cinematic sound world of Dama Venus.",
+  openGraph: {
+    title: "Music | Dama Venus",
+    description: "Listen to selected releases and visual chapters from the cinematic sound world of Dama Venus.",
+    url: "/music",
+    images: [{ url: "/og-default.svg" }]
+  },
+  twitter: {
+    title: "Music | Dama Venus",
+    description: "Listen to selected releases and visual chapters from the cinematic sound world of Dama Venus.",
+    images: ["/og-default.svg"]
+  },
+  alternates: {
+    canonical: "/music"
+  }
+};
 
 export default function MusicPage() {
   const featured = musicData.releases.find((release) => release.id === musicData.featuredReleaseId) ?? musicData.releases[0];
@@ -9,18 +29,19 @@ export default function MusicPage() {
     .sort((a, b) => a.priority - b.priority)
     .filter((release) => release.id !== featured.id);
   const leadSecondary = selectedReleases[0];
+  const selectedSingles = leadSecondary ? [leadSecondary] : [];
   const followUpReleases = selectedReleases.slice(1);
 
   const featuredAsset = assetMap[featured.coverAsset.id] ?? (featured.alternateVisualAsset ? assetMap[featured.alternateVisualAsset.id] : undefined);
 
   return (
-    <section className="space-y-10">
-      <header className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.03] p-5 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
+    <section className="section-stack-md">
+      <header className="grid gap-5 rounded-lg border border-white/10 bg-surface/60 p-5 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
         <div className="space-y-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-muted">{musicData.intro.label}</p>
-          <h1 className="font-display text-3xl font-semibold md:text-4xl">{musicData.intro.headline}</h1>
-          <p className="max-w-xl text-sm text-muted md:text-base">{musicData.intro.subhead}</p>
-          <p className="text-xs uppercase tracking-[0.2em] text-muted">Featured Release · {featured.title}</p>
+          <p className="typo-label">{musicData.intro.label}</p>
+          <h1 className="typo-h1">{musicData.intro.headline}</h1>
+          <p className="typo-body-m max-w-2xl">{musicData.intro.subhead}</p>
+          <p className="typo-label">Featured Release · {featured.title}</p>
         </div>
 
         {featuredAsset ? (
@@ -36,13 +57,13 @@ export default function MusicPage() {
         ) : null}
 
         <div>
-          <Link href={featured.primaryCta.href} className="first-impression-cta">
+          <Link href={featured.primaryCta.href} className="cta-primary">
             {featured.primaryCta.label}
           </Link>
         </div>
       </header>
 
-      <article id={featured.id} className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.03] p-5 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center">
+      <article id={featured.id} className="grid gap-5 rounded-lg border border-white/10 bg-surface/60 p-5 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center">
         {featuredAsset ? (
           <div className="aspect-[4/5] w-full overflow-hidden rounded-md">
             <Image
@@ -56,16 +77,16 @@ export default function MusicPage() {
           </div>
         ) : null}
         <div className="space-y-3">
-          <p className="text-xs uppercase tracking-[0.2em] text-muted">Featured Release</p>
-          <h2 className="font-display text-2xl font-semibold">{featured.title}</h2>
-          {featured.subtitle ? <p className="text-sm text-muted">{featured.subtitle}</p> : null}
-          <p className="text-sm text-muted">{featured.shortText}</p>
+          <p className="typo-label">Featured Release</p>
+          <h2 className="typo-h2">{featured.title}</h2>
+          {featured.subtitle ? <p className="typo-body-m">{featured.subtitle}</p> : null}
+          <p className="typo-body-m">{featured.shortText}</p>
           <div className="flex flex-wrap gap-3">
-            <Link href={featured.primaryCta.href} className="first-impression-cta">
+            <Link href={featured.primaryCta.href} className="cta-primary">
               {musicData.ctaLabels.listen}
             </Link>
             {featured.watchLinks?.[0] ? (
-              <Link href={featured.watchLinks[0].href} className="first-impression-cta">
+              <Link href={featured.watchLinks[0].href} className="cta-secondary">
                 {musicData.ctaLabels.watch}
               </Link>
             ) : null}
@@ -74,20 +95,22 @@ export default function MusicPage() {
       </article>
 
       <section id="selected-releases" className="space-y-3">
-        <h2 className="font-display text-2xl font-semibold">Selected Releases</h2>
-        <ul className="grid gap-4 md:grid-cols-2">
-          {selectedSingles.map((release) => {
-            return (
+        <h2 className="typo-h2">Selected Releases</h2>
+        {selectedSingles.length ? (
+          <ul className="grid gap-4 md:grid-cols-2">
+            {selectedSingles.map((release) => (
               <li key={release.id} id={release.id} className="space-y-2 rounded-lg border border-white/10 p-4">
-                <p className="text-xs uppercase tracking-[0.2em] text-muted">{release.status}</p>
-                <h3 className="font-display text-xl">{release.title}</h3>
-                <p className="text-sm text-muted">{release.shortText}</p>
-                <Link href={release.primaryCta.href} className="first-impression-cta">
+                <p className="typo-label">{release.status}</p>
+                <h3 className="typo-h3">{release.title}</h3>
+                <p className="typo-body-m">{release.shortText}</p>
+                <Link href={release.primaryCta.href} className="cta-primary">
                   {release.primaryCta.label}
                 </Link>
               </li>
-            );
-          })() : null}
+            ))}
+          </ul>
+        ) : null}
+        {followUpReleases.length ? (
           <ul className="grid gap-3 md:grid-cols-2">
             {followUpReleases.map((release) => {
               const releaseAsset = assetMap[release.coverAsset.id];
@@ -103,20 +126,20 @@ export default function MusicPage() {
                       className="h-40 w-full rounded-md object-cover"
                     />
                   ) : null}
-                  <h3 className="font-display text-lg">{release.title}</h3>
-                  <p className="text-sm text-muted">{release.shortText}</p>
-                  <Link href={release.primaryCta.href} className="first-impression-cta">
+                  <h3 className="typo-h4">{release.title}</h3>
+                  <p className="typo-body-m">{release.shortText}</p>
+                  <Link href={release.primaryCta.href} className="cta-primary">
                     {release.primaryCta.label}
                   </Link>
                 </li>
               );
             })}
           </ul>
-        </div>
+        ) : null}
       </section>
 
       <section id="visual-releases" className="space-y-3">
-        <h2 className="font-display text-2xl font-semibold">Visual Releases</h2>
+        <h2 className="typo-h2">Visual Releases</h2>
         <ul className="space-y-3">
           {musicData.visualReleases.map((release) => {
             const releaseAsset = assetMap[release.coverAsset.id];
@@ -146,24 +169,22 @@ export default function MusicPage() {
                       className="h-44 w-full rounded-md object-cover"
                     />
                   ) : null}
-                  <h3 id={`${release.id}-title`} className="font-display text-xl">
+                  <h3 id={`${release.id}-title`} className="typo-h3">
                     {release.title}
                   </h3>
                   <div className="flex flex-wrap gap-3">
                     {watchAction && primaryWatchLabel ? (
-                      <Link href={watchAction.href} className="first-impression-cta">
+                      <Link href={watchAction.href} className="cta-secondary">
                         {primaryWatchLabel}
                       </Link>
                     ) : null}
                     {secondaryAction && secondaryLabel ? (
-                      <Link href={secondaryAction.href} className={watchAction ? "text-sm text-muted underline-offset-4 hover:underline" : "first-impression-cta"}>
+                      <Link href={secondaryAction.href} className={watchAction ? "typo-body-s underline-offset-4 hover:underline" : "cta-primary"}>
                         {secondaryLabel}
                       </Link>
                     ) : null}
                   </div>
-                  <p className="text-xs text-muted">
-                    Asset hints: {releaseAsset?.cropHint} · {releaseAsset?.focusHint}
-                  </p>
+                  {/* Asset hints intentionally not rendered in UI. */}
                 </article>
               </li>
             );

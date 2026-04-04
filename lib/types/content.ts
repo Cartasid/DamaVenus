@@ -29,6 +29,25 @@ export type CTA = {
   href: string;
 };
 
+export type CtaTarget = `/${string}` | `https://${string}` | `http://${string}` | `mailto:${string}`;
+export type CtaActionKind = "internal" | "external" | "mailto";
+
+export function getCtaActionKind(href: string): CtaActionKind {
+  if (href.startsWith("mailto:")) return "mailto";
+  if (href.startsWith("http://") || href.startsWith("https://")) return "external";
+  return "internal";
+}
+
+export function isValidCtaTarget(target: string): target is CtaTarget {
+  return target.startsWith("/") || target.startsWith("https://") || target.startsWith("http://") || target.startsWith("mailto:");
+}
+
+export function validateCta(cta: CTA, context: string): void {
+  if (!isValidCtaTarget(cta.href)) {
+    throw new Error(`Invalid CTA target in ${context}: ${cta.href}`);
+  }
+}
+
 export type NavigationItem = {
   label: string;
   href: string;

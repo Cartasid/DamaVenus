@@ -141,13 +141,13 @@ Entscheidungsregel pro Asset:
 ### 8.1 Zielstruktur
 Empfohlene Medienstruktur (Web-Pfade):
 
-- `public/assets/dama-venus/curated/` — **kuratiert** (freigegebene Master-Auswahl als redaktionelle Referenz)
-- `public/assets/dama-venus/home/` — **web-ready** (optimierte Varianten für Startseite)
-- `public/assets/dama-venus/music/` — **web-ready** (optimierte Varianten für Music/Release)
-- `public/assets/dama-venus/visuals/` — **web-ready** (optimierte Varianten für Visuals/Portfolio)
-- `public/assets/dama-venus/about/` — **web-ready** (optimierte Varianten für About)
-- `public/assets/dama-venus/press/` — **web-ready** (optimierte Varianten für Press/EPK)
-- `public/assets/dama-venus/raw/` — **Quelle** (optionaler Spiegel der Originale, nur bei fachlich begründetem Spiegelbedarf)
+- `public/assets/dama-venus/{bereich}/{motiv}/...` — **verbindliche Pipeline-Struktur** mit stabilen Dateinamen auf Basis `slug + variant + vNN`
+- Pro Input werden zuerst normierte Master-Derivate erzeugt (`master-jpeg`, `master-webp`), danach Variantenderivate (`hero`, `portrait`, `square`, `landscape`, `tall`)
+- Metadaten werden aus real erzeugten Derivaten geschrieben (`asset-map.json`/`asset-map.ts`: Breite, Höhe, Format, Byte-Größe)
+
+Pfadkonventionen für Prioritized-Asset-Paare:
+- `finalPath`: öffentlicher Frontend-Delivery-Pfad, **muss** mit `/assets/dama-venus/` beginnen.
+- `sourcePath`: reiner Pipeline-Inputpfad aus **nicht-public** Quellen, erlaubt sind nur `pics/` oder `assets-src/dama-venus/` (nie `public/`).
 
 ### 8.2 Naming-Konvention
 Format:
@@ -220,10 +220,10 @@ Aktueller Schwerpunkt: **Kuratierung und technische Normalisierung des bereits i
 - Naming/Ordnung noch nicht auf die Zielstruktur aus Kapitel 8 normalisiert
 
 ### Technischer Grenzfall: HEIC in der Preparation-Pipeline (verbindlich)
-- Das Preparation-Script versucht HEIC-Dateien zuerst direkt über verfügbares Tooling zu verarbeiten (`magick`, `convert`, `heif-convert`, `sips`).
-- Wenn kein HEIC-Tooling verfügbar ist, gilt verbindlich der Fallback: **markierter Skip pro Variante** (`status: skipped-heic`), Eintrag einer **TODO-Liste** im Report und **nicht-blockierender Exitcode**.
+- Das Preparation-Script versucht HEIC-Dateien zuerst über `sharp` zu verarbeiten.
+- Falls `sharp` für HEIC lokal nicht greift, wird der dokumentierte Fallback-Pfad genutzt (`magick`, `convert`, `heif-convert`, `sips`); wenn auch dieser nicht verfügbar ist, gilt verbindlich: **markierter Skip** (`status: skipped-heic`) und **nicht-blockierender Exitcode**.
 - Die Nicht-Blockierung gilt ausschließlich für den klar markierten Fall „HEIC-Skip wegen fehlendem Tooling“; alle anderen Verarbeitungsfehler bleiben build-blockierend.
-- Der Metadaten-Report muss dafür einen eigenen Abschnitt `heicStatus` ausgeben (Support-Status, gewähltes Tool, Fallback-Nutzung, Skip-Zähler, TODO-Liste).
+- Der Metadaten-Report enthält dafür einen eigenen Abschnitt `heicStatus` (Support-Status, gewähltes Tool, Fallback-Nutzung, Skip-Zähler, TODO-Liste).
 
 ### Konkrete Empfehlungen für Nachlieferung
 1. Mindestens 20–40 Realassets in einem ersten Pool bereitstellen (Portraits, Editorial-Stills, Wide Frames, Detailshots).

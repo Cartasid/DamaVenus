@@ -11,18 +11,62 @@ body {
 }
 
 a {
-  @apply text-primary underline-offset-4 hover:underline;
+  @apply text-muted underline-offset-4 hover:text-offWhite hover:underline;
+}
+
+
+@layer components {
+  /* Single source of truth for global content width + horizontal padding (Header/Main/Footer). */
+  .site-container {
+    @apply mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-16;
+  }
+
+  .module-card {
+    @apply rounded-lg border border-white/10 p-5 md:p-6;
+  }
+
+  .typo-h1 {
+    @apply font-display text-3xl font-semibold leading-tight md:text-4xl;
+  }
+
+  .typo-h2 {
+    @apply font-display text-2xl font-semibold leading-snug;
+  }
+
+  .typo-h3 {
+    @apply font-display text-xl font-semibold leading-snug;
+  }
+
+  .typo-h4 {
+    @apply font-display text-lg font-semibold leading-snug;
+  }
+
+  .typo-body-m {
+    @apply text-base leading-relaxed text-muted;
+  }
+
+  .typo-body-s {
+    @apply text-sm leading-relaxed text-muted;
+  }
+
+  .typo-label {
+    @apply text-xs uppercase tracking-[0.2em] text-muted;
+  }
+
+  .typo-cta {
+    @apply text-sm font-semibold;
+  }
 }
 
 .focus-token:focus-visible {
   @apply outline-2 outline-offset-2 outline-accent ring-2 ring-offset-2 ring-offset-background ring-accent;
 }
 
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-.first-impression-cta:focus-visible {
+:where(a, button, input, textarea, [tabindex]:not([tabindex="-1"])):focus-visible,
+.cta-primary:focus-visible,
+.cta-secondary:focus-visible,
+.cta-soft:focus-visible,
+.text-link:focus-visible {
   @apply focus-token rounded-sm;
 }
 
@@ -38,16 +82,32 @@ textarea:focus-visible,
   @apply focus-token rounded-sm;
 }
 
-.first-impression-cta {
-  @apply inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-black no-underline transition duration-200;
+.cta-primary {
+  @apply typo-cta inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-4 py-2 text-background no-underline transition duration-200;
 }
 
-.first-impression-cta:hover {
-  @apply brightness-110;
+.cta-primary:hover {
+  @apply bg-accentSoft;
 }
 
-.first-impression-cta:focus-visible {
-  @apply ring-2 ring-offset-2 ring-offset-background ring-accent;
+.cta-secondary {
+  @apply inline-flex min-h-11 items-center justify-center rounded-md border border-white/20 bg-transparent px-4 py-2 text-sm font-semibold text-offWhite no-underline transition duration-200;
+}
+
+.cta-secondary:hover {
+  @apply border-white/40 bg-white/5 text-primary;
+}
+
+.cta-soft {
+  @apply inline-flex min-h-11 items-center justify-center rounded-md bg-surface/70 px-4 py-2 text-sm font-medium text-offWhite no-underline transition duration-200;
+}
+
+.cta-soft:hover {
+  @apply bg-surface text-primary;
+}
+
+.text-link {
+  @apply text-sm text-muted underline underline-offset-4 transition duration-200 hover:text-primary;
 }
 
 .home-composition a {
@@ -59,7 +119,29 @@ textarea:focus-visible,
 }
 
 .skip-link {
-  @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-surface focus:px-3 focus:py-2;
+  @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-surface focus:px-3 focus:py-2 focus:text-offWhite;
+}
+
+
+.section-gap-md {
+  @apply mt-12 md:mt-16;
+}
+
+.section-gap-lg {
+  @apply mt-16 md:mt-20;
+}
+
+.section-stack-md {
+  @apply w-full space-y-12 md:space-y-16;
+}
+
+.section-stack-lg {
+  @apply w-full space-y-16 md:space-y-20;
+}
+
+input,
+textarea {
+  @apply rounded-md border border-white/10 bg-surface text-offWhite;
 }
 
 .visual-overlay {
@@ -93,7 +175,7 @@ textarea:focus-visible,
 
 @media (prefers-reduced-motion: reduce) {
   .first-impression-tile,
-  .first-impression-cta,
+  .cta-primary,
   .home-composition a.interactive-hint {
     transition: none !important;
   }
