@@ -123,7 +123,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     id: "downloads",
     title: "Downloads",
     shortDescriptor: "Download section for press assets.",
-    body: "Downloads will be published in this section.",
+    body: "Downloads are currently provided on request after editorial approval.",
     linkedAssets: ["press-epk", "press-featured-portrait-primary", "press-editorial-landscape"],
     order: 9,
     priority: 9,
