@@ -1,13 +1,13 @@
 # DamaVenus Website
 
-## Abschluss-Pass (2026-04-04)
+## Completion pass (2026-04-04)
 
-- Robots-/Sitemap-Routen ergänzt und auf `siteConfig.url` ausgerichtet.
-- Navigation/Footer um `Privacy` und `Imprint` erweitert, inklusive Platzhalterseiten.
-- `.gitignore`/`.dockerignore` für Build-Artefakte und sensible Dateien ergänzt.
-- Keyboard-only/A11y-Basis geprüft (Landmarks, Labels, Alt-Strategie, Focus Visible, Touch Targets).
+- Robots and sitemap routes were added and aligned with `siteConfig.url`.
+- Navigation and footer were extended with `Privacy` and `Imprint`, including placeholder pages.
+- `.gitignore` and `.dockerignore` were updated for build artifacts and sensitive files.
+- Keyboard-only and accessibility baseline checks were completed (landmarks, labels, alt strategy, focus-visible, touch targets).
 
-### Verbleibende Risiken
+### Remaining risks
 
-- Build-Blocker außerhalb dieses Scopes: `Invalid CTA config for home module: press`.
-- Rechtliche Inhalte auf `/privacy` und `/imprint` sind noch Platzhalter.
+- Build blocker outside this scope: `Invalid CTA config for home module: press`.
+- Legal content on `/privacy` and `/imprint` is still placeholder content.

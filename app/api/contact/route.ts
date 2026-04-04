@@ -44,19 +44,19 @@ function validatePayload(payload: ContactPayload): string | null {
   const companyWebsite = payload.companyWebsite?.trim() || "";
 
   if (companyWebsite.length > 0) {
-    return "Spam-Schutz ausgelöst. Bitte Formular erneut senden.";
+    return "Spam protection triggered. Please submit the form again.";
   }
 
   if (!name || name.length < 2 || name.length > 120) {
-    return "Bitte gib einen Namen mit 2 bis 120 Zeichen an.";
+    return "Please enter a name with 2 to 120 characters.";
   }
 
   if (!email || email.length > 254 || !EMAIL_REGEX.test(email)) {
-    return "Bitte gib eine gültige E-Mail-Adresse an.";
+    return "Please enter a valid email address.";
   }
 
   if (!message || message.length < 10 || message.length > 5000) {
-    return "Bitte gib eine Nachricht mit 10 bis 5000 Zeichen an.";
+    return "Please enter a message with 10 to 5000 characters.";
   }
 
   return null;
@@ -134,7 +134,7 @@ export async function POST(request: Request) {
 
     if (isRateLimited(ip)) {
       return NextResponse.json(
-        { ok: false, message: "Zu viele Anfragen in kurzer Zeit. Bitte versuche es in einigen Minuten erneut." },
+        { ok: false, message: "Too many requests in a short time. Please try again in a few minutes." },
         { status: 429 }
       );
     }
@@ -152,7 +152,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Contact submit failed", error);
     return NextResponse.json(
-      { ok: false, message: "Deine Anfrage konnte gerade nicht gesendet werden. Bitte versuche es später erneut." },
+      { ok: false, message: "Your request could not be sent right now. Please try again later." },
       { status: 500 }
     );
   }
