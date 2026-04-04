@@ -266,12 +266,16 @@
    - `app/about/page.tsx`
    - `content/data/about.data.ts`
    - `content/data/site.config.ts` (Asset-Map-Referenzierung)
-   - `content/dama-venus/assets.ts` (About-Asset-IDs/-Priorisierung)
-3. **Offene Restpunkte (klar getrennt)**
-   - **Finale Fact-Validierung:** belastbare/verifizierte Bio-Fakten, Quellen, Credits und ggf. zitierfähige Details sind noch final zu bestätigen.
-   - **Letzter Visual-/Contrast-Feinschliff:** abschließender Polishing-Pass für visuelle Feingewichtung, Kontrast und finale Qualitätsabnahme bleibt ausstehend.
-4. **Expliziter nächster Schritt**
-   - Nächster Umsetzungsschritt ist die **Vorbereitung und Umsetzung von `Press/EPK`**.
+
+## Update 2026-04-04 – Asset-Pfade auf öffentliche Pipeline-Ziele bereinigt
+1. **`content/dama-venus/assets.ts` vollständig bereinigt**
+   - Alle bisherigen `finalPath`-Einträge mit `/pics/...` wurden auf öffentliche Pipeline-Zielpfade unter `/assets/dama-venus/...` umgestellt (insbesondere für `visuals` und `about`).
+   - `sourcePath` bleibt unverändert als technische Herkunft (`pics/...` bzw. bestehende Pipeline-/Curated-Quellen) erhalten.
+2. **Konsumenten-Check der relevanten Seiten abgeschlossen**
+   - Die Seiten `app/page.tsx`, `app/music/page.tsx`, `app/visuals/page.tsx` und `app/about/page.tsx` beziehen Assets weiterhin über `assetMap[...].src`; damit zeigen sie nach der Bereinigung auf öffentliche `finalPath`-Ziele.
+   - `app/press/page.tsx` rendert aktuell keine Bild-Assets aus `assetMap`; es sind dafür keine zusätzlichen Pfadänderungen erforderlich.
+3. **Datenmodell-/Auslieferungslogik bestätigt**
+   - In `content/data/site.config.ts` wird frontend-seitig weiterhin ausschließlich `finalPath` als `assetMap[...].src` ausgeliefert; `sourcePath` wird nicht in die UI ausgereicht.
 
 ## Update 2026-04-03 – Schritt 13 Press-/EPK-Struktur konkretisiert
 1. **Press-/EPK-Struktur + Datenmodell (jetzt vorhanden)**
@@ -367,3 +371,10 @@
    - `WebSite` wird nachgezogen, sobald globale Seitendaten (kanonische URL-Strategie, finale Social-/Kontakt-Referenzen, rechtliche Basisdaten) final abgestimmt sind.
 3. **Nächster Review-Schritt**
    - Als nächster Schritt folgt ein finaler SEO-/Metadata-Cleanup-Pass, inklusive erneuter Prüfung, ob die Kriterien für `Person`/`MusicGroup`/`WebSite` vollständig erfüllt sind.
+
+
+## Update 2026-04-04 – Contact-Flow real wired
+- Der Contact-Submit ist jetzt real wired: `/contact` sendet an `POST /api/contact` mit serverseitiger Validierung (`fullName`, `email`, `message`).
+- UI-Status umgesetzt: Pending-/Success-/Error-Zustände werden im Formular gerendert; `#contact-form-status` erscheint nur nach erfolgreichem Submit.
+- Minimaler Spam-Schutz aktiv: Honeypot-Feld + serverseitige Längenprüfungen + einfache IP-basierte Rate-Kontrolle.
+- Provider-/Mail-Konfiguration erfolgt vollständig per ENV (`CONTACT_PROVIDER`, `CONTACT_TO_EMAIL`, Provider-Keys/URLs).
