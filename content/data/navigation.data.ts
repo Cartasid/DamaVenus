@@ -5,7 +5,5 @@ export const navigationItems: NavigationItem[] = [
   { label: "Visuals", href: "/visuals" },
   { label: "About", href: "/about" },
   { label: "Press", href: "/press" },
-  { label: "Contact", href: "/contact" },
-  { label: "Privacy (Placeholder)", href: "/privacy" },
-  { label: "Imprint (Placeholder)", href: "/imprint" }
+  { label: "Contact", href: "/contact" }
 ];
