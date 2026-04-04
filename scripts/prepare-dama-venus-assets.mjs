@@ -273,6 +273,19 @@ async function ensurePrioritizedAssetOutputs(detectedHeicTool) {
     try {
       await fs.access(sourcePath);
     } catch (_error) {
+      const isPdfTarget = targetExt === '.pdf';
+      if (isPdfTarget) {
+        const warningMessage = `[warn] Optionales Dokument fehlt: finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`;
+        steps.push({
+          finalPath: pair.finalPath,
+          sourcePath: pair.sourcePath,
+          status: 'missing-source-optional',
+          warning: warningMessage,
+        });
+        counters.skipped += 1;
+        console.warn(warningMessage);
+        continue;
+      }
       const errorMessage = `[error] Pflichtasset-Quelle fehlt: finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`;
       steps.push({
         finalPath: pair.finalPath,
