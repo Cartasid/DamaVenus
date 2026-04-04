@@ -135,7 +135,7 @@ docker compose -f docker-compose.prod.yml logs --tail=100 app
 
 ---
 
-## 10) Nginx-Konfiguration aktivieren
+## 10) Nginx-Konfiguration aktivieren (Initial ohne TLS)
 
 Datei ins System übernehmen:
 
@@ -143,7 +143,7 @@ Datei ins System übernehmen:
 sudo cp /opt/dama-venus/deploy/nginx/dama-venus.conf /etc/nginx/sites-available/dama-venus.conf
 ```
 
-Domain in der Datei ersetzen:
+Domain in der Datei ersetzen (diese Datei ist bewusst nur HTTP für den ersten Certbot-Lauf):
 
 ```bash
 sudo nano /etc/nginx/sites-available/dama-venus.conf
@@ -168,8 +168,17 @@ sudo systemctl enable nginx
 
 ## 11) SSL-Zertifikat anfordern (Let's Encrypt)
 
+Certbot ergänzt automatisch TLS-Serverblöcke und Redirect-Regeln in der aktiven Nginx-Site:
+
 ```bash
 sudo certbot --nginx -d example.com -d www.example.com --redirect -m admin@example.com --agree-tos --no-eff-email
+```
+
+Danach Konfiguration prüfen und Nginx neu laden:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
 ```
 
 Automatische Erneuerung prüfen:

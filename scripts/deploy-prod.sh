@@ -8,7 +8,6 @@ if [ ! -f .env.production ]; then
   exit 1
 fi
 
-docker compose -f docker-compose.prod.yml pull --ignore-buildable
 docker compose -f docker-compose.prod.yml build --pull
 docker compose -f docker-compose.prod.yml up -d --remove-orphans
 docker compose -f docker-compose.prod.yml ps
