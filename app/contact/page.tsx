@@ -15,36 +15,42 @@ export default function ContactPage() {
       </header>
 
       <form className="space-y-4" aria-label="Contact form">
-        <div className="space-y-1">
-          <label htmlFor="name" className="text-sm">
-            Name
-          </label>
-          <input id="name" name="name" type="text" autoComplete="name" className="w-full" />
-        </div>
-
-        <div className="space-y-1">
-          <label htmlFor="email" className="text-sm">
-            Email
-          </label>
-          <input id="email" name="email" type="email" autoComplete="email" className="w-full" />
-        </div>
-
-        <div className="space-y-1">
-          <label htmlFor="subject" className="text-sm">
-            Subject
-          </label>
-          <input id="subject" name="subject" type="text" className="w-full" />
-        </div>
-
-        <div className="space-y-1">
-          <label htmlFor="message" className="text-sm">
-            Message
-          </label>
-          <textarea id="message" name="message" rows={6} className="w-full" />
-        </div>
+        {contactContent.form.fields.map((field) => (
+          <div key={field.id} className="space-y-1">
+            <label htmlFor={field.id} className="text-sm">
+              {field.label}
+              {field.required ? " *" : ""}
+            </label>
+            {field.type === "textarea" ? (
+              <textarea
+                id={field.id}
+                name={field.name}
+                rows={6}
+                required={field.required}
+                placeholder={field.placeholder}
+                aria-describedby={`${field.id}-help`}
+                className="w-full"
+              />
+            ) : (
+              <input
+                id={field.id}
+                name={field.name}
+                type={field.type}
+                required={field.required}
+                placeholder={field.placeholder}
+                autoComplete={field.type === "email" ? "email" : "name"}
+                aria-describedby={`${field.id}-help`}
+                className="w-full"
+              />
+            )}
+            <p id={`${field.id}-help`} className="text-xs text-muted">
+              {field.helperText}
+            </p>
+          </div>
+        ))}
 
         <button type="submit" className="inline-block text-sm underline">
-          Send Inquiry
+          {contactContent.form.ctaLabel}
         </button>
       </form>
 
