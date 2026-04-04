@@ -84,3 +84,9 @@ Kurzablauf:
 - In-Memory Rate-Limiting der Contact-API ist nicht über Container/Instanzen hinweg geteilt.
 - Contact-Provider `webhook` und `resend` benötigen korrekte ENV-Konfiguration; sonst antwortet die API mit Fehler.
 - Asset-Preparation ist ein separater Schritt und nicht automatisch im Docker-Build enthalten.
+
+
+## Security / Dependency Status
+- Next.js wird auf **15.3.6** festgelegt (gepatchte 15.x-Linie, kein Major-Wechsel).
+- Hintergrund: Entfernung der Nutzung von `next@15.3.1` (Deprecated-Hinweis) durch Upgrade auf gepatchtes 15.x-Release.
+

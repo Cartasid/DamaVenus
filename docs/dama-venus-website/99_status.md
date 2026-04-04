@@ -353,3 +353,10 @@
 - Absicherung ergänzt: Alle vorhandenen Seiten-Metadaten (`/`, `/about`, `/music`, `/visuals`, `/press`, `/contact`) referenzieren zusätzlich explizit dasselbe Default-OG-Bild, sodass ein funktionierender Fallback pro Route gewährleistet bleibt.
 - Optionale route-spezifische OG-Bilder bleiben möglich, indem pro Route später `openGraph.images`/`twitter.images` auf ein eigenes Asset überschrieben wird.
 - Es wurde **keine** halbfertige per-Route-OG-Logik eingeführt; der globale Fallback ist durchgängig funktionsfähig.
+
+
+## Update 2026-04-04 – Next.js 15.x Sicherheits-/Deprecation-Fix
+- `next` wurde in `package.json` von `15.3.1` auf `15.3.6` angehoben (gepatchte, kompatible 15.x-Version; kein Major-Wechsel).
+- Ziel des Updates: Deprecated-Hinweis für `15.3.1` eliminieren und auf gepatchter 15.x-Linie bleiben.
+- App-Router-/Metadata-Kompatibilitätsprüfung wurde für `app/layout.tsx`, `app/robots.ts`, `app/sitemap.ts` sowie Seiten mit `export const metadata` durchgeführt; es waren keine API-Anpassungen erforderlich.
+
