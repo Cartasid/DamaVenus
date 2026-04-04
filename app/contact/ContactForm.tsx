@@ -6,11 +6,17 @@ import { contactContent } from "@/content/data/contact.data";
 type SubmitState = "idle" | "pending" | "success" | "error";
 type ContactErrorCode = "validation_error" | "rate_limit_error" | "provider_error" | "unknown_error";
 
-type ContactApiResult = {
-  ok?: boolean;
+type ContactApiSuccess = {
+  ok: true;
+};
+
+type ContactApiError = {
+  ok: false;
   code?: ContactErrorCode;
   message?: string;
 };
+
+type ContactApiResult = ContactApiSuccess | ContactApiError;
 
 const VALIDATION_MESSAGES = {
   fullName: "Bitte gib einen Namen mit mindestens 2 Zeichen an.",
@@ -72,9 +78,9 @@ export function ContactForm() {
 
       const result = (await response.json()) as ContactApiResult;
 
-      if (!response.ok || !result.ok) {
+      if (result.ok !== true) {
         setSubmitState("error");
-        setErrorMessage(result.message || "Your request could not be sent.");
+        setErrorMessage(result.message || "Your request could not be sent right now. Please try again later.");
         return;
       }
 

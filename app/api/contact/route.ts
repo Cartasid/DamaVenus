@@ -139,10 +139,7 @@ export async function POST(request: Request) {
     const ip = getClientIp(request);
 
     if (isRateLimited(ip)) {
-      return NextResponse.json(
-        { ok: false, message: "Too many requests in a short time. Please try again in a few minutes." },
-        { status: 429 }
-      );
+      return errorResponse("rate_limit_error", "Too many requests in a short time. Please try again in a few minutes.", 429);
     }
 
     const payload = (await request.json()) as ContactPayload;
@@ -156,15 +153,12 @@ export async function POST(request: Request) {
       await sendWithProvider(payload);
     } catch (error) {
       console.error("Contact provider submit failed", error);
-      return errorResponse("provider_error", "Deine Anfrage konnte gerade nicht gesendet werden. Bitte versuche es später erneut.", 502);
+      return errorResponse("provider_error", "Your request could not be sent right now. Please try again later.", 502);
     }
 
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Contact submit failed", error);
-    return NextResponse.json(
-      { ok: false, message: "Your request could not be sent right now. Please try again later." },
-      { status: 500 }
-    );
+    return errorResponse("unknown_error", "Your request could not be sent right now. Please try again later.", 500);
   }
 }
