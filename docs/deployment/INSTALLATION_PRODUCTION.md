@@ -1,5 +1,7 @@
 # Dama-Venus Produktion auf Ubuntu 24.04 LTS
 
+> **Launch-Hinweis:** Aktuell not launch-ready, solange `/privacy` und `/imprint` nur Placeholder-Inhalte enthalten.
+
 Diese Anleitung setzt die Website reproduzierbar mit **Docker (App)** + **Nginx (Host Reverse Proxy)** + **Let's Encrypt (Certbot)** auf.
 
 ## 1) Annahmen / Zielwerte

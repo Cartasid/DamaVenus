@@ -1,11 +1,23 @@
 # 99 Status
 
-## Aktueller Stand
-- Routen vorhanden: `/`, `/music`, `/visuals`, `/about`, `/press`, `/contact`, `/privacy`, `/imprint`. (Code unter `app/*/page.tsx`)
-- SEO-Basis vorhanden: `app/robots.ts`, `app/sitemap.ts`; Domain-Basis ist `https://damavenus.com` aus `content/data/site.config.ts`.
-- OG-Fallback ist global und pro Seite gesetzt (`/og-default.svg`), inkl. `openGraph` und `twitter` Metadata.
-- Kontakt-Flow ist implementiert: Kontaktseite + Formular (`app/contact/page.tsx`, `content/data/contact.data.ts`) und API-Route (`app/api/contact/route.ts`).
-- CTA-/Daten-Validierungen sind aktiv (u. a. `content/data/homepage.data.ts`, `music.data.ts`, `about.data.ts`, `visuals.data.ts`, `press.data.ts`). Der frühere Hinweis „Build-Blocker `Invalid CTA config for home module: press`“ ist im aktuellen Datenstand **nicht** als aktiver Blocker belegt.
+## Entscheidung Rechtstexte (2026-04-04)
+- Es werden **vorerst keine finalen Rechtstexte** eingepflegt.
+- Die Website ist damit im aktuellen Zustand explizit **not launch-ready**.
+- `/privacy` und `/imprint` bleiben als Placeholder-Seiten im Projekt, werden aber bei Placeholder-Status nicht über die Sitemap für Indexierung priorisiert.
+
+## Aktueller Stand (faktenbasiert, Code-gegenprüfbar)
+- Next.js-App-Routen sind vorhanden für `/`, `/music`, `/visuals`, `/about`, `/press`, `/contact`, `/privacy`, `/imprint`.  
+  Code: `app/page.tsx`, `app/music/page.tsx`, `app/visuals/page.tsx`, `app/about/page.tsx`, `app/press/page.tsx`, `app/contact/page.tsx`, `app/privacy/page.tsx`, `app/imprint/page.tsx`.
+- SEO-Basisrouten sind vorhanden: `app/robots.ts` und `app/sitemap.ts` nutzen `siteConfig.url` als Basisdomain.
+- Navigation enthält Legal-Links (`/privacy`, `/imprint`) in `content/data/navigation.data.ts`.
+- Kontakt-Flow ist technisch vorhanden: UI unter `app/contact/page.tsx`/`app/contact/ContactForm.tsx`, API unter `app/api/contact/route.ts`.
+- Der aktuelle Build-Blocker bleibt bestehen: In `content/data/homepage.data.ts` wird bei CTA-Abweichung explizit `Invalid CTA config for home module: press` geworfen.
+
+## Verifizierte Erledigungen
+- Privacy- und Imprint-Seiten sind angelegt (derzeit Placeholder-Inhalte).
+- Robots- und Sitemap-Routen sind implementiert.
+- Navigation wurde um Privacy/Imprint ergänzt.
+- Kontaktformular inkl. Submit-Route ist im Code vorhanden.
 
 ## Offene Punkte
 - Finale produktive Kontakt-Dispatch-Konfiguration ist noch umgebungsabhängig (Provider/Secrets wie `CONTACT_PROVIDER`, `CONTACT_WEBHOOK_URL`, `RESEND_API_KEY` in `app/api/contact/route.ts`).
