@@ -339,3 +339,9 @@
 
 ## Nächster empfohlener Schritt (aktualisiert)
 - Expliziter nächster Schritt ist ein **Accessibility- und Interaktionsqualitäts-Pass** mit Fokus auf **Fokusführung**, **States**, **Motion/Reduced Motion** und **Formular-UX** inklusive QA-Abnahme gegen die obige Checkliste.
+
+## Update 2026-04-04 – OG-Bildbasis (globaler Fallback)
+- Gewählte Strategie: **statisches Default-Asset** über `public/og-default.svg` mit globaler Referenz in `app/layout.tsx` (`metadata.openGraph.images` + `metadata.twitter.images`).
+- Absicherung ergänzt: Alle vorhandenen Seiten-Metadaten (`/`, `/about`, `/music`, `/visuals`, `/press`, `/contact`) referenzieren zusätzlich explizit dasselbe Default-OG-Bild, sodass ein funktionierender Fallback pro Route gewährleistet bleibt.
+- Optionale route-spezifische OG-Bilder bleiben möglich, indem pro Route später `openGraph.images`/`twitter.images` auf ein eigenes Asset überschrieben wird.
+- Es wurde **keine** halbfertige per-Route-OG-Logik eingeführt; der globale Fallback ist durchgängig funktionsfähig.

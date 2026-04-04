@@ -10,11 +10,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About | Dama Venus",
     description: "Read the artist profile of Dama Venus—an atmosphere-driven practice between music, image, and intention.",
-    url: "/about"
+    url: "/about",
+    images: [{ url: "/og-default.svg" }]
   },
   twitter: {
     title: "About | Dama Venus",
-    description: "Read the artist profile of Dama Venus—an atmosphere-driven practice between music, image, and intention."
+    description: "Read the artist profile of Dama Venus—an atmosphere-driven practice between music, image, and intention.",
+    images: ["/og-default.svg"]
   },
   alternates: {
     canonical: "/about"

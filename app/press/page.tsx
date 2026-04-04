@@ -8,11 +8,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Press & EPK | Dama Venus",
     description: "Access press-ready information, selected assets, and EPK links for Dama Venus.",
-    url: "/press"
+    url: "/press",
+    images: [{ url: "/og-default.svg" }]
   },
   twitter: {
     title: "Press & EPK | Dama Venus",
-    description: "Access press-ready information, selected assets, and EPK links for Dama Venus."
+    description: "Access press-ready information, selected assets, and EPK links for Dama Venus.",
+    images: ["/og-default.svg"]
   },
   alternates: {
     canonical: "/press"

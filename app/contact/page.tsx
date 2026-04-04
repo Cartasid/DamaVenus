@@ -7,11 +7,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact | Dama Venus",
     description: "Send booking, press, or collaboration inquiries to Dama Venus via the official contact channel.",
-    url: "/contact"
+    url: "/contact",
+    images: [{ url: "/og-default.svg" }]
   },
   twitter: {
     title: "Contact | Dama Venus",
-    description: "Send booking, press, or collaboration inquiries to Dama Venus via the official contact channel."
+    description: "Send booking, press, or collaboration inquiries to Dama Venus via the official contact channel.",
+    images: ["/og-default.svg"]
   },
   alternates: {
     canonical: "/contact"

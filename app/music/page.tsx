@@ -10,11 +10,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Music | Dama Venus",
     description: "Listen to selected releases and visual chapters from the cinematic sound world of Dama Venus.",
-    url: "/music"
+    url: "/music",
+    images: [{ url: "/og-default.svg" }]
   },
   twitter: {
     title: "Music | Dama Venus",
-    description: "Listen to selected releases and visual chapters from the cinematic sound world of Dama Venus."
+    description: "Listen to selected releases and visual chapters from the cinematic sound world of Dama Venus.",
+    images: ["/og-default.svg"]
   },
   alternates: {
     canonical: "/music"
