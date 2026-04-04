@@ -6,9 +6,9 @@ import type {
 
 export type PrioritizedAsset = {
   id: string;
-  /** Public delivery path consumed by frontend (<img/src>, links, etc.); must stay under /assets/dama-venus/... */
+  /** Öffentlicher Auslieferungspfad für Frontend-Verwendung; muss mit /assets/dama-venus/ beginnen. */
   finalPath: string;
-  /** Pipeline input path (raw/curated source material only); never use for frontend delivery references. */
+  /** Pipeline-Inputpfad aus nicht-public Quellen (pics/ oder assets-src/dama-venus/), niemals public/. */
   sourcePath: string;
   area: "home" | "music" | "visuals" | "about" | "press";
   recommendedModuleType: string;
