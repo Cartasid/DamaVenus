@@ -118,6 +118,11 @@ Mindestens setzen:
 - `NEXT_PUBLIC_SITE_URL=https://example.com`
 - `CONTACT_PROVIDER` (`noop`, `webhook` oder `resend`)
 
+URL-Resolution-Regel:
+- Primär wird `NEXT_PUBLIC_SITE_URL` verwendet.
+- Ist `NEXT_PUBLIC_SITE_URL` leer oder ungültig, fällt die App auf `https://damavenus.com` zurück.
+- Diese aufgelöste URL wird für Metadaten, `robots.txt` (`host`, `sitemap`) und `sitemap.xml` genutzt.
+
 Provider-spezifisch ergänzen:
 
 - Für `CONTACT_PROVIDER=webhook`:
