@@ -178,7 +178,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "visuals-cinderela-lead-241",
-    finalPath: "/pics/Cinderela-241.jpg",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_cinderela_lead_241_color_3x4_v01.jpg",
     sourcePath: "pics/Cinderela-241.jpg",
     area: "visuals",
     recommendedModuleType: "series-section",
@@ -192,7 +192,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "visuals-cinderela-frame-243",
-    finalPath: "/pics/Cinderela-243.JPEG",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_cinderela_frame_243_bw_3x4_v01.jpeg",
     sourcePath: "pics/Cinderela-243.JPEG",
     area: "visuals",
     recommendedModuleType: "series-section",
@@ -206,7 +206,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "visuals-cinderela-frame-288",
-    finalPath: "/pics/Cinderela-288.JPEG",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_cinderela_frame_288_bw_3x4_v01.jpeg",
     sourcePath: "pics/Cinderela-288.JPEG",
     area: "visuals",
     recommendedModuleType: "series-section",
@@ -220,7 +220,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "visuals-cinderela-landscape-210",
-    finalPath: "/pics/Cinderela-210.JPEG",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_cinderela_landscape_210_bw_16x9_v01.jpeg",
     sourcePath: "pics/Cinderela-210.JPEG",
     area: "visuals",
     recommendedModuleType: "editorial-image-row",
@@ -234,7 +234,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "visuals-uuid-6824",
-    finalPath: "/pics/6824A7C6-3A24-4408-8BDF-F7A237F5FD41.JPG",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_uuid_6824_color_16x9_v01.jpg",
     sourcePath: "pics/6824A7C6-3A24-4408-8BDF-F7A237F5FD41.JPG",
     area: "visuals",
     recommendedModuleType: "editorial-image-row",
@@ -248,7 +248,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "visuals-uuid-3493",
-    finalPath: "/pics/349343D2-8AD2-4A03-8893-E2C94FC1D7BF.JPG",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_uuid_3493_color_3x4_v01.jpg",
     sourcePath: "pics/349343D2-8AD2-4A03-8893-E2C94FC1D7BF.JPG",
     area: "visuals",
     recommendedModuleType: "editorial-image-row",
@@ -262,7 +262,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "visuals-portrait-tamiris-12",
-    finalPath: "/pics/Tamiris-12.JPEG",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_portrait_tamiris_12_color_3x4_v01.jpeg",
     sourcePath: "pics/Tamiris-12.JPEG",
     area: "visuals",
     recommendedModuleType: "large-image-block",
@@ -276,7 +276,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "visuals-still-unnamed-1",
-    finalPath: "/pics/unnamed.webp",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_still_unnamed_01_bw_1x1_v01.webp",
     sourcePath: "pics/unnamed.webp",
     area: "visuals",
     recommendedModuleType: "grid",
@@ -290,7 +290,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "visuals-still-unnamed-2",
-    finalPath: "/pics/unnamed (2).webp",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_still_unnamed_02_bw_1x1_v01.webp",
     sourcePath: "pics/unnamed (2).webp",
     area: "visuals",
     recommendedModuleType: "grid",
@@ -304,7 +304,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "visuals-still-unnamed-3",
-    finalPath: "/pics/unnamed (3).webp",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_still_unnamed_03_bw_1x1_v01.webp",
     sourcePath: "pics/unnamed (3).webp",
     area: "visuals",
     recommendedModuleType: "grid",
@@ -318,7 +318,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "visuals-linked-current-chapter",
-    finalPath: "/pics/spotify_canvas_9x16.jpg",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_linked_current_chapter_color_9x16_v01.jpg",
     sourcePath: "pics/spotify_canvas_9x16.jpg",
     area: "visuals",
     recommendedModuleType: "linked-visual-module",
@@ -332,7 +332,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "about-intro-entry-portrait-primary",
-    finalPath: "/pics/Cinderela-241.jpg",
+    finalPath: "/assets/dama-venus/about/dv_about_intro_entry_portrait_primary_color_3x4_v01.jpg",
     sourcePath: "pics/Cinderela-241.jpg",
     area: "about",
     recommendedModuleType: "about-intro-lead",
@@ -346,7 +346,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "about-intro-entry-portrait-secondary",
-    finalPath: "/pics/Cinderela-243.JPEG",
+    finalPath: "/assets/dama-venus/about/dv_about_intro_entry_portrait_secondary_bw_3x4_v01.jpeg",
     sourcePath: "pics/Cinderela-243.JPEG",
     area: "about",
     recommendedModuleType: "about-intro-lead",
@@ -360,7 +360,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "about-supporting-visual-calm-01",
-    finalPath: "/pics/Cinderela-210.JPEG",
+    finalPath: "/assets/dama-venus/about/dv_about_supporting_visual_calm_01_bw_16x9_v01.jpeg",
     sourcePath: "pics/Cinderela-210.JPEG",
     area: "about",
     recommendedModuleType: "about-supporting-visual",
@@ -374,7 +374,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "about-supporting-visual-calm-02",
-    finalPath: "/pics/Tamiris-12.JPEG",
+    finalPath: "/assets/dama-venus/about/dv_about_supporting_visual_calm_02_color_3x4_v01.jpeg",
     sourcePath: "pics/Tamiris-12.JPEG",
     area: "about",
     recommendedModuleType: "about-supporting-visual",
@@ -388,7 +388,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "about-supporting-visual-calm-reserve-03",
-    finalPath: "/pics/349343D2-8AD2-4A03-8893-E2C94FC1D7BF.JPG",
+    finalPath: "/assets/dama-venus/about/dv_about_supporting_visual_calm_reserve_03_color_3x4_v01.jpg",
     sourcePath: "pics/349343D2-8AD2-4A03-8893-E2C94FC1D7BF.JPG",
     area: "about",
     recommendedModuleType: "about-supporting-visual",
