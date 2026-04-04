@@ -7,10 +7,45 @@ type SubmitState = "idle" | "pending" | "success" | "error";
 type ContactErrorCode = "validation_error" | "rate_limit_error" | "provider_error" | "unknown_error";
 
 type ContactApiResult = {
-  ok?: boolean;
+  ok: boolean;
   code?: ContactErrorCode;
   message?: string;
 };
+
+const API_ERROR_MESSAGES: Record<ContactErrorCode, string> = {
+  validation_error: "Bitte prüfe deine Eingaben und versuche es erneut.",
+  rate_limit_error: "Zu viele Anfragen. Bitte versuche es in wenigen Minuten erneut.",
+  provider_error: "Deine Anfrage konnte aktuell nicht gesendet werden. Bitte versuche es später erneut.",
+  unknown_error: "Deine Anfrage konnte nicht gesendet werden. Bitte versuche es später erneut."
+};
+
+const GENERIC_ERROR_MESSAGE = API_ERROR_MESSAGES.unknown_error;
+
+function isContactErrorCode(value: unknown): value is ContactErrorCode {
+  return value === "validation_error" || value === "rate_limit_error" || value === "provider_error" || value === "unknown_error";
+}
+
+function isContactApiResult(value: unknown): value is ContactApiResult {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+
+  const candidate = value as { ok?: unknown; code?: unknown; message?: unknown };
+
+  if (typeof candidate.ok !== "boolean") {
+    return false;
+  }
+
+  if (candidate.code !== undefined && !isContactErrorCode(candidate.code)) {
+    return false;
+  }
+
+  if (candidate.message !== undefined && typeof candidate.message !== "string") {
+    return false;
+  }
+
+  return true;
+}
 
 const VALIDATION_MESSAGES = {
   fullName: "Bitte gib einen Namen mit mindestens 2 Zeichen an.",
@@ -70,11 +105,23 @@ export function ContactForm() {
         body: JSON.stringify(payload)
       });
 
-      const result = (await response.json()) as ContactApiResult;
+      let result: ContactApiResult | null = null;
 
-      if (!response.ok || !result.ok) {
+      try {
+        const rawResult: unknown = await response.json();
+        if (isContactApiResult(rawResult)) {
+          result = rawResult;
+        }
+      } catch {
+        result = null;
+      }
+
+      if (!response.ok || !result?.ok) {
+        const mappedMessage = result?.code ? API_ERROR_MESSAGES[result.code] : undefined;
+        const uiMessage = mappedMessage || result?.message || GENERIC_ERROR_MESSAGE;
+
         setSubmitState("error");
-        setErrorMessage(result.message || "Your request could not be sent.");
+        setErrorMessage(uiMessage);
         return;
       }
 
@@ -82,7 +129,7 @@ export function ContactForm() {
       setSubmitState("success");
     } catch {
       setSubmitState("error");
-      setErrorMessage("Your request could not be sent. Please try again later.");
+      setErrorMessage(GENERIC_ERROR_MESSAGE);
     }
   }
 
