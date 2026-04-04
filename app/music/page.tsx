@@ -182,9 +182,7 @@ export default function MusicPage() {
                       </Link>
                     ) : null}
                   </div>
-                  <p className="typo-label">
-                    Asset hints: {releaseAsset?.cropHint} · {releaseAsset?.focusHint}
-                  </p>
+                  {/* Asset hints intentionally not rendered in UI. */}
                 </article>
               </li>
             );
