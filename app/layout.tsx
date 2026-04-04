@@ -33,6 +33,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/"
   },
+  manifest: "/manifest.webmanifest",
   icons: {
     icon: "/icon.svg",
     shortcut: "/favicon.svg",
