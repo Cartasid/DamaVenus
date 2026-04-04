@@ -52,6 +52,7 @@ Enthaltene Scripts:
 - `npm run typecheck` -> TypeScript-Check ohne Emit
 - `npm run check` -> kombiniert Lint + Typecheck
 - `npm run build:check` -> vollständiger Produktions-Build als zusätzlicher Validierungscheck
+- Interne Aufschlüsselung: `npm run build:check` entspricht `npm run build` + `npm run build:verify`
 
 ## Asset-Pipeline
 Asset-Preparation erfolgt über:
