@@ -43,6 +43,31 @@ export type SectionContent = {
   asset?: AssetRef;
 };
 
+
+export type ContactFieldType = "text" | "email" | "textarea" | "select";
+
+export type ContactFieldDefinition = {
+  id: string;
+  label: string;
+  type: ContactFieldType;
+  required?: boolean;
+  placeholder?: string;
+  options?: string[];
+};
+
+export type ContactAlternatePath = {
+  label: string;
+  href: string;
+};
+
+export type ContactPageContent = {
+  headline: string;
+  subhead?: string;
+  fields?: ContactFieldDefinition[];
+  alternatePaths?: ContactAlternatePath[];
+  cta?: CTA;
+};
+
 export type ReleaseItem = {
   title: string;
   description: string;
