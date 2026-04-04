@@ -163,6 +163,7 @@ Klarer Ablauf im Pflichtpfad:
 ## 10) App bauen und starten (Docker, inkl. Asset-Preparation)
 
 Die Asset-Pipeline läuft beim Deploy automatisch im Docker-Build über `npm run build`; kein separater Host-Node-Schritt erforderlich.
+Pipeline-Input ist ausschließlich nicht-public (`pics/` und `assets-src/dama-venus/`); Delivery bleibt ausschließlich `public/assets/dama-venus/`.
 Die Pipeline verwendet `sharp` als primäre Engine für Bildverarbeitung (Konvertierung/Optimierung und Derivate).
 
 HEIC-Hinweis:

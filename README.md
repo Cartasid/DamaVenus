@@ -9,7 +9,7 @@ DamaVenus ist eine Next.js-Website mit statisch gepflegter Content-Schicht (`con
 - **Framework:** Next.js App Router (`app/`).
 - **UI-Struktur:** Seiten und Module in `app/` und `components/`.
 - **Content-Schicht:** Redaktionsdaten als TypeScript-Objekte in `content/data/`.
-- **Assets:** Quellmaterial in `pics/`, aufbereitete Assets in `public/assets/dama-venus/`.
+- **Assets:** Quellmaterial in `pics/` sowie `assets-src/dama-venus/` (nicht-public Input), aufbereitete Assets in `public/assets/dama-venus/`.
 - **Deployment-Stack:** Docker-Container (App) + Nginx Reverse Proxy (Host), siehe `docs/deployment/INSTALLATION_PRODUCTION.md`.
 
 ## Lokale Entwicklung
@@ -59,7 +59,7 @@ node scripts/prepare-dama-venus-assets.mjs
 ```
 
 Pipeline-Logik:
-- Liest Quellen aus `pics/` (reiner Input-Ordner der Pipeline).
+- Liest Quellen aus `pics/` und `assets-src/dama-venus/` (beides reine, nicht-public Input-Pfade der Pipeline).
 - Schreibt optimierte Dateien nach `public/assets/dama-venus/` (dieser Pfad ist der finale Auslieferungspfad; `pics/` ist nie Auslieferung).
 - Generiert Mapping-Dateien:
   - `public/assets/dama-venus/asset-map.json`
