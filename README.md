@@ -12,7 +12,12 @@
 - Build-Blocker außerhalb dieses Scopes: `Invalid CTA config for home module: press`.
 - Rechtliche Inhalte auf `/privacy` und `/imprint` sind noch Platzhalter.
 
-## Design-System / Tokens
+## Fonts (Next.js + Tailwind)
 
-- Ungültige Klasse `text-foreground` wurde entfernt; für About-Statements wird jetzt das vorhandene Token `text-primary` verwendet.
-- Repo-weiter Check auf `text-foreground`: keine verbleibenden Verwendungen.
+- Der Ladeweg läuft über `next/font/google` in `app/layout.tsx` mit `Inter` und `Space_Grotesk`.
+- Die Fonts werden als CSS-Variablen (`--font-inter`, `--font-space-grotesk`) auf dem `<body>` gesetzt.
+- `tailwind.config.ts` referenziert diese Variablen in `fontFamily.sans` und `fontFamily.display`.
+- Datenschutz/Hosting-Verhalten: Bei `next/font/google` lädt Next.js die Google-Fonts zur Build-Zeit und hostet die Font-Dateien anschließend lokal aus der eigenen App (kein Runtime-Fetch vom Browser zu Google Fonts).
+- Fallback-Reihenfolge:
+  - `sans`: `var(--font-inter)` → `system-ui` → `sans-serif`
+  - `display`: `var(--font-space-grotesk)` → `var(--font-inter)` → `system-ui` → `sans-serif`
