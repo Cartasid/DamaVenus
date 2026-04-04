@@ -62,6 +62,23 @@ textarea:focus-visible,
   @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-surface focus:px-3 focus:py-2 focus:text-offWhite;
 }
 
+
+.section-gap-md {
+  @apply mt-12 md:mt-16;
+}
+
+.section-gap-lg {
+  @apply mt-16 md:mt-20;
+}
+
+.section-stack-md {
+  @apply space-y-12 md:space-y-16;
+}
+
+.section-stack-lg {
+  @apply space-y-16 md:space-y-20;
+}
+
 input,
 textarea {
   @apply rounded-md border border-white/10 bg-surface text-offWhite;

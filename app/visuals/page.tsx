@@ -50,7 +50,7 @@ export default function VisualsPage() {
   const linkedVisualAsset = linkedVisual?.assets[0] ? assetMap[linkedVisual.assets[0]] : undefined;
 
   return (
-    <main className="space-y-10" aria-labelledby="visuals-page-title">
+    <main className="section-stack-md" aria-labelledby="visuals-page-title">
       <header className="grid gap-4 rounded-lg border border-white/10 bg-surface/60 p-5 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
         {openerAsset ? (
           <Image
