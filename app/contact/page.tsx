@@ -9,71 +9,82 @@ export default function ContactPage() {
       </header>
 
       <form className="space-y-4" aria-label="Contact form">
-        {contactContent.form.fields.map((field) => (
-          <div key={field.id} className="space-y-1">
-            <label htmlFor={field.id} className="text-sm">
-              {field.label}
-              {field.required ? " *" : ""}
-            </label>
-            {field.type === "textarea" ? (
-              <textarea
-                id={field.id}
-                name={field.name}
-                rows={6}
-                required={field.required}
-                placeholder={field.placeholder}
-                aria-describedby={`${field.id}-help`}
-                className="w-full"
-              />
-            ) : (
-              <input
-                id={field.id}
-                name={field.name}
-                type={field.type}
-                required={field.required}
-                placeholder={field.placeholder}
-                autoComplete={field.type === "email" ? "email" : "name"}
-                aria-describedby={`${field.id}-help`}
-                className="w-full"
-              />
-            )}
-            <p id={`${field.id}-help`} className="text-xs text-muted">
-              {field.helperText}
-            </p>
-          </div>
-        ))}
+        <p className="text-xs text-muted">* Pflichtfeld</p>
+
+        <div className="space-y-1">
+          <label htmlFor="name" className="text-sm">
+            Name *
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            autoComplete="name"
+            className="w-full"
+            aria-describedby="name-help"
+            required
+          />
+          <p id="name-help" className="text-xs text-muted">
+            Bitte geben Sie Ihren Namen ein.
+          </p>
+        </div>
+
+        <div className="space-y-1">
+          <label htmlFor="email" className="text-sm">
+            Email *
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            className="w-full"
+            aria-describedby="email-help"
+            required
+          />
+          <p id="email-help" className="text-xs text-muted">
+            Bitte geben Sie eine gültige E-Mail-Adresse ein.
+          </p>
+        </div>
+
+        <div className="space-y-1">
+          <label htmlFor="subject" className="text-sm">
+            Subject *
+          </label>
+          <input id="subject" name="subject" type="text" className="w-full" aria-describedby="subject-help" required />
+          <p id="subject-help" className="text-xs text-muted">
+            Bitte geben Sie einen Betreff ein.
+          </p>
+        </div>
+
+        <div className="space-y-1">
+          <label htmlFor="message" className="text-sm">
+            Message *
+          </label>
+          <textarea id="message" name="message" rows={6} className="w-full" aria-describedby="message-help" required />
+          <p id="message-help" className="text-xs text-muted">
+            Bitte beschreiben Sie Ihr Anliegen.
+          </p>
+        </div>
 
         <button type="submit" className="inline-block text-sm underline">
           {contactContent.form.ctaLabel}
         </button>
+        <div id="contact-form-status" role="status" aria-live="polite" data-feature="contact-success-message" hidden>
+          <p className="text-sm text-muted">Thanks, your inquiry has been sent successfully.</p>
+        </div>
       </form>
 
-      <div aria-live="polite" data-feature="contact-success-message" hidden>
-        <h2 className="text-sm font-semibold">{contactContent.form.success.title}</h2>
-        <p className="text-sm text-muted">{contactContent.form.success.message}</p>
-      </div>
-
-      <section className="space-y-2" aria-label="Alternative contact options">
-        <h2 className="text-sm font-semibold">Alternative Contact</h2>
-        <ul className="space-y-2 text-sm text-muted">
-          {contactContent.alternatePaths.map((path) => (
-            <li key={path.id} className="space-y-1">
-              <p className="font-medium text-foreground">{path.label}</p>
-              {path.href ? (
-                <a href={path.href} className="underline">
-                  {path.href}
-                </a>
-              ) : null}
-              {path.email ? (
-                <a href={`mailto:${path.email}`} className="underline">
-                  {path.email}
-                </a>
-              ) : null}
-              <p>{path.note}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {contactContent.cta?.href ? (
+        <section className="space-y-2" aria-label="Alternative contact options">
+          <h2 className="text-sm font-semibold">Alternative Contact</h2>
+          <div className="text-sm text-muted">
+            <a href={contactContent.cta.href} className="underline">
+              {contactContent.cta.label}
+            </a>
+          </div>
+        </section>
+      ) : null}
     </section>
   );
 }
