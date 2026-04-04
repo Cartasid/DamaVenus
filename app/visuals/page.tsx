@@ -1,7 +1,25 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { visualsData } from "@/content/data/visuals.data";
 import { assetMap } from "@/content/data/site.config";
+
+export const metadata: Metadata = {
+  title: { absolute: "Visuals | Dama Venus" },
+  description: "Explore curated visuals, portraits, and editorial sequences shaped in the signature of Dama Venus.",
+  openGraph: {
+    title: "Visuals | Dama Venus",
+    description: "Explore curated visuals, portraits, and editorial sequences shaped in the signature of Dama Venus.",
+    url: "/visuals"
+  },
+  twitter: {
+    title: "Visuals | Dama Venus",
+    description: "Explore curated visuals, portraits, and editorial sequences shaped in the signature of Dama Venus."
+  },
+  alternates: {
+    canonical: "/visuals"
+  }
+};
 
 export default function VisualsPage() {
   const resolveAlt = (asset: (typeof assetMap)[string] | undefined, altTextNotes?: string) => {

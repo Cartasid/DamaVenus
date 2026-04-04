@@ -1,7 +1,25 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { musicData } from "@/content/data/music.data";
 import { assetMap } from "@/content/data/site.config";
+
+export const metadata: Metadata = {
+  title: { absolute: "Music | Dama Venus" },
+  description: "Listen to selected releases and visual chapters from the cinematic sound world of Dama Venus.",
+  openGraph: {
+    title: "Music | Dama Venus",
+    description: "Listen to selected releases and visual chapters from the cinematic sound world of Dama Venus.",
+    url: "/music"
+  },
+  twitter: {
+    title: "Music | Dama Venus",
+    description: "Listen to selected releases and visual chapters from the cinematic sound world of Dama Venus."
+  },
+  alternates: {
+    canonical: "/music"
+  }
+};
 
 export default function MusicPage() {
   const featured = musicData.releases.find((release) => release.id === musicData.featuredReleaseId) ?? musicData.releases[0];
