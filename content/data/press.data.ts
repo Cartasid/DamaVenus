@@ -10,7 +10,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     order: 1,
     priority: 1,
     ctaLabel: "Zum Press & EPK Überblick",
-    target: "/press",
+    target: "/press#very-short-bio",
     isPrimaryVisible: true
   },
   {

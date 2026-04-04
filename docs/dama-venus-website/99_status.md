@@ -218,6 +218,13 @@
    - **Letzte Asset-Exports:** finale Derivate/Exports für `public/assets/dama-venus/visuals/` und finale Qualitätsabnahme einzelner Bildvarianten.
    - **Endpolish:** letzter visueller Feinschliff (Spacing/Hierarchie), abschließender A11y-/Kontrast-Check und finaler Performance-Pass.
 4. **Expliziter nächster Schritt**
+
+## Update 2026-04-04 – Press-Anchor-Stabilisierung
+- In `app/press/page.tsx` wurden für die Zielbereiche der Blöcke `veryShortBio`, `shortBio`, `pressReadyDescription` und `downloads` explizite, stabile IDs gesetzt: `very-short-bio`, `short-bio`, `press-ready-description`, `downloads`.
+- Die Rendering-Logik nutzt dafür eine feste ID-Mapping-Konstante nach Block-ID, sodass Anchors bei Umordnung der Sektionen stabil bleiben.
+- Für die Hash-Ziele wurde die Semantik/A11y ergänzt: jeder gerenderte Block ist nun eine benannte `section` mit `aria-labelledby` auf die jeweilige Block-Überschrift, damit Hash-Sprünge in klar benannte Zielbereiche führen.
+- `content/data/press.data.ts` wurde auf Zielkonsistenz geprüft; die vorhandenen Press-Targets mit Hash (`/press#very-short-bio`, `/press#short-bio`, `/press#press-ready-description`, `/press#downloads`) passen zu den tatsächlichen IDs.
+- CTA-Konsistenz auf `/press` wurde bereinigt: der Intro-CTA verweist nicht mehr als Self-Link auf `/press`, sondern sinnvoll auf den ersten relevanten Anchor (`/press#very-short-bio`).
    - Nach Abschluss des Visuals-Polish folgt die Umsetzung der nächsten Seiten in dieser Reihenfolge: **About**, danach **Press**, danach **Contact**.
 
 ## Update 2026-04-03 – Schritt 12 About-Datenbasis strukturiert/priorisiert
