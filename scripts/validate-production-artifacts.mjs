@@ -50,32 +50,39 @@ async function parsePrioritizedAssets() {
   return idToFinalPath;
 }
 
-async function parseHomepageAssetIds() {
-  const homepageDataPath = path.resolve(projectRoot, 'content/data/homepage.data.ts');
-  const source = await fs.readFile(homepageDataPath, 'utf8');
-  const matches = [
-    ...source.matchAll(/assetId:\s*"([^"]+)"/g),
-    ...source.matchAll(/coverAsset:\s*\{\s*id:\s*"([^"]+)"\s*\}/g),
-    ...source.matchAll(/asset:\s*\{\s*id:\s*"([^"]+)"\s*\}/g),
-  ];
+async function parseReferencedAssetIds() {
+  const dataDirPath = path.resolve(projectRoot, 'content/data');
+  const dataFiles = (await fs.readdir(dataDirPath))
+    .filter((fileName) => fileName.endsWith('.data.ts'))
+    .map((fileName) => path.join(dataDirPath, fileName));
+  const referencedIds = new Set();
 
-  return [...new Set(matches.map((m) => m[1]))];
+  for (const dataFilePath of dataFiles) {
+    const source = await fs.readFile(dataFilePath, 'utf8');
+    const matches = [
+      ...source.matchAll(/assetId:\s*"([^"]+)"/g),
+      ...source.matchAll(/coverAsset:\s*\{\s*id:\s*"([^"]+)"\s*\}/g),
+      ...source.matchAll(/\b\w*Asset:\s*\{\s*id:\s*"([^"]+)"\s*\}/g),
+      ...source.matchAll(/\basset:\s*\{\s*id:\s*"([^"]+)"\s*\}/g),
+    ];
+
+    matches.forEach((match) => referencedIds.add(match[1]));
+  }
+
+  return [...referencedIds];
 }
 
-async function ensureHomepageCriticalAssets(idToFinalPath, homepageAssetIds) {
-  if (homepageAssetIds.length === 0) {
-    throw new Error('Keine Startseiten-Asset-IDs in content/data/homepage.data.ts gefunden.');
+async function ensureReferencedAssetsResolvable(idToFinalPath, referencedAssetIds) {
+  if (referencedAssetIds.length === 0) {
+    throw new Error('Keine referenzierten Asset-IDs in content/data/*.data.ts gefunden.');
   }
 
-  const missingIdMappings = homepageAssetIds.filter((id) => !idToFinalPath.has(id));
-  if (missingIdMappings.length > 0) {
-    throw new Error(
-      `assetMap-Referenzen ohne Zielpfad gefunden: ${missingIdMappings.join(', ')}`
-    );
-  }
-
+  const missingIdMappings = referencedAssetIds.filter((id) => !idToFinalPath.has(id));
   const missingFiles = [];
-  for (const id of homepageAssetIds) {
+  for (const id of referencedAssetIds) {
+    if (!idToFinalPath.has(id)) {
+      continue;
+    }
     const finalPath = idToFinalPath.get(id);
     const absolutePath = path.resolve(projectRoot, 'public', finalPath.replace(/^\/+/, ''));
     try {
@@ -85,19 +92,24 @@ async function ensureHomepageCriticalAssets(idToFinalPath, homepageAssetIds) {
     }
   }
 
-  if (missingFiles.length > 0) {
-    throw new Error(
-      `Kritische Startseiten-Assets fehlen unter public/assets/dama-venus: ${missingFiles.join('; ')}`
-    );
+  if (missingIdMappings.length > 0 || missingFiles.length > 0) {
+    const details = [];
+    if (missingIdMappings.length > 0) {
+      details.push(`IDs ohne finalPath-Mapping: ${missingIdMappings.join(', ')}`);
+    }
+    if (missingFiles.length > 0) {
+      details.push(`finalPath-Dateien unter public/ fehlen: ${missingFiles.join('; ')}`);
+    }
+    throw new Error(`Artefakt-Validierung fehlgeschlagen. ${details.join(' | ')}`);
   }
 }
 
 async function run() {
   await ensureAtLeastOneBuiltCss();
   const idToFinalPath = await parsePrioritizedAssets();
-  const homepageAssetIds = await parseHomepageAssetIds();
-  await ensureHomepageCriticalAssets(idToFinalPath, homepageAssetIds);
-  console.log('Production-Artefakte validiert: CSS vorhanden, kritische Homepage-Assets vorhanden, IDs auf Dateien auflösbar.');
+  const referencedAssetIds = await parseReferencedAssetIds();
+  await ensureReferencedAssetsResolvable(idToFinalPath, referencedAssetIds);
+  console.log('Production-Artefakte validiert: CSS vorhanden, referenzierte Asset-IDs gemappt, finalPath-Dateien vorhanden.');
 }
 
 run().catch((error) => {
