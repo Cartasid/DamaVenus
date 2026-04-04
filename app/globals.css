@@ -11,7 +11,7 @@ body {
 }
 
 a {
-  @apply text-primary underline-offset-4 hover:underline;
+  @apply text-muted underline-offset-4 hover:text-offWhite hover:underline;
 }
 
 .focus-token:focus-visible {
@@ -43,7 +43,7 @@ textarea:focus-visible,
 }
 
 .first-impression-cta:hover {
-  @apply brightness-110;
+  @apply bg-accentSoft;
 }
 
 .first-impression-cta:focus-visible {
@@ -59,7 +59,12 @@ textarea:focus-visible,
 }
 
 .skip-link {
-  @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-surface focus:px-3 focus:py-2;
+  @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-surface focus:px-3 focus:py-2 focus:text-offWhite;
+}
+
+input,
+textarea {
+  @apply rounded-md border border-white/10 bg-surface text-offWhite;
 }
 
 .visual-overlay {

@@ -71,7 +71,7 @@ export default function AboutPage() {
       </section>
 
       {aboutBio.longArtistNote ? (
-        <section className="space-y-2 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-labelledby="about-artist-note-heading">
+        <section className="space-y-2 rounded-lg border border-white/10 bg-surface/50 p-4" aria-labelledby="about-artist-note-heading">
           <h3 id="about-artist-note-heading" className="text-xs uppercase tracking-wide text-muted">
             Artist Note
           </h3>
@@ -79,7 +79,7 @@ export default function AboutPage() {
         </section>
       ) : null}
 
-      <section className="space-y-3 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-labelledby="about-method-heading">
+      <section className="space-y-3 rounded-lg border border-white/10 bg-surface/50 p-4" aria-labelledby="about-method-heading">
         <h2 id="about-method-heading" className="text-xs uppercase tracking-wide text-muted">
           Arbeitsweise
         </h2>

@@ -51,7 +51,7 @@ export default function VisualsPage() {
 
   return (
     <main className="space-y-10" aria-labelledby="visuals-page-title">
-      <header className="grid gap-4 rounded-lg border border-white/10 bg-white/[0.03] p-5 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
+      <header className="grid gap-4 rounded-lg border border-white/10 bg-surface/60 p-5 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
         {openerAsset ? (
           <Image
             src={openerAsset.src}
@@ -181,7 +181,7 @@ export default function VisualsPage() {
       ))}
 
       {linkedVisual ? (
-        <section className="space-y-3 rounded-lg border border-white/10 bg-white/[0.02] p-4" aria-labelledby={`${linkedVisual.id}-linked-title`}>
+        <section className="space-y-3 rounded-lg border border-white/10 bg-surface/50 p-4" aria-labelledby={`${linkedVisual.id}-linked-title`}>
           <h2 id={`${linkedVisual.id}-linked-title`} className="font-display text-2xl font-semibold">
             {linkedVisual.title}
           </h2>
