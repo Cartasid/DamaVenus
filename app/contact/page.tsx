@@ -67,7 +67,7 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <button type="submit" className="inline-block text-sm underline">
+        <button type="submit" className="first-impression-cta">
           {contactContent.form.ctaLabel}
         </button>
         <div id="contact-form-status" role="status" aria-live="polite" data-feature="contact-success-message" hidden>

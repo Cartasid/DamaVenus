@@ -16,7 +16,7 @@ export default function MusicPage() {
 
   return (
     <section className="space-y-10">
-      <header className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.03] p-5 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
+      <header className="grid gap-5 rounded-lg border border-white/10 bg-surface/60 p-5 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
         <div className="space-y-4">
           <p className="text-xs uppercase tracking-[0.2em] text-muted">{musicData.intro.label}</p>
           <h1 className="font-display text-3xl font-semibold md:text-4xl">{musicData.intro.headline}</h1>
@@ -43,7 +43,7 @@ export default function MusicPage() {
         </div>
       </header>
 
-      <article id={featured.id} className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.03] p-5 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center">
+      <article id={featured.id} className="grid gap-5 rounded-lg border border-white/10 bg-surface/60 p-5 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center">
         {featuredAsset ? (
           <div className="aspect-[4/5] w-full overflow-hidden rounded-md">
             <Image
