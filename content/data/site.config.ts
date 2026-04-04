@@ -25,7 +25,7 @@ export const siteConfig = {
   url: resolveSiteUrl(),
   metadata: {
     title: "Dama Venus",
-    description: "Music. Image. Presence."
+    description: "Dama Venus — artist, visual storyteller, and live performer. Explore new music, cinematic image work, and press materials."
   },
   brandDescriptor: "Artist • Visual Narratives • Live Energy",
   footerLine: "Dama Venus — Music. Image. Presence."

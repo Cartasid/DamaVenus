@@ -35,13 +35,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     title: metadataTitle.default,
     description: metadataDescription,
-    images: [{ url: "/og-default.svg" }]
+    images: [{ url: "/og-default.png" }]
   },
   twitter: {
     card: "summary_large_image",
     title: metadataTitle.default,
     description: metadataDescription,
-    images: ["/og-default.svg"]
+    images: ["/og-default.png"]
   },
   alternates: {
     canonical: "/"

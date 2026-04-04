@@ -272,7 +272,9 @@
       "Bash(python -m pytest -q --tb=no --ignore=tests/bff --ignore=tests/knowledge_regression)",
       "Bash(echo \"EXIT:$?\")",
       "Bash(python -m pytest tests/test_admin_router.py tests/test_portal_router.py -q --tb=short)",
-      "Bash(python -m pytest tests/test_admin_router.py -q --tb=no)"
+      "Bash(python -m pytest tests/test_admin_router.py -q --tb=no)",
+      "Bash(node -e ':*)",
+      "Bash(node -e \"require\\('./node_modules/sharp'\\)\")"
     ]
   }
 }

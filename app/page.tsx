@@ -12,12 +12,12 @@ export const metadata: Metadata = {
     title: "Home | Dama Venus",
     description: "Cinematic presence in music and image—discover the latest chapter by Dama Venus.",
     url: "/",
-    images: [{ url: "/og-default.svg" }]
+    images: [{ url: "/og-default.png" }]
   },
   twitter: {
     title: "Home | Dama Venus",
     description: "Cinematic presence in music and image—discover the latest chapter by Dama Venus.",
-    images: ["/og-default.svg"]
+    images: ["/og-default.png"]
   },
   alternates: {
     canonical: "/"
@@ -89,8 +89,8 @@ export default function HomePage() {
             <Image
               src={leadAsset.src}
               alt={leadAsset.alt ?? leadModule?.alt ?? ""}
-              width={1600}
-              height={900}
+              width={900}
+              height={1200}
               priority
               sizes="(max-width: 768px) 100vw, 66vw"
               className={leadMediaClass}
@@ -163,6 +163,7 @@ export default function HomePage() {
               alt={featuredReleaseAsset.alt ?? featuredReleaseModule?.alt ?? ""}
               width={1400}
               height={900}
+              priority
               sizes="(max-width: 768px) 100vw, 66vw"
               className="h-64 w-full rounded-md object-cover"
             />
@@ -205,7 +206,7 @@ export default function HomePage() {
         </article>
       </section>
 
-      <section aria-labelledby="statement-title" className="mt-20 rounded-md border-l-2 border-white/20 pl-5 md:mt-24 md:pl-8">
+      <section aria-labelledby="statement-title" className="section-gap-lg rounded-md border-l-2 border-white/20 pl-5 md:pl-8">
         <h2 id="statement-title" className="typo-h2 text-white/90">
           {statementModule?.copy.headline}
         </h2>

@@ -8,10 +8,10 @@ export default function SiteFooter() {
         <span>© {new Date().getFullYear()} {siteConfig.footerLine}</span>
         <nav aria-label="Legal" className="flex items-center gap-4">
           <Link href="/privacy" className="underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current">
-            Privacy (Placeholder)
+            Privacy
           </Link>
           <Link href="/imprint" className="underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current">
-            Imprint (Placeholder)
+            Imprint
           </Link>
         </nav>
       </div>

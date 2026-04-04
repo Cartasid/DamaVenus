@@ -32,7 +32,7 @@ export default function SiteHeader() {
   }, [isMenuOpen]);
 
   return (
-    <header className="border-b border-white/10 bg-surface/80">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-surface/80 backdrop-blur-sm">
       <div className="site-container py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="font-display text-lg font-semibold tracking-wide no-underline">
