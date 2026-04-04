@@ -7,6 +7,8 @@ type ContactPayload = {
   companyWebsite?: string;
 };
 
+type ContactErrorCode = "validation_error" | "rate_limit_error" | "provider_error" | "unknown_error";
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
@@ -35,6 +37,10 @@ function isRateLimited(ip: string): boolean {
   recent.push(now);
   rateMap.set(ip, recent);
   return false;
+}
+
+function errorResponse(code: ContactErrorCode, message: string, status: number) {
+  return NextResponse.json({ ok: false, code, message }, { status });
 }
 
 function validatePayload(payload: ContactPayload): string | null {
@@ -133,27 +139,26 @@ export async function POST(request: Request) {
     const ip = getClientIp(request);
 
     if (isRateLimited(ip)) {
-      return NextResponse.json(
-        { ok: false, message: "Zu viele Anfragen in kurzer Zeit. Bitte versuche es in einigen Minuten erneut." },
-        { status: 429 }
-      );
+      return errorResponse("rate_limit_error", "Zu viele Anfragen in kurzer Zeit. Bitte versuche es in einigen Minuten erneut.", 429);
     }
 
     const payload = (await request.json()) as ContactPayload;
     const validationError = validatePayload(payload);
 
     if (validationError) {
-      return NextResponse.json({ ok: false, message: validationError }, { status: 400 });
+      return errorResponse("validation_error", validationError, 400);
     }
 
-    await sendWithProvider(payload);
+    try {
+      await sendWithProvider(payload);
+    } catch (error) {
+      console.error("Contact provider submit failed", error);
+      return errorResponse("provider_error", "Deine Anfrage konnte gerade nicht gesendet werden. Bitte versuche es später erneut.", 502);
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Contact submit failed", error);
-    return NextResponse.json(
-      { ok: false, message: "Deine Anfrage konnte gerade nicht gesendet werden. Bitte versuche es später erneut." },
-      { status: 500 }
-    );
+    return errorResponse("unknown_error", "Deine Anfrage konnte gerade nicht gesendet werden. Bitte versuche es später erneut.", 500);
   }
 }

@@ -384,3 +384,10 @@
 6. **Verbleibende Risiken**
    - `next build` bricht weiterhin mit einem bereits bestehenden Datenfehler (`Invalid CTA config for home module: press`) ab; nicht Teil dieses Abschluss-Passes.
    - Rechtstexte sind aktuell Platzhalter und müssen vor Go-Live juristisch/fachlich final ersetzt werden.
+
+## Update 2026-04-04 – Contact-Flow aktiviert (Ist-Stand)
+- `/contact` nutzt jetzt ausschließlich das clientseitige `<ContactForm />`; der statische Formularblock in `app/contact/page.tsx` wurde entfernt.
+- Alle Formularfelder, Labels und Helper-Texte werden weiterhin aus `content/data/contact.data.ts` gerendert.
+- Vor dem API-Call erfolgt clientseitige Validierung (Trim + Mindestlängen-/Formatprüfung), damit Fehler direkt im Formular sichtbar sind.
+- Der API-Endpoint `POST /api/contact` liefert strukturierte, stabile Fehlerantworten für UI-Handling: `validation_error`, `rate_limit_error`, `provider_error`, `unknown_error`.
+- Realer Ist-Stand: Der Contact-Flow ist funktional aktiviert (Client + API + Fehlercodes) und nicht mehr als „nahezu final“ beschrieben.
