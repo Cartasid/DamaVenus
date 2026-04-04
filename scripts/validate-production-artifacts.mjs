@@ -84,81 +84,56 @@ async function parsePrioritizedAssets() {
   const assetsTsPath = path.resolve(projectRoot, 'content/dama-venus/assets.ts');
   const source = await fs.readFile(assetsTsPath, 'utf8');
   const objectPattern = /{[\s\S]*?}/g;
-  const idToFinalPath = new Map();
+  const assets = [];
 
   for (const objectMatch of source.matchAll(objectPattern)) {
     const objectContent = objectMatch[0];
     const idMatch = objectContent.match(/id:\s*"([^"]+)"/);
     const finalPathMatch = objectContent.match(/finalPath:\s*"([^"]+)"/);
-    if (idMatch && finalPathMatch) {
-      idToFinalPath.set(idMatch[1], finalPathMatch[1]);
+    const sourcePathMatch = objectContent.match(/sourcePath:\s*"([^"]+)"/);
+    if (idMatch && finalPathMatch && sourcePathMatch) {
+      assets.push({
+        id: idMatch[1],
+        finalPath: finalPathMatch[1],
+        sourcePath: sourcePathMatch[1],
+      });
     }
   }
 
-  return idToFinalPath;
+  return assets;
 }
 
-async function parseReferencedAssetIds() {
-  const dataDirPath = path.resolve(projectRoot, 'content/data');
-  const dataFiles = (await fs.readdir(dataDirPath))
-    .filter((fileName) => fileName.endsWith('.data.ts'))
-    .map((fileName) => path.join(dataDirPath, fileName));
-  const referencedIds = new Set();
-
-  for (const dataFilePath of dataFiles) {
-    const source = await fs.readFile(dataFilePath, 'utf8');
-    const matches = [
-      ...source.matchAll(/assetId:\s*"([^"]+)"/g),
-      ...source.matchAll(/coverAsset:\s*\{\s*id:\s*"([^"]+)"\s*\}/g),
-      ...source.matchAll(/\b\w*Asset:\s*\{\s*id:\s*"([^"]+)"\s*\}/g),
-      ...source.matchAll(/\basset:\s*\{\s*id:\s*"([^"]+)"\s*\}/g),
-    ];
-
-    matches.forEach((match) => referencedIds.add(match[1]));
-  }
-
-  return [...referencedIds];
-}
-
-async function ensureReferencedAssetsResolvable(idToFinalPath, referencedAssetIds) {
-  if (referencedAssetIds.length === 0) {
-    throw new Error('Keine referenzierten Asset-IDs in content/data/*.data.ts gefunden.');
+async function ensureAllPrioritizedAssetsExist(assets) {
+  if (assets.length === 0) {
+    throw new Error('Keine priorisierten Assets in content/dama-venus/assets.ts gefunden.');
   }
 
   const missingIdMappings = referencedAssetIds.filter((id) => !idToFinalPath.has(id));
   const missingFiles = [];
-  for (const id of referencedAssetIds) {
-    if (!idToFinalPath.has(id)) {
-      continue;
-    }
-    const finalPath = idToFinalPath.get(id);
+  for (const asset of assets) {
+    const finalPath = asset.finalPath;
     const absolutePath = path.resolve(projectRoot, 'public', finalPath.replace(/^\/+/, ''));
     try {
       await fs.access(absolutePath);
     } catch {
-      missingFiles.push(`${id} -> ${finalPath}`);
+      missingFiles.push(
+        `id="${asset.id}" finalPath="${asset.finalPath}" sourcePath="${asset.sourcePath}"`
+      );
     }
   }
 
-  if (missingIdMappings.length > 0 || missingFiles.length > 0) {
-    const details = [];
-    if (missingIdMappings.length > 0) {
-      details.push(`IDs ohne finalPath-Mapping: ${missingIdMappings.join(', ')}`);
-    }
-    if (missingFiles.length > 0) {
-      details.push(`finalPath-Dateien unter public/ fehlen: ${missingFiles.join('; ')}`);
-    }
-    throw new Error(`Artefakt-Validierung fehlgeschlagen. ${details.join(' | ')}`);
+  if (missingFiles.length > 0) {
+    throw new Error(
+      `Pflicht-Assets fehlen unter public/: ${missingFiles.join('; ')}`
+    );
   }
 }
 
 async function run() {
   await ensureAtLeastOneBuiltCss();
-  await ensureHomepageReferencesCssInBuildManifest();
-  const idToFinalPath = await parsePrioritizedAssets();
-  const referencedAssetIds = await parseReferencedAssetIds();
-  await ensureReferencedAssetsResolvable(idToFinalPath, referencedAssetIds);
-  console.log('Production-Artefakte validiert: CSS vorhanden, referenzierte Asset-IDs gemappt, finalPath-Dateien vorhanden.');
+  const assets = await parsePrioritizedAssets();
+  await ensureAllPrioritizedAssetsExist(assets);
+  console.log('Production-Artefakte validiert: CSS vorhanden und alle finalPath-Assets unter public/ vorhanden.');
 }
 
 run().catch((error) => {

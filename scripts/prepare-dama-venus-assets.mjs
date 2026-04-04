@@ -242,17 +242,19 @@ async function parsePrioritizedAssetTargets() {
 
   for (const objectMatch of source.matchAll(objectPattern)) {
     const objectContent = objectMatch[0];
+    const idMatch = objectContent.match(/id:\s*"([^"]+)"/);
     const finalPathMatch = objectContent.match(/finalPath:\s*"([^"]+)"/);
     const sourcePathMatch = objectContent.match(/sourcePath:\s*"([^"]+)"/);
-    if (finalPathMatch && sourcePathMatch) {
+    if (idMatch && finalPathMatch && sourcePathMatch) {
       pairs.push({
+        id: idMatch[1],
         finalPath: finalPathMatch[1],
         sourcePath: sourcePathMatch[1],
       });
     }
   }
 
-  return pairs.sort((a, b) => a.finalPath.localeCompare(b.finalPath));
+  return pairs.sort((a, b) => a.id.localeCompare(b.id));
 }
 
 function resolveRepoPath(relativeOrAbsolutePath) {
@@ -270,7 +272,7 @@ async function ensurePrioritizedAssetOutputs(detectedHeicTool) {
       hasInvalidPairs = true;
       counters.errors += 1;
       console.error(
-        `[error] Ungültiger finalPath außerhalb /assets/dama-venus/: finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`,
+        `[error] Ungültiger finalPath außerhalb /assets/dama-venus/: id="${pair.id}" finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`,
       );
     }
 
@@ -281,7 +283,7 @@ async function ensurePrioritizedAssetOutputs(detectedHeicTool) {
       hasInvalidPairs = true;
       counters.errors += 1;
       console.error(
-        `[error] Ungültiger sourcePath (nur pics/ oder assets-src/dama-venus/, nie public/): finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`,
+        `[error] Ungültiger sourcePath (nur pics/ oder assets-src/dama-venus/, nie public/): id="${pair.id}" finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`,
       );
     }
   }
@@ -300,21 +302,9 @@ async function ensurePrioritizedAssetOutputs(detectedHeicTool) {
     try {
       await fs.access(sourcePath);
     } catch (_error) {
-      const isPdfTarget = targetExt === '.pdf';
-      if (isPdfTarget) {
-        const warningMessage = `[warn] Optionales Dokument fehlt: finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`;
-        steps.push({
-          finalPath: pair.finalPath,
-          sourcePath: pair.sourcePath,
-          status: 'missing-source-optional',
-          warning: warningMessage,
-        });
-        counters.skipped += 1;
-        console.warn(warningMessage);
-        continue;
-      }
-      const errorMessage = `[error] Pflichtasset-Quelle fehlt: finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`;
+      const errorMessage = `[error] Pflichtasset-Quelle fehlt: id="${pair.id}" finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`;
       steps.push({
+        id: pair.id,
         finalPath: pair.finalPath,
         sourcePath: pair.sourcePath,
         status: 'missing-source',
@@ -333,6 +323,7 @@ async function ensurePrioritizedAssetOutputs(detectedHeicTool) {
         const converted = await processHeicVariant(sourcePath, heicFallbackTarget, detectedHeicTool);
         if (!converted) {
           steps.push({
+            id: pair.id,
             finalPath: pair.finalPath,
             sourcePath: pair.sourcePath,
             status: 'heic-convert-failed',
@@ -343,6 +334,7 @@ async function ensurePrioritizedAssetOutputs(detectedHeicTool) {
         sourceForOutput = heicFallbackTarget;
       } else if (!sharpCanProcessHeic) {
         steps.push({
+          id: pair.id,
           finalPath: pair.finalPath,
           sourcePath: pair.sourcePath,
           status: 'heic-skipped-no-tooling',
@@ -355,6 +347,7 @@ async function ensurePrioritizedAssetOutputs(detectedHeicTool) {
     if (sourceExt === targetExt) {
       await copyVariant(sourceForOutput, targetPath);
       steps.push({
+        id: pair.id,
         finalPath: pair.finalPath,
         sourcePath: pair.sourcePath,
         status: 'copied',
@@ -368,11 +361,30 @@ async function ensurePrioritizedAssetOutputs(detectedHeicTool) {
       quality: CONFIG.qualities.base,
     });
     steps.push({
+      id: pair.id,
       finalPath: pair.finalPath,
       sourcePath: pair.sourcePath,
       status: 'converted',
       format: targetFormat,
     });
+  }
+
+  for (const pair of pairs) {
+    const targetPath = resolveRepoPath(path.join('public', pair.finalPath.replace(/^\/+/, '')));
+    try {
+      await fs.access(targetPath);
+    } catch (_error) {
+      const errorMessage = `[error] Pflichtasset-Ausgabe fehlt: id="${pair.id}" finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`;
+      steps.push({
+        id: pair.id,
+        finalPath: pair.finalPath,
+        sourcePath: pair.sourcePath,
+        status: 'missing-output',
+        error: errorMessage,
+      });
+      counters.errors += 1;
+      console.error(errorMessage);
+    }
   }
 
   mapping.prioritizedAssets = {
