@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npm run prepare:dama-venus-assets && next dev",
-    "build": "npm run prepare:dama-venus-assets && next build",
+    "build": "npm run prepare:dama-venus-assets && next build && node scripts/copy-standalone-static.mjs",
     "start": "next start",
     "lint": "tsc --noEmit --pretty false",
     "prepare:dama-venus-assets": "node scripts/prepare-dama-venus-assets.mjs",
