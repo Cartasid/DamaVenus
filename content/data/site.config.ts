@@ -3,7 +3,7 @@ import { prioritizedAssets } from "@/content/dama-venus/assets";
 
 export const siteConfig = {
   name: "Dama Venus",
-  language: "de",
+  language: "en",
   url: "https://damavenus.com",
   metadata: {
     title: "Dama Venus",

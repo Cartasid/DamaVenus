@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: siteConfig.name,
     type: "website",
-    locale: "de_DE",
+    locale: "en_US",
     title: metadataTitle.default,
     description: metadataDescription,
     images: [{ url: "/og-default.svg" }]
@@ -46,10 +46,10 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     <html lang={siteConfig.language}>
       <body className="min-h-screen flex flex-col">
         <a href="#main-content" className="skip-link">
-          Zum Inhalt springen
+          Skip to content
         </a>
         <SiteHeader />
-        <main id="main-content" className="mx-auto w-full max-w-[1440px] flex-1 px-5 py-10 md:px-10 xl:px-16">
+        <main id="main-content" className="site-container flex-1 py-10">
           {children}
         </main>
         <SiteFooter />

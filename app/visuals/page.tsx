@@ -224,7 +224,7 @@ export default function VisualsPage() {
 
       {visualsData.intro.cta ? (
         <footer className="rounded-lg border border-white/10 p-5">
-          <Link href={visualsData.intro.cta.href} className="first-impression-cta">
+          <Link href={visualsData.intro.cta.href} className="cta-primary">
             {visualsData.intro.cta.label}
           </Link>
         </footer>
