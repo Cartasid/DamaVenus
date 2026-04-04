@@ -35,6 +35,22 @@ Dieses Projekt verwendet **npm** als verbindlichen Paketmanager.
 - Produktions-Build lokal: `npm run build`
 - Produktionsserver lokal: `npm run start`
 
+## Verbindlicher Prüfpfad (Quality Gate)
+`next lint` ist in dieser Repo-Konstellation ohne zusätzliche ESLint-Installation nicht zuverlässig non-interaktiv ausführbar; daher ist der verbindliche Lint-Check auf einen direkt ausführbaren TypeScript-Lintlauf umgestellt.
+
+Vor jedem Merge/Deploy müssen diese Checks lokal im Repository erfolgreich laufen:
+
+```bash
+npm run check
+npm run build:check
+```
+
+Enthaltene Scripts:
+- `npm run lint` -> robuster statischer TypeScript-Lintlauf (`tsc --noEmit --pretty false`)
+- `npm run typecheck` -> TypeScript-Check ohne Emit
+- `npm run check` -> kombiniert Lint + Typecheck
+- `npm run build:check` -> vollständiger Produktions-Build als zusätzlicher Validierungscheck
+
 ## Asset-Pipeline
 Asset-Preparation erfolgt über:
 
