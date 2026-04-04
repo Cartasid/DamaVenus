@@ -1,4 +1,4 @@
-import type { MusicAction, MusicRelease, ReleaseItem, SectionContent } from "@/lib/types";
+import { getCtaActionKind, type MusicAction, type MusicRelease, type ReleaseItem, type SectionContent, validateCta } from "@/lib/types";
 
 const musicCtaLabels = {
   listen: "Listen Now",
@@ -124,3 +124,25 @@ export const featuredRelease: ReleaseItem = {
   },
   coverAsset: selectedFeatured.coverAsset
 };
+
+function validateMusicActions(releases: MusicRelease[]): void {
+  const allActions = releases.flatMap((release) => [
+    ...release.listeningLinks,
+    ...(release.watchLinks ?? []),
+    release.primaryCta,
+    ...(release.secondaryCta ? [release.secondaryCta] : [])
+  ]);
+
+  for (const action of allActions) {
+    validateCta({ label: action.label, href: action.href }, `music action ${action.kind}`);
+    const targetKind = getCtaActionKind(action.href);
+    if ((action.kind === "listen" || action.kind === "watch" || action.kind === "open") && targetKind !== "external") {
+      throw new Error(`Music action "${action.kind}" must target an external destination.`);
+    }
+    if ((action.kind === "view-release" || action.kind === "explore") && targetKind === "mailto") {
+      throw new Error(`Music action "${action.kind}" must not target mailto.`);
+    }
+  }
+}
+
+validateMusicActions([...musicReleases, ...musicVisualReleases]);
