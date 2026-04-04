@@ -1,4 +1,22 @@
+import type { Metadata } from "next";
 import { contactContent } from "@/content/data/contact.data";
+
+export const metadata: Metadata = {
+  title: { absolute: "Contact | Dama Venus" },
+  description: "Send booking, press, or collaboration inquiries to Dama Venus via the official contact channel.",
+  openGraph: {
+    title: "Contact | Dama Venus",
+    description: "Send booking, press, or collaboration inquiries to Dama Venus via the official contact channel.",
+    url: "/contact"
+  },
+  twitter: {
+    title: "Contact | Dama Venus",
+    description: "Send booking, press, or collaboration inquiries to Dama Venus via the official contact channel."
+  },
+  alternates: {
+    canonical: "/contact"
+  }
+};
 
 export default function ContactPage() {
   return (

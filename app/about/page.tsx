@@ -1,7 +1,25 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { aboutPageModel } from "@/content/data/about.data";
 import { assetMap } from "@/content/data/site.config";
+
+export const metadata: Metadata = {
+  title: { absolute: "About | Dama Venus" },
+  description: "Read the artist profile of Dama Venus—an atmosphere-driven practice between music, image, and intention.",
+  openGraph: {
+    title: "About | Dama Venus",
+    description: "Read the artist profile of Dama Venus—an atmosphere-driven practice between music, image, and intention.",
+    url: "/about"
+  },
+  twitter: {
+    title: "About | Dama Venus",
+    description: "Read the artist profile of Dama Venus—an atmosphere-driven practice between music, image, and intention."
+  },
+  alternates: {
+    canonical: "/about"
+  }
+};
 
 export default function AboutPage() {
   const { aboutBio, aboutIntro, aboutKeyStatements, aboutVisualModules } = aboutPageModel;

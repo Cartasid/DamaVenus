@@ -1,5 +1,23 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { pressEpkBlocks } from "@/content/data/press.data";
+
+export const metadata: Metadata = {
+  title: { absolute: "Press & EPK | Dama Venus" },
+  description: "Access press-ready information, selected assets, and EPK links for Dama Venus.",
+  openGraph: {
+    title: "Press & EPK | Dama Venus",
+    description: "Access press-ready information, selected assets, and EPK links for Dama Venus.",
+    url: "/press"
+  },
+  twitter: {
+    title: "Press & EPK | Dama Venus",
+    description: "Access press-ready information, selected assets, and EPK links for Dama Venus."
+  },
+  alternates: {
+    canonical: "/press"
+  }
+};
 
 const primaryBlockIds = ["veryShortBio", "featuredPressImages", "contactBlock"];
 const secondaryBlockIds = ["shortBio", "pressReadyDescription", "musicListeningLinks", "videoVisualLinks", "socialStreamingLinks", "downloads"];

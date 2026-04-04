@@ -1,8 +1,26 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { homepageCoreModules, homepageIntro } from "@/content/data/homepage.data";
 import { navigationItems } from "@/content/data/navigation.data";
 import { assetMap, siteConfig } from "@/content/data/site.config";
+
+export const metadata: Metadata = {
+  title: { absolute: "Home | Dama Venus" },
+  description: "Cinematic presence in music and image—discover the latest chapter by Dama Venus.",
+  openGraph: {
+    title: "Home | Dama Venus",
+    description: "Cinematic presence in music and image—discover the latest chapter by Dama Venus.",
+    url: "/"
+  },
+  twitter: {
+    title: "Home | Dama Venus",
+    description: "Cinematic presence in music and image—discover the latest chapter by Dama Venus."
+  },
+  alternates: {
+    canonical: "/"
+  }
+};
 
 export default function HomePage() {
   const leadModule =
