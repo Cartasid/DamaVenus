@@ -273,12 +273,15 @@ async function ensurePrioritizedAssetOutputs(detectedHeicTool) {
     try {
       await fs.access(sourcePath);
     } catch (_error) {
+      const errorMessage = `[error] Pflichtasset-Quelle fehlt: finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`;
       steps.push({
         finalPath: pair.finalPath,
         sourcePath: pair.sourcePath,
         status: 'missing-source',
+        error: errorMessage,
       });
-      counters.skipped += 1;
+      counters.errors += 1;
+      console.error(errorMessage);
       continue;
     }
 
