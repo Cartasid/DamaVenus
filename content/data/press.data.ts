@@ -9,7 +9,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["press-epk"],
     order: 1,
     priority: 1,
-    ctaLabel: "Zum Press & EPK Überblick",
+    ctaLabel: "Open Press & EPK Overview",
     target: "/press",
     isPrimaryVisible: true
   },
@@ -21,7 +21,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["press-epk"],
     order: 2,
     priority: 2,
-    ctaLabel: "Zum Künstlerprofil",
+    ctaLabel: "Go to Artist Profile",
     target: "/about"
   },
   {
@@ -32,7 +32,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["press-epk"],
     order: 3,
     priority: 3,
-    ctaLabel: "Sehr kurze Bio verwenden",
+    ctaLabel: "Use Very Short Bio",
     target: "/press#very-short-bio"
   },
   {
@@ -46,7 +46,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["press-epk"],
     order: 4,
     priority: 4,
-    ctaLabel: "Kurze Bio übernehmen",
+    ctaLabel: "Use Short Bio",
     target: "/press#short-bio"
   },
   {
@@ -115,7 +115,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: [],
     order: 10,
     priority: 10,
-    ctaLabel: "Pressekontakt aufnehmen",
+    ctaLabel: "Contact Press",
     target: "/contact",
     isPrimaryVisible: true
   },
@@ -151,7 +151,7 @@ export const pressMaterials: PressMaterialItem[] = [
     type: "download",
     accessMode: "request",
     url: "/contact",
-    notes: "Download folgt im nächsten Schritt; Bereitstellung aktuell auf Anfrage.",
+    notes: "Download follows in the next step; currently available on request.",
     asset: { id: "press-epk" }
   }
 ];

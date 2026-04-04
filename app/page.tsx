@@ -104,7 +104,7 @@ export default function HomePage() {
         </article>
 
         <aside className="space-y-4">
-          <nav aria-label="Home Orientierung" className="first-impression-tile rounded-lg p-3">
+          <nav aria-label="Home navigation" className="first-impression-tile rounded-lg p-3">
             <ul className="flex flex-wrap gap-x-4 gap-y-2 typo-body-s">
               {navigationItems.map((item) => (
                 <li key={item.href}>

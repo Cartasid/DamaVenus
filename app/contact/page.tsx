@@ -27,7 +27,7 @@ export default function ContactPage() {
       </header>
 
       <form className="space-y-4" aria-label="Contact form">
-        <p className="typo-label">* Pflichtfeld</p>
+        <p className="typo-label">* Required field</p>
 
         {contactContent.form.fields.map((field) => {
           const helperId = `${field.id}-help`;
