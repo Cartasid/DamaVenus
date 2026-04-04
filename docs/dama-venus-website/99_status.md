@@ -1,25 +1,21 @@
 # 99 Status
 
-## Aktueller Stand (code-gegenprüfbar)
+## Aktueller Stand
 - App-Routen sind vorhanden für `/`, `/music`, `/visuals`, `/about`, `/press`, `/contact`, `/privacy`, `/imprint` (`app/.../page.tsx`).
 - Kontakt-Flow ist technisch vorhanden: Formular unter `app/contact/page.tsx`/`app/contact/ContactForm.tsx`, API-Route unter `app/api/contact/route.ts`.
 - SEO-Basisrouten sind vorhanden: `app/robots.ts` und `app/sitemap.ts`.
 - Navigation enthält Legal-Links auf `/privacy` und `/imprint` in `content/data/navigation.data.ts`.
-- `privacy` und `imprint` sind weiterhin Placeholder-Seiten (`app/privacy/page.tsx`, `app/imprint/page.tsx`), daher aktuell kein finaler Launch-Status.
+- `privacy` und `imprint` sind als Placeholder-Seiten vorhanden (`app/privacy/page.tsx`, `app/imprint/page.tsx`).
+
+## Verifiziert erledigte Punkte
+- Build-relevante CSS-Artefakte sind vorhanden.
+- Kritische Homepage-Assets sind vorhanden.
+- Historien-/Root-Cause-Passagen wurden aus dem aktiven Statusteil entfernt.
 
 ## Echte offene Punkte
-- Finale Rechtstexte für `/privacy` und `/imprint` fehlen noch.
-- Finale Press-/EPK- und Kontaktdaten sind ggf. noch zu vervollständigen.
-- Finaler Asset-/Visual-Polish für produktive Abnahme ist ggf. noch offen.
-
-## Dokumentierte Root-Cause (Asset-Pipeline)
-- Build-Blocker-Ursache waren fehlende Dateien in priorisierten `sourcePath`-Quellen der Asset-Pipeline.
-
-## Status nach Fix
-- CSS-Artefakte sind vorhanden.
-- Kritische Homepage-Assets sind vorhanden.
+- Finale Rechtstexte für `/privacy` und `/imprint` einpflegen.
+- Finale Press-/EPK- und Kontaktdaten vollständig verifizieren und ergänzen.
+- Offenen Asset-/Visual-Polish für die produktive Endabnahme schließen.
 
 ## Nächster sinnvoller Schritt
-- Finalen Review-/Deploy-Vorbereitungspass durchführen: Rechtstexte einpflegen, Press-/Kontaktdaten verifizieren, offenen Asset-Polish schließen und anschließend Endabnahme für Launch entscheiden.
-
-*Hinweis: Die detaillierte Update-Chronik ("Update YYYY-MM-DD – Schritt …") wurde aus dem Hauptfluss entfernt und bei Bedarf separat geführt.*
+- Einen finalen Review-/Deploy-Vorbereitungspass durchführen: Rechtstexte einpflegen, Press-/Kontaktdaten verifizieren, Asset-Polish abschließen und danach Launch-Endabnahme entscheiden.
