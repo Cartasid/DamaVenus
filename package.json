@@ -6,8 +6,11 @@
     "dev": "next dev",
     "build": "npm run prepare:dama-venus-assets && next build",
     "start": "next start",
-    "lint": "next lint",
-    "prepare:dama-venus-assets": "node scripts/prepare-dama-venus-assets.mjs"
+    "lint": "tsc --noEmit --pretty false",
+    "prepare:dama-venus-assets": "node scripts/prepare-dama-venus-assets.mjs",
+    "typecheck": "tsc --noEmit",
+    "build:check": "npm run build",
+    "check": "npm run lint && npm run typecheck"
   },
   "dependencies": {
     "next": "15.3.1",

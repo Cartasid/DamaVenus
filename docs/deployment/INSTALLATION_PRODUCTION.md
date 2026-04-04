@@ -144,7 +144,22 @@ node scripts/prepare-dama-venus-assets.mjs
 
 ---
 
-## 10) App bauen und starten (Docker)
+## 10) Verbindlicher Prüfpfad vor Deploy
+
+Vor jedem Produktions-Deploy im Projektverzeichnis ausführen:
+
+```bash
+cd /opt/dama-venus
+npm ci
+npm run check
+npm run build:check
+```
+
+Damit werden Lint + Typecheck und zusätzlich ein vollständiger Produktions-Build validiert.
+
+---
+
+## 11) App bauen und starten (Docker)
 
 ```bash
 cd /opt/dama-venus
@@ -160,7 +175,7 @@ docker compose -f docker-compose.prod.yml logs --tail=100 app
 
 ---
 
-## 11) Nginx-Konfiguration aktivieren (Initial ohne TLS)
+## 12) Nginx-Konfiguration aktivieren (Initial ohne TLS)
 
 Datei ins System übernehmen:
 
@@ -191,7 +206,7 @@ sudo systemctl enable nginx
 
 ---
 
-## 12) SSL-Zertifikat anfordern (Let's Encrypt)
+## 13) SSL-Zertifikat anfordern (Let's Encrypt)
 
 Certbot ergänzt automatisch TLS-Serverblöcke und Redirect-Regeln in der aktiven Nginx-Site:
 
@@ -215,7 +230,7 @@ sudo certbot renew --dry-run
 
 ---
 
-## 13) HTTPS und Redirect prüfen
+## 14) HTTPS und Redirect prüfen
 
 ```bash
 curl -I http://example.com
@@ -229,7 +244,7 @@ Erwartung:
 
 ---
 
-## 14) Update-/Redeploy-Prozess
+## 15) Update-/Redeploy-Prozess
 
 ```bash
 cd /opt/dama-venus
@@ -245,7 +260,7 @@ cd /opt/dama-venus
 
 ---
 
-## 15) Betrieb: Logs, Restart, Status
+## 16) Betrieb: Logs, Restart, Status
 
 Container-Logs live:
 
@@ -278,7 +293,7 @@ sudo systemctl status docker
 
 ---
 
-## 16) Troubleshooting (konkret)
+## 17) Troubleshooting (konkret)
 
 Port-Bindings prüfen:
 
