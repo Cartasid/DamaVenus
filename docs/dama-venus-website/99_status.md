@@ -359,3 +359,28 @@
    - `WebSite` wird nachgezogen, sobald globale Seitendaten (kanonische URL-Strategie, finale Social-/Kontakt-Referenzen, rechtliche Basisdaten) final abgestimmt sind.
 3. **Nächster Review-Schritt**
    - Als nächster Schritt folgt ein finaler SEO-/Metadata-Cleanup-Pass, inklusive erneuter Prüfung, ob die Kriterien für `Person`/`MusicGroup`/`WebSite` vollständig erfüllt sind.
+
+## Update 2026-04-04 – Abschluss-Pass (SEO/Legal/Ignore/A11y)
+1. **Robots + Sitemap ergänzt (Domain aus `siteConfig.url`)**
+   - `app/robots.ts` und `app/sitemap.ts` wurden ergänzt.
+   - Beide nutzen die produktive Basisdomain aus `siteConfig.url` (`https://damavenus.com`) für Host-/URL-Ausgabe.
+2. **Rechtliche Pflichtseiten in Navigation + Footer ergänzt**
+   - Navigation enthält jetzt zusätzlich `Privacy` und `Imprint`.
+   - Footer enthält einen dedizierten Legal-Navigationsblock mit Links auf `/privacy` und `/imprint`.
+   - Platzhalterseiten wurden angelegt: `app/privacy/page.tsx` und `app/imprint/page.tsx`.
+3. **Ignore-Dateien ergänzt**
+   - `.gitignore` und `.dockerignore` wurden neu angelegt.
+   - Abgedeckt sind Build-Artefakte (`.next`, `out`), Dependencies (`node_modules`) sowie sensible Env-Dateien (`.env*`).
+4. **Keyboard-only Flow (Form-/Link-Semantik + Fokus) geprüft**
+   - Codebasierter Quercheck über Layout, Header, Footer und Seitenrouten durchgeführt.
+   - Fokuszustände sind über `:focus-visible`-Regeln und komponentenspezifische Klassen für Links/Buttons/Inputs/CTAs vorhanden.
+   - Kontaktformular bleibt semantisch korrekt mit Label-zu-Input-Verknüpfung und Submit-Button.
+5. **A11y-Basics dokumentiert (Status)**
+   - Landmarks: `header`, `main`, `footer`, `nav`, sowie sectionbasierte `aria-labelledby`/`aria-label`-Muster vorhanden.
+   - Labels: Formularfelder auf `/contact` mit expliziten `<label htmlFor>` umgesetzt.
+   - Alt-Strategie: Bildkomponenten setzen `alt`, dekorative Assets werden auf `""` geführt.
+   - Focus visible: globale und komponentenspezifische Fokusstile vorhanden.
+   - Touch targets: Navigation/Interaktionsziele mit `min-h-11` bzw. CTA-Komponenten umgesetzt.
+6. **Verbleibende Risiken**
+   - `next build` bricht weiterhin mit einem bereits bestehenden Datenfehler (`Invalid CTA config for home module: press`) ab; nicht Teil dieses Abschluss-Passes.
+   - Rechtstexte sind aktuell Platzhalter und müssen vor Go-Live juristisch/fachlich final ersetzt werden.
