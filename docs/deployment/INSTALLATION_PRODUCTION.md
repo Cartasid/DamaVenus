@@ -133,9 +133,15 @@ Provider-spezifisch ergänzen:
 
 ## 9) Asset-Preparation (bei neuen Bildern aus `pics/`)
 
-Die Asset-Pipeline läuft automatisch im Docker-Build, weil `npm run build` intern `npm run prepare:dama-venus-assets` ausführt.
+Die Asset-Pipeline ist ein separater Schritt und **nicht** Teil von `./scripts/deploy-prod.sh` oder des Docker-Builds.
+Die Pipeline verwendet `sharp` als primäre Engine für Bildverarbeitung (Konvertierung/Optimierung und Derivate).
 
 Kein separater Host-Node-Schritt erforderlich: neue/angepasste Bildquellen aus `pics/` werden beim Deploy über `./scripts/deploy-prod.sh` verarbeitet.
+
+HEIC-Hinweis:
+- Wenn `sharp` ein HEIC direkt lesen kann, reicht `sharp` allein.
+- Nur wenn `sharp` für eine HEIC-Datei fehlschlägt, greift das Script auf externe Fallback-Tools zurück (`magick`, `convert`, `heif-convert`, `sips`).
+- Ist kein Fallback-Tool verfügbar, werden diese HEIC-Dateien non-blocking übersprungen und im Mapping-Status ausgewiesen.
 
 ---
 
