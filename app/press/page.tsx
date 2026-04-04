@@ -95,12 +95,12 @@ export default function PressPage() {
       ) : null}
 
       <section className="space-y-4">
-        <h2 className="typo-h2">Primary Press Blocks</h2>
+        <h2 className="typo-h2">Press Essentials</h2>
         {primaryLeadBlocks.map((block) => renderBlock(block))}
       </section>
 
       <section className="space-y-4">
-        <h2 className="typo-h2">Secondary Press Blocks</h2>
+        <h2 className="typo-h2">Additional Press Resources</h2>
         {secondaryInfoBlocks.filter((block) => block.id !== "contactBlock").map((block) => renderBlock(block))}
         {secondaryLinkGroups.map((group) => {
           const groupBlocks = group.blockIds
