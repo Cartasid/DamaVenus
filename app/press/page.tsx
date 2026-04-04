@@ -61,7 +61,7 @@ export default function PressPage() {
   const primaryLeadBlocks = primaryBlocks.filter((block) => block.id !== "contactBlock");
 
   return (
-    <section className="space-y-8">
+    <section className="section-stack-md">
       {introBlock ? (
         <section className="space-y-3 rounded-lg border border-white/10 p-6">
           <p className="text-xs uppercase tracking-[0.2em] text-muted">Press & EPK</p>

@@ -15,7 +15,7 @@ export default function MusicPage() {
   const featuredAsset = assetMap[featured.coverAsset.id] ?? (featured.alternateVisualAsset ? assetMap[featured.alternateVisualAsset.id] : undefined);
 
   return (
-    <section className="space-y-10">
+    <section className="section-stack-md">
       <header className="grid gap-5 rounded-lg border border-white/10 bg-surface/60 p-5 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
         <div className="space-y-4">
           <p className="text-xs uppercase tracking-[0.2em] text-muted">{musicData.intro.label}</p>
