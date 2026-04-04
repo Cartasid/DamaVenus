@@ -12,7 +12,7 @@
 - Build-Blocker außerhalb dieses Scopes: `Invalid CTA config for home module: press`.
 - Rechtliche Inhalte auf `/privacy` und `/imprint` sind noch Platzhalter.
 
-## Layout / Design-System
+## Design-System / Tokens
 
-- `site-container` in `app/globals.css` ist die einzige Source of Truth für globale Content-Breite und horizontale Innenabstände (Header/Main/Footer).
-- Komponenten definieren dafür keine eigene `max-width`; falls nötig werden nur vertikale Spacing-Klassen pro Abschnitt ergänzt.
+- Ungültige Klasse `text-foreground` wurde entfernt; für About-Statements wird jetzt das vorhandene Token `text-primary` verwendet.
+- Repo-weiter Check auf `text-foreground`: keine verbleibenden Verwendungen.

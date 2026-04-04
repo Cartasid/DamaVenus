@@ -104,7 +104,7 @@ export default function AboutPage() {
         <ul className="grid gap-2 sm:grid-cols-2">
           {keyStatements.map((statement) => (
             <li key={statement.id} className="rounded-md border border-white/10 p-3 typo-body-m">
-              <h3 className="typo-h4 text-foreground">{statement.title}</h3>
+              <h3 className="typo-h4 text-primary">{statement.title}</h3>
               <p>{statement.shortText}</p>
             </li>
           ))}
