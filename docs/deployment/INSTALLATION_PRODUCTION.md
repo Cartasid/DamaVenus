@@ -140,7 +140,7 @@ Provider-spezifisch ergänzen:
 
 ## 9) Verbindlicher Prüfpfad vor Deploy
 
-Vor jedem Produktions-Deploy im Projektverzeichnis ausführen:
+Optional im Projektverzeichnis ausführbar:
 
 ```bash
 cd /opt/dama-venus
@@ -149,7 +149,14 @@ npm run check
 npm run build:check
 ```
 
-Damit werden Lint + Typecheck und zusätzlich ein vollständiger Produktions-Build validiert.
+Damit werden Lint + Typecheck und zusätzlich ein vollständiger Produktions-Build vorab auf dem Host validiert.
+Der **offizielle Pflicht-Deploypfad** bleibt jedoch containerzentriert (ENV -> Deploy-Script -> Nginx/TLS), da Build und Asset-Preparation bereits im Docker-Build stattfinden.
+
+Klarer Ablauf im Pflichtpfad:
+1. `8) Produktions-ENV erstellen`
+2. `11) ./scripts/deploy-prod.sh`
+3. `12) Nginx-Konfiguration`
+4. `13) TLS mit Certbot`
 
 ---
 
