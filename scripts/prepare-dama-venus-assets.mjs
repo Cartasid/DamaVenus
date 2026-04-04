@@ -262,7 +262,34 @@ function resolveRepoPath(relativeOrAbsolutePath) {
 
 async function ensurePrioritizedAssetOutputs(detectedHeicTool) {
   const pairs = await parsePrioritizedAssetTargets();
+  let hasInvalidPairs = false;
   const steps = [];
+
+  for (const pair of pairs) {
+    if (!pair.finalPath.startsWith('/assets/dama-venus/')) {
+      hasInvalidPairs = true;
+      counters.errors += 1;
+      console.error(
+        `[error] Ungültiger finalPath außerhalb /assets/dama-venus/: finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`,
+      );
+    }
+
+    const sourcePathNormalized = pair.sourcePath.replace(/^\/+/, '');
+    const hasValidSourcePrefix =
+      sourcePathNormalized.startsWith('pics/') || sourcePathNormalized.startsWith('assets-src/dama-venus/');
+    if (sourcePathNormalized.startsWith('public/') || !hasValidSourcePrefix) {
+      hasInvalidPairs = true;
+      counters.errors += 1;
+      console.error(
+        `[error] Ungültiger sourcePath (nur pics/ oder assets-src/dama-venus/, nie public/): finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`,
+      );
+    }
+  }
+
+  if (hasInvalidPairs) {
+    process.exitCode = 1;
+    return;
+  }
 
   for (const pair of pairs) {
     const targetPath = resolveRepoPath(path.join('public', pair.finalPath.replace(/^\/+/, '')));

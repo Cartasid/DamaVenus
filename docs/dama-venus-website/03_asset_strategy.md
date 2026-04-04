@@ -145,6 +145,10 @@ Empfohlene Medienstruktur (Web-Pfade):
 - Pro Input werden zuerst normierte Master-Derivate erzeugt (`master-jpeg`, `master-webp`), danach Variantenderivate (`hero`, `portrait`, `square`, `landscape`, `tall`)
 - Metadaten werden aus real erzeugten Derivaten geschrieben (`asset-map.json`/`asset-map.ts`: Breite, Höhe, Format, Byte-Größe)
 
+Pfadkonventionen für Prioritized-Asset-Paare:
+- `finalPath`: öffentlicher Frontend-Delivery-Pfad, **muss** mit `/assets/dama-venus/` beginnen.
+- `sourcePath`: reiner Pipeline-Inputpfad aus **nicht-public** Quellen, erlaubt sind nur `pics/` oder `assets-src/dama-venus/` (nie `public/`).
+
 ### 8.2 Naming-Konvention
 Format:
 `dv_[seite/modul]_[motiv]_[variante]_[ratio]_[version].[ext]`
