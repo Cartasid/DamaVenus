@@ -135,7 +135,7 @@ export default function HomePage() {
         </aside>
       </div>
 
-      <section aria-labelledby="featured-release-title" className="mt-16 rounded-lg border border-white/10 bg-surface/60 p-6 md:mt-20">
+      <section aria-labelledby="featured-release-title" className="section-gap-lg rounded-lg border border-white/10 bg-surface/60 p-6">
         <div className="grid gap-5 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:items-center">
           {featuredReleaseAsset ? (
             <Image
@@ -161,7 +161,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section aria-labelledby="visual-story-title" className="mt-24 grid gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
+      <section aria-labelledby="visual-story-title" className="section-gap-lg grid gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
         {visualsAsset ? (
           <Image
             src={visualsAsset.src}
@@ -191,7 +191,7 @@ export default function HomePage() {
         </h2>
       </section>
 
-      <section aria-labelledby="press-epk-title" className="mt-16 rounded-lg border border-white/10 bg-surface/50 p-6 md:mt-20">
+      <section aria-labelledby="press-epk-title" className="section-gap-lg rounded-lg border border-white/10 bg-surface/50 p-6">
         <div className="grid gap-5 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center">
           <article className="space-y-3">
             <h2 id="press-epk-title" className="typo-h2">
@@ -219,7 +219,7 @@ export default function HomePage() {
 
       <section
         aria-labelledby="contact-newsletter-title"
-        className="mt-24 rounded-t-xl border-t border-white/10 bg-gradient-to-b from-transparent via-surface/50 to-surface/70 px-6 pb-14 pt-12"
+        className="section-gap-lg rounded-t-xl border-t border-white/10 bg-gradient-to-b from-transparent via-surface/50 to-surface/70 px-6 pb-14 pt-12"
       >
         <h2 id="contact-newsletter-title" className="typo-h2">
           {contactNewsletterModule?.copy.headline}

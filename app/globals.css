@@ -57,7 +57,11 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
-.first-impression-cta:focus-visible {
+.first-impression-cta:focus-visible,
+.cta-primary:focus-visible,
+.cta-secondary:focus-visible,
+.cta-soft:focus-visible,
+.text-link:focus-visible {
   @apply focus-token rounded-sm;
 }
 
@@ -77,12 +81,40 @@ textarea:focus-visible,
   @apply typo-cta inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-4 py-2 text-black no-underline transition duration-200;
 }
 
-.first-impression-cta:hover {
+.cta-primary:hover {
   @apply bg-accentSoft;
 }
 
-.first-impression-cta:focus-visible {
+.cta-primary:focus-visible {
   @apply ring-2 ring-offset-2 ring-offset-background ring-accent;
+}
+
+.cta-secondary {
+  @apply inline-flex min-h-11 items-center justify-center rounded-md border border-white/20 bg-transparent px-4 py-2 text-sm font-semibold text-offWhite no-underline transition duration-200;
+}
+
+.cta-secondary:hover {
+  @apply border-white/40 bg-white/5 text-primary;
+}
+
+.cta-soft {
+  @apply inline-flex min-h-11 items-center justify-center rounded-md bg-surface/70 px-4 py-2 text-sm font-medium text-offWhite no-underline transition duration-200;
+}
+
+.cta-soft:hover {
+  @apply bg-surface text-primary;
+}
+
+.text-link {
+  @apply text-sm text-muted underline underline-offset-4 transition duration-200 hover:text-primary;
+}
+
+.text-link:focus-visible {
+  @apply ring-2 ring-offset-2 ring-offset-background ring-accent;
+}
+
+.first-impression-cta {
+  @apply inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-black no-underline transition duration-200;
 }
 
 .home-composition a {
@@ -95,6 +127,23 @@ textarea:focus-visible,
 
 .skip-link {
   @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-surface focus:px-3 focus:py-2 focus:text-offWhite;
+}
+
+
+.section-gap-md {
+  @apply mt-12 md:mt-16;
+}
+
+.section-gap-lg {
+  @apply mt-16 md:mt-20;
+}
+
+.section-stack-md {
+  @apply space-y-12 md:space-y-16;
+}
+
+.section-stack-lg {
+  @apply space-y-16 md:space-y-20;
 }
 
 input,

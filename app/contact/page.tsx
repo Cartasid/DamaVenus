@@ -2,7 +2,7 @@ import { contactContent } from "@/content/data/contact.data";
 
 export default function ContactPage() {
   return (
-    <section className="space-y-8">
+    <section className="section-stack-md">
       <header className="space-y-3">
         <h1 className="typo-h1 font-bold">{contactContent.intro.headline}</h1>
         <p className="typo-body-m max-w-2xl">{contactContent.intro.subhead}</p>
@@ -67,7 +67,7 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <button type="submit" className="first-impression-cta">
+        <button type="submit" className="cta-primary">
           {contactContent.form.ctaLabel}
         </button>
         <div id="contact-form-status" role="status" aria-live="polite" data-feature="contact-success-message" hidden>

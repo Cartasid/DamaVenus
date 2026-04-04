@@ -27,7 +27,7 @@ export default function AboutPage() {
   };
 
   return (
-    <section className="space-y-8" aria-labelledby="about-title">
+    <section className="section-stack-md" aria-labelledby="about-title">
       {leadPortraitAsset ? (
         <article className="overflow-hidden rounded-lg border border-white/10">
           <div className="relative aspect-[4/5] sm:aspect-[3/4]">

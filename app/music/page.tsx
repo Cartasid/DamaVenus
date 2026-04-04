@@ -15,7 +15,7 @@ export default function MusicPage() {
   const featuredAsset = assetMap[featured.coverAsset.id] ?? (featured.alternateVisualAsset ? assetMap[featured.alternateVisualAsset.id] : undefined);
 
   return (
-    <section className="space-y-10">
+    <section className="section-stack-md">
       <header className="grid gap-5 rounded-lg border border-white/10 bg-surface/60 p-5 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-center">
         <div className="space-y-4">
           <p className="typo-label">{musicData.intro.label}</p>
@@ -66,7 +66,7 @@ export default function MusicPage() {
               {musicData.ctaLabels.listen}
             </Link>
             {featured.watchLinks?.[0] ? (
-              <Link href={featured.watchLinks[0].href} className="first-impression-cta">
+              <Link href={featured.watchLinks[0].href} className="cta-secondary">
                 {musicData.ctaLabels.watch}
               </Link>
             ) : null}
@@ -154,7 +154,7 @@ export default function MusicPage() {
                   </h3>
                   <div className="flex flex-wrap gap-3">
                     {watchAction && primaryWatchLabel ? (
-                      <Link href={watchAction.href} className="first-impression-cta">
+                      <Link href={watchAction.href} className="cta-secondary">
                         {primaryWatchLabel}
                       </Link>
                     ) : null}

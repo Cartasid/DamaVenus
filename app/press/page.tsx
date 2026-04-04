@@ -25,9 +25,11 @@ function renderBody(body: string | string[]) {
   return <p className="typo-body-m max-w-2xl">{body}</p>;
 }
 
-function renderBlock(block: (typeof pressEpkBlocks)[number], options?: { purpose?: string; ctaVariant?: "primary" | "text" | "request" }) {
+function renderBlock(block: (typeof pressEpkBlocks)[number], options?: { purpose?: string; ctaVariant?: "primary" | "secondary" | "soft" | "text" }) {
   const purpose = options?.purpose;
   const ctaVariant = options?.ctaVariant ?? "text";
+  const ctaClassName =
+    ctaVariant === "primary" ? "cta-primary" : ctaVariant === "secondary" ? "cta-secondary" : ctaVariant === "soft" ? "cta-soft" : "text-link";
 
   return (
     <article key={block.id} className="space-y-2 rounded-lg border border-white/10 p-4">
@@ -35,7 +37,7 @@ function renderBlock(block: (typeof pressEpkBlocks)[number], options?: { purpose
       <h3 className="typo-h2">{block.title}</h3>
       <p className="typo-label">{block.shortDescriptor}</p>
       {renderBody(block.body)}
-      <Link href={block.target} className="first-impression-cta">
+      <Link href={block.target} className={ctaClassName}>
         {block.ctaLabel}
       </Link>
     </article>
@@ -61,7 +63,7 @@ export default function PressPage() {
   const primaryLeadBlocks = primaryBlocks.filter((block) => block.id !== "contactBlock");
 
   return (
-    <section className="space-y-8">
+    <section className="section-stack-md">
       {introBlock ? (
         <section className="space-y-3 rounded-lg border border-white/10 p-6">
           <p className="typo-label">Press & EPK</p>
@@ -90,13 +92,13 @@ export default function PressPage() {
           return groupBlocks.map((block) =>
             renderBlock(block, {
               purpose: group.purpose,
-              ctaVariant: block.id === "downloads" ? "request" : "text"
+              ctaVariant: block.id === "downloads" ? "secondary" : "soft"
             })
           );
         })}
       </section>
 
-      {contactBlock ? <section className="space-y-4">{renderBlock(contactBlock, { purpose: "contact" })}</section> : null}
+      {contactBlock ? <section className="space-y-4">{renderBlock(contactBlock, { purpose: "contact", ctaVariant: "primary" })}</section> : null}
     </section>
   );
 }
