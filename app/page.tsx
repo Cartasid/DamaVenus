@@ -43,10 +43,9 @@ export default function HomePage() {
   ]
     .filter(Boolean)
     .join(" ");
-  const leadHeadlineClass =
-    leadOverlayVariant === "strong" ? "font-display text-3xl font-bold leading-tight text-white md:text-4xl" : "font-display text-3xl font-bold leading-tight text-white/95 md:text-4xl";
-  const leadDescriptorClass = leadOverlayVariant === "strong" ? "text-sm uppercase tracking-wide text-white/90" : "text-sm uppercase tracking-wide text-white/80";
-  const leadStatementClass = leadOverlayVariant === "strong" ? "mt-2 text-sm leading-snug text-white/95" : "mt-2 text-sm leading-snug text-white/90";
+  const leadHeadlineClass = "typo-h1 font-bold text-white";
+  const leadDescriptorClass = leadOverlayVariant === "strong" ? "typo-label text-white/90" : "typo-label text-white/80";
+  const leadStatementClass = leadOverlayVariant === "strong" ? "mt-2 typo-body-m max-w-2xl text-white/95" : "mt-2 typo-body-m max-w-2xl text-white/90";
 
   const supportMediaClass = [
     "h-48 w-full rounded-md object-cover transition duration-300",
@@ -88,7 +87,7 @@ export default function HomePage() {
 
         <aside className="space-y-4">
           <nav aria-label="Home Orientierung" className="first-impression-tile rounded-lg p-3">
-            <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted">
+            <ul className="flex flex-wrap gap-x-4 gap-y-2 typo-body-s">
               {navigationItems.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="interactive-hint">
@@ -102,8 +101,8 @@ export default function HomePage() {
           {supportModule ? (
             supportCta ? (
               <Link href={supportCta.href} className="first-impression-tile block min-h-11 space-y-3 rounded-lg p-3">
-                <h2 className="font-display text-xl font-semibold">{supportModule.copy.headline}</h2>
-                {supportModule.copy.subline ? <p className="text-sm text-muted">{supportModule.copy.subline}</p> : null}
+                <h2 className="typo-h3">{supportModule.copy.headline}</h2>
+                {supportModule.copy.subline ? <p className="typo-body-m max-w-2xl">{supportModule.copy.subline}</p> : null}
                 {supportAsset ? (
                   <Image
                     src={supportAsset.src}
@@ -118,8 +117,8 @@ export default function HomePage() {
               </Link>
             ) : (
               <article className="first-impression-tile space-y-3 rounded-lg p-3">
-                <h2 className="font-display text-xl font-semibold">{supportModule.copy.headline}</h2>
-                {supportModule.copy.subline ? <p className="text-sm text-muted">{supportModule.copy.subline}</p> : null}
+                <h2 className="typo-h3">{supportModule.copy.headline}</h2>
+                {supportModule.copy.subline ? <p className="typo-body-m max-w-2xl">{supportModule.copy.subline}</p> : null}
                 {supportAsset ? (
                   <Image
                     src={supportAsset.src}
@@ -149,10 +148,10 @@ export default function HomePage() {
             />
           ) : null}
           <div className="space-y-3">
-            <h2 id="featured-release-title" className="font-display text-2xl font-semibold">
+            <h2 id="featured-release-title" className="typo-h2">
               {featuredReleaseModule?.copy.headline}
             </h2>
-            {featuredReleaseModule?.copy.subline ? <p className="text-sm text-muted">{featuredReleaseModule.copy.subline}</p> : null}
+            {featuredReleaseModule?.copy.subline ? <p className="typo-body-m max-w-2xl">{featuredReleaseModule.copy.subline}</p> : null}
             {featuredReleaseModule?.copy.cta ? (
               <Link href={featuredReleaseModule.copy.cta.href} className="first-impression-cta">
                 {featuredReleaseModule.copy.cta.label}
@@ -174,10 +173,10 @@ export default function HomePage() {
           />
         ) : null}
         <article className="rounded-lg border border-white/10 bg-surface/70 p-5">
-          <h2 id="visual-story-title" className="font-display text-2xl font-semibold">
+          <h2 id="visual-story-title" className="typo-h2">
             {visualsModule?.copy.headline}
           </h2>
-          {visualsModule?.copy.subline ? <p className="mt-2 text-sm text-muted">{visualsModule.copy.subline}</p> : null}
+          {visualsModule?.copy.subline ? <p className="mt-2 typo-body-m max-w-2xl">{visualsModule.copy.subline}</p> : null}
           {visualsModule?.copy.cta ? (
             <Link href={visualsModule.copy.cta.href} className="mt-4 inline-block first-impression-cta">
               {visualsModule.copy.cta.label}
@@ -186,8 +185,8 @@ export default function HomePage() {
         </article>
       </section>
 
-      <section aria-labelledby="statement-title" className="section-gap-lg rounded-md border-l-2 border-white/20 pl-5 md:pl-8">
-        <h2 id="statement-title" className="font-display text-2xl font-semibold text-white/90">
+      <section aria-labelledby="statement-title" className="mt-20 rounded-md border-l-2 border-white/20 pl-5 md:mt-24 md:pl-8">
+        <h2 id="statement-title" className="typo-h2 text-white/90">
           {statementModule?.copy.headline}
         </h2>
       </section>
@@ -195,10 +194,10 @@ export default function HomePage() {
       <section aria-labelledby="press-epk-title" className="section-gap-lg rounded-lg border border-white/10 bg-surface/50 p-6">
         <div className="grid gap-5 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center">
           <article className="space-y-3">
-            <h2 id="press-epk-title" className="font-display text-2xl font-semibold">
+            <h2 id="press-epk-title" className="typo-h2">
               {pressModule?.copy.headline}
             </h2>
-            {pressModule?.copy.subline ? <p className="text-sm text-muted">{pressModule.copy.subline}</p> : null}
+            {pressModule?.copy.subline ? <p className="typo-body-m max-w-2xl">{pressModule.copy.subline}</p> : null}
             {pressModule?.copy.cta ? (
               <Link href={pressModule.copy.cta.href} className="first-impression-cta">
                 {pressModule.copy.cta.label}
@@ -222,10 +221,10 @@ export default function HomePage() {
         aria-labelledby="contact-newsletter-title"
         className="section-gap-lg rounded-t-xl border-t border-white/10 bg-gradient-to-b from-transparent via-surface/50 to-surface/70 px-6 pb-14 pt-12"
       >
-        <h2 id="contact-newsletter-title" className="font-display text-2xl font-semibold">
+        <h2 id="contact-newsletter-title" className="typo-h2">
           {contactNewsletterModule?.copy.headline}
         </h2>
-        {contactNewsletterModule?.copy.subline ? <p className="mt-2 text-sm text-muted">{contactNewsletterModule.copy.subline}</p> : null}
+        {contactNewsletterModule?.copy.subline ? <p className="mt-2 typo-body-m max-w-2xl">{contactNewsletterModule.copy.subline}</p> : null}
         {contactNewsletterModule?.copy.cta ? (
           <Link href={contactNewsletterModule.copy.cta.href} className="mt-4 inline-block first-impression-cta">
             {contactNewsletterModule.copy.cta.label}
