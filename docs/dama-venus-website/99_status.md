@@ -339,3 +339,13 @@
 
 ## Nächster empfohlener Schritt (aktualisiert)
 - Expliziter nächster Schritt ist ein **Accessibility- und Interaktionsqualitäts-Pass** mit Fokus auf **Fokusführung**, **States**, **Motion/Reduced Motion** und **Formular-UX** inklusive QA-Abnahme gegen die obige Checkliste.
+
+## Update 2026-04-04 – JSON-LD/Schema-Status
+1. **Aktueller Stand (bewusst begrenzt)**
+   - JSON-LD wird aktuell bewusst nicht weiter ausgebaut, da belastbare Inhalte/Fakten in zentralen Bereichen noch offen sind.
+2. **Kriterien für Nachzug von Schema-Typen**
+   - `Person` wird nachgezogen, sobald verifizierte Bio-Kernfakten, Rollen-/Namensschreibweise und belastbare Profil-/Referenzlinks final freigegeben sind.
+   - `MusicGroup` wird nachgezogen, sobald die belastbare Release-/Discography-Basis, konsistente Credits und finale Plattform-/Listening-Referenzen verbindlich vorliegen.
+   - `WebSite` wird nachgezogen, sobald globale Seitendaten (kanonische URL-Strategie, finale Social-/Kontakt-Referenzen, rechtliche Basisdaten) final abgestimmt sind.
+3. **Nächster Review-Schritt**
+   - Als nächster Schritt folgt ein finaler SEO-/Metadata-Cleanup-Pass, inklusive erneuter Prüfung, ob die Kriterien für `Person`/`MusicGroup`/`WebSite` vollständig erfüllt sind.
