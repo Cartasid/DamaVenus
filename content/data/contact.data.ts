@@ -1,14 +1,6 @@
-import type { AssetRole, SectionContent } from "@/lib/types";
+import type { ContactPageContent } from "@/lib/types";
 
-export type ContactContent = SectionContent & {
-  accent?: {
-    assetId: string;
-    alt?: string;
-    role?: AssetRole;
-  };
-};
-
-export const contactContent: ContactContent = {
+export const contactContent: ContactPageContent = {
   headline: "Let’s Create the Next Chapter.",
   subhead: "For bookings, collaborations, and selected requests.",
   cta: {
