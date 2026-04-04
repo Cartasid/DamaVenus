@@ -1,6 +1,6 @@
 # DamaVenus Website
 
-> **Status:** Not launch-ready. Die Seiten `/privacy` und `/imprint` enthalten aktuell nur Placeholder-Inhalte.
+> **Launch-Hinweis:** Not launch-ready, solange `/privacy` und `/imprint` nur Placeholder-Inhalte enthalten.
 
 ## Projektüberblick
 DamaVenus ist eine Next.js-Website mit statisch gepflegter Content-Schicht (`content/data`) und einer serverseitigen Contact-API unter `app/api/contact/route.ts`.
@@ -78,11 +78,8 @@ Siehe `.env.example` für lokale Defaults.
 
 Wichtige Contact-/Provider-Variablen:
 - `CONTACT_PROVIDER` (`noop` | `webhook` | `resend`)
-- `CONTACT_WEBHOOK_URL`
-- `CONTACT_API_KEY`
-- `CONTACT_TO_EMAIL`
-- `CONTACT_FROM_EMAIL`
-- `RESEND_API_KEY`
+- Für `CONTACT_PROVIDER=webhook`: `CONTACT_WEBHOOK_URL` (required), `CONTACT_API_KEY` (optional), `CONTACT_TO_EMAIL` (optional)
+- Für `CONTACT_PROVIDER=resend`: `RESEND_API_KEY` (required), `CONTACT_TO_EMAIL` (required), `CONTACT_FROM_EMAIL` (required)
 
 Zusätzlich relevant:
 - `NEXT_PUBLIC_SITE_URL`
@@ -100,15 +97,16 @@ Produktionsschritte sind dokumentiert in:
 - `docs/deployment/INSTALLATION_PRODUCTION.md`
 
 Kurzablauf:
-1. `.env.production` aus `.env.production.example` erzeugen.
-2. Contact-Provider-Variablen in `.env.production` setzen.
-3. `./scripts/deploy-prod.sh` ausführen (inkl. Asset-Preparation im Docker-Build).
-4. Nginx aktivieren und TLS via Certbot einrichten.
+1. `.env.production` aus `.env.production.example` erzeugen und produktive Werte setzen.
+2. Contact-Provider-Variablen in `.env.production` gemäß Provider setzen.
+3. Vor Deploy den Prüfpfad ausführen (`npm ci`, `npm run check`, `npm run build:check`).
+4. `./scripts/deploy-prod.sh` ausführen (Asset-Preparation läuft im Docker-Build über `npm run build`).
+5. Nginx aktivieren und TLS via Certbot einrichten.
 
 ## Known limitations
 - In-Memory Rate-Limiting der Contact-API ist nicht über Container/Instanzen hinweg geteilt.
 - Contact-Provider `webhook` und `resend` benötigen korrekte ENV-Konfiguration; sonst antwortet die API mit Fehler.
-- Asset-Preparation ist ein separater Schritt und nicht automatisch im Docker-Build enthalten.
+- Asset-Preparation läuft im Docker-Build über `npm run build`; kein separater Host-Node-Schritt erforderlich.
 
 
 ## Security / Dependency Status

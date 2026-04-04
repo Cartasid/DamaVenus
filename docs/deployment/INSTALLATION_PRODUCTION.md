@@ -1,6 +1,6 @@
 # Dama-Venus Produktion auf Ubuntu 24.04 LTS
 
-> **Launch-Hinweis:** Aktuell not launch-ready, solange `/privacy` und `/imprint` nur Placeholder-Inhalte enthalten.
+> **Launch-Hinweis:** Not launch-ready, solange `/privacy` und `/imprint` nur Placeholder-Inhalte enthalten.
 
 Diese Anleitung setzt die Website reproduzierbar mit **Docker (App)** + **Nginx (Host Reverse Proxy)** + **Let's Encrypt (Certbot)** auf.
 
@@ -138,21 +138,7 @@ Provider-spezifisch ergänzen:
 
 ---
 
-## 9) Asset-Preparation (offizieller Produktionspfad)
-
-Offizielle Linie: **containerzentrierter Produktionspfad**.
-
-Es gibt im Standard-Deploy **keinen separaten Host-Asset-Step**. Assets werden im Docker-Build erzeugt:
-
-- `./scripts/deploy-prod.sh` startet `docker compose ... build`
-- der Docker-Build führt `npm run build` aus
-- `npm run build` enthält `prepare:dama-venus-assets` und danach `next build`
-
-Damit laufen Asset-Preparation und App-Build konsistent im Container-Build.
-
----
-
-## 10) Optionaler Host-Preflight (nicht Teil des Pflicht-Deploypfads)
+## 9) Verbindlicher Prüfpfad vor Deploy
 
 Optional im Projektverzeichnis ausführbar:
 
@@ -174,7 +160,15 @@ Klarer Ablauf im Pflichtpfad:
 
 ---
 
-## 11) App bauen und starten (Docker)
+## 10) App bauen und starten (Docker, inkl. Asset-Preparation)
+
+Die Asset-Pipeline läuft beim Deploy automatisch im Docker-Build über `npm run build`; kein separater Host-Node-Schritt erforderlich.
+Die Pipeline verwendet `sharp` als primäre Engine für Bildverarbeitung (Konvertierung/Optimierung und Derivate).
+
+HEIC-Hinweis:
+- Wenn `sharp` ein HEIC direkt lesen kann, reicht `sharp` allein.
+- Nur wenn `sharp` für eine HEIC-Datei fehlschlägt, greift das Script auf externe Fallback-Tools zurück (`magick`, `convert`, `heif-convert`, `sips`).
+- Ist kein Fallback-Tool verfügbar, werden diese HEIC-Dateien non-blocking übersprungen und im Mapping-Status ausgewiesen.
 
 ```bash
 cd /opt/dama-venus
@@ -190,7 +184,7 @@ docker compose -f docker-compose.prod.yml logs --tail=100 app
 
 ---
 
-## 12) Nginx-Konfiguration aktivieren (Initial ohne TLS)
+## 11) Nginx-Konfiguration aktivieren (Initial ohne TLS)
 
 Datei ins System übernehmen:
 
@@ -221,7 +215,7 @@ sudo systemctl enable nginx
 
 ---
 
-## 13) SSL-Zertifikat anfordern (Let's Encrypt)
+## 12) SSL-Zertifikat anfordern (Let's Encrypt)
 
 Certbot ergänzt automatisch TLS-Serverblöcke und Redirect-Regeln in der aktiven Nginx-Site:
 
@@ -245,7 +239,7 @@ sudo certbot renew --dry-run
 
 ---
 
-## 14) HTTPS und Redirect prüfen
+## 13) HTTPS und Redirect prüfen
 
 ```bash
 curl -I http://example.com
@@ -259,7 +253,7 @@ Erwartung:
 
 ---
 
-## 15) Update-/Redeploy-Prozess
+## 14) Update-/Redeploy-Prozess
 
 ```bash
 cd /opt/dama-venus
@@ -275,7 +269,7 @@ cd /opt/dama-venus
 
 ---
 
-## 16) Betrieb: Logs, Restart, Status
+## 15) Betrieb: Logs, Restart, Status
 
 Container-Logs live:
 
@@ -308,7 +302,7 @@ sudo systemctl status docker
 
 ---
 
-## 17) Troubleshooting (konkret)
+## 16) Troubleshooting (konkret)
 
 Port-Bindings prüfen:
 
