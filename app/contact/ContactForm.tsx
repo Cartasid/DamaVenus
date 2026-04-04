@@ -74,7 +74,7 @@ export function ContactForm() {
 
       if (!response.ok || !result.ok) {
         setSubmitState("error");
-        setErrorMessage(result.message || "Die Anfrage konnte nicht gesendet werden.");
+        setErrorMessage(result.message || "Your request could not be sent.");
         return;
       }
 
@@ -82,13 +82,13 @@ export function ContactForm() {
       setSubmitState("success");
     } catch {
       setSubmitState("error");
-      setErrorMessage("Die Anfrage konnte nicht gesendet werden. Bitte versuche es später erneut.");
+      setErrorMessage("Your request could not be sent. Please try again later.");
     }
   }
 
   return (
     <form className="space-y-4" aria-label="Contact form" onSubmit={onSubmit}>
-      <p className="typo-label">* Pflichtfeld</p>
+      <p className="typo-label">* Required field</p>
 
       {contactContent.form.fields.map((field) => {
         const helperId = `${field.id}-help`;
@@ -145,7 +145,7 @@ export function ContactForm() {
       </div>
 
       <button type="submit" className="cta-primary" disabled={submitState === "pending"}>
-        {submitState === "pending" ? "Wird gesendet…" : contactContent.form.ctaLabel}
+        {submitState === "pending" ? "Sending…" : contactContent.form.ctaLabel}
       </button>
 
       {submitState === "error" ? (
