@@ -2,14 +2,21 @@
 
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { navigationItems } from "@/content/data/navigation.data";
 import { siteConfig } from "@/content/data/site.config";
+
+function isActiveHref(href: string, pathname: string): boolean {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(href + "/");
+}
 
 export default function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!isMenuOpen) {
@@ -51,12 +58,13 @@ export default function SiteHeader() {
             Menu
           </button>
 
-          <nav aria-label="Primary Navigation" className="hidden items-center gap-4 text-sm text-muted md:flex">
+          <nav aria-label="Primary Navigation" className="hidden items-center gap-4 text-sm md:flex">
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="min-h-11 items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current md:inline-flex md:min-h-0"
+                aria-current={isActiveHref(item.href, pathname) ? "page" : undefined}
+                className={["nav-link min-h-11 items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current md:inline-flex md:min-h-0", isActiveHref(item.href, pathname) ? "nav-link--active" : ""].filter(Boolean).join(" ")}
               >
                 {item.label}
               </Link>
@@ -75,7 +83,8 @@ export default function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 ref={index === 0 ? firstMobileLinkRef : undefined}
-                className="inline-flex min-h-11 items-center rounded-md px-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+                aria-current={isActiveHref(item.href, pathname) ? "page" : undefined}
+                className={["nav-link inline-flex min-h-11 items-center rounded-md px-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current", isActiveHref(item.href, pathname) ? "nav-link--active" : ""].filter(Boolean).join(" ")}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}

@@ -43,6 +43,7 @@ export default function HomePage() {
   const supportAsset = supportModule?.assetId ? assetMap[supportModule.assetId] : undefined;
   const featuredReleaseAsset = featuredReleaseModule?.assetId ? assetMap[featuredReleaseModule.assetId] : undefined;
   const visualsAsset = visualsModule?.assetId ? assetMap[visualsModule.assetId] : undefined;
+  const statementAsset = statementModule?.assetId ? assetMap[statementModule.assetId] : undefined;
   const pressAsset = pressModule?.assetId ? assetMap[pressModule.assetId] : undefined;
   const supportCta = supportModule?.copy.cta;
 
@@ -63,9 +64,6 @@ export default function HomePage() {
   ]
     .filter(Boolean)
     .join(" ");
-  const leadHeadlineClass = "typo-h1 font-bold text-white";
-  const leadDescriptorClass = leadOverlayVariant === "strong" ? "typo-label text-white/90" : "typo-label text-white/80";
-  const leadStatementClass = leadOverlayVariant === "strong" ? "mt-2 typo-body-m max-w-2xl text-white/95" : "mt-2 typo-body-m max-w-2xl text-white/90";
 
   const supportMediaClass = [
     "h-48 w-full rounded-md object-cover transition duration-300",
@@ -97,15 +95,15 @@ export default function HomePage() {
             />
           ) : null}
           <div className={leadOverlayClass}>
-            <h1 id="home-title" className={leadHeadlineClass}>
+            <h1 id="home-title" className="hero-headline">
               {siteConfig.name}
             </h1>
-            <p className={leadDescriptorClass}>{siteConfig.brandDescriptor}</p>
-            <p className={leadStatementClass}>{homepageIntro.statement}</p>
+            <p className="hero-descriptor">{siteConfig.brandDescriptor}</p>
+            <p className="hero-statement">{homepageIntro.statement}</p>
           </div>
         </article>
 
-        <aside className="space-y-4">
+        <aside className="space-y-4 reveal reveal-delay-1">
           <nav aria-label="Home navigation" className="first-impression-tile rounded-lg p-3">
             <ul className="flex flex-wrap gap-x-4 gap-y-2 typo-body-s">
               {navigationItems.map((item) => (
@@ -155,7 +153,7 @@ export default function HomePage() {
         </aside>
       </div>
 
-      <section aria-labelledby="featured-release-title" className="module-card section-gap-lg bg-surface/60">
+      <section aria-labelledby="featured-release-title" className="module-card section-gap-lg bg-surface/60 reveal">
         <div className="grid gap-5 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:items-center">
           {featuredReleaseAsset ? (
             <Image
@@ -163,7 +161,6 @@ export default function HomePage() {
               alt={featuredReleaseAsset.alt ?? featuredReleaseModule?.alt ?? ""}
               width={1400}
               height={900}
-              priority
               sizes="(max-width: 768px) 100vw, 66vw"
               className="h-64 w-full rounded-md object-cover"
             />
@@ -182,18 +179,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section aria-labelledby="visual-story-title" className="section-gap-lg grid gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
+      <section aria-labelledby="visual-story-title" className="section-gap-lg grid gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end reveal">
         {visualsAsset ? (
-          <Image
-            src={visualsAsset.src}
-            alt={visualsAsset.alt ?? visualsModule?.alt ?? ""}
-            width={1400}
-            height={900}
-            sizes="(max-width: 768px) 100vw, 60vw"
-            className="h-72 w-full rounded-lg object-cover"
-          />
+          <div className="img-hover-zoom">
+            <Image
+              src={visualsAsset.src}
+              alt={visualsAsset.alt ?? visualsModule?.alt ?? ""}
+              width={1400}
+              height={900}
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, 60vw"
+              className="h-72 w-full object-cover"
+            />
+          </div>
         ) : null}
-        <article className="module-card bg-surface/70">
+        <article className="module-card--accented bg-surface/70">
           <h2 id="visual-story-title" className="typo-h2">
             {visualsModule?.copy.headline}
           </h2>
@@ -206,13 +206,28 @@ export default function HomePage() {
         </article>
       </section>
 
-      <section aria-labelledby="statement-title" className="section-gap-lg rounded-md border-l-2 border-white/20 pl-5 md:pl-8">
-        <h2 id="statement-title" className="typo-h2 text-white/90">
-          {statementModule?.copy.headline}
-        </h2>
+      <section aria-labelledby="statement-title" className="section-gap-lg statement-block reveal-fade">
+        {statementAsset ? (
+          <div className="statement-block__bg" aria-hidden="true">
+            <Image
+              src={statementAsset.src}
+              alt=""
+              fill
+              sizes="100vw"
+              loading="lazy"
+              className="object-cover opacity-20 grayscale"
+            />
+          </div>
+        ) : null}
+        <div className="statement-block__content">
+          <p className="statement-block__eyebrow" aria-hidden="true">—</p>
+          <h2 id="statement-title" className="statement-block__headline">
+            {statementModule?.copy.headline}
+          </h2>
+        </div>
       </section>
 
-      <section aria-labelledby="press-epk-title" className="module-card section-gap-lg bg-surface/50">
+      <section aria-labelledby="press-epk-title" className="module-card section-gap-lg bg-surface/50 reveal">
         <div className="grid gap-5 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center">
           <article className="space-y-3">
             <h2 id="press-epk-title" className="typo-h2">
@@ -226,21 +241,24 @@ export default function HomePage() {
             ) : null}
           </article>
           {pressAsset ? (
-            <Image
-              src={pressAsset.src}
-              alt={pressAsset.alt ?? pressModule?.alt ?? ""}
-              width={1200}
-              height={800}
-              sizes="(max-width: 768px) 100vw, 60vw"
-              className="h-52 w-full rounded-md object-cover"
-            />
+            <div className="img-hover-zoom">
+              <Image
+                src={pressAsset.src}
+                alt={pressAsset.alt ?? pressModule?.alt ?? ""}
+                width={1200}
+                height={800}
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 60vw"
+                className="h-52 w-full object-cover"
+              />
+            </div>
           ) : null}
         </div>
       </section>
 
       <section
         aria-labelledby="contact-newsletter-title"
-        className="section-gap-lg rounded-t-xl border-t border-white/10 bg-gradient-to-b from-transparent via-surface/50 to-surface/70 px-6 pb-14 pt-12"
+        className="section-gap-lg rounded-t-xl border-t border-white/10 bg-gradient-to-b from-transparent via-surface/50 to-surface/70 px-6 pb-14 pt-12 reveal"
       >
         <h2 id="contact-newsletter-title" className="typo-h2">
           {contactNewsletterModule?.copy.headline}

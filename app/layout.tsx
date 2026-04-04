@@ -4,6 +4,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import SiteFooter from "@/components/layout/site-footer";
 import SiteHeader from "@/components/layout/site-header";
+import ScrollRevealProvider from "@/components/utils/scroll-reveal-provider";
 import { resolveSiteUrl, siteConfig } from "@/content/data/site.config";
 
 const siteUrl = resolveSiteUrl();
@@ -58,12 +59,15 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang={siteConfig.language}>
       <body className={`${inter.variable} ${spaceGrotesk.variable} min-h-screen flex flex-col`}>
+        <noscript>
+          <style>{".reveal,.reveal-fade{opacity:1!important;transform:none!important}"}</style>
+        </noscript>
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
         <SiteHeader />
         <main id="main-content" className="site-container flex-1 py-10">
-          {children}
+          <ScrollRevealProvider>{children}</ScrollRevealProvider>
         </main>
         <SiteFooter />
       </body>
