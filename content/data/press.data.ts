@@ -1,4 +1,4 @@
-import type { PressEpkBlock, PressMaterialItem, SectionContent } from "@/lib/types";
+import { getCtaActionKind, type PressEpkBlock, type PressMaterialItem, type SectionContent, validateCta } from "@/lib/types";
 
 export const pressEpkBlocks: PressEpkBlock[] = [
   {
@@ -155,3 +155,10 @@ export const pressMaterials: PressMaterialItem[] = [
     asset: { id: "press-epk" }
   }
 ];
+
+for (const block of pressEpkBlocks) {
+  validateCta({ label: block.ctaLabel, href: block.target }, `press block ${block.id}`);
+  if (getCtaActionKind(block.target) === "mailto") {
+    throw new Error(`Press block "${block.id}" must use route-based CTA targets.`);
+  }
+}
