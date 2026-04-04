@@ -1,5 +1,7 @@
 # DamaVenus Website
 
+> **Status:** Not launch-ready. Die Seiten `/privacy` und `/imprint` enthalten aktuell nur Placeholder-Inhalte.
+
 ## Projektüberblick
 DamaVenus ist eine Next.js-Website mit statisch gepflegter Content-Schicht (`content/data`) und einer serverseitigen Contact-API unter `app/api/contact/route.ts`.
 

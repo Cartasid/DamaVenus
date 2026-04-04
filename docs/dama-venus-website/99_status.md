@@ -1,5 +1,10 @@
 # 99 Status
 
+## Entscheidung Rechtstexte (2026-04-04)
+- Es werden **vorerst keine finalen Rechtstexte** eingepflegt.
+- Die Website ist damit im aktuellen Zustand explizit **not launch-ready**.
+- `/privacy` und `/imprint` bleiben als Placeholder-Seiten im Projekt, werden aber bei Placeholder-Status nicht über die Sitemap für Indexierung priorisiert.
+
 ## Aktueller Stand (faktenbasiert, Code-gegenprüfbar)
 - Next.js-App-Routen sind vorhanden für `/`, `/music`, `/visuals`, `/about`, `/press`, `/contact`, `/privacy`, `/imprint`.  
   Code: `app/page.tsx`, `app/music/page.tsx`, `app/visuals/page.tsx`, `app/about/page.tsx`, `app/press/page.tsx`, `app/contact/page.tsx`, `app/privacy/page.tsx`, `app/imprint/page.tsx`.

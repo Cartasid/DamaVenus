@@ -6,6 +6,6 @@ export const navigationItems: NavigationItem[] = [
   { label: "About", href: "/about" },
   { label: "Press", href: "/press" },
   { label: "Contact", href: "/contact" },
-  { label: "Privacy", href: "/privacy" },
-  { label: "Imprint", href: "/imprint" }
+  { label: "Privacy (Placeholder)", href: "/privacy" },
+  { label: "Imprint (Placeholder)", href: "/imprint" }
 ];
