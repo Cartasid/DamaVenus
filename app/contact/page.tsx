@@ -27,7 +27,49 @@ export default function ContactPage() {
         <p className="typo-body-m max-w-2xl">{contactContent.intro.subhead}</p>
       </header>
 
-      <ContactForm />
+      <form className="space-y-4" aria-label="Contact form">
+        <p className="typo-label">* Required field</p>
+
+        {contactContent.form.fields.map((field) => {
+          const helperId = `${field.id}-help`;
+          const isRequired = field.required ? " *" : "";
+
+          return (
+            <div className="space-y-1" key={field.id}>
+              <label htmlFor={field.id} className="typo-body-s">
+                {field.label}
+                {isRequired}
+              </label>
+
+              {field.type === "textarea" ? (
+                <textarea id={field.id} name={field.name} rows={6} className="w-full" aria-describedby={helperId} required={field.required} />
+              ) : (
+                <input
+                  id={field.id}
+                  name={field.name}
+                  type={field.type}
+                  autoComplete={field.type === "email" ? "email" : undefined}
+                  className="w-full"
+                  aria-describedby={helperId}
+                  required={field.required}
+                />
+              )}
+
+              <p id={helperId} className="typo-body-s">
+                {field.helperText}
+              </p>
+            </div>
+          );
+        })}
+
+        <button type="submit" className="cta-primary">
+          {contactContent.form.ctaLabel}
+        </button>
+        <div id="contact-form-status" role="status" aria-live="polite" data-feature="contact-success-message" hidden>
+          <p className="typo-body-m">{contactContent.form.success.title}</p>
+          <p className="typo-body-s">{contactContent.form.success.message}</p>
+        </div>
+      </form>
 
       {contactContent.alternatePaths.length ? (
         <section className="space-y-2" aria-label="Alternative contact options">

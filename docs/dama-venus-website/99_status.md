@@ -1,5 +1,9 @@
 # 99 Status
 
+## Update 2026-04-04 – Sprachentscheidung
+- Primärsprache der Website ist auf Englisch festgelegt (`en` / `en_US`).
+- Verbleibende gemischte DE/EN-UI- und CTA-Formulierungen werden auf Englisch konsolidiert.
+
 ## Bereits abgeschlossen
 - Die Creative Direction für die Dama-Venus-Website ist festgelegt und gilt als verbindlicher Rahmen.
 - Die visuelle Leitlinie ist klar definiert: dunkel-luxuriöse Bühne, editorial-cineastische Bilddramaturgie, reduzierte UI-Lautstärke.
