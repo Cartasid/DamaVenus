@@ -6,5 +6,9 @@ export const contactContent: ContactPageContent = {
   cta: {
     label: "Send Inquiry",
     href: "mailto:booking@damavenus.com"
+  },
+  accent: {
+    assetId: "home-contact-newsletter",
+    role: "decorative"
   }
 };
