@@ -9,6 +9,7 @@ export default function MusicPage() {
     .sort((a, b) => a.priority - b.priority)
     .filter((release) => release.id !== featured.id);
   const leadSecondary = selectedReleases[0];
+  const selectedSingles = leadSecondary ? [leadSecondary] : [];
   const followUpReleases = selectedReleases.slice(1);
 
   const featuredAsset = assetMap[featured.coverAsset.id] ?? (featured.alternateVisualAsset ? assetMap[featured.alternateVisualAsset.id] : undefined);
@@ -75,9 +76,9 @@ export default function MusicPage() {
 
       <section id="selected-releases" className="space-y-3">
         <h2 className="font-display text-2xl font-semibold">Selected Releases</h2>
-        <ul className="grid gap-4 md:grid-cols-2">
-          {selectedSingles.map((release) => {
-            return (
+        {selectedSingles.length ? (
+          <ul className="grid gap-4 md:grid-cols-2">
+            {selectedSingles.map((release) => (
               <li key={release.id} id={release.id} className="space-y-2 rounded-lg border border-white/10 p-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-muted">{release.status}</p>
                 <h3 className="font-display text-xl">{release.title}</h3>
@@ -86,8 +87,10 @@ export default function MusicPage() {
                   {release.primaryCta.label}
                 </Link>
               </li>
-            );
-          })() : null}
+            ))}
+          </ul>
+        ) : null}
+        {followUpReleases.length ? (
           <ul className="grid gap-3 md:grid-cols-2">
             {followUpReleases.map((release) => {
               const releaseAsset = assetMap[release.coverAsset.id];
@@ -112,7 +115,7 @@ export default function MusicPage() {
               );
             })}
           </ul>
-        </div>
+        ) : null}
       </section>
 
       <section id="visual-releases" className="space-y-3">
