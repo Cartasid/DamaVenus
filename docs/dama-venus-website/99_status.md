@@ -258,12 +258,16 @@
    - `app/about/page.tsx`
    - `content/data/about.data.ts`
    - `content/data/site.config.ts` (Asset-Map-Referenzierung)
-   - `content/dama-venus/assets.ts` (About-Asset-IDs/-Priorisierung)
-3. **Offene Restpunkte (klar getrennt)**
-   - **Finale Fact-Validierung:** belastbare/verifizierte Bio-Fakten, Quellen, Credits und ggf. zitierfähige Details sind noch final zu bestätigen.
-   - **Letzter Visual-/Contrast-Feinschliff:** abschließender Polishing-Pass für visuelle Feingewichtung, Kontrast und finale Qualitätsabnahme bleibt ausstehend.
-4. **Expliziter nächster Schritt**
-   - Nächster Umsetzungsschritt ist die **Vorbereitung und Umsetzung von `Press/EPK`**.
+
+## Update 2026-04-04 – Asset-Pfade auf öffentliche Pipeline-Ziele bereinigt
+1. **`content/dama-venus/assets.ts` vollständig bereinigt**
+   - Alle bisherigen `finalPath`-Einträge mit `/pics/...` wurden auf öffentliche Pipeline-Zielpfade unter `/assets/dama-venus/...` umgestellt (insbesondere für `visuals` und `about`).
+   - `sourcePath` bleibt unverändert als technische Herkunft (`pics/...` bzw. bestehende Pipeline-/Curated-Quellen) erhalten.
+2. **Konsumenten-Check der relevanten Seiten abgeschlossen**
+   - Die Seiten `app/page.tsx`, `app/music/page.tsx`, `app/visuals/page.tsx` und `app/about/page.tsx` beziehen Assets weiterhin über `assetMap[...].src`; damit zeigen sie nach der Bereinigung auf öffentliche `finalPath`-Ziele.
+   - `app/press/page.tsx` rendert aktuell keine Bild-Assets aus `assetMap`; es sind dafür keine zusätzlichen Pfadänderungen erforderlich.
+3. **Datenmodell-/Auslieferungslogik bestätigt**
+   - In `content/data/site.config.ts` wird frontend-seitig weiterhin ausschließlich `finalPath` als `assetMap[...].src` ausgeliefert; `sourcePath` wird nicht in die UI ausgereicht.
 
 ## Update 2026-04-03 – Schritt 13 Press-/EPK-Struktur konkretisiert
 1. **Press-/EPK-Struktur + Datenmodell (jetzt vorhanden)**
