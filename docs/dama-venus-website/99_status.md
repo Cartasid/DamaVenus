@@ -12,6 +12,13 @@
 - Finale Press-/EPK- und Kontaktdaten sind ggf. noch zu vervollständigen.
 - Finaler Asset-/Visual-Polish für produktive Abnahme ist ggf. noch offen.
 
+## Dokumentierte Root-Cause (Asset-Pipeline)
+- Build-Blocker-Ursache waren fehlende Dateien in priorisierten `sourcePath`-Quellen der Asset-Pipeline.
+
+## Status nach Fix
+- CSS-Artefakte sind vorhanden.
+- Kritische Homepage-Assets sind vorhanden.
+
 ## Nächster sinnvoller Schritt
 - Finalen Review-/Deploy-Vorbereitungspass durchführen: Rechtstexte einpflegen, Press-/Kontaktdaten verifizieren, offenen Asset-Polish schließen und anschließend Endabnahme für Launch entscheiden.
 

@@ -34,6 +34,8 @@ Dieses Projekt verwendet **npm** als verbindlichen Paketmanager.
 ## Build/Start
 - Produktions-Build lokal: `npm run build`
 - Produktionsserver lokal: `npm run start`
+- `npm run build` führt verpflichtend zuerst `prepare:dama-venus-assets` aus (`npm run prepare:dama-venus-assets && next build`).
+- Fehlen priorisierte Asset-Quellen, muss die Asset-Preparation den Build mit Fehler beenden (kein stilles Weiterbauen).
 
 ## Verbindlicher Prüfpfad (Quality Gate)
 `next lint` ist in dieser Repo-Konstellation ohne zusätzliche ESLint-Installation nicht zuverlässig non-interaktiv ausführbar; daher ist der verbindliche Lint-Check auf einen direkt ausführbaren TypeScript-Lintlauf umgestellt.
@@ -112,4 +114,3 @@ Kurzablauf:
 ## Security / Dependency Status
 - Next.js wird auf **15.3.6** festgelegt (gepatchte 15.x-Linie, kein Major-Wechsel).
 - Hintergrund: Entfernung der Nutzung von `next@15.3.1` (Deprecated-Hinweis) durch Upgrade auf gepatchtes 15.x-Release.
-

@@ -146,7 +146,8 @@ Optional im Projektverzeichnis ausführbar:
 cd /opt/dama-venus
 npm ci
 npm run check
-npm run build:check
+npm run build
+npm run build:verify
 ```
 
 Damit werden Lint + Typecheck und zusätzlich ein vollständiger Produktions-Build vorab auf dem Host validiert.
@@ -154,9 +155,11 @@ Der **offizielle Pflicht-Deploypfad** bleibt jedoch containerzentriert (ENV -> D
 
 Klarer Ablauf im Pflichtpfad:
 1. `8) Produktions-ENV erstellen`
-2. `11) ./scripts/deploy-prod.sh`
-3. `12) Nginx-Konfiguration`
-4. `13) TLS mit Certbot`
+2. `Build` (`npm run build`)
+3. `Artifact-Validation` (`npm run build:verify`)
+4. `Deploy` (`./scripts/deploy-prod.sh`)
+5. `12) Nginx-Konfiguration`
+6. `13) TLS mit Certbot`
 
 ---
 
