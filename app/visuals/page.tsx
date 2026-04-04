@@ -10,11 +10,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Visuals | Dama Venus",
     description: "Explore curated visuals, portraits, and editorial sequences shaped in the signature of Dama Venus.",
-    url: "/visuals"
+    url: "/visuals",
+    images: [{ url: "/og-default.svg" }]
   },
   twitter: {
     title: "Visuals | Dama Venus",
-    description: "Explore curated visuals, portraits, and editorial sequences shaped in the signature of Dama Venus."
+    description: "Explore curated visuals, portraits, and editorial sequences shaped in the signature of Dama Venus.",
+    images: ["/og-default.svg"]
   },
   alternates: {
     canonical: "/visuals"

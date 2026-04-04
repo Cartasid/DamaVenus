@@ -11,11 +11,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Home | Dama Venus",
     description: "Cinematic presence in music and image—discover the latest chapter by Dama Venus.",
-    url: "/"
+    url: "/",
+    images: [{ url: "/og-default.svg" }]
   },
   twitter: {
     title: "Home | Dama Venus",
-    description: "Cinematic presence in music and image—discover the latest chapter by Dama Venus."
+    description: "Cinematic presence in music and image—discover the latest chapter by Dama Venus.",
+    images: ["/og-default.svg"]
   },
   alternates: {
     canonical: "/"

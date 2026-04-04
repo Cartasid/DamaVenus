@@ -6,13 +6,15 @@ export const metadata: Metadata = {
   title: { absolute: "Press & EPK – Images, Bio & Release Facts | Dama Venus" },
   description: "Press-ready overview with images, bio, and release facts for fast editorial use.",
   openGraph: {
-    title: "Press & EPK – Images, Bio & Release Facts | Dama Venus",
-    description: "Images, bio, and release facts for press inquiries, plus approved links and contact.",
-    url: "/press"
+    title: "Press & EPK | Dama Venus",
+    description: "Access press-ready information, selected assets, and EPK links for Dama Venus.",
+    url: "/press",
+    images: [{ url: "/og-default.svg" }]
   },
   twitter: {
-    title: "Press & EPK – Images, Bio & Release Facts | Dama Venus",
-    description: "Images, bio, and release facts for press inquiries, plus approved links and contact."
+    title: "Press & EPK | Dama Venus",
+    description: "Access press-ready information, selected assets, and EPK links for Dama Venus.",
+    images: ["/og-default.svg"]
   },
   alternates: {
     canonical: "/press"
