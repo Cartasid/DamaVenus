@@ -112,7 +112,7 @@ export default function AboutPage() {
       </section>
 
       <div>
-        <Link href={aboutCta.href} className="first-impression-cta">
+        <Link href={aboutCta.href} className="cta-primary">
           {aboutCta.label}
         </Link>
       </div>
