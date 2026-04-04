@@ -245,11 +245,13 @@ async function parsePrioritizedAssetTargets() {
     const idMatch = objectContent.match(/id:\s*"([^"]+)"/);
     const finalPathMatch = objectContent.match(/finalPath:\s*"([^"]+)"/);
     const sourcePathMatch = objectContent.match(/sourcePath:\s*"([^"]+)"/);
+    const optionalMatch = objectContent.match(/optional:\s*(true|false)/);
     if (idMatch && finalPathMatch && sourcePathMatch) {
       pairs.push({
         id: idMatch[1],
         finalPath: finalPathMatch[1],
         sourcePath: sourcePathMatch[1],
+        optional: optionalMatch?.[1] === 'true',
       });
     }
   }
@@ -302,16 +304,29 @@ async function ensurePrioritizedAssetOutputs(detectedHeicTool) {
     try {
       await fs.access(sourcePath);
     } catch (_error) {
-      const errorMessage = `[error] Pflichtasset-Quelle fehlt: id="${pair.id}" finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`;
-      steps.push({
-        id: pair.id,
-        finalPath: pair.finalPath,
-        sourcePath: pair.sourcePath,
-        status: 'missing-source',
-        error: errorMessage,
-      });
-      counters.errors += 1;
-      console.error(errorMessage);
+      if (pair.optional) {
+        const warnMessage = `[warn] Optionales Asset nicht vorhanden (übersprungen): id="${pair.id}" sourcePath="${pair.sourcePath}"`;
+        steps.push({
+          id: pair.id,
+          finalPath: pair.finalPath,
+          sourcePath: pair.sourcePath,
+          status: 'optional-skipped',
+          warn: warnMessage,
+        });
+        counters.skipped += 1;
+        console.warn(warnMessage);
+      } else {
+        const errorMessage = `[error] Pflichtasset-Quelle fehlt: id="${pair.id}" finalPath="${pair.finalPath}" sourcePath="${pair.sourcePath}"`;
+        steps.push({
+          id: pair.id,
+          finalPath: pair.finalPath,
+          sourcePath: pair.sourcePath,
+          status: 'missing-source',
+          error: errorMessage,
+        });
+        counters.errors += 1;
+        console.error(errorMessage);
+      }
       continue;
     }
 
@@ -370,6 +385,7 @@ async function ensurePrioritizedAssetOutputs(detectedHeicTool) {
   }
 
   for (const pair of pairs) {
+    if (pair.optional) continue;
     const targetPath = resolveRepoPath(path.join('public', pair.finalPath.replace(/^\/+/, '')));
     try {
       await fs.access(targetPath);

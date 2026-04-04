@@ -20,6 +20,8 @@ export type PrioritizedAsset = {
   priority: number;
   role: AssetRole;
   copyKey?: string;
+  /** Wenn true: fehlende Quelle wird als Warnung behandelt, nicht als Fehler. Für Assets, die noch nicht geliefert wurden. */
+  optional?: boolean;
 };
 
 export const prioritizedAssets: PrioritizedAsset[] = [
@@ -470,6 +472,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     swColorMode: "n/a",
     overlaySuitability: "n/a",
     priority: 5,
-    role: "informative"
+    role: "informative",
+    optional: true
   }
 ];
