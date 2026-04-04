@@ -41,8 +41,8 @@ node scripts/prepare-dama-venus-assets.mjs
 ```
 
 Pipeline-Logik:
-- Liest Quellen aus `pics/`.
-- Schreibt optimierte Dateien nach `public/assets/dama-venus/`.
+- Liest Quellen aus `pics/` (reiner Input-Ordner der Pipeline).
+- Schreibt optimierte Dateien nach `public/assets/dama-venus/` (dieser Pfad ist der finale Auslieferungspfad; `pics/` ist nie Auslieferung).
 - Generiert Mapping-Dateien:
   - `public/assets/dama-venus/asset-map.json`
   - `public/assets/dama-venus/asset-map.ts`
