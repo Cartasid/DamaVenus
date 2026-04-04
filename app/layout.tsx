@@ -49,7 +49,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           Zum Inhalt springen
         </a>
         <SiteHeader />
-        <main id="main-content" className="mx-auto w-full max-w-[1440px] flex-1 px-5 py-10 md:px-10 xl:px-16">
+        <main id="main-content" className="site-container flex-1 py-10">
           {children}
         </main>
         <SiteFooter />
