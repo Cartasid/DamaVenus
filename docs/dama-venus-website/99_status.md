@@ -92,6 +92,14 @@
 - Der Metadaten-Output enthält jetzt zusätzlich den Abschnitt `heicStatus` mit Support-Status, erkanntem Tool, Fallback-Nutzung sowie Skip-/TODO-Informationen.
 - Der technische Grenzfall „HEIC ohne verfügbares Tooling“ ist in `03_asset_strategy.md` als verbindliche Pipeline-Regel dokumentiert.
 
+## Update 2026-04-04 – Sharp-basierte Derivat-Pipeline
+- `scripts/prepare-dama-venus-assets.mjs` erzeugt jetzt echte Bildderivate mit `sharp` statt reiner Kopierlogik.
+- Pro zulässigem Input (`.jpg/.jpeg/.png/.webp/.heic`) werden normierte Master-Derivate (`master-jpeg`, `master-webp`) erzeugt; anschließend werden die Varianten `hero`, `portrait`, `square`, `landscape`, `tall` mit realen `resize`-Operationen generiert.
+- Die Ausgabe erfolgt strikt unter `public/assets/dama-venus/{bereich}/{motiv}/...` mit stabilen Dateinamen im Muster `slug-variant-vNN`.
+- `asset-map.json`/`asset-map.ts` referenzieren die tatsächlich erzeugten Derivate und enthalten pro Master/Variante reale Metadaten (Breite, Höhe, Format, Byte-Größe).
+- HEIC wird primär über `sharp` verarbeitet; falls lokal nicht verfügbar, bleibt der markierte Fallback-Pfad (`status: skipped-heic`) mit nicht-blockierendem Verhalten erhalten.
+- Die Pipeline läuft deterministisch über sortierte Eingänge, stabile Versionsvergabe und sortierte Mapping-Items.
+
 ## Update 2026-04-03 – Homepage-Assets/Mappings (reproduzierbar)
 - **Priorisierte Homepage-Assets (Datenquelle):** In `content/dama-venus/assets.ts` sind für den Home-Kontext aktuell priorisiert `home-release-cover` (Priority 1) und `home-visual-preview` (Priority 2); zusätzlich ist `press-epk` als Press-Asset geführt. Damit ist die Priorisierung nachvollziehbar über `prioritizedAssets` (`id`, `priority`, `area`). Referenz: `content/dama-venus/assets.ts`.
 - **Modul-Asset-Zuordnung (Datenquelle):** In `content/data/homepage.data.ts` ist die Zuordnung aktuell wie folgt: `lead` (kein `assetId`), `featuredRelease` → `home-release-cover`, `visuals` → `home-visual-preview`, `statement` (text-only, kein `assetId`), `press` → `press-epk`, `contactNewsletter` (kein `assetId`, nur `assetPath` aus Contact-CTA). Referenz: `content/data/homepage.data.ts`.

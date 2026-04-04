@@ -1,25 +1,12 @@
 # DamaVenus
 
-## Environment variables (Contact flow)
+## Asset-Preparation (Dama Venus)
 
-Der Contact-Flow nutzt `POST /api/contact` und wird vollständig über ENV konfiguriert.
+`scripts/prepare-dama-venus-assets.mjs` verarbeitet Assets aus `pics/` deterministisch mit `sharp` und erzeugt:
 
-- `CONTACT_PROVIDER`: Versand-Provider (`noop`, `webhook`, `resend`)
-- `CONTACT_TO_EMAIL`: Zieladresse für Kontaktanfragen
-- `CONTACT_FROM_EMAIL`: Absenderadresse (nur für `resend`)
-- `CONTACT_API_KEY`: Optionales Bearer-Token für `webhook`
-- `CONTACT_WEBHOOK_URL`: Ziel-Webhook-URL bei `CONTACT_PROVIDER=webhook`
-- `RESEND_API_KEY`: API Key bei `CONTACT_PROVIDER=resend`
+- normierte Master-Derivate (`master-jpeg`, `master-webp`)
+- Varianten (`hero`, `portrait`, `square`, `landscape`, `tall`) mit echten Resize-Operationen und konfigurierten Qualitätswerten
+- eine strukturierte Ausgabe unter `public/assets/dama-venus/{bereich}/{motiv}/...`
+- Metadaten in `public/assets/dama-venus/asset-map.json` und `asset-map.ts` mit realen Derivatdaten (Breite, Höhe, Format, Byte-Größe)
 
-### Beispiel `.env.local`
-
-```bash
-CONTACT_PROVIDER=noop
-CONTACT_TO_EMAIL=booking@example.com
-# CONTACT_FROM_EMAIL=no-reply@example.com
-# CONTACT_WEBHOOK_URL=https://example.com/contact-webhook
-# CONTACT_API_KEY=...
-# RESEND_API_KEY=...
-```
-
-Hinweis: Keine Secrets ins Repository committen. Keys ausschließlich über ENV setzen.
+HEIC wird primär über `sharp` verarbeitet; falls lokal nicht unterstützt, bleibt der dokumentierte Fallback aktiv (`status: skipped-heic` oder Konvertierung via `magick`/`convert`/`heif-convert`/`sips`).
