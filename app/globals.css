@@ -16,6 +16,14 @@ a {
 
 
 @layer components {
+  .site-container {
+    @apply mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-16;
+  }
+
+  .module-card {
+    @apply rounded-lg border border-white/10 p-5 md:p-6;
+  }
+
   .typo-h1 {
     @apply font-display text-3xl font-semibold leading-tight md:text-4xl;
   }
@@ -139,11 +147,11 @@ textarea:focus-visible,
 }
 
 .section-stack-md {
-  @apply space-y-12 md:space-y-16;
+  @apply w-full space-y-12 md:space-y-16;
 }
 
 .section-stack-lg {
-  @apply space-y-16 md:space-y-20;
+  @apply w-full space-y-16 md:space-y-20;
 }
 
 input,

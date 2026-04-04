@@ -267,6 +267,11 @@
 4. **Nächster finaler Review-/Cleanup-Pass**
    - Vor finaler Gesamtfreigabe ist ein expliziter letzter Review-/Cleanup-Pass vorgesehen, mit Fokus auf Metadata-/OG-Konsistenz, technische Endabnahme und Bereinigung verbliebener Platzhalter.
 
+## Update 2026-04-04 – Zentrales Layout-Containerpattern vereinheitlicht
+- Ein gemeinsames Container-Pattern wurde zentralisiert: `site-container` in `app/globals.css` definiert und in `app/layout.tsx`, `components/layout/site-header.tsx` sowie `components/layout/site-footer.tsx` als gemeinsame Max-Width-/Padding-Baseline umgesetzt.
+- Für modulare Karten wurde eine wiederverwendbare Basisklasse `module-card` ergänzt und auf die zentralen Home-Module angewendet (u. a. Featured Release, Visual Story, Press/EPK), um horizontale Kanten und Innenabstände konsistenter auszurichten.
+- Die Seiten-Stack-Basis (`section-stack-md`, `section-stack-lg`) wurde auf volle Breite vereinheitlicht, damit die Hauptseiten-Container konsistent mit der globalen Shell fluchten.
+
 ## Update 2026-04-03 – Schritt 12a `/about` Status konkretisiert (final/nahezu final)
 1. **Auf `/about` jetzt final bzw. nahezu final**
    - **Intro-Frame/oberer Einstieg:** stabil umgesetzt mit klarer About-Einstiegsstruktur (Label, Headline, Intro-Text) als reproduzierbarer Startpunkt.
