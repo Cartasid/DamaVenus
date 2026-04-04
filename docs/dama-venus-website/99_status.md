@@ -304,3 +304,20 @@
    - Für den endgültigen Betrieb sind damit noch Freigaben zu Mail-Adressen, Zuständigkeiten und Response-/Weiterleitungslogik erforderlich.
 4. **Klarer nächster Schritt**
    - Nächster konkreter Umsetzungsschritt ist der **finale UI-Build der `/contact`-Seite** inklusive echter Submit-Logik, Success-State und produktionsreifer Mail-/Routing-Anbindung.
+
+## Update 2026-04-04 – Schritt 14a `/contact` Status konkretisiert (final/nahezu final)
+1. **Was auf `/contact` jetzt final bzw. nahezu final ist**
+   - Als final/nahezu final umgesetzt gelten **Intro**, **Scope**, **Formular**, **Success-State** und **sekundäre Kontaktpfade** als zusammenhängender Contact-Flow.
+   - Intro/Scope bleiben konsistent mit der gesetzten Kontaktführung („Let’s Create the Next Chapter.“ / „For bookings, collaborations, and selected requests.“) und sind in die finale Seitenlogik eingebettet.
+   - Das Formular ist als primärer Einstiegspfad stabil gesetzt; der Success-State ist als klarer Abschluss des Inquiry-Flows vorhanden.
+   - Sekundärpfade sind als ergänzende Kontaktführung neben dem Primärformular verfügbar.
+2. **Stabile Felder/Komponenten (konkret, mit Pfaden)**
+   - `app/contact/page.tsx`: stabile Seitenausspielung für Intro, Scope, Formularbereich, Success-State und sekundäre Kontaktpfade.
+   - `content/data/contact.data.ts`: stabile Datenbasis für Contact-Copy, Feld-/CTA-Konfiguration und Zustände.
+   - `app/globals.css`: stabile Interaktions-/A11y-Basis (u. a. Fokuszustände/Reduced-Motion), auf die der Contact-Flow aufsetzt.
+3. **Offene Restpunkte (klar getrennt)**
+   - **Finale Routing-/Mail-Endpunkte:** letzte Verifizierung/Freigabe produktionsreifer Zieladressen und Routing-Regeln je Inquiry-Typ.
+   - **Backend-Submit (optional/falls erforderlich):** finale Entscheidung und ggf. Anbindung eines serverseitigen Submit-/Dispatch-Flows.
+   - **Finale Betriebsfreigabe:** abschließende Prüfung von Zuständigkeiten, Response-Handling und Weiterleitungslogik.
+4. **Expliziter nächster Schritt**
+   - Nach Abschluss der `/contact`-Restpunkte folgt ein **siteweiter Polish-Pass** (konsistenter Feinschliff über alle Seiten inkl. A11y/Motion/Performance vor Gesamtfreigabe).
