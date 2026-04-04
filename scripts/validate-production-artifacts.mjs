@@ -36,68 +36,55 @@ async function parsePrioritizedAssets() {
   const assetsTsPath = path.resolve(projectRoot, 'content/dama-venus/assets.ts');
   const source = await fs.readFile(assetsTsPath, 'utf8');
   const objectPattern = /{[\s\S]*?}/g;
-  const idToFinalPath = new Map();
+  const assets = [];
 
   for (const objectMatch of source.matchAll(objectPattern)) {
     const objectContent = objectMatch[0];
     const idMatch = objectContent.match(/id:\s*"([^"]+)"/);
     const finalPathMatch = objectContent.match(/finalPath:\s*"([^"]+)"/);
-    if (idMatch && finalPathMatch) {
-      idToFinalPath.set(idMatch[1], finalPathMatch[1]);
+    const sourcePathMatch = objectContent.match(/sourcePath:\s*"([^"]+)"/);
+    if (idMatch && finalPathMatch && sourcePathMatch) {
+      assets.push({
+        id: idMatch[1],
+        finalPath: finalPathMatch[1],
+        sourcePath: sourcePathMatch[1],
+      });
     }
   }
 
-  return idToFinalPath;
+  return assets;
 }
 
-async function parseHomepageAssetIds() {
-  const homepageDataPath = path.resolve(projectRoot, 'content/data/homepage.data.ts');
-  const source = await fs.readFile(homepageDataPath, 'utf8');
-  const matches = [
-    ...source.matchAll(/assetId:\s*"([^"]+)"/g),
-    ...source.matchAll(/coverAsset:\s*\{\s*id:\s*"([^"]+)"\s*\}/g),
-    ...source.matchAll(/asset:\s*\{\s*id:\s*"([^"]+)"\s*\}/g),
-  ];
-
-  return [...new Set(matches.map((m) => m[1]))];
-}
-
-async function ensureHomepageCriticalAssets(idToFinalPath, homepageAssetIds) {
-  if (homepageAssetIds.length === 0) {
-    throw new Error('Keine Startseiten-Asset-IDs in content/data/homepage.data.ts gefunden.');
-  }
-
-  const missingIdMappings = homepageAssetIds.filter((id) => !idToFinalPath.has(id));
-  if (missingIdMappings.length > 0) {
-    throw new Error(
-      `assetMap-Referenzen ohne Zielpfad gefunden: ${missingIdMappings.join(', ')}`
-    );
+async function ensureAllPrioritizedAssetsExist(assets) {
+  if (assets.length === 0) {
+    throw new Error('Keine priorisierten Assets in content/dama-venus/assets.ts gefunden.');
   }
 
   const missingFiles = [];
-  for (const id of homepageAssetIds) {
-    const finalPath = idToFinalPath.get(id);
+  for (const asset of assets) {
+    const finalPath = asset.finalPath;
     const absolutePath = path.resolve(projectRoot, 'public', finalPath.replace(/^\/+/, ''));
     try {
       await fs.access(absolutePath);
     } catch {
-      missingFiles.push(`${id} -> ${finalPath}`);
+      missingFiles.push(
+        `id="${asset.id}" finalPath="${asset.finalPath}" sourcePath="${asset.sourcePath}"`
+      );
     }
   }
 
   if (missingFiles.length > 0) {
     throw new Error(
-      `Kritische Startseiten-Assets fehlen unter public/assets/dama-venus: ${missingFiles.join('; ')}`
+      `Pflicht-Assets fehlen unter public/: ${missingFiles.join('; ')}`
     );
   }
 }
 
 async function run() {
   await ensureAtLeastOneBuiltCss();
-  const idToFinalPath = await parsePrioritizedAssets();
-  const homepageAssetIds = await parseHomepageAssetIds();
-  await ensureHomepageCriticalAssets(idToFinalPath, homepageAssetIds);
-  console.log('Production-Artefakte validiert: CSS vorhanden, kritische Homepage-Assets vorhanden, IDs auf Dateien auflösbar.');
+  const assets = await parsePrioritizedAssets();
+  await ensureAllPrioritizedAssetsExist(assets);
+  console.log('Production-Artefakte validiert: CSS vorhanden und alle finalPath-Assets unter public/ vorhanden.');
 }
 
 run().catch((error) => {

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run prepare:dama-venus-assets && next dev",
     "build": "npm run prepare:dama-venus-assets && next build",
     "start": "next start",
     "lint": "tsc --noEmit --pretty false",
