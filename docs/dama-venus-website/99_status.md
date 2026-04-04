@@ -359,3 +359,10 @@
    - `WebSite` wird nachgezogen, sobald globale Seitendaten (kanonische URL-Strategie, finale Social-/Kontakt-Referenzen, rechtliche Basisdaten) final abgestimmt sind.
 3. **Nächster Review-Schritt**
    - Als nächster Schritt folgt ein finaler SEO-/Metadata-Cleanup-Pass, inklusive erneuter Prüfung, ob die Kriterien für `Person`/`MusicGroup`/`WebSite` vollständig erfüllt sind.
+
+
+## Update 2026-04-04 – Contact-Flow real wired
+- Der Contact-Submit ist jetzt real wired: `/contact` sendet an `POST /api/contact` mit serverseitiger Validierung (`fullName`, `email`, `message`).
+- UI-Status umgesetzt: Pending-/Success-/Error-Zustände werden im Formular gerendert; `#contact-form-status` erscheint nur nach erfolgreichem Submit.
+- Minimaler Spam-Schutz aktiv: Honeypot-Feld + serverseitige Längenprüfungen + einfache IP-basierte Rate-Kontrolle.
+- Provider-/Mail-Konfiguration erfolgt vollständig per ENV (`CONTACT_PROVIDER`, `CONTACT_TO_EMAIL`, Provider-Keys/URLs).

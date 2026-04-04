@@ -1,0 +1,159 @@
+import { NextResponse } from "next/server";
+
+type ContactPayload = {
+  fullName: string;
+  email: string;
+  message: string;
+  companyWebsite?: string;
+};
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX = 5;
+
+const rateMap = new Map<string, number[]>();
+
+function getClientIp(request: Request): string {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  if (forwardedFor) {
+    return forwardedFor.split(",")[0]?.trim() || "unknown";
+  }
+
+  const realIp = request.headers.get("x-real-ip");
+  return realIp?.trim() || "unknown";
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (rateMap.get(ip) || []).filter((value) => now - value < RATE_WINDOW_MS);
+
+  if (recent.length >= RATE_LIMIT_MAX) {
+    rateMap.set(ip, recent);
+    return true;
+  }
+
+  recent.push(now);
+  rateMap.set(ip, recent);
+  return false;
+}
+
+function validatePayload(payload: ContactPayload): string | null {
+  const name = payload.fullName?.trim() || "";
+  const email = payload.email?.trim() || "";
+  const message = payload.message?.trim() || "";
+  const companyWebsite = payload.companyWebsite?.trim() || "";
+
+  if (companyWebsite.length > 0) {
+    return "Spam-Schutz ausgelöst. Bitte Formular erneut senden.";
+  }
+
+  if (!name || name.length < 2 || name.length > 120) {
+    return "Bitte gib einen Namen mit 2 bis 120 Zeichen an.";
+  }
+
+  if (!email || email.length > 254 || !EMAIL_REGEX.test(email)) {
+    return "Bitte gib eine gültige E-Mail-Adresse an.";
+  }
+
+  if (!message || message.length < 10 || message.length > 5000) {
+    return "Bitte gib eine Nachricht mit 10 bis 5000 Zeichen an.";
+  }
+
+  return null;
+}
+
+async function sendWithProvider(payload: ContactPayload): Promise<void> {
+  const provider = (process.env.CONTACT_PROVIDER || "noop").toLowerCase();
+
+  if (provider === "noop") {
+    return;
+  }
+
+  if (provider === "webhook") {
+    const webhookUrl = process.env.CONTACT_WEBHOOK_URL;
+    if (!webhookUrl) {
+      throw new Error("CONTACT_WEBHOOK_URL is required for CONTACT_PROVIDER=webhook");
+    }
+
+    const response = await fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(process.env.CONTACT_API_KEY ? { Authorization: `Bearer ${process.env.CONTACT_API_KEY}` } : {})
+      },
+      body: JSON.stringify({
+        to: process.env.CONTACT_TO_EMAIL,
+        subject: `New contact inquiry from ${payload.fullName}`,
+        payload
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error("Webhook provider request failed");
+    }
+
+    return;
+  }
+
+  if (provider === "resend") {
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const toEmail = process.env.CONTACT_TO_EMAIL;
+    const fromEmail = process.env.CONTACT_FROM_EMAIL;
+
+    if (!resendApiKey || !toEmail || !fromEmail) {
+      throw new Error("RESEND_API_KEY, CONTACT_TO_EMAIL and CONTACT_FROM_EMAIL are required for CONTACT_PROVIDER=resend");
+    }
+
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${resendApiKey}`
+      },
+      body: JSON.stringify({
+        from: fromEmail,
+        to: [toEmail],
+        subject: `New contact inquiry from ${payload.fullName}`,
+        text: `Name: ${payload.fullName}\nEmail: ${payload.email}\n\nMessage:\n${payload.message}`
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error("Resend provider request failed");
+    }
+
+    return;
+  }
+
+  throw new Error(`Unsupported CONTACT_PROVIDER: ${provider}`);
+}
+
+export async function POST(request: Request) {
+  try {
+    const ip = getClientIp(request);
+
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { ok: false, message: "Zu viele Anfragen in kurzer Zeit. Bitte versuche es in einigen Minuten erneut." },
+        { status: 429 }
+      );
+    }
+
+    const payload = (await request.json()) as ContactPayload;
+    const validationError = validatePayload(payload);
+
+    if (validationError) {
+      return NextResponse.json({ ok: false, message: validationError }, { status: 400 });
+    }
+
+    await sendWithProvider(payload);
+
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    console.error("Contact submit failed", error);
+    return NextResponse.json(
+      { ok: false, message: "Deine Anfrage konnte gerade nicht gesendet werden. Bitte versuche es später erneut." },
+      { status: 500 }
+    );
+  }
+}
