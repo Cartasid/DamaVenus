@@ -4,7 +4,9 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import SiteFooter from "@/components/layout/site-footer";
 import SiteHeader from "@/components/layout/site-header";
-import { siteConfig } from "@/content/data/site.config";
+import { resolveSiteUrl, siteConfig } from "@/content/data/site.config";
+
+const siteUrl = resolveSiteUrl();
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,7 +28,7 @@ const metadataDescription = siteConfig.metadata.description;
 export const metadata: Metadata = {
   title: metadataTitle,
   description: metadataDescription,
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: new URL(siteUrl),
   openGraph: {
     siteName: siteConfig.name,
     type: "website",
