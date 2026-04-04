@@ -238,6 +238,16 @@
 5. **Nächster Schritt**
    - Im nächsten Schritt erfolgt der finale Build der Seite **`/about`** auf Basis der jetzt priorisierten Daten-, Text- und Asset-Struktur.
 
+## Update 2026-04-04 – Metadata/SEO-Status konkretisiert
+1. **Finalisierte Metadata-/SEO-Bereiche**
+   - Die grundlegenden Metadata-/SEO-Bereiche sind als finalisiert markiert: Seitentitel-/Beschreibungssystem, robots-/Canonical-Basis sowie die konsistente metadata-getriebene Ausspielung über die bestehenden Seitenrouten.
+2. **Vorhandene OG-/Sharing-Grundlage**
+   - Eine funktionale OG-/Sharing-Grundlage ist vorhanden und als technische Basis gesetzt (inkl. strukturierter OG-Metadaten als Ausgangspunkt für Link-Previews).
+3. **Offene technische Seitendetails**
+   - Weiterhin offen sind die finalen technischen Seitendetails: finale OG-Routebilder je Seite, verbindliche Produktions-URL/Domain sowie finale Icon-/App-Icon-Fassungen für den produktiven Rollout.
+4. **Nächster finaler Review-/Cleanup-Pass**
+   - Vor finaler Gesamtfreigabe ist ein expliziter letzter Review-/Cleanup-Pass vorgesehen, mit Fokus auf Metadata-/OG-Konsistenz, technische Endabnahme und Bereinigung verbliebener Platzhalter.
+
 ## Update 2026-04-03 – Schritt 12a `/about` Status konkretisiert (final/nahezu final)
 1. **Auf `/about` jetzt final bzw. nahezu final**
    - **Intro-Frame/oberer Einstieg:** stabil umgesetzt mit klarer About-Einstiegsstruktur (Label, Headline, Intro-Text) als reproduzierbarer Startpunkt.
