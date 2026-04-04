@@ -14,7 +14,7 @@ const secondaryLinkGroups: Array<{ purpose: "listen" | "watch" | "social" | "dow
 function renderBody(body: string | string[]) {
   if (Array.isArray(body)) {
     return (
-      <div className="space-y-2 text-sm text-muted">
+      <div className="space-y-2 typo-body-m max-w-2xl">
         {body.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
@@ -22,7 +22,7 @@ function renderBody(body: string | string[]) {
     );
   }
 
-  return <p className="text-sm text-muted">{body}</p>;
+  return <p className="typo-body-m max-w-2xl">{body}</p>;
 }
 
 function renderBlock(block: (typeof pressEpkBlocks)[number], options?: { purpose?: string; ctaVariant?: "primary" | "text" | "request" }) {
@@ -31,9 +31,9 @@ function renderBlock(block: (typeof pressEpkBlocks)[number], options?: { purpose
 
   return (
     <article key={block.id} className="space-y-2 rounded-lg border border-white/10 p-4">
-      {purpose ? <p className="text-xs uppercase tracking-[0.2em] text-muted">{purpose}</p> : null}
-      <h3 className="font-display text-2xl font-semibold">{block.title}</h3>
-      <p className="text-xs uppercase tracking-[0.2em] text-muted">{block.shortDescriptor}</p>
+      {purpose ? <p className="typo-label">{purpose}</p> : null}
+      <h3 className="typo-h2">{block.title}</h3>
+      <p className="typo-label">{block.shortDescriptor}</p>
       {renderBody(block.body)}
       <Link href={block.target} className="first-impression-cta">
         {block.ctaLabel}
@@ -64,10 +64,10 @@ export default function PressPage() {
     <section className="space-y-8">
       {introBlock ? (
         <section className="space-y-3 rounded-lg border border-white/10 p-6">
-          <p className="text-xs uppercase tracking-[0.2em] text-muted">Press & EPK</p>
-          <h1 className="font-display text-4xl font-semibold">{introBlock.title}</h1>
-          {typeof introBlock.body === "string" ? <p className="text-sm text-muted">{introBlock.body}</p> : renderBody(introBlock.body)}
-          {summaryBlock ? (typeof summaryBlock.body === "string" ? <p className="text-sm text-muted">{summaryBlock.body}</p> : renderBody(summaryBlock.body)) : null}
+          <p className="typo-label">Press & EPK</p>
+          <h1 className="typo-h1">{introBlock.title}</h1>
+          {typeof introBlock.body === "string" ? <p className="typo-body-m max-w-2xl">{introBlock.body}</p> : renderBody(introBlock.body)}
+          {summaryBlock ? (typeof summaryBlock.body === "string" ? <p className="typo-body-m max-w-2xl">{summaryBlock.body}</p> : renderBody(summaryBlock.body)) : null}
           <Link href={introBlock.target} className="first-impression-cta">
             {introBlock.ctaLabel}
           </Link>
@@ -75,12 +75,12 @@ export default function PressPage() {
       ) : null}
 
       <section className="space-y-4">
-        <h2 className="font-display text-2xl font-semibold">Primary Press Blocks</h2>
+        <h2 className="typo-h2">Primary Press Blocks</h2>
         {primaryLeadBlocks.map((block) => renderBlock(block))}
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-display text-2xl font-semibold">Secondary Press Blocks</h2>
+        <h2 className="typo-h2">Secondary Press Blocks</h2>
         {secondaryInfoBlocks.filter((block) => block.id !== "contactBlock").map((block) => renderBlock(block))}
         {secondaryLinkGroups.map((group) => {
           const groupBlocks = group.blockIds
