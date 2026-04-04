@@ -4,6 +4,7 @@ import { prioritizedAssets } from "@/content/dama-venus/assets";
 export const siteConfig = {
   name: "Dama Venus",
   language: "de",
+  url: "https://damavenus.com",
   metadata: {
     title: "Dama Venus",
     description: "Music. Image. Presence."
