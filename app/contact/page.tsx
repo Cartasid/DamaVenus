@@ -67,7 +67,7 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <button type="submit" className="first-impression-cta">
+        <button type="submit" className="cta-primary">
           {contactContent.form.ctaLabel}
         </button>
         <div id="contact-form-status" role="status" aria-live="polite" data-feature="contact-success-message" hidden>
@@ -79,7 +79,7 @@ export default function ContactPage() {
         <section className="space-y-2" aria-label="Alternative contact options">
           <h2 className="text-sm font-semibold">Alternative Contact</h2>
           <div className="text-sm text-muted">
-            <a href={contactContent.cta.href} className="underline">
+            <a href={contactContent.cta.href} className="text-link">
               {contactContent.cta.label}
             </a>
           </div>

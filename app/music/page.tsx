@@ -66,7 +66,7 @@ export default function MusicPage() {
               {musicData.ctaLabels.listen}
             </Link>
             {featured.watchLinks?.[0] ? (
-              <Link href={featured.watchLinks[0].href} className="first-impression-cta">
+              <Link href={featured.watchLinks[0].href} className="cta-secondary">
                 {musicData.ctaLabels.watch}
               </Link>
             ) : null}
@@ -154,12 +154,12 @@ export default function MusicPage() {
                   </h3>
                   <div className="flex flex-wrap gap-3">
                     {watchAction && primaryWatchLabel ? (
-                      <Link href={watchAction.href} className="first-impression-cta">
+                      <Link href={watchAction.href} className="cta-secondary">
                         {primaryWatchLabel}
                       </Link>
                     ) : null}
                     {secondaryAction && secondaryLabel ? (
-                      <Link href={secondaryAction.href} className={watchAction ? "text-sm text-muted underline-offset-4 hover:underline" : "first-impression-cta"}>
+                      <Link href={secondaryAction.href} className={watchAction ? "text-link" : "cta-primary"}>
                         {secondaryLabel}
                       </Link>
                     ) : null}
