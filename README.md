@@ -68,6 +68,11 @@ Zusätzlich relevant:
 - `NODE_ENV`
 - `PORT`
 
+URL-Resolution-Regel:
+- Primär wird `NEXT_PUBLIC_SITE_URL` verwendet.
+- Ist `NEXT_PUBLIC_SITE_URL` leer oder ungültig, fällt die App auf `https://damavenus.com` zurück.
+- Für Metadaten, `robots.txt` und `sitemap.xml` wird diese zentrale Auflösung verwendet.
+
 ## Deployment-Flow
 Produktionsschritte sind dokumentiert in:
 
