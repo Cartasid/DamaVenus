@@ -104,7 +104,7 @@ export default function HomePage() {
         </article>
 
         <aside className="space-y-4">
-          <nav aria-label="Home Orientierung" className="first-impression-tile rounded-lg p-3">
+          <nav aria-label="Home navigation" className="first-impression-tile rounded-lg p-3">
             <ul className="flex flex-wrap gap-x-4 gap-y-2 typo-body-s">
               {navigationItems.map((item) => (
                 <li key={item.href}>
@@ -153,7 +153,7 @@ export default function HomePage() {
         </aside>
       </div>
 
-      <section aria-labelledby="featured-release-title" className="section-gap-lg rounded-lg border border-white/10 bg-surface/60 p-6">
+      <section aria-labelledby="featured-release-title" className="module-card section-gap-lg bg-surface/60">
         <div className="grid gap-5 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] md:items-center">
           {featuredReleaseAsset ? (
             <Image
@@ -190,7 +190,7 @@ export default function HomePage() {
             className="h-72 w-full rounded-lg object-cover"
           />
         ) : null}
-        <article className="rounded-lg border border-white/10 bg-surface/70 p-5">
+        <article className="module-card bg-surface/70">
           <h2 id="visual-story-title" className="typo-h2">
             {visualsModule?.copy.headline}
           </h2>
@@ -209,7 +209,7 @@ export default function HomePage() {
         </h2>
       </section>
 
-      <section aria-labelledby="press-epk-title" className="section-gap-lg rounded-lg border border-white/10 bg-surface/50 p-6">
+      <section aria-labelledby="press-epk-title" className="module-card section-gap-lg bg-surface/50">
         <div className="grid gap-5 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center">
           <article className="space-y-3">
             <h2 id="press-epk-title" className="typo-h2">

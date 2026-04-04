@@ -79,11 +79,11 @@ export default function AboutPage() {
         </header>
       )}
 
-      <section className="space-y-2" aria-label="Positionierung">
+      <section className="space-y-2" aria-label="Positioning">
         <p className="typo-body-m max-w-2xl">{aboutBio.mediumText}</p>
       </section>
 
-      <section className="space-y-2 rounded-lg border border-white/10 p-4" aria-label="Haltung">
+      <section className="space-y-2 rounded-lg border border-white/10 p-4" aria-label="Stance">
         <p className="typo-label">Short Bio</p>
         <p className="typo-body-m max-w-2xl">{aboutBio.shortText}</p>
       </section>
@@ -99,7 +99,7 @@ export default function AboutPage() {
 
       <section className="space-y-3 rounded-lg border border-white/10 bg-surface/50 p-4" aria-labelledby="about-method-heading">
         <h2 id="about-method-heading" className="typo-label">
-          Arbeitsweise
+          Method
         </h2>
         <ul className="grid gap-2 sm:grid-cols-2">
           {keyStatements.map((statement) => (
