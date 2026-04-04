@@ -136,12 +136,7 @@ Provider-spezifisch ergänzen:
 Die Asset-Pipeline ist ein separater Schritt und **nicht** Teil von `./scripts/deploy-prod.sh` oder des Docker-Builds.
 Die Pipeline verwendet `sharp` als primäre Engine für Bildverarbeitung (Konvertierung/Optimierung und Derivate).
 
-Bei neuen/angepassten Bildquellen aus `pics/` vor dem Deploy ausführen:
-
-```bash
-cd /opt/dama-venus
-node scripts/prepare-dama-venus-assets.mjs
-```
+Kein separater Host-Node-Schritt erforderlich: neue/angepasste Bildquellen aus `pics/` werden beim Deploy über `./scripts/deploy-prod.sh` verarbeitet.
 
 HEIC-Hinweis:
 - Wenn `sharp` ein HEIC direkt lesen kann, reicht `sharp` allein.
