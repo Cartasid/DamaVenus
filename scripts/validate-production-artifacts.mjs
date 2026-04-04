@@ -24,12 +24,60 @@ async function ensureAtLeastOneBuiltCss() {
   try {
     cssFiles = (await listFiles(cssDir)).filter((filePath) => filePath.endsWith('.css'));
   } catch {
-    throw new Error('Build-CSS-Verzeichnis fehlt: .next/static/css');
+    throw new Error('CSS-Datei fehlt: Build-CSS-Verzeichnis fehlt (.next/static/css).');
   }
 
   if (cssFiles.length < 1) {
-    throw new Error('Keine CSS-Datei unter .next/static/css gefunden.');
+    throw new Error('CSS-Datei fehlt: Keine CSS-Datei unter .next/static/css gefunden.');
   }
+
+  const containsTailwindOutput = (cssSource) => {
+    const hasUtilitySelector = /(?:^|[}\s])\.[_a-zA-Z][\w-]*(?:\\:[\w-]+)*\s*\{/m.test(cssSource);
+    const hasTailwindVariable = /--tw-[\w-]+\s*:/.test(cssSource);
+    return hasUtilitySelector && hasTailwindVariable;
+  };
+
+  for (const cssFile of cssFiles) {
+    const cssSource = await fs.readFile(cssFile, 'utf8');
+    if (containsTailwindOutput(cssSource)) {
+      return;
+    }
+  }
+
+  throw new Error('CSS-Datei vorhanden, aber Tailwind-Ausgabe nicht erkannt.');
+}
+
+async function ensureHomepageReferencesCssInBuildManifest() {
+  const manifestCandidates = [
+    { file: '.next/build-manifest.json', keys: ['/', '/index'] },
+    { file: '.next/app-build-manifest.json', keys: ['/', '/page'] },
+  ];
+
+  for (const candidate of manifestCandidates) {
+    const manifestPath = path.resolve(projectRoot, candidate.file);
+    let manifest;
+    try {
+      manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
+    } catch {
+      continue;
+    }
+
+    const pages = manifest?.pages;
+    if (!pages || typeof pages !== 'object') {
+      continue;
+    }
+
+    for (const key of candidate.keys) {
+      const assets = pages[key];
+      if (Array.isArray(assets) && assets.some((asset) => typeof asset === 'string' && asset.endsWith('.css'))) {
+        return;
+      }
+    }
+  }
+
+  throw new Error(
+    'Build-Manifest-Check fehlgeschlagen: Startseite referenziert kein CSS-Asset.'
+  );
 }
 
 async function parsePrioritizedAssets() {
@@ -94,10 +142,11 @@ async function ensureHomepageCriticalAssets(idToFinalPath, homepageAssetIds) {
 
 async function run() {
   await ensureAtLeastOneBuiltCss();
+  await ensureHomepageReferencesCssInBuildManifest();
   const idToFinalPath = await parsePrioritizedAssets();
   const homepageAssetIds = await parseHomepageAssetIds();
   await ensureHomepageCriticalAssets(idToFinalPath, homepageAssetIds);
-  console.log('Production-Artefakte validiert: CSS vorhanden, kritische Homepage-Assets vorhanden, IDs auf Dateien auflösbar.');
+  console.log('Production-Artefakte validiert: CSS vorhanden und als Tailwind-Ausgabe erkannt, Build-Manifeste referenzieren CSS für die Startseite, kritische Homepage-Assets vorhanden, IDs auf Dateien auflösbar.');
 }
 
 run().catch((error) => {
