@@ -1,17 +1,11 @@
-import Image from "next/image";
 import { contactContent } from "@/content/data/contact.data";
-import { assetMap } from "@/content/data/site.config";
 
 export default function ContactPage() {
-  const accentAsset = contactContent.accent ? assetMap[contactContent.accent.assetId] : undefined;
-  const accentRole = contactContent.accent?.role ?? accentAsset?.role;
-  const accentAlt = accentRole === "decorative" ? "" : contactContent.accent?.alt ?? accentAsset?.alt ?? "Contact accent";
-
   return (
     <section className="space-y-8">
       <header className="space-y-3">
-        <h1 className="font-display text-3xl font-bold">{contactContent.headline}</h1>
-        <p className="text-muted">{contactContent.subhead}</p>
+        <h1 className="font-display text-3xl font-bold">{contactContent.intro.headline}</h1>
+        <p className="text-muted">{contactContent.intro.subhead}</p>
       </header>
 
       <form className="space-y-4" aria-label="Contact form">
@@ -55,19 +49,31 @@ export default function ContactPage() {
       </form>
 
       <div aria-live="polite" data-feature="contact-success-message" hidden>
-        <p className="text-sm text-muted">Thanks, your inquiry has been sent successfully.</p>
+        <h2 className="text-sm font-semibold">{contactContent.form.success.title}</h2>
+        <p className="text-sm text-muted">{contactContent.form.success.message}</p>
       </div>
 
-      {contactContent.cta?.href ? (
-        <section className="space-y-2" aria-label="Alternative contact options">
-          <h2 className="text-sm font-semibold">Alternative Contact</h2>
-          <div className="text-sm text-muted">
-            <a href={contactContent.cta.href} className="underline">
-              {contactContent.cta.label}
-            </a>
-          </div>
-        </section>
-      ) : null}
+      <section className="space-y-2" aria-label="Alternative contact options">
+        <h2 className="text-sm font-semibold">Alternative Contact</h2>
+        <ul className="space-y-2 text-sm text-muted">
+          {contactContent.alternatePaths.map((path) => (
+            <li key={path.id} className="space-y-1">
+              <p className="font-medium text-foreground">{path.label}</p>
+              {path.href ? (
+                <a href={path.href} className="underline">
+                  {path.href}
+                </a>
+              ) : null}
+              {path.email ? (
+                <a href={`mailto:${path.email}`} className="underline">
+                  {path.email}
+                </a>
+              ) : null}
+              <p>{path.note}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
     </section>
   );
 }
