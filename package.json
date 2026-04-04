@@ -10,7 +10,7 @@
     "prepare:dama-venus-assets": "node scripts/prepare-dama-venus-assets.mjs"
   },
   "dependencies": {
-    "next": "15.3.1",
+    "next": "15.3.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "sharp": "0.34.5"
