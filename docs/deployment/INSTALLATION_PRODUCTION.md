@@ -1,5 +1,7 @@
 # Dama-Venus Produktion auf Ubuntu 24.04 LTS
 
+> **Launch-Hinweis:** Aktuell not launch-ready, solange `/privacy` und `/imprint` nur Placeholder-Inhalte enthalten.
+
 Diese Anleitung setzt die Website reproduzierbar mit **Docker (App)** + **Nginx (Host Reverse Proxy)** + **Let's Encrypt (Certbot)** auf.
 
 ## 1) Annahmen / Zielwerte
@@ -118,6 +120,11 @@ Mindestens setzen:
 - `NEXT_PUBLIC_SITE_URL=https://example.com`
 - `CONTACT_PROVIDER` (`noop`, `webhook` oder `resend`)
 
+URL-Resolution-Regel:
+- Primär wird `NEXT_PUBLIC_SITE_URL` verwendet.
+- Ist `NEXT_PUBLIC_SITE_URL` leer oder ungültig, fällt die App auf `https://damavenus.com` zurück.
+- Diese aufgelöste URL wird für Metadaten, `robots.txt` (`host`, `sitemap`) und `sitemap.xml` genutzt.
+
 Provider-spezifisch ergänzen:
 
 - Für `CONTACT_PROVIDER=webhook`:
@@ -134,13 +141,14 @@ Provider-spezifisch ergänzen:
 ## 9) Asset-Preparation (bei neuen Bildern aus `pics/`)
 
 Die Asset-Pipeline ist ein separater Schritt und **nicht** Teil von `./scripts/deploy-prod.sh` oder des Docker-Builds.
+Die Pipeline verwendet `sharp` als primäre Engine für Bildverarbeitung (Konvertierung/Optimierung und Derivate).
 
-Bei neuen/angepassten Bildquellen aus `pics/` vor dem Deploy ausführen:
+Kein separater Host-Node-Schritt erforderlich: neue/angepasste Bildquellen aus `pics/` werden beim Deploy über `./scripts/deploy-prod.sh` verarbeitet.
 
-```bash
-cd /opt/dama-venus
-node scripts/prepare-dama-venus-assets.mjs
-```
+HEIC-Hinweis:
+- Wenn `sharp` ein HEIC direkt lesen kann, reicht `sharp` allein.
+- Nur wenn `sharp` für eine HEIC-Datei fehlschlägt, greift das Script auf externe Fallback-Tools zurück (`magick`, `convert`, `heif-convert`, `sips`).
+- Ist kein Fallback-Tool verfügbar, werden diese HEIC-Dateien non-blocking übersprungen und im Mapping-Status ausgewiesen.
 
 ---
 
