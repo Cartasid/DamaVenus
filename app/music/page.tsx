@@ -57,7 +57,7 @@ export default function MusicPage() {
         ) : null}
 
         <div>
-          <Link href={featured.primaryCta.href} className="first-impression-cta">
+          <Link href={featured.primaryCta.href} className="cta-primary">
             {featured.primaryCta.label}
           </Link>
         </div>
@@ -82,7 +82,7 @@ export default function MusicPage() {
           {featured.subtitle ? <p className="typo-body-m">{featured.subtitle}</p> : null}
           <p className="typo-body-m">{featured.shortText}</p>
           <div className="flex flex-wrap gap-3">
-            <Link href={featured.primaryCta.href} className="first-impression-cta">
+            <Link href={featured.primaryCta.href} className="cta-primary">
               {musicData.ctaLabels.listen}
             </Link>
             {featured.watchLinks?.[0] ? (
@@ -103,7 +103,7 @@ export default function MusicPage() {
                 <p className="typo-label">{release.status}</p>
                 <h3 className="typo-h3">{release.title}</h3>
                 <p className="typo-body-m">{release.shortText}</p>
-                <Link href={release.primaryCta.href} className="first-impression-cta">
+                <Link href={release.primaryCta.href} className="cta-primary">
                   {release.primaryCta.label}
                 </Link>
               </li>
@@ -128,7 +128,7 @@ export default function MusicPage() {
                   ) : null}
                   <h3 className="typo-h4">{release.title}</h3>
                   <p className="typo-body-m">{release.shortText}</p>
-                  <Link href={release.primaryCta.href} className="first-impression-cta">
+                  <Link href={release.primaryCta.href} className="cta-primary">
                     {release.primaryCta.label}
                   </Link>
                 </li>
@@ -179,14 +179,12 @@ export default function MusicPage() {
                       </Link>
                     ) : null}
                     {secondaryAction && secondaryLabel ? (
-                      <Link href={secondaryAction.href} className={watchAction ? "typo-body-s underline-offset-4 hover:underline" : "first-impression-cta"}>
+                      <Link href={secondaryAction.href} className={watchAction ? "typo-body-s underline-offset-4 hover:underline" : "cta-primary"}>
                         {secondaryLabel}
                       </Link>
                     ) : null}
                   </div>
-                  <p className="typo-label">
-                    Asset hints: {releaseAsset?.cropHint} · {releaseAsset?.focusHint}
-                  </p>
+                  {/* Asset hints intentionally not rendered in UI. */}
                 </article>
               </li>
             );

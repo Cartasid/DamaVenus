@@ -1,4 +1,4 @@
-import type { SectionContent } from "@/lib/types";
+import { getCtaActionKind, type SectionContent, validateCta } from "@/lib/types";
 
 type VisualEntryType = "series" | "portrait" | "still" | "linked-visual";
 type VisualRole = "lead" | "supporting" | "quiet-spacer";
@@ -126,5 +126,9 @@ export const visualsData = {
   renderingModules: ["grid", "series-section", "large-image-block", "editorial-image-row", "linked-visual-module"] as VisualModuleType[]
 } as const;
 
-// Compatibility export for current visuals route shell.
-export const visualsContent = visualsData.intro;
+if (visualsIntro.cta) {
+  validateCta(visualsIntro.cta, "visuals intro");
+  if (getCtaActionKind(visualsIntro.cta.href) !== "internal") {
+    throw new Error("Visuals intro CTA must target an internal route.");
+  }
+}

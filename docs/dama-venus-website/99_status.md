@@ -1,20 +1,18 @@
 # 99 Status
 
-## Bereits abgeschlossen
-- Die Creative Direction für die Dama-Venus-Website ist festgelegt und gilt als verbindlicher Rahmen.
-- Die visuelle Leitlinie ist klar definiert: dunkel-luxuriöse Bühne, editorial-cineastische Bilddramaturgie, reduzierte UI-Lautstärke.
-- Das Schwarzweiß-zu-Farbe-Motiv ist als verbindliches dramaturgisches Prinzip für die Startseite entschieden.
-- Die reduzierte Sitemap, die Komponentenlogik, die Interaktionsprinzipien sowie Do/Don’t-Regeln sind als Arbeitsgrundlage beschlossen.
-- Konsistenzabgleich zwischen `00_project_brief.md` und `01_creative_direction.md` ist durchgeführt; technische Leitplanken wurden in der Creative Direction explizit nachgezogen.
-- Die Asset-Strategie ist als eigener Schritt dokumentiert (`03_asset_strategy.md`) und für die Folgearbeit verbindlich gemacht.
+## Aktueller Stand (faktenbasiert, Code-gegenprüfbar)
+- Next.js-App-Routen sind vorhanden für `/`, `/music`, `/visuals`, `/about`, `/press`, `/contact`, `/privacy`, `/imprint`.  
+  Code: `app/page.tsx`, `app/music/page.tsx`, `app/visuals/page.tsx`, `app/about/page.tsx`, `app/press/page.tsx`, `app/contact/page.tsx`, `app/privacy/page.tsx`, `app/imprint/page.tsx`.
+- SEO-Basisrouten sind vorhanden: `app/robots.ts` und `app/sitemap.ts` nutzen `siteConfig.url` als Basisdomain.
+- Navigation enthält Legal-Links (`/privacy`, `/imprint`) in `content/data/navigation.data.ts`.
+- Kontakt-Flow ist technisch vorhanden: UI unter `app/contact/page.tsx`/`app/contact/ContactForm.tsx`, API unter `app/api/contact/route.ts`.
+- Der aktuelle Build-Blocker bleibt bestehen: In `content/data/homepage.data.ts` wird bei CTA-Abweichung explizit `Invalid CTA config for home module: press` geworfen.
 
-## Verbindliche Entscheidungen
-- Die in `01_creative_direction.md` dokumentierte Creative Direction ist für die Folgearbeiten maßgeblich.
-- Die definierte Farbpalette (`#050505`, `#FF4FA8`, `#FF8DCC`, `#F3EEF2`, `#B9B1B7`) ist verbindlich anzuwenden.
-- Die reduzierte Informationsarchitektur mit den Hauptseiten Startseite, Portfolio, Über, Leistungen, Kontakt/Buchung ist gesetzt.
-- Interaktionen bleiben ruhig, präzise und funktional; Lesbarkeit, Kontrast und klare Handlungsführung haben Vorrang.
-- Technische Leitplanken sind verbindlich und deckungsgleich in Brief und Creative Direction festgehalten: Next.js, React, Tailwind CSS, komponentenbasierter Aufbau, Responsiveness, Performance, Accessibility und image-first.
-- Für die spätere Asset-Verwendung ist folgende Grundlogik gesetzt: 3–6 Lead-Assets als visuelle Hauptträger, asymmetrische Homepage-Komposition mit 5 Kernkacheln (1 Lead + 2 primär + 2 sekundär), SW→Farbe als dramaturgische Steuerung.
+## Verifizierte Erledigungen
+- Privacy- und Imprint-Seiten sind angelegt (derzeit Placeholder-Inhalte).
+- Robots- und Sitemap-Routen sind implementiert.
+- Navigation wurde um Privacy/Imprint ergänzt.
+- Kontaktformular inkl. Submit-Route ist im Code vorhanden.
 
 ## Offene Punkte
 - Reale Bildassets wurden in `/pics` ingestiert, aber eine konkrete visuelle Kuratierung auf Dateiebene ist noch ausstehend.

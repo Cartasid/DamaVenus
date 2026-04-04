@@ -1,4 +1,4 @@
-import type { CTA, ReleaseItem, SectionContent } from "@/lib/types";
+import { getCtaActionKind, type CTA, type ReleaseItem, type SectionContent, validateCta } from "@/lib/types";
 import { contactContent } from "@/content/data/contact.data";
 import { pressContent } from "@/content/data/press.data";
 
@@ -56,7 +56,6 @@ type HomepageModuleId =
 type HomepageModule = {
   id: HomepageModuleId;
   assetId?: string;
-  assetPath?: string;
   alt: string;
   cropFocusHint: string;
   priority: "high" | "medium" | "low";
@@ -126,7 +125,6 @@ export const homepageCoreModules: HomepageModule[] = [
   {
     id: "press",
     assetId: "home-press-preview",
-    assetPath: "/press",
     alt: "Press and EPK access module",
     cropFocusHint: "center-subject",
     priority: "low",
@@ -141,7 +139,6 @@ export const homepageCoreModules: HomepageModule[] = [
   {
     id: "contactNewsletter",
     assetId: "home-contact-newsletter",
-    assetPath: `mailto:${contactContent.primaryContact.email}`,
     alt: "Contact and newsletter call-to-action module",
     cropFocusHint: "center-safe-text",
     priority: "low",
@@ -150,7 +147,7 @@ export const homepageCoreModules: HomepageModule[] = [
     copy: {
       headline: contactContent.intro.headline,
       subline: contactContent.intro.subhead,
-      cta: { label: contactContent.form.ctaLabel, href: `mailto:${contactContent.primaryContact.email}` }
+      cta: { label: contactContent.form.ctaLabel, href: contactContent.primaryContact.href }
     }
   }
 ];
@@ -158,8 +155,8 @@ export const homepageCoreModules: HomepageModule[] = [
 const expectedHomeModuleCtas: Partial<Record<HomepageModuleId, CTA>> = {
   featuredRelease: { label: "Listen Now", href: "/music" },
   visuals: { label: "View Visuals", href: "/visuals" },
-  press: { label: "Open EPK", href: "/press" },
-  contactNewsletter: { label: "Send Inquiry", href: `mailto:${contactContent.primaryContact.email}` }
+  press: { label: pressContent.cta?.label ?? "Zum Press & EPK Überblick", href: pressContent.cta?.href ?? "/press" },
+  contactNewsletter: { label: "Send Inquiry", href: contactContent.primaryContact.href }
 };
 
 const primaryToSecondaryCtaSequence: HomepageModuleId[] = ["featuredRelease", "visuals", "press", "contactNewsletter"];
@@ -172,6 +169,7 @@ function validateHomeModuleCtasAndFlow(modules: HomepageModule[]): void {
     if (!cta || cta.label !== expectedCta.label || cta.href !== expectedCta.href) {
       throw new Error(`Invalid CTA config for home module: ${moduleId}`);
     }
+    validateCta(cta, `homepage module ${moduleId}`);
   }
 
   const sequenceIndexes = primaryToSecondaryCtaSequence.map((moduleId) => modules.findIndex((module) => module.id === moduleId));
@@ -183,3 +181,8 @@ function validateHomeModuleCtasAndFlow(modules: HomepageModule[]): void {
 }
 
 validateHomeModuleCtasAndFlow(homepageCoreModules);
+
+const contactModuleCta = homepageCoreModules.find((module) => module.id === "contactNewsletter")?.copy.cta;
+if (!contactModuleCta || getCtaActionKind(contactModuleCta.href) !== "internal") {
+  throw new Error("Homepage contact CTA must use internal contact endpoint.");
+}

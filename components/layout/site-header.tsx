@@ -33,7 +33,7 @@ export default function SiteHeader() {
 
   return (
     <header className="border-b border-white/10 bg-surface/80">
-      <div className="mx-auto w-full max-w-5xl px-6 py-4">
+      <div className="site-container py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="font-display text-lg font-semibold tracking-wide no-underline">
             {siteConfig.name}
@@ -44,11 +44,11 @@ export default function SiteHeader() {
             type="button"
             aria-expanded={isMenuOpen}
             aria-controls={menuId}
-            aria-label={isMenuOpen ? "Navigation schließen" : "Navigation öffnen"}
+            aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
             className="inline-flex min-h-11 items-center rounded-md px-3 text-sm text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current md:hidden"
             onClick={() => setIsMenuOpen((open) => !open)}
           >
-            Menü
+            Menu
           </button>
 
           <nav aria-label="Primary Navigation" className="hidden items-center gap-4 text-sm text-muted md:flex">
