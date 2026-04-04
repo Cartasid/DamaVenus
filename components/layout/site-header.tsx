@@ -33,7 +33,7 @@ export default function SiteHeader() {
 
   return (
     <header className="border-b border-white/10 bg-surface/80">
-      <div className="mx-auto w-full max-w-5xl px-6 py-4">
+      <div className="site-container py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="font-display text-lg font-semibold tracking-wide no-underline">
             {siteConfig.name}
