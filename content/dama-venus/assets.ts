@@ -6,7 +6,9 @@ import type {
 
 export type PrioritizedAsset = {
   id: string;
+  /** Public delivery path consumed by frontend (<img/src>, links, etc.); must stay under /assets/dama-venus/... */
   finalPath: string;
+  /** Pipeline input path (raw/curated source material only); never use for frontend delivery references. */
   sourcePath: string;
   area: "home" | "music" | "visuals" | "about" | "press";
   recommendedModuleType: string;
@@ -445,7 +447,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "press-detail-still",
     finalPath: "/assets/dama-venus/press/dv_press_detail_still_bw_1x1_v01.jpg",
-    sourcePath: "pics/Unnamed-1.jpg",
+    sourcePath: "pics/unnamed.webp",
     area: "press",
     recommendedModuleType: "featured-press-image",
     altDraft: "Detail still from Dama Venus press visual sequence",
