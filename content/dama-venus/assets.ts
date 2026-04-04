@@ -26,7 +26,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "home-lead-portrait",
     finalPath: "/assets/dama-venus/home/dv_home_lead_portrait_main_color_3x4_v01.jpeg",
-    sourcePath: "assets-src/dama-venus/curated/dv_curated_press_portrait_main_color_3x4_v01.jpeg",
+    sourcePath: "pics/Cinderela-241.jpg",
     area: "home",
     recommendedModuleType: "image",
     altDraft: "Dama Venus lead portrait",
@@ -40,7 +40,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "home-release-cover",
     finalPath: "/assets/dama-venus/home/dv_home_release_cover_primary_color_4x5_v01.jpg",
-    sourcePath: "assets-src/dama-venus/curated/dv_curated_release_cover_primary_color_4x5_v01.jpg",
+    sourcePath: "pics/spotify_canvas_9x16.jpg",
     area: "home",
     recommendedModuleType: "image",
     altDraft: "Current Chapter cover",
@@ -54,7 +54,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "home-visual-preview",
     finalPath: "/assets/dama-venus/visuals/dv_visuals_story_frame01_bw_16x9_v01.jpeg",
-    sourcePath: "assets-src/dama-venus/curated/dv_curated_visual_story_frame01_bw_16x9_v01.jpeg",
+    sourcePath: "pics/Cinderela-210.JPEG",
     area: "home",
     recommendedModuleType: "image",
     altDraft: "Frames in Motion preview",
@@ -68,7 +68,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "home-statement-editorial",
     finalPath: "/assets/dama-venus/visuals/dv_visuals_story_frame01_bw_16x9_v01.jpeg",
-    sourcePath: "assets-src/dama-venus/curated/dv_curated_visual_story_frame01_bw_16x9_v01.jpeg",
+    sourcePath: "pics/Cinderela-210.JPEG",
     area: "home",
     recommendedModuleType: "image",
     altDraft: "Editorial background for homepage statement",
@@ -82,7 +82,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "home-contact-newsletter",
     finalPath: "/assets/dama-venus/home/dv_home_release_cover_primary_color_4x5_v01.jpg",
-    sourcePath: "assets-src/dama-venus/curated/dv_curated_release_cover_primary_color_4x5_v01.jpg",
+    sourcePath: "pics/spotify_canvas_9x16.jpg",
     area: "home",
     recommendedModuleType: "image",
     altDraft: "Contact and newsletter module visual",
@@ -96,7 +96,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "home-press-preview",
     finalPath: "/assets/dama-venus/home/dv_home_lead_portrait_main_color_3x4_v01.jpeg",
-    sourcePath: "assets-src/dama-venus/curated/dv_curated_press_portrait_main_color_3x4_v01.jpeg",
+    sourcePath: "pics/Cinderela-241.jpg",
     area: "home",
     recommendedModuleType: "image",
     altDraft: "Home press preview portrait",
@@ -111,7 +111,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "music-current-chapter-cover",
     finalPath: "/assets/dama-venus/music/dv_music_current_chapter_cover_color_4x5_v01.jpg",
-    sourcePath: "assets-src/dama-venus/curated/dv_curated_release_cover_primary_color_4x5_v01.jpg",
+    sourcePath: "pics/spotify_canvas_9x16.jpg",
     area: "music",
     recommendedModuleType: "featured-release",
     altDraft: "Current Chapter single cover by Dama Venus",
@@ -125,7 +125,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "music-current-chapter-visual",
     finalPath: "/assets/dama-venus/music/dv_music_current_chapter_visual_color_16x9_v01.jpg",
-    sourcePath: "assets-src/dama-venus/curated/dv_curated_release_cover_primary_color_4x5_v01.jpg",
+    sourcePath: "pics/spotify_canvas_9x16.jpg",
     area: "music",
     recommendedModuleType: "visual-release",
     altDraft: "Current Chapter visual frame",
@@ -139,7 +139,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "music-midnight-signal-cover",
     finalPath: "/assets/dama-venus/music/dv_music_midnight_signal_cover_bw_4x5_v01.jpg",
-    sourcePath: "assets-src/dama-venus/curated/dv_curated_visual_story_frame01_bw_16x9_v01.jpeg",
+    sourcePath: "pics/Cinderela-210.JPEG",
     area: "music",
     recommendedModuleType: "release-card",
     altDraft: "Midnight Signal single artwork",
@@ -153,7 +153,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "music-afterglow-cut-cover",
     finalPath: "/assets/dama-venus/music/dv_music_afterglow_cut_cover_color_1x1_v01.jpg",
-    sourcePath: "assets-src/dama-venus/curated/dv_curated_press_portrait_main_color_3x4_v01.jpeg",
+    sourcePath: "pics/Cinderela-241.jpg",
     area: "music",
     recommendedModuleType: "release-card",
     altDraft: "Afterglow Cut release artwork",
@@ -167,7 +167,7 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "music-nocturne-line-visual",
     finalPath: "/assets/dama-venus/music/dv_music_nocturne_line_visual_bw_16x9_v01.jpg",
-    sourcePath: "assets-src/dama-venus/curated/dv_curated_visual_story_frame01_bw_16x9_v01.jpeg",
+    sourcePath: "pics/Cinderela-210.JPEG",
     area: "music",
     recommendedModuleType: "video-link",
     altDraft: "Nocturne Line visual sequence still",
