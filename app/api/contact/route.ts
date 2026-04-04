@@ -7,6 +7,8 @@ type ContactPayload = {
   companyWebsite?: string;
 };
 
+type ContactErrorCode = "validation_error" | "rate_limit_error" | "provider_error" | "unknown_error";
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
@@ -37,6 +39,10 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
+function errorResponse(code: ContactErrorCode, message: string, status: number) {
+  return NextResponse.json({ ok: false, code, message }, { status });
+}
+
 function validatePayload(payload: ContactPayload): string | null {
   const name = payload.fullName?.trim() || "";
   const email = payload.email?.trim() || "";
@@ -44,19 +50,19 @@ function validatePayload(payload: ContactPayload): string | null {
   const companyWebsite = payload.companyWebsite?.trim() || "";
 
   if (companyWebsite.length > 0) {
-    return "Spam-Schutz ausgelöst. Bitte Formular erneut senden.";
+    return "Spam protection triggered. Please submit the form again.";
   }
 
   if (!name || name.length < 2 || name.length > 120) {
-    return "Bitte gib einen Namen mit 2 bis 120 Zeichen an.";
+    return "Please enter a name with 2 to 120 characters.";
   }
 
   if (!email || email.length > 254 || !EMAIL_REGEX.test(email)) {
-    return "Bitte gib eine gültige E-Mail-Adresse an.";
+    return "Please enter a valid email address.";
   }
 
   if (!message || message.length < 10 || message.length > 5000) {
-    return "Bitte gib eine Nachricht mit 10 bis 5000 Zeichen an.";
+    return "Please enter a message with 10 to 5000 characters.";
   }
 
   return null;
@@ -134,7 +140,7 @@ export async function POST(request: Request) {
 
     if (isRateLimited(ip)) {
       return NextResponse.json(
-        { ok: false, message: "Zu viele Anfragen in kurzer Zeit. Bitte versuche es in einigen Minuten erneut." },
+        { ok: false, message: "Too many requests in a short time. Please try again in a few minutes." },
         { status: 429 }
       );
     }
@@ -143,16 +149,21 @@ export async function POST(request: Request) {
     const validationError = validatePayload(payload);
 
     if (validationError) {
-      return NextResponse.json({ ok: false, message: validationError }, { status: 400 });
+      return errorResponse("validation_error", validationError, 400);
     }
 
-    await sendWithProvider(payload);
+    try {
+      await sendWithProvider(payload);
+    } catch (error) {
+      console.error("Contact provider submit failed", error);
+      return errorResponse("provider_error", "Deine Anfrage konnte gerade nicht gesendet werden. Bitte versuche es später erneut.", 502);
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Contact submit failed", error);
     return NextResponse.json(
-      { ok: false, message: "Deine Anfrage konnte gerade nicht gesendet werden. Bitte versuche es später erneut." },
+      { ok: false, message: "Your request could not be sent right now. Please try again later." },
       { status: 500 }
     );
   }
