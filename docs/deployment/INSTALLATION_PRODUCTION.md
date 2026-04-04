@@ -125,41 +125,34 @@ URL-Resolution-Regel:
 - Ist `NEXT_PUBLIC_SITE_URL` leer oder ungültig, fällt die App auf `https://damavenus.com` zurück.
 - Diese aufgelöste URL wird für Metadaten, `robots.txt` (`host`, `sitemap`) und `sitemap.xml` genutzt.
 
-Provider-spezifisch ergänzen:
-
-- Für `CONTACT_PROVIDER=webhook`:
-  - `CONTACT_WEBHOOK_URL`
-  - Optional `CONTACT_API_KEY`
-  - Optional `CONTACT_TO_EMAIL`
-- Für `CONTACT_PROVIDER=resend`:
-  - `RESEND_API_KEY`
-  - `CONTACT_TO_EMAIL`
-  - `CONTACT_FROM_EMAIL`
+Wichtige Contact-/Provider-Variablen:
+- `CONTACT_PROVIDER` (`noop` | `webhook` | `resend`)
+- Für `CONTACT_PROVIDER=webhook`: `CONTACT_WEBHOOK_URL` (required), `CONTACT_API_KEY` (optional), `CONTACT_TO_EMAIL` (optional)
+- Für `CONTACT_PROVIDER=resend`: `RESEND_API_KEY` (required), `CONTACT_TO_EMAIL` (required), `CONTACT_FROM_EMAIL` (required)
 
 ---
 
 ## 9) Verbindlicher Prüfpfad vor Deploy
 
-Optional im Projektverzeichnis ausführbar:
+Vor jedem Deploy müssen diese Checks im Projektverzeichnis erfolgreich laufen:
 
 ```bash
 cd /opt/dama-venus
 npm ci
 npm run check
-npm run build
-npm run build:verify
+npm run build:check
 ```
 
 Damit werden Lint + Typecheck und zusätzlich ein vollständiger Produktions-Build vorab auf dem Host validiert.
+Interne Aufschlüsselung: `npm run build:check` entspricht `npm run build` + `npm run build:verify`.
 Der **offizielle Pflicht-Deploypfad** bleibt jedoch containerzentriert (ENV -> Deploy-Script -> Nginx/TLS), da Build und Asset-Preparation bereits im Docker-Build stattfinden.
 
 Klarer Ablauf im Pflichtpfad:
 1. `8) Produktions-ENV erstellen`
-2. `Build` (`npm run build`)
-3. `Artifact-Validation` (`npm run build:verify`)
-4. `Deploy` (`./scripts/deploy-prod.sh`)
-5. `12) Nginx-Konfiguration`
-6. `13) TLS mit Certbot`
+2. `Quality Gate` (`npm run check`, `npm run build:check`)
+3. `Deploy` (`./scripts/deploy-prod.sh`)
+4. `12) Nginx-Konfiguration`
+5. `13) TLS mit Certbot`
 
 ---
 
