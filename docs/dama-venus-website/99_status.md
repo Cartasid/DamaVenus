@@ -96,6 +96,14 @@
 - Der Metadaten-Output enthält jetzt zusätzlich den Abschnitt `heicStatus` mit Support-Status, erkanntem Tool, Fallback-Nutzung sowie Skip-/TODO-Informationen.
 - Der technische Grenzfall „HEIC ohne verfügbares Tooling“ ist in `03_asset_strategy.md` als verbindliche Pipeline-Regel dokumentiert.
 
+## Update 2026-04-04 – Sharp-basierte Derivat-Pipeline
+- `scripts/prepare-dama-venus-assets.mjs` erzeugt jetzt echte Bildderivate mit `sharp` statt reiner Kopierlogik.
+- Pro zulässigem Input (`.jpg/.jpeg/.png/.webp/.heic`) werden normierte Master-Derivate (`master-jpeg`, `master-webp`) erzeugt; anschließend werden die Varianten `hero`, `portrait`, `square`, `landscape`, `tall` mit realen `resize`-Operationen generiert.
+- Die Ausgabe erfolgt strikt unter `public/assets/dama-venus/{bereich}/{motiv}/...` mit stabilen Dateinamen im Muster `slug-variant-vNN`.
+- `asset-map.json`/`asset-map.ts` referenzieren die tatsächlich erzeugten Derivate und enthalten pro Master/Variante reale Metadaten (Breite, Höhe, Format, Byte-Größe).
+- HEIC wird primär über `sharp` verarbeitet; falls lokal nicht verfügbar, bleibt der markierte Fallback-Pfad (`status: skipped-heic`) mit nicht-blockierendem Verhalten erhalten.
+- Die Pipeline läuft deterministisch über sortierte Eingänge, stabile Versionsvergabe und sortierte Mapping-Items.
+
 ## Update 2026-04-03 – Homepage-Assets/Mappings (reproduzierbar)
 - **Priorisierte Homepage-Assets (Datenquelle):** In `content/dama-venus/assets.ts` sind für den Home-Kontext aktuell priorisiert `home-release-cover` (Priority 1) und `home-visual-preview` (Priority 2); zusätzlich ist `press-epk` als Press-Asset geführt. Damit ist die Priorisierung nachvollziehbar über `prioritizedAssets` (`id`, `priority`, `area`). Referenz: `content/dama-venus/assets.ts`.
 - **Modul-Asset-Zuordnung (Datenquelle):** In `content/data/homepage.data.ts` ist die Zuordnung aktuell wie folgt: `lead` (kein `assetId`), `featuredRelease` → `home-release-cover`, `visuals` → `home-visual-preview`, `statement` (text-only, kein `assetId`), `press` → `press-epk`, `contactNewsletter` (kein `assetId`, nur `assetPath` aus Contact-CTA). Referenz: `content/data/homepage.data.ts`.
@@ -222,6 +230,13 @@
    - **Letzte Asset-Exports:** finale Derivate/Exports für `public/assets/dama-venus/visuals/` und finale Qualitätsabnahme einzelner Bildvarianten.
    - **Endpolish:** letzter visueller Feinschliff (Spacing/Hierarchie), abschließender A11y-/Kontrast-Check und finaler Performance-Pass.
 4. **Expliziter nächster Schritt**
+
+## Update 2026-04-04 – Press-Anchor-Stabilisierung
+- In `app/press/page.tsx` wurden für die Zielbereiche der Blöcke `veryShortBio`, `shortBio`, `pressReadyDescription` und `downloads` explizite, stabile IDs gesetzt: `very-short-bio`, `short-bio`, `press-ready-description`, `downloads`.
+- Die Rendering-Logik nutzt dafür eine feste ID-Mapping-Konstante nach Block-ID, sodass Anchors bei Umordnung der Sektionen stabil bleiben.
+- Für die Hash-Ziele wurde die Semantik/A11y ergänzt: jeder gerenderte Block ist nun eine benannte `section` mit `aria-labelledby` auf die jeweilige Block-Überschrift, damit Hash-Sprünge in klar benannte Zielbereiche führen.
+- `content/data/press.data.ts` wurde auf Zielkonsistenz geprüft; die vorhandenen Press-Targets mit Hash (`/press#very-short-bio`, `/press#short-bio`, `/press#press-ready-description`, `/press#downloads`) passen zu den tatsächlichen IDs.
+- CTA-Konsistenz auf `/press` wurde bereinigt: der Intro-CTA verweist nicht mehr als Self-Link auf `/press`, sondern sinnvoll auf den ersten relevanten Anchor (`/press#very-short-bio`).
    - Nach Abschluss des Visuals-Polish folgt die Umsetzung der nächsten Seiten in dieser Reihenfolge: **About**, danach **Press**, danach **Contact**.
 
 ## Update 2026-04-03 – Schritt 12 About-Datenbasis strukturiert/priorisiert
@@ -262,12 +277,16 @@
    - `app/about/page.tsx`
    - `content/data/about.data.ts`
    - `content/data/site.config.ts` (Asset-Map-Referenzierung)
-   - `content/dama-venus/assets.ts` (About-Asset-IDs/-Priorisierung)
-3. **Offene Restpunkte (klar getrennt)**
-   - **Finale Fact-Validierung:** belastbare/verifizierte Bio-Fakten, Quellen, Credits und ggf. zitierfähige Details sind noch final zu bestätigen.
-   - **Letzter Visual-/Contrast-Feinschliff:** abschließender Polishing-Pass für visuelle Feingewichtung, Kontrast und finale Qualitätsabnahme bleibt ausstehend.
-4. **Expliziter nächster Schritt**
-   - Nächster Umsetzungsschritt ist die **Vorbereitung und Umsetzung von `Press/EPK`**.
+
+## Update 2026-04-04 – Asset-Pfade auf öffentliche Pipeline-Ziele bereinigt
+1. **`content/dama-venus/assets.ts` vollständig bereinigt**
+   - Alle bisherigen `finalPath`-Einträge mit `/pics/...` wurden auf öffentliche Pipeline-Zielpfade unter `/assets/dama-venus/...` umgestellt (insbesondere für `visuals` und `about`).
+   - `sourcePath` bleibt unverändert als technische Herkunft (`pics/...` bzw. bestehende Pipeline-/Curated-Quellen) erhalten.
+2. **Konsumenten-Check der relevanten Seiten abgeschlossen**
+   - Die Seiten `app/page.tsx`, `app/music/page.tsx`, `app/visuals/page.tsx` und `app/about/page.tsx` beziehen Assets weiterhin über `assetMap[...].src`; damit zeigen sie nach der Bereinigung auf öffentliche `finalPath`-Ziele.
+   - `app/press/page.tsx` rendert aktuell keine Bild-Assets aus `assetMap`; es sind dafür keine zusätzlichen Pfadänderungen erforderlich.
+3. **Datenmodell-/Auslieferungslogik bestätigt**
+   - In `content/data/site.config.ts` wird frontend-seitig weiterhin ausschließlich `finalPath` als `assetMap[...].src` ausgeliefert; `sourcePath` wird nicht in die UI ausgereicht.
 
 ## Update 2026-04-03 – Schritt 13 Press-/EPK-Struktur konkretisiert
 1. **Press-/EPK-Struktur + Datenmodell (jetzt vorhanden)**
@@ -363,3 +382,10 @@
    - `WebSite` wird nachgezogen, sobald globale Seitendaten (kanonische URL-Strategie, finale Social-/Kontakt-Referenzen, rechtliche Basisdaten) final abgestimmt sind.
 3. **Nächster Review-Schritt**
    - Als nächster Schritt folgt ein finaler SEO-/Metadata-Cleanup-Pass, inklusive erneuter Prüfung, ob die Kriterien für `Person`/`MusicGroup`/`WebSite` vollständig erfüllt sind.
+
+
+## Update 2026-04-04 – Contact-Flow real wired
+- Der Contact-Submit ist jetzt real wired: `/contact` sendet an `POST /api/contact` mit serverseitiger Validierung (`fullName`, `email`, `message`).
+- UI-Status umgesetzt: Pending-/Success-/Error-Zustände werden im Formular gerendert; `#contact-form-status` erscheint nur nach erfolgreichem Submit.
+- Minimaler Spam-Schutz aktiv: Honeypot-Feld + serverseitige Längenprüfungen + einfache IP-basierte Rate-Kontrolle.
+- Provider-/Mail-Konfiguration erfolgt vollständig per ENV (`CONTACT_PROVIDER`, `CONTACT_TO_EMAIL`, Provider-Keys/URLs).

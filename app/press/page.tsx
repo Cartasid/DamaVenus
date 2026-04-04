@@ -29,6 +29,13 @@ const secondaryLinkGroups: Array<{ purpose: "listen" | "watch" | "social" | "dow
   { purpose: "download", blockIds: ["downloads"] }
 ];
 
+const blockSectionIds: Partial<Record<(typeof pressEpkBlocks)[number]["id"], string>> = {
+  veryShortBio: "very-short-bio",
+  shortBio: "short-bio",
+  pressReadyDescription: "press-ready-description",
+  downloads: "downloads"
+};
+
 function renderBody(body: string | string[]) {
   if (Array.isArray(body)) {
     return (
@@ -46,19 +53,23 @@ function renderBody(body: string | string[]) {
 function renderBlock(block: (typeof pressEpkBlocks)[number], options?: { purpose?: string; ctaVariant?: "primary" | "secondary" | "soft" | "text" }) {
   const purpose = options?.purpose;
   const ctaVariant = options?.ctaVariant ?? "text";
+  const sectionId = blockSectionIds[block.id];
+  const headingId = `${block.id}-heading`;
   const ctaClassName =
     ctaVariant === "primary" ? "cta-primary" : ctaVariant === "secondary" ? "cta-secondary" : ctaVariant === "soft" ? "cta-soft" : "text-link";
 
   return (
-    <article key={block.id} className="space-y-2 rounded-lg border border-white/10 p-4">
+    <section key={block.id} id={sectionId} aria-labelledby={headingId} className="space-y-2 rounded-lg border border-white/10 p-4">
       {purpose ? <p className="typo-label">{purpose}</p> : null}
-      <h3 className="typo-h2">{block.title}</h3>
+      <h3 id={headingId} className="typo-h2">
+        {block.title}
+      </h3>
       <p className="typo-label">{block.shortDescriptor}</p>
       {renderBody(block.body)}
       <Link href={block.target} className={ctaClassName}>
         {block.ctaLabel}
       </Link>
-    </article>
+    </section>
   );
 }
 

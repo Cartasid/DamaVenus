@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { contactContent } from "@/content/data/contact.data";
+import { ContactForm } from "./ContactForm";
 
 export const metadata: Metadata = {
   title: { absolute: "Contact | Dama Venus" },
