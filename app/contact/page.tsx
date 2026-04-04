@@ -29,77 +29,67 @@ export default function ContactPage() {
       <form className="space-y-4" aria-label="Contact form">
         <p className="typo-label">* Pflichtfeld</p>
 
-        <div className="space-y-1">
-          <label htmlFor="name" className="typo-body-s">
-            Name *
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            autoComplete="name"
-            className="w-full"
-            aria-describedby="name-help"
-            required
-          />
-          <p id="name-help" className="typo-body-s">
-            Bitte geben Sie Ihren Namen ein.
-          </p>
-        </div>
+        {contactContent.form.fields.map((field) => {
+          const helperId = `${field.id}-help`;
+          const isRequired = field.required ? " *" : "";
 
-        <div className="space-y-1">
-          <label htmlFor="email" className="typo-body-s">
-            Email *
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            className="w-full"
-            aria-describedby="email-help"
-            required
-          />
-          <p id="email-help" className="typo-body-s">
-            Bitte geben Sie eine gültige E-Mail-Adresse ein.
-          </p>
-        </div>
+          return (
+            <div className="space-y-1" key={field.id}>
+              <label htmlFor={field.id} className="typo-body-s">
+                {field.label}
+                {isRequired}
+              </label>
 
-        <div className="space-y-1">
-          <label htmlFor="subject" className="typo-body-s">
-            Subject *
-          </label>
-          <input id="subject" name="subject" type="text" className="w-full" aria-describedby="subject-help" required />
-          <p id="subject-help" className="typo-body-s">
-            Bitte geben Sie einen Betreff ein.
-          </p>
-        </div>
+              {field.type === "textarea" ? (
+                <textarea id={field.id} name={field.name} rows={6} className="w-full" aria-describedby={helperId} required={field.required} />
+              ) : (
+                <input
+                  id={field.id}
+                  name={field.name}
+                  type={field.type}
+                  autoComplete={field.type === "email" ? "email" : undefined}
+                  className="w-full"
+                  aria-describedby={helperId}
+                  required={field.required}
+                />
+              )}
 
-        <div className="space-y-1">
-          <label htmlFor="message" className="typo-body-s">
-            Message *
-          </label>
-          <textarea id="message" name="message" rows={6} className="w-full" aria-describedby="message-help" required />
-          <p id="message-help" className="typo-body-s">
-            Bitte beschreiben Sie Ihr Anliegen.
-          </p>
-        </div>
+              <p id={helperId} className="typo-body-s">
+                {field.helperText}
+              </p>
+            </div>
+          );
+        })}
 
         <button type="submit" className="cta-primary">
           {contactContent.form.ctaLabel}
         </button>
         <div id="contact-form-status" role="status" aria-live="polite" data-feature="contact-success-message" hidden>
-          <p className="typo-body-m">Thanks, your inquiry has been sent successfully.</p>
+          <p className="typo-body-m">{contactContent.form.success.title}</p>
+          <p className="typo-body-s">{contactContent.form.success.message}</p>
         </div>
       </form>
 
-      {contactContent.cta?.href ? (
+      {contactContent.alternatePaths.length ? (
         <section className="space-y-2" aria-label="Alternative contact options">
           <h2 className="typo-label text-primary">Alternative Contact</h2>
-          <div className="typo-body-m">
-            <a href={contactContent.cta.href} className="underline">
-              {contactContent.cta.label}
-            </a>
+          <div className="space-y-2 typo-body-m">
+            {contactContent.alternatePaths.map((path) => (
+              <div key={path.id}>
+                {path.href ? (
+                  <a href={path.href} className="underline">
+                    {path.label}
+                  </a>
+                ) : path.email ? (
+                  <a href={`mailto:${path.email}`} className="underline">
+                    {path.label}
+                  </a>
+                ) : (
+                  <span>{path.label}</span>
+                )}
+                <p className="typo-body-s">{path.note}</p>
+              </div>
+            ))}
           </div>
         </section>
       ) : null}
