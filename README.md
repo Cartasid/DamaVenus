@@ -76,11 +76,9 @@ Produktionsschritte sind dokumentiert in:
 Kurzablauf:
 1. `.env.production` aus `.env.production.example` erzeugen.
 2. Contact-Provider-Variablen in `.env.production` setzen.
-3. Optional Asset-Pipeline ausführen, wenn neue/angepasste Bilder aus `pics/` bereitgestellt werden.
-4. `./scripts/deploy-prod.sh` ausführen.
-5. Nginx aktivieren und TLS via Certbot einrichten.
+3. `./scripts/deploy-prod.sh` ausführen (inkl. Asset-Preparation im Docker-Build).
+4. Nginx aktivieren und TLS via Certbot einrichten.
 
 ## Known limitations
 - In-Memory Rate-Limiting der Contact-API ist nicht über Container/Instanzen hinweg geteilt.
 - Contact-Provider `webhook` und `resend` benötigen korrekte ENV-Konfiguration; sonst antwortet die API mit Fehler.
-- Asset-Preparation ist ein separater Schritt und nicht automatisch im Docker-Build enthalten.

@@ -8,6 +8,7 @@ if [ ! -f .env.production ]; then
   exit 1
 fi
 
+echo "Info: Asset-Preparation läuft im Docker-Build über 'npm run build'."
 docker compose -f docker-compose.prod.yml build --pull
 docker compose -f docker-compose.prod.yml up -d --remove-orphans
 docker compose -f docker-compose.prod.yml ps

@@ -133,14 +133,9 @@ Provider-spezifisch ergänzen:
 
 ## 9) Asset-Preparation (bei neuen Bildern aus `pics/`)
 
-Die Asset-Pipeline ist ein separater Schritt und **nicht** Teil von `./scripts/deploy-prod.sh` oder des Docker-Builds.
+Die Asset-Pipeline läuft automatisch im Docker-Build, weil `npm run build` intern `npm run prepare:dama-venus-assets` ausführt.
 
-Bei neuen/angepassten Bildquellen aus `pics/` vor dem Deploy ausführen:
-
-```bash
-cd /opt/dama-venus
-node scripts/prepare-dama-venus-assets.mjs
-```
+Kein separater Host-Node-Schritt erforderlich: neue/angepasste Bildquellen aus `pics/` werden beim Deploy über `./scripts/deploy-prod.sh` verarbeitet.
 
 ---
 
