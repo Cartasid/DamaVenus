@@ -138,23 +138,23 @@ Provider-spezifisch ergänzen:
 
 ---
 
-## 9) Asset-Preparation (bei neuen Bildern aus `pics/`)
+## 9) Asset-Preparation (offizieller Produktionspfad)
 
-Die Asset-Pipeline ist ein separater Schritt und **nicht** Teil von `./scripts/deploy-prod.sh` oder des Docker-Builds.
-Die Pipeline verwendet `sharp` als primäre Engine für Bildverarbeitung (Konvertierung/Optimierung und Derivate).
+Offizielle Linie: **containerzentrierter Produktionspfad**.
 
-Kein separater Host-Node-Schritt erforderlich: neue/angepasste Bildquellen aus `pics/` werden beim Deploy über `./scripts/deploy-prod.sh` verarbeitet.
+Es gibt im Standard-Deploy **keinen separaten Host-Asset-Step**. Assets werden im Docker-Build erzeugt:
 
-HEIC-Hinweis:
-- Wenn `sharp` ein HEIC direkt lesen kann, reicht `sharp` allein.
-- Nur wenn `sharp` für eine HEIC-Datei fehlschlägt, greift das Script auf externe Fallback-Tools zurück (`magick`, `convert`, `heif-convert`, `sips`).
-- Ist kein Fallback-Tool verfügbar, werden diese HEIC-Dateien non-blocking übersprungen und im Mapping-Status ausgewiesen.
+- `./scripts/deploy-prod.sh` startet `docker compose ... build`
+- der Docker-Build führt `npm run build` aus
+- `npm run build` enthält `prepare:dama-venus-assets` und danach `next build`
+
+Damit laufen Asset-Preparation und App-Build konsistent im Container-Build.
 
 ---
 
-## 10) Verbindlicher Prüfpfad vor Deploy
+## 10) Optionaler Host-Preflight (nicht Teil des Pflicht-Deploypfads)
 
-Vor jedem Produktions-Deploy im Projektverzeichnis ausführen:
+Optional im Projektverzeichnis ausführbar:
 
 ```bash
 cd /opt/dama-venus
@@ -163,7 +163,14 @@ npm run check
 npm run build:check
 ```
 
-Damit werden Lint + Typecheck und zusätzlich ein vollständiger Produktions-Build validiert.
+Damit werden Lint + Typecheck und zusätzlich ein vollständiger Produktions-Build vorab auf dem Host validiert.
+Der **offizielle Pflicht-Deploypfad** bleibt jedoch containerzentriert (ENV -> Deploy-Script -> Nginx/TLS), da Build und Asset-Preparation bereits im Docker-Build stattfinden.
+
+Klarer Ablauf im Pflichtpfad:
+1. `8) Produktions-ENV erstellen`
+2. `11) ./scripts/deploy-prod.sh`
+3. `12) Nginx-Konfiguration`
+4. `13) TLS mit Certbot`
 
 ---
 
