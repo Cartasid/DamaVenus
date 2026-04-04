@@ -16,6 +16,14 @@ a {
 
 
 @layer components {
+  .site-container {
+    @apply mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-16;
+  }
+
+  .module-card {
+    @apply rounded-lg border border-white/10 p-5 md:p-6;
+  }
+
   .typo-h1 {
     @apply font-display text-3xl font-semibold leading-tight md:text-4xl;
   }
@@ -53,11 +61,7 @@ a {
   @apply outline-2 outline-offset-2 outline-accent ring-2 ring-offset-2 ring-offset-background ring-accent;
 }
 
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-.first-impression-cta:focus-visible,
+:where(a, button, input, textarea, [tabindex]:not([tabindex="-1"])):focus-visible,
 .cta-primary:focus-visible,
 .cta-secondary:focus-visible,
 .cta-soft:focus-visible,
@@ -77,16 +81,8 @@ textarea:focus-visible,
   @apply focus-token rounded-sm;
 }
 
-.first-impression-cta {
-  @apply typo-cta inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-4 py-2 text-black no-underline transition duration-200;
-}
-
-.first-impression-cta:hover {
-  @apply bg-accentSoft;
-}
-
 .cta-primary {
-  @apply typo-cta inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-4 py-2 text-black no-underline transition duration-200;
+  @apply typo-cta inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-4 py-2 text-background no-underline transition duration-200;
 }
 
 .cta-primary:hover {
@@ -113,10 +109,6 @@ textarea:focus-visible,
   @apply text-sm text-muted underline underline-offset-4 transition duration-200 hover:text-primary;
 }
 
-.text-link:focus-visible {
-  @apply ring-2 ring-offset-2 ring-offset-background ring-accent;
-}
-
 .home-composition a {
   @apply text-muted no-underline;
 }
@@ -139,11 +131,11 @@ textarea:focus-visible,
 }
 
 .section-stack-md {
-  @apply space-y-12 md:space-y-16;
+  @apply w-full space-y-12 md:space-y-16;
 }
 
 .section-stack-lg {
-  @apply space-y-16 md:space-y-20;
+  @apply w-full space-y-16 md:space-y-20;
 }
 
 input,
@@ -182,7 +174,7 @@ textarea {
 
 @media (prefers-reduced-motion: reduce) {
   .first-impression-tile,
-  .first-impression-cta,
+  .cta-primary,
   .home-composition a.interactive-hint {
     transition: none !important;
   }
