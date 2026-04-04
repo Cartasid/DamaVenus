@@ -141,16 +141,16 @@ export const homepageCoreModules: HomepageModule[] = [
   {
     id: "contactNewsletter",
     assetId: "home-contact-newsletter",
-    assetPath: contactContent.cta?.href,
+    assetPath: `mailto:${contactContent.primaryContact.email}`,
     alt: "Contact and newsletter call-to-action module",
     cropFocusHint: "center-safe-text",
     priority: "low",
     swColorLogic: "accent-contrast",
     overlaySuitability: "high",
     copy: {
-      headline: contactContent.headline,
-      subline: contactContent.subhead,
-      cta: contactContent.cta
+      headline: contactContent.intro.headline,
+      subline: contactContent.intro.subhead,
+      cta: { label: contactContent.form.ctaLabel, href: `mailto:${contactContent.primaryContact.email}` }
     }
   }
 ];
@@ -159,7 +159,7 @@ const expectedHomeModuleCtas: Partial<Record<HomepageModuleId, CTA>> = {
   featuredRelease: { label: "Listen Now", href: "/music" },
   visuals: { label: "View Visuals", href: "/visuals" },
   press: { label: "Open EPK", href: "/press" },
-  contactNewsletter: { label: "Send Inquiry", href: contactContent.cta?.href ?? "/contact" }
+  contactNewsletter: { label: "Send Inquiry", href: `mailto:${contactContent.primaryContact.email}` }
 };
 
 const primaryToSecondaryCtaSequence: HomepageModuleId[] = ["featuredRelease", "visuals", "press", "contactNewsletter"];
