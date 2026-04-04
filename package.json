@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run prepare:dama-venus-assets && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare:dama-venus-assets": "node scripts/prepare-dama-venus-assets.mjs"
   },
   "dependencies": {
     "next": "15.3.1",
