@@ -1,4 +1,4 @@
-import type { CTA, SectionContent } from "@/lib/types";
+import { getCtaActionKind, type CTA, validateCta } from "@/lib/types";
 
 export type AboutSection = {
   id: string;
@@ -158,14 +158,6 @@ export const aboutPageModel = {
   }
 } as const;
 
-// Compatibility export for existing consumers. Primary source is `aboutPageModel`.
-export const aboutContent: SectionContent = {
-  label: aboutPageModel.aboutIntro.title,
-  headline: aboutPageModel.aboutIntro.introLine,
-  body: [aboutPageModel.aboutBio.shortText, aboutPageModel.aboutBio.mediumText],
-  cta: aboutPageModel.aboutIntro.primaryCtaPattern
-};
-
 export const aboutIntro = {
   label: aboutPageModel.aboutIntro.title,
   title: aboutPageModel.aboutIntro.title,
@@ -180,3 +172,8 @@ export const aboutKeyStatements = aboutPageModel.aboutKeyStatements;
 export const featuredPortraits = aboutPageModel.aboutVisualModules.featuredPortraits;
 export const supportingVisuals = aboutPageModel.aboutVisualModules.supportingVisuals;
 export const aboutCta: CTA = aboutPageModel.aboutIntro.primaryCtaPattern;
+
+validateCta(aboutCta, "about intro");
+if (getCtaActionKind(aboutCta.href) !== "internal") {
+  throw new Error("About CTA must target an internal route.");
+}

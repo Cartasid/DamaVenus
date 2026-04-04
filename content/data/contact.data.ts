@@ -15,6 +15,7 @@ export type ContactContent = {
     invitation?: string;
   };
   primaryContact: {
+    href: "/contact";
     email: string;
     label?: string;
   };
@@ -41,6 +42,7 @@ export const contactContent: ContactContent = {
     subhead: "For bookings, collaborations, and selected requests."
   },
   primaryContact: {
+    href: "/contact",
     email: "booking@damavenus.com",
     label: "Direct booking contact"
   },
