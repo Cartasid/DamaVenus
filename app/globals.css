@@ -36,6 +36,15 @@ body {
   @apply bg-background text-primary font-sans antialiased;
 }
 
+img {
+  filter: grayscale(100%);
+  transition: filter 450ms ease;
+}
+
+img:hover {
+  filter: grayscale(0%);
+}
+
 a {
   @apply text-muted underline-offset-4 hover:text-offWhite hover:underline;
 }
