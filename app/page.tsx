@@ -131,7 +131,7 @@ export default function HomePage() {
                     className={supportMediaClass}
                   />
                 ) : null}
-                <span className="first-impression-cta">{supportCta.label}</span>
+                <span className="cta-primary">{supportCta.label}</span>
               </Link>
             ) : (
               <article className="first-impression-tile space-y-3 rounded-lg p-3">
@@ -171,7 +171,7 @@ export default function HomePage() {
             </h2>
             {featuredReleaseModule?.copy.subline ? <p className="typo-body-m max-w-2xl">{featuredReleaseModule.copy.subline}</p> : null}
             {featuredReleaseModule?.copy.cta ? (
-              <Link href={featuredReleaseModule.copy.cta.href} className="first-impression-cta">
+              <Link href={featuredReleaseModule.copy.cta.href} className="cta-primary">
                 {featuredReleaseModule.copy.cta.label}
               </Link>
             ) : null}
@@ -196,7 +196,7 @@ export default function HomePage() {
           </h2>
           {visualsModule?.copy.subline ? <p className="mt-2 typo-body-m max-w-2xl">{visualsModule.copy.subline}</p> : null}
           {visualsModule?.copy.cta ? (
-            <Link href={visualsModule.copy.cta.href} className="mt-4 inline-block first-impression-cta">
+            <Link href={visualsModule.copy.cta.href} className="mt-4 inline-block cta-primary">
               {visualsModule.copy.cta.label}
             </Link>
           ) : null}
@@ -217,7 +217,7 @@ export default function HomePage() {
             </h2>
             {pressModule?.copy.subline ? <p className="typo-body-m max-w-2xl">{pressModule.copy.subline}</p> : null}
             {pressModule?.copy.cta ? (
-              <Link href={pressModule.copy.cta.href} className="first-impression-cta">
+              <Link href={pressModule.copy.cta.href} className="cta-primary">
                 {pressModule.copy.cta.label}
               </Link>
             ) : null}
@@ -244,7 +244,7 @@ export default function HomePage() {
         </h2>
         {contactNewsletterModule?.copy.subline ? <p className="mt-2 typo-body-m max-w-2xl">{contactNewsletterModule.copy.subline}</p> : null}
         {contactNewsletterModule?.copy.cta ? (
-          <Link href={contactNewsletterModule.copy.cta.href} className="mt-4 inline-block first-impression-cta">
+          <Link href={contactNewsletterModule.copy.cta.href} className="mt-4 inline-block cta-primary">
             {contactNewsletterModule.copy.cta.label}
           </Link>
         ) : null}

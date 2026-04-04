@@ -88,7 +88,7 @@ export default function PressPage() {
           <h1 className="typo-h1">{introBlock.title}</h1>
           {typeof introBlock.body === "string" ? <p className="typo-body-m max-w-2xl">{introBlock.body}</p> : renderBody(introBlock.body)}
           {summaryBlock ? (typeof summaryBlock.body === "string" ? <p className="typo-body-m max-w-2xl">{summaryBlock.body}</p> : renderBody(summaryBlock.body)) : null}
-          <Link href={introBlock.target} className="first-impression-cta">
+          <Link href={introBlock.target} className="cta-primary">
             {introBlock.ctaLabel}
           </Link>
         </section>

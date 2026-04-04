@@ -359,3 +359,17 @@
    - `WebSite` wird nachgezogen, sobald globale Seitendaten (kanonische URL-Strategie, finale Social-/Kontakt-Referenzen, rechtliche Basisdaten) final abgestimmt sind.
 3. **Nächster Review-Schritt**
    - Als nächster Schritt folgt ein finaler SEO-/Metadata-Cleanup-Pass, inklusive erneuter Prüfung, ob die Kriterien für `Person`/`MusicGroup`/`WebSite` vollständig erfüllt sind.
+
+## Update 2026-04-04 – Schritt 15 CTA-/Focus-Konsolidierung ohne visuelle Richtungsänderung
+1. **CTA-Konsolidierung (ohne Redesign)**
+   - Primäre CTA-Rolle wurde auf `cta-primary` vereinheitlicht; bisherige Verwendungen von `first-impression-cta` in den Seitenrouten sind auf `cta-primary` umgestellt.
+   - Visuelle Ausprägung bleibt unverändert (gleiche Größe, Radius, Farben, Hover-Verhalten), nur die semantische Rollenbenennung wurde konsolidiert.
+2. **Fokusstil zentralisiert**
+   - Fokusbehandlung läuft jetzt zentral über `focus-token` + eine gebündelte `:focus-visible`-Basis (inkl. interaktiver Elemente und CTA-/Link-Klassen).
+   - Redundante Einzelregel für `.text-link:focus-visible` wurde entfernt.
+3. **Tailwind-/Token-Konsistenz und tote Klassen**
+   - Redundante CTA-Definition für `first-impression-cta` in `app/globals.css` wurde entfernt.
+   - CTA-Textfarbe nutzt tokenbasiert `text-background` statt hartem `text-black`.
+   - Verwendete CTA-/Focus-Klassen sind weiterhin durch das bestehende Tailwind-Theme gedeckt; keine zusätzlichen Theme-Tokens waren erforderlich.
+4. **Regression-Schutz**
+   - Änderungen sind konsolidierend und auf bestehende Styles/Selektoren begrenzt, ohne Layout-/Kompositionswechsel.
