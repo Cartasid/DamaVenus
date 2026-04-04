@@ -321,3 +321,21 @@
    - **Finale Betriebsfreigabe:** abschließende Prüfung von Zuständigkeiten, Response-Handling und Weiterleitungslogik.
 4. **Expliziter nächster Schritt**
    - Nach Abschluss der `/contact`-Restpunkte folgt ein **siteweiter Polish-Pass** (konsistenter Feinschliff über alle Seiten inkl. A11y/Motion/Performance vor Gesamtfreigabe).
+
+## Update 2026-04-04 – Globaler UI-Konsistenzabgleich (visuell)
+1. **Bereinigte globale visuelle Inkonsistenzen (konkret)**
+   - Uneinheitliche CTA-Darstellungen wurden auf ein konsistentes Muster vereinheitlicht (primäre CTA-Logik und sekundäre Link-Führung seitenübergreifend gleichartig).
+   - Unterschiedliche Fokus-/Interaktionsdarstellungen wurden auf ein gemeinsames Global-Pattern zusammengeführt.
+   - Abweichende SW→Farbe-/Overlay-Ausspielungen zwischen Seitenmodulen wurden auf die definierte zustandsbasierte Bildlogik harmonisiert.
+2. **Codeweit konsistent getroffene Designentscheidungen**
+   - Das Interaktionsmuster bleibt durchgängig: ruhige Übergänge, keine Hover-Pflicht für Kerninteraktion, klare Priorität für Lesbarkeit und Orientierung.
+   - Das visuelle System bleibt einheitlich: tokenbasierte Farb-/Kontrastführung und konsistente CTA-Hierarchie über die Hauptseiten.
+   - Die dramaturgische Bildsprache bleibt konsistent angewendet: SW→Farbe als bewusstes Steuerungsprinzip statt isolierter Einzeleffekte.
+3. **Offene Qualitätsbereiche als überprüfbare QA-Checkliste**
+   - [ ] Fokusführung: Tastatur-Navigation prüfbar ohne Fokusverlust über alle Primärpfade (`/`, `/visuals`, `/music`, `/about`, `/press`, `/contact`).
+   - [ ] States: Hover/Focus/Active/Disabled pro interaktivem Element vollständig und visuell eindeutig umgesetzt.
+   - [ ] Motion/Reduced Motion: `prefers-reduced-motion` reduziert Transition/Animation ohne Funktionsverlust in allen Kernmodulen.
+   - [ ] Formular-UX: Formular auf `/contact` prüfbar bzgl. Fehlermeldungen, Success-State, Feldvalidierung und klarer Submission-Rückmeldung.
+
+## Nächster empfohlener Schritt (aktualisiert)
+- Expliziter nächster Schritt ist ein **Accessibility- und Interaktionsqualitäts-Pass** mit Fokus auf **Fokusführung**, **States**, **Motion/Reduced Motion** und **Formular-UX** inklusive QA-Abnahme gegen die obige Checkliste.
