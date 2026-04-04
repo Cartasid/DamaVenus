@@ -46,6 +46,9 @@ Pipeline-Logik:
 - Generiert Mapping-Dateien:
   - `public/assets/dama-venus/asset-map.json`
   - `public/assets/dama-venus/asset-map.ts`
+- `sharp` ist die zentrale Bild-Engine für Konvertierung/Optimierung (JPEG/WebP) und Zuschnitte innerhalb der Pipeline.
+- Für `.heic` prüft das Script zuerst, ob `sharp` das jeweilige Bild direkt dekodieren kann; wenn ja, ist **kein** externes Tool nötig.
+- Nur wenn `sharp` ein `.heic` nicht direkt verarbeiten kann, nutzt das Script als Fallback ein externes Tool (`magick`, `convert`, `heif-convert` oder `sips`); fehlt dieses Tool, werden betroffene HEIC-Dateien als non-blocking Skip markiert.
 
 ## Content-Schicht
 - Zentrale Inhaltsdaten liegen in `content/data/*.data.ts`.
@@ -68,6 +71,11 @@ Zusätzlich relevant:
 - `NODE_ENV`
 - `PORT`
 
+URL-Resolution-Regel:
+- Primär wird `NEXT_PUBLIC_SITE_URL` verwendet.
+- Ist `NEXT_PUBLIC_SITE_URL` leer oder ungültig, fällt die App auf `https://damavenus.com` zurück.
+- Für Metadaten, `robots.txt` und `sitemap.xml` wird diese zentrale Auflösung verwendet.
+
 ## Deployment-Flow
 Produktionsschritte sind dokumentiert in:
 
@@ -76,11 +84,9 @@ Produktionsschritte sind dokumentiert in:
 Kurzablauf:
 1. `.env.production` aus `.env.production.example` erzeugen.
 2. Contact-Provider-Variablen in `.env.production` setzen.
-3. Optional Asset-Pipeline ausführen, wenn neue/angepasste Bilder aus `pics/` bereitgestellt werden.
-4. `./scripts/deploy-prod.sh` ausführen.
-5. Nginx aktivieren und TLS via Certbot einrichten.
+3. `./scripts/deploy-prod.sh` ausführen (inkl. Asset-Preparation im Docker-Build).
+4. Nginx aktivieren und TLS via Certbot einrichten.
 
 ## Known limitations
 - In-Memory Rate-Limiting der Contact-API ist nicht über Container/Instanzen hinweg geteilt.
 - Contact-Provider `webhook` und `resend` benötigen korrekte ENV-Konfiguration; sonst antwortet die API mit Fehler.
-- Asset-Preparation ist ein separater Schritt und nicht automatisch im Docker-Build enthalten.
