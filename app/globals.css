@@ -16,6 +16,7 @@ a {
 
 
 @layer components {
+  /* Single source of truth for global content width + horizontal padding (Header/Main/Footer). */
   .site-container {
     @apply mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-16;
   }
