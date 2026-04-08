@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────
+   SCROLL REVEAL
+───────────────────────────────────────────── */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: opacity, transform;
 }
 
@@ -16,89 +20,185 @@
 
 .reveal-fade {
   opacity: 0;
-  transition: opacity 0.7s ease;
+  transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .reveal-fade[data-revealed="true"] {
   opacity: 1;
 }
 
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
 
+/* ─────────────────────────────────────────────
+   BASE
+───────────────────────────────────────────── */
 :root {
   color-scheme: dark;
+  --transition-luxury: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-background text-primary font-sans antialiased;
+  @apply bg-background text-primary antialiased;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  background-color: #000000;
 }
 
+/* ─────────────────────────────────────────────
+   IMAGE EFFECTS — BLACK & WHITE → COLOR (Rihanna-style)
+───────────────────────────────────────────── */
+
+/* All images default to grayscale */
 img {
-  filter: grayscale(100%);
-  transition: filter 450ms ease;
+  filter: grayscale(100%) contrast(1.05) brightness(0.92);
+  transition:
+    filter 700ms var(--transition-luxury),
+    transform 600ms var(--transition-luxury);
 }
 
-img:hover {
-  filter: grayscale(0%);
+/* Hero image: darker + more contrast for overlay readability */
+img.img-hero-bw {
+  filter: grayscale(100%) contrast(1.1) brightness(0.7);
+  transition: filter 1000ms var(--transition-luxury);
 }
 
+/* Statement background: very dark, barely visible */
+img.img-statement-bg {
+  filter: grayscale(100%) brightness(0.2) contrast(1.15);
+  opacity: 0.55;
+  transition: none;
+}
+
+/* On hover: reveal color — applies to direct hover AND wrapper-based hover */
+img:hover,
+.img-color-reveal:hover img,
+.img-color-reveal:focus-within img {
+  filter: grayscale(0%) contrast(1) brightness(1);
+}
+
+/* Hero color reveal on wrapper hover — keep slightly darker */
+.img-color-reveal:hover img.img-hero-bw {
+  filter: grayscale(0%) contrast(1) brightness(0.88);
+}
+
+/* Full color override for images that should always be colored */
+.img-always-color,
+.img-always-color img {
+  filter: grayscale(0%) contrast(1) brightness(1) !important;
+  transition: none !important;
+}
+
+/* Statement bg never changes on hover */
+img.img-statement-bg:hover,
+.img-color-reveal:hover img.img-statement-bg {
+  filter: grayscale(100%) brightness(0.2) contrast(1.15) !important;
+  opacity: 0.55 !important;
+}
+
+/* ─────────────────────────────────────────────
+   LINKS
+───────────────────────────────────────────── */
 a {
-  @apply text-muted underline-offset-4 hover:text-offWhite hover:underline;
+  @apply text-muted underline-offset-4;
+  transition: color 250ms var(--transition-luxury);
 }
 
+a:hover {
+  @apply text-offWhite;
+}
 
+/* ─────────────────────────────────────────────
+   LAYOUT UTILITIES
+───────────────────────────────────────────── */
 @layer components {
-  /* Single source of truth for global content width + horizontal padding (Header/Main/Footer). */
+
   .site-container {
     @apply mx-auto w-full max-w-[1440px] px-5 md:px-10 xl:px-16;
   }
 
-  .module-card {
-    @apply rounded-lg border border-white/10 p-5 md:p-6;
+  /* ── TYPOGRAPHY ── */
+  .typo-display {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.01em;
   }
 
-  .module-card--accented {
-    @apply module-card border-t-2;
-    border-top-color: theme("colors.accent");
+  .typo-display-xl {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-size: clamp(5rem, 14vw, 12rem);
+    font-weight: 300;
+    line-height: 0.88;
+    letter-spacing: -0.02em;
   }
 
   .typo-h1 {
-    @apply font-display text-3xl font-semibold leading-tight md:text-4xl;
+    font-family: var(--font-cormorant), Georgia, serif;
+    @apply text-4xl font-light leading-tight md:text-5xl xl:text-6xl;
+    letter-spacing: -0.01em;
   }
 
   .typo-h2 {
-    @apply font-display text-2xl font-semibold leading-snug;
+    font-family: var(--font-cormorant), Georgia, serif;
+    @apply text-3xl font-light leading-snug md:text-4xl;
   }
 
   .typo-h3 {
-    @apply font-display text-xl font-semibold leading-snug;
+    font-family: var(--font-cormorant), Georgia, serif;
+    @apply text-2xl font-light leading-snug;
   }
 
   .typo-h4 {
-    @apply font-display text-lg font-semibold leading-snug;
+    @apply font-display text-base font-semibold leading-snug tracking-wide uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
   }
 
   .typo-body-m {
     @apply text-base leading-relaxed text-muted;
+    font-family: var(--font-inter), system-ui, sans-serif;
   }
 
   .typo-body-s {
     @apply text-sm leading-relaxed text-muted;
+    font-family: var(--font-inter), system-ui, sans-serif;
   }
 
   .typo-label {
-    @apply text-xs uppercase tracking-[0.2em] text-muted;
+    @apply text-xs uppercase text-muted;
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    letter-spacing: 0.2em;
   }
 
   .typo-cta {
     @apply text-sm font-semibold;
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    letter-spacing: 0.08em;
   }
 
+  /* ── NAVIGATION ── */
   .nav-link {
-    @apply relative text-muted transition-colors duration-200 hover:text-primary no-underline;
+    @apply relative text-muted no-underline;
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color 300ms var(--transition-luxury);
+  }
+
+  .nav-link:hover {
+    @apply text-primary;
   }
 
   .nav-link--active {
@@ -107,17 +207,306 @@ a {
 
   .nav-link::after {
     content: "";
-    @apply absolute -bottom-0.5 left-0 h-px w-0 bg-accent transition-all duration-200;
+    @apply absolute -bottom-0.5 left-0 h-px w-0 bg-accent;
+    transition: width 300ms var(--transition-luxury);
   }
 
   .nav-link:hover::after,
   .nav-link--active::after {
     @apply w-full;
   }
+
+  /* ── CTA BUTTONS ── */
+  .cta-primary {
+    @apply typo-cta inline-flex min-h-11 items-center justify-center px-6 py-2.5 text-black no-underline;
+    background-color: #FF4FA8;
+    transition:
+      background-color 300ms var(--transition-luxury),
+      box-shadow 300ms var(--transition-luxury),
+      transform 300ms var(--transition-luxury);
+  }
+
+  .cta-primary:hover {
+    background-color: #FF8DCC;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px -4px rgba(255, 79, 168, 0.5);
+    @apply text-black;
+  }
+
+  .cta-secondary {
+    @apply inline-flex min-h-11 items-center justify-center border px-6 py-2.5 text-sm font-semibold text-offWhite no-underline;
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    letter-spacing: 0.08em;
+    border-color: rgba(255, 255, 255, 0.2);
+    transition:
+      border-color 300ms var(--transition-luxury),
+      background-color 300ms var(--transition-luxury);
+  }
+
+  .cta-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.05);
+    @apply text-primary;
+  }
+
+  .cta-soft {
+    @apply inline-flex min-h-11 items-center justify-center px-6 py-2.5 text-sm font-medium text-offWhite no-underline;
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    background-color: rgba(255, 255, 255, 0.06);
+    transition: background-color 300ms var(--transition-luxury);
+  }
+
+  .cta-soft:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    @apply text-primary;
+  }
+
+  .text-link {
+    @apply text-sm text-muted underline underline-offset-4;
+    transition: color 250ms var(--transition-luxury);
+  }
+
+  .text-link:hover {
+    @apply text-primary;
+  }
+
+  /* ── MODULE CARDS ── */
+  .module-card {
+    @apply border p-5 md:p-6;
+    border-color: rgba(255, 255, 255, 0.06);
+    background-color: rgba(255, 255, 255, 0.02);
+  }
+
+  .module-card--accented {
+    @apply module-card border-t-2;
+    border-top-color: theme("colors.accent");
+  }
+
+  /* ── FIRST IMPRESSION TILE ── */
+  .first-impression-tile {
+    @apply text-primary no-underline;
+    border: 1px solid transparent;
+    transition:
+      border-color 300ms var(--transition-luxury),
+      transform 400ms var(--transition-luxury);
+  }
+
+  .first-impression-tile:hover {
+    @apply opacity-100;
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* ── HERO ELEMENTS ── */
+  .hero-headline {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    color: white;
+  }
+
+  .hero-descriptor {
+    @apply mt-3 text-white/50;
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .hero-statement {
+    @apply mt-4 leading-relaxed text-white/75 max-w-sm;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.9rem;
+  }
+
+  /* ── REVEAL CHILD (stagger animation) ── */
+  .reveal-child {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .reveal-child[data-revealed="true"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── STATEMENT BLOCK ── */
+  .statement-block {
+    @apply relative overflow-hidden py-24 md:py-40;
+    padding-left: max(1.25rem, calc((100vw - 1440px) / 2 + 2.5rem));
+    padding-right: max(1.25rem, calc((100vw - 1440px) / 2 + 2.5rem));
+    border-left: 1px solid theme("colors.accent");
+  }
+
+  .statement-block__bg {
+    @apply absolute inset-0 pointer-events-none;
+  }
+
+  .statement-block__content {
+    @apply relative z-10;
+  }
+
+  .statement-block__eyebrow {
+    @apply mb-6 text-accent;
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .statement-block__headline {
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    @apply text-white/95 max-w-3xl;
+  }
+
+  /* ── IMAGE HOVER ZOOM ── */
+  .img-hover-zoom {
+    @apply overflow-hidden;
+  }
+
+  .img-hover-zoom img {
+    transition:
+      transform 700ms var(--transition-luxury),
+      filter 700ms var(--transition-luxury);
+  }
+
+  .img-hover-zoom:hover img {
+    transform: scale(1.04);
+    filter: grayscale(0%) contrast(1) brightness(1);
+  }
+
+  /* ── DIVIDER ── */
+  .divider-editorial {
+    @apply w-full;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  /* ── SECTION SPACING ── */
+  .section-gap-sm  { @apply mt-8 md:mt-12; }
+  .section-gap-md  { @apply mt-12 md:mt-16; }
+  .section-gap-lg  { @apply mt-20 md:mt-28; }
+  .section-gap-xl  { @apply mt-28 md:mt-40; }
+  .section-stack-md { @apply w-full space-y-16 md:space-y-20; }
+  .section-stack-lg { @apply w-full space-y-20 md:space-y-28; }
+
+  /* ── HOME COMPOSITION ── */
+  .home-composition {
+    @apply w-full;
+  }
+
+  .home-composition a {
+    @apply text-muted no-underline;
+  }
+
+  .home-composition a.interactive-hint {
+    @apply text-muted underline-offset-4;
+    transition: color 250ms var(--transition-luxury);
+  }
+
+  .home-composition a.interactive-hint:hover {
+    @apply text-primary underline;
+  }
+
+  /* ── OVERLAY SYSTEM ── */
+  .visual-overlay {
+    @apply pointer-events-none absolute inset-0;
+  }
+
+  .visual-overlay--subtle {
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 40%, transparent 100%);
+  }
+
+  .visual-overlay--strong {
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 100%);
+  }
+
+  .visual-overlay--intro.visual-overlay--subtle,
+  .visual-overlay--series.visual-overlay--subtle,
+  .visual-overlay--portrait.visual-overlay--subtle {
+    background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 50%, transparent 100%);
+  }
+
+  .visual-overlay--lead.visual-overlay--strong,
+  .visual-overlay--editorial.visual-overlay--strong,
+  .visual-overlay--linked.visual-overlay--strong {
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.15) 100%);
+  }
+
+  .visual-overlay--quiet.visual-overlay--strong,
+  .visual-overlay--quiet.visual-overlay--subtle {
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.05) 100%);
+  }
+
+  /* ── FORM ELEMENTS ── */
+  input,
+  textarea {
+    @apply border bg-transparent text-offWhite outline-none;
+    border-color: rgba(255, 255, 255, 0.1);
+    transition: border-color 250ms var(--transition-luxury);
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: rgba(255, 79, 168, 0.5);
+  }
 }
 
+/* ─────────────────────────────────────────────
+   TEXT SELECTION
+───────────────────────────────────────────── */
+::selection {
+  background-color: rgba(255, 79, 168, 0.25);
+  color: #ffffff;
+}
+
+/* ─────────────────────────────────────────────
+   CURSOR
+───────────────────────────────────────────── */
+.img-color-reveal {
+  cursor: crosshair;
+}
+
+a, button, [role="button"] {
+  cursor: pointer;
+}
+
+/* ─────────────────────────────────────────────
+   SCROLLBAR — minimal styled
+───────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 79, 168, 0.3);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 79, 168, 0.6);
+}
+
+/* ─────────────────────────────────────────────
+   FOCUS STYLES
+───────────────────────────────────────────── */
 .focus-token:focus-visible {
-  @apply outline-2 outline-offset-2 outline-accent ring-2 ring-offset-2 ring-offset-background ring-accent;
+  outline: 1px solid theme("colors.accent");
+  outline-offset: 3px;
 }
 
 :where(a, button, input, textarea, [tabindex]:not([tabindex="-1"])):focus-visible,
@@ -125,172 +514,75 @@ a {
 .cta-secondary:focus-visible,
 .cta-soft:focus-visible,
 .text-link:focus-visible {
-  @apply focus-token rounded-sm;
+  outline: 1px solid theme("colors.accent");
+  outline-offset: 3px;
+  border-radius: 1px;
 }
 
-.first-impression-tile {
-  @apply text-primary no-underline transition duration-300 border border-transparent;
-}
-
-.first-impression-tile:hover {
-  @apply opacity-100 scale-[1.015] border-white/15;
-}
-
-.first-impression-tile:focus-visible {
-  @apply focus-token rounded-sm;
-}
-
-.cta-primary {
-  @apply typo-cta inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-4 py-2 text-background no-underline transition duration-200;
-}
-
-.cta-primary:hover {
-  @apply bg-accentSoft -translate-y-px shadow-[0_4px_16px_-4px_rgba(255,79,168,0.4)];
-}
-
-.cta-secondary {
-  @apply inline-flex min-h-11 items-center justify-center rounded-md border border-white/20 bg-transparent px-4 py-2 text-sm font-semibold text-offWhite no-underline transition duration-200;
-}
-
-.cta-secondary:hover {
-  @apply border-white/40 bg-white/5 text-primary;
-}
-
-.cta-soft {
-  @apply inline-flex min-h-11 items-center justify-center rounded-md bg-surface/70 px-4 py-2 text-sm font-medium text-offWhite no-underline transition duration-200;
-}
-
-.cta-soft:hover {
-  @apply bg-surface text-primary;
-}
-
-.text-link {
-  @apply text-sm text-muted underline underline-offset-4 transition duration-200 hover:text-primary;
-}
-
-.home-composition a {
-  @apply text-muted no-underline;
-}
-
-.home-composition a.interactive-hint {
-  @apply text-muted underline-offset-4 hover:text-primary hover:underline;
-}
-
+/* ─────────────────────────────────────────────
+   SKIP LINK
+───────────────────────────────────────────── */
 .skip-link {
-  @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-surface focus:px-3 focus:py-2 focus:text-offWhite;
+  @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-surface focus:px-3 focus:py-2 focus:text-offWhite;
 }
 
-
-.img-hover-zoom {
-  @apply overflow-hidden rounded-lg;
-}
-
-.img-hover-zoom img {
-  @apply transition-transform duration-500 ease-out;
-}
-
-.img-hover-zoom:hover img {
-  @apply scale-[1.03];
-}
-
-.hero-headline {
-  @apply font-display text-3xl font-bold leading-tight text-white md:text-5xl xl:text-6xl;
-}
-
-.hero-descriptor {
-  @apply mt-1 text-xs uppercase tracking-[0.3em] text-white/70;
-}
-
-.hero-statement {
-  @apply mt-3 text-sm leading-relaxed text-white/90 max-w-sm md:text-base;
-}
-
-.statement-block {
-  @apply relative overflow-hidden rounded-lg px-8 py-16 md:px-16 md:py-20;
-  border-left: 2px solid theme("colors.accent");
-}
-
-.statement-block__bg {
-  @apply absolute inset-0 pointer-events-none;
-}
-
-.statement-block__content {
-  @apply relative z-10;
-}
-
-.statement-block__eyebrow {
-  @apply text-xs uppercase tracking-[0.2em] text-accent mb-4;
-}
-
-.statement-block__headline {
-  @apply font-display text-3xl md:text-4xl xl:text-5xl font-semibold leading-tight text-white/95 max-w-3xl;
-}
-
-.section-gap-md {
-  @apply mt-12 md:mt-16;
-}
-
-.section-gap-lg {
-  @apply mt-16 md:mt-20;
-}
-
-.section-stack-md {
-  @apply w-full space-y-12 md:space-y-16;
-}
-
-.section-stack-lg {
-  @apply w-full space-y-16 md:space-y-20;
-}
-
-input,
-textarea {
-  @apply rounded-md border border-white/10 bg-surface text-offWhite;
-}
-
-.visual-overlay {
-  @apply pointer-events-none absolute inset-0;
-}
-
-.visual-overlay--subtle {
-  @apply bg-gradient-to-t from-black/40 via-black/20 to-transparent;
-}
-
-.visual-overlay--strong {
-  @apply bg-gradient-to-t from-black/70 via-black/45 to-black/10;
-}
-
-.visual-overlay--intro.visual-overlay--subtle,
-.visual-overlay--series.visual-overlay--subtle,
-.visual-overlay--portrait.visual-overlay--subtle {
-  @apply from-black/35 via-black/15;
-}
-
-.visual-overlay--lead.visual-overlay--strong,
-.visual-overlay--editorial.visual-overlay--strong,
-.visual-overlay--linked.visual-overlay--strong {
-  @apply from-black/80 via-black/55 to-black/15;
-}
-
-.visual-overlay--quiet.visual-overlay--strong,
-.visual-overlay--quiet.visual-overlay--subtle {
-  @apply from-black/55 via-black/30 to-black/5;
-}
-
+/* ─────────────────────────────────────────────
+   PAGE ENTRY ANIMATION
+───────────────────────────────────────────── */
 @keyframes page-enter {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.home-composition > :first-child {
-  animation: page-enter 0.8s ease forwards;
+.home-hero-enter {
+  animation: page-enter 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
+/* ─────────────────────────────────────────────
+   HORIZONTAL RULE — EDITORIAL STYLE
+───────────────────────────────────────────── */
+hr {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: 0;
+}
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY POLISH
+───────────────────────────────────────────── */
+
+/* Ligatures + kerning for editorial text */
+.statement-block__headline,
+.typo-display,
+.typo-display-xl,
+.hero-headline {
+  font-feature-settings: "liga" 1, "kern" 1, "dlig" 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* Accent pink text in editorial serif */
+.editorial-accent {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-style: italic;
+  color: theme("colors.accent");
+}
+
+/* ─────────────────────────────────────────────
+   LOADING SKELETON (for images before load)
+───────────────────────────────────────────── */
+.img-color-reveal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0a0a0a;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────
+   REDUCED MOTION
+───────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .reveal-fade {
@@ -300,8 +592,7 @@ textarea {
   }
 
   .first-impression-tile,
-  .cta-primary,
-  .home-composition a.interactive-hint {
+  .cta-primary {
     transition: none !important;
   }
 
@@ -324,7 +615,11 @@ textarea {
     transform: none !important;
   }
 
-  .home-composition > :first-child {
+  .home-hero-enter {
     animation: none;
+  }
+
+  img {
+    transition: none !important;
   }
 }

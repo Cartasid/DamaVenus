@@ -21,40 +21,65 @@ export const metadata: Metadata = {
   }
 };
 
+const labelStyle = {
+  fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
+  fontSize: "0.6rem",
+  letterSpacing: "0.22em",
+  textTransform: "uppercase" as const
+};
+
 export default function ContactPage() {
   return (
-    <section className="section-stack-md">
-      <header className="space-y-3">
-        <h1 className="typo-h1 font-bold">{contactContent.intro.headline}</h1>
-        <p className="typo-body-m max-w-2xl">{contactContent.intro.subhead}</p>
-      </header>
+    <div className="site-container py-16 pb-28">
+      <section className="section-stack-md max-w-2xl">
 
-      <ContactForm />
+        <header className="space-y-4">
+          <p className="text-accent" style={labelStyle}>Inquiries</p>
+          <h1
+            className="text-primary"
+            style={{
+              fontFamily: "var(--font-cormorant), Georgia, serif",
+              fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+              fontWeight: 300,
+              lineHeight: 0.95
+            }}
+          >
+            {contactContent.intro.headline}
+          </h1>
+          <p className="text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.75 }}>
+            {contactContent.intro.subhead}
+          </p>
+        </header>
 
+        <div className="h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
 
-      {contactContent.alternatePaths.length ? (
-        <section className="space-y-2" aria-label="Alternative contact options">
-          <h2 className="typo-label text-primary">Alternative Contact</h2>
-          <div className="space-y-2 typo-body-m">
-            {contactContent.alternatePaths.map((path) => (
-              <div key={path.id}>
-                {path.href ? (
-                  <a href={path.href} className="underline">
-                    {path.label}
-                  </a>
-                ) : path.email ? (
-                  <a href={`mailto:${path.email}`} className="underline">
-                    {path.label}
-                  </a>
-                ) : (
-                  <span>{path.label}</span>
-                )}
-                <p className="typo-body-s">{path.note}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      ) : null}
-    </section>
+        <ContactForm />
+
+        {contactContent.alternatePaths.length ? (
+          <section className="space-y-4" aria-label="Alternative contact options">
+            <p className="text-muted" style={labelStyle}>Alternative Contact</p>
+            <div className="space-y-4">
+              {contactContent.alternatePaths.map((path) => (
+                <div key={path.id}>
+                  {path.href ? (
+                    <a href={path.href} className="text-offWhite underline underline-offset-4">
+                      {path.label}
+                    </a>
+                  ) : path.email ? (
+                    <a href={`mailto:${path.email}`} className="text-offWhite underline underline-offset-4">
+                      {path.label}
+                    </a>
+                  ) : (
+                    <span className="text-offWhite">{path.label}</span>
+                  )}
+                  <p className="mt-1 text-muted" style={{ fontSize: "0.8rem" }}>{path.note}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+      </section>
+    </div>
   );
 }
