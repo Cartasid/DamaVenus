@@ -4,6 +4,9 @@ import Image from "next/image";
 import { homepageCoreModules, homepageIntro } from "@/content/data/homepage.data";
 import { navigationItems } from "@/content/data/navigation.data";
 import { assetMap, siteConfig } from "@/content/data/site.config";
+import HeroTextReveal from "@/components/utils/hero-text-reveal";
+import Marquee from "@/components/utils/marquee";
+import ParallaxHero from "@/components/utils/parallax-hero";
 
 export const metadata: Metadata = {
   title: { absolute: "Dama Venus — Artist, Visual Storyteller" },
@@ -47,81 +50,93 @@ export default function HomePage() {
     <div className="home-composition">
 
       {/* ══════════════════════════════════════════════
-          HERO — FULL VIEWPORT
+          HERO — FULL VIEWPORT WITH PARALLAX
       ══════════════════════════════════════════════ */}
       <section
-        className="home-hero-enter relative min-h-[92vh] flex flex-col justify-end overflow-hidden"
+        className="home-hero-enter relative min-h-[100vh] flex flex-col justify-end overflow-hidden"
         aria-labelledby="home-title"
       >
         {leadAsset ? (
-          <div className="img-color-reveal absolute inset-0">
-            <Image
-              src={leadAsset.src}
-              alt={leadAsset.alt ?? leadModule?.alt ?? ""}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center img-hero-bw"
-            />
-            {/* Gradient overlay */}
-            <div
-              className="absolute inset-0"
-              aria-hidden="true"
-              style={{
-                background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 35%, rgba(0,0,0,0.15) 65%, transparent 100%)"
-              }}
-            />
-            {/* Left accent line */}
-            <div
-              className="absolute bottom-0 left-0 top-0 w-px"
-              aria-hidden="true"
-              style={{ background: "rgba(255,79,168,0.3)" }}
-            />
-          </div>
+          <ParallaxHero className="absolute inset-0" intensity={0.25}>
+            <div className="img-color-reveal absolute inset-0" style={{ height: "120%" }}>
+              <Image
+                src={leadAsset.src}
+                alt={leadAsset.alt ?? leadModule?.alt ?? ""}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-center img-hero-bw"
+              />
+              {/* Multi-layer gradient overlay for depth */}
+              <div
+                className="absolute inset-0"
+                aria-hidden="true"
+                style={{
+                  background: "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.05) 100%)"
+                }}
+              />
+              {/* Side accent gradient */}
+              <div
+                className="absolute inset-0"
+                aria-hidden="true"
+                style={{
+                  background: "linear-gradient(to right, rgba(255,79,168,0.03) 0%, transparent 30%)"
+                }}
+              />
+              {/* Left accent line */}
+              <div
+                className="absolute bottom-0 left-0 top-0 w-px"
+                aria-hidden="true"
+                style={{ background: "linear-gradient(to bottom, transparent, rgba(255,79,168,0.4), transparent)" }}
+              />
+            </div>
+          </ParallaxHero>
         ) : (
           <div className="absolute inset-0 bg-black" />
         )}
 
         {/* Hero content */}
-        <div className="site-container relative z-10 pb-16 pt-32">
+        <div className="site-container relative z-10 pb-20 pt-32">
           <div className="max-w-4xl">
             {/* Eyebrow */}
             <p
-              className="mb-4 text-white/50"
+              className="mb-5 text-white/40"
               style={{
                 fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
-                fontSize: "0.6rem",
-                letterSpacing: "0.35em",
+                fontSize: "0.55rem",
+                letterSpacing: "0.4em",
                 textTransform: "uppercase"
               }}
             >
-              Brazilian Artist · Based in Europe
+              Brazilian Artist &middot; Based in Europe
             </p>
 
-            {/* Main headline */}
-            <h1
+            {/* Main headline with stagger animation */}
+            <HeroTextReveal
+              text={siteConfig.name}
+              tag="h1"
               id="home-title"
               className="text-white"
               style={{
                 fontFamily: "var(--font-cormorant), Georgia, serif",
-                fontSize: "clamp(4rem, 12vw, 10rem)",
+                fontSize: "clamp(4.5rem, 14vw, 12rem)",
                 fontWeight: 300,
-                lineHeight: 0.9,
-                letterSpacing: "-0.01em"
+                lineHeight: 0.88,
+                letterSpacing: "-0.02em"
               }}
-            >
-              {siteConfig.name}
-            </h1>
+              delayMs={400}
+            />
 
             {/* Statement */}
             <p
-              className="mt-6 text-white/70"
+              className="mt-7 text-white/60"
               style={{
                 fontFamily: "var(--font-cormorant), Georgia, serif",
-                fontSize: "clamp(1.1rem, 2.5vw, 1.6rem)",
+                fontSize: "clamp(1.15rem, 2.8vw, 1.8rem)",
                 fontWeight: 300,
                 fontStyle: "italic",
-                maxWidth: "30rem"
+                maxWidth: "28rem",
+                letterSpacing: "0.01em"
               }}
             >
               {homepageIntro.statement}
@@ -129,31 +144,31 @@ export default function HomePage() {
 
             {/* Brand descriptor */}
             <p
-              className="mt-5 text-white/40"
+              className="mt-6 text-white/25"
               style={{
                 fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
-                fontSize: "0.6rem",
-                letterSpacing: "0.2em",
+                fontSize: "0.55rem",
+                letterSpacing: "0.25em",
                 textTransform: "uppercase"
               }}
             >
-              Alternative Pop · Trap-Pop · R&amp;B · Vaporwave
+              Alternative Pop &middot; Trap-Pop &middot; R&amp;B &middot; Vaporwave
             </p>
           </div>
 
           {/* Navigation row at bottom of hero */}
           <nav
             aria-label="Home navigation"
-            className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3"
+            className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-3"
           >
             {navigationItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="interactive-hint text-white/50 hover:text-white/90 no-underline"
+                className="interactive-hint text-white/40 hover:text-white/90 no-underline"
                 style={{
                   fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
-                  fontSize: "0.62rem",
+                  fontSize: "0.58rem",
                   letterSpacing: "0.22em",
                   textTransform: "uppercase",
                   transition: "color 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)"
@@ -164,13 +179,28 @@ export default function HomePage() {
             ))}
           </nav>
         </div>
+
+        {/* Scroll indicator */}
+        <div
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10"
+          aria-hidden="true"
+          style={{
+            width: "1px",
+            height: "40px",
+            background: "linear-gradient(to bottom, rgba(255,79,168,0.4), transparent)",
+            animation: "pulse 2s ease-in-out infinite"
+          }}
+        />
       </section>
 
       {/* ══════════════════════════════════════════════
-          EDITORIAL DIVIDER
+          MARQUEE TICKER
       ══════════════════════════════════════════════ */}
-      <div className="site-container">
-        <div className="my-0 h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
+      <div className="py-6" style={{ borderTop: "1px solid rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+        <Marquee
+          items={["Music", "Image", "Presence", "Alternative Pop", "Trap-Pop", "R&B", "Vaporwave", "Rio de Janeiro", "Europe", "Visual Storyteller"]}
+          speed={45}
+        />
       </div>
 
       {/* ══════════════════════════════════════════════
@@ -181,10 +211,10 @@ export default function HomePage() {
         className="reveal section-gap-lg"
       >
         <div className="site-container">
-          <div className="grid gap-0 md:grid-cols-2">
+          <div className="grid gap-0 md:grid-cols-2 premium-card shine-hover">
 
             {/* Image panel */}
-            <div className="img-color-reveal relative overflow-hidden" style={{ minHeight: "480px" }}>
+            <div className="img-color-reveal relative overflow-hidden" style={{ minHeight: "520px" }}>
               {featuredReleaseAsset ? (
                 <Image
                   src={featuredReleaseAsset.src}
@@ -200,15 +230,15 @@ export default function HomePage() {
 
             {/* Text panel */}
             <div
-              className="flex flex-col justify-center px-8 py-12 md:px-12"
+              className="flex flex-col justify-center px-8 py-14 md:px-14"
               style={{ background: "rgba(255,255,255,0.015)", borderLeft: "1px solid rgba(255,255,255,0.06)" }}
             >
               <p
                 className="mb-4 text-accent"
                 style={{
                   fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
-                  fontSize: "0.6rem",
-                  letterSpacing: "0.25em",
+                  fontSize: "0.55rem",
+                  letterSpacing: "0.3em",
                   textTransform: "uppercase"
                 }}
               >
@@ -219,9 +249,9 @@ export default function HomePage() {
                 className="text-primary"
                 style={{
                   fontFamily: "var(--font-cormorant), Georgia, serif",
-                  fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                  fontSize: "clamp(2.2rem, 5vw, 4rem)",
                   fontWeight: 300,
-                  lineHeight: 1.05
+                  lineHeight: 1.02
                 }}
               >
                 {featuredReleaseModule?.copy.headline}
@@ -231,7 +261,7 @@ export default function HomePage() {
                   className="mt-4 text-muted"
                   style={{
                     fontFamily: "var(--font-cormorant), Georgia, serif",
-                    fontSize: "1.15rem",
+                    fontSize: "1.2rem",
                     fontStyle: "italic",
                     fontWeight: 300
                   }}
@@ -240,7 +270,7 @@ export default function HomePage() {
                 </p>
               ) : null}
               {featuredReleaseModule?.copy.cta ? (
-                <div className="mt-8">
+                <div className="mt-10">
                   <Link href={featuredReleaseModule.copy.cta.href} className="cta-primary">
                     {featuredReleaseModule.copy.cta.label}
                   </Link>
@@ -286,11 +316,11 @@ export default function HomePage() {
         className="reveal section-gap-lg"
       >
         <div className="site-container">
-          <div className="grid gap-0 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-stretch">
+          <div className="grid gap-0 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-stretch premium-card">
 
             {/* Image */}
             {visualsAsset ? (
-              <div className="img-color-reveal relative overflow-hidden" style={{ minHeight: "420px" }}>
+              <div className="img-color-reveal img-hover-zoom relative overflow-hidden" style={{ minHeight: "460px" }}>
                 <Image
                   src={visualsAsset.src}
                   alt={visualsAsset.alt ?? visualsModule?.alt ?? ""}
@@ -304,7 +334,7 @@ export default function HomePage() {
 
             {/* Text */}
             <div
-              className="flex flex-col justify-end px-8 py-10 md:px-10"
+              className="flex flex-col justify-end px-8 py-12 md:px-12"
               style={{
                 borderTop: "1px solid rgba(255,255,255,0.06)",
                 borderLeft: "1px solid rgba(255,255,255,0.06)",
@@ -316,28 +346,28 @@ export default function HomePage() {
                 className="text-primary"
                 style={{
                   fontFamily: "var(--font-cormorant), Georgia, serif",
-                  fontSize: "clamp(1.8rem, 4vw, 3rem)",
+                  fontSize: "clamp(2rem, 4.5vw, 3.5rem)",
                   fontWeight: 300,
-                  lineHeight: 1.1
+                  lineHeight: 1.05
                 }}
               >
                 {visualsModule?.copy.headline}
               </h2>
               {visualsModule?.copy.subline ? (
-                <p className="mt-3 text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.6 }}>
+                <p className="mt-4 text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.7 }}>
                   {visualsModule.copy.subline}
                 </p>
               ) : null}
               {visualsModule?.copy.cta ? (
-                <Link href={visualsModule.copy.cta.href} className="mt-8 inline-block cta-secondary self-start">
+                <Link href={visualsModule.copy.cta.href} className="mt-10 inline-block cta-secondary self-start">
                   {visualsModule.copy.cta.label}
                 </Link>
               ) : null}
 
               {/* Accent line */}
               <div
-                className="mt-10 w-12 h-px"
-                style={{ background: "rgba(255,79,168,0.4)" }}
+                className="mt-12 w-16 h-px"
+                style={{ background: "linear-gradient(to right, rgba(255,79,168,0.5), transparent)" }}
                 aria-hidden="true"
               />
             </div>
@@ -354,17 +384,17 @@ export default function HomePage() {
       >
         <div className="site-container">
           <div
-            className="grid gap-0 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-stretch"
+            className="grid gap-0 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-stretch premium-card shine-hover"
             style={{ border: "1px solid rgba(255,255,255,0.06)" }}
           >
             {/* Text */}
-            <div className="flex flex-col justify-center px-8 py-12 md:px-10">
+            <div className="flex flex-col justify-center px-8 py-14 md:px-12">
               <p
                 className="mb-3 text-muted"
                 style={{
                   fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
-                  fontSize: "0.6rem",
-                  letterSpacing: "0.22em",
+                  fontSize: "0.55rem",
+                  letterSpacing: "0.25em",
                   textTransform: "uppercase"
                 }}
               >
@@ -375,20 +405,20 @@ export default function HomePage() {
                 className="text-primary"
                 style={{
                   fontFamily: "var(--font-cormorant), Georgia, serif",
-                  fontSize: "clamp(1.8rem, 4vw, 3rem)",
+                  fontSize: "clamp(2rem, 4.5vw, 3.5rem)",
                   fontWeight: 300,
-                  lineHeight: 1.05
+                  lineHeight: 1.02
                 }}
               >
                 {pressModule?.copy.headline}
               </h2>
               {pressModule?.copy.subline ? (
-                <p className="mt-3 text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>
+                <p className="mt-4 text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.7 }}>
                   {pressModule.copy.subline}
                 </p>
               ) : null}
               {pressModule?.copy.cta ? (
-                <Link href={pressModule.copy.cta.href} className="mt-8 inline-block cta-primary self-start">
+                <Link href={pressModule.copy.cta.href} className="mt-10 inline-block cta-primary self-start">
                   {pressModule.copy.cta.label}
                 </Link>
               ) : null}
@@ -396,7 +426,7 @@ export default function HomePage() {
 
             {/* Image */}
             {pressAsset ? (
-              <div className="img-color-reveal relative overflow-hidden" style={{ minHeight: "340px", borderLeft: "1px solid rgba(255,255,255,0.06)" }}>
+              <div className="img-color-reveal img-hover-zoom relative overflow-hidden" style={{ minHeight: "380px", borderLeft: "1px solid rgba(255,255,255,0.06)" }}>
                 <Image
                   src={pressAsset.src}
                   alt={pressAsset.alt ?? pressModule?.alt ?? ""}
@@ -420,25 +450,30 @@ export default function HomePage() {
       >
         <div className="site-container">
           <div
-            className="relative overflow-hidden px-8 py-20 md:px-16 md:py-28"
+            className="relative overflow-hidden px-8 py-24 md:px-16 md:py-32 glow-accent"
             style={{
-              background: "linear-gradient(135deg, rgba(255,79,168,0.04) 0%, transparent 60%)",
+              background: "linear-gradient(135deg, rgba(255,79,168,0.05) 0%, transparent 50%, rgba(255,79,168,0.02) 100%)",
               border: "1px solid rgba(255,79,168,0.12)"
             }}
           >
-            {/* Decorative element */}
+            {/* Decorative corner lines */}
             <div
               className="absolute right-0 top-0 bottom-0 w-px"
-              style={{ background: "linear-gradient(to bottom, transparent, rgba(255,79,168,0.2), transparent)" }}
+              style={{ background: "linear-gradient(to bottom, transparent, rgba(255,79,168,0.25), transparent)" }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute left-0 top-0 right-0 h-px"
+              style={{ background: "linear-gradient(to right, rgba(255,79,168,0.2), transparent 40%)" }}
               aria-hidden="true"
             />
 
             <p
-              className="mb-4 text-accent"
+              className="mb-5 text-accent"
               style={{
                 fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
-                fontSize: "0.6rem",
-                letterSpacing: "0.25em",
+                fontSize: "0.55rem",
+                letterSpacing: "0.3em",
                 textTransform: "uppercase"
               }}
             >
@@ -449,24 +484,24 @@ export default function HomePage() {
               className="text-primary"
               style={{
                 fontFamily: "var(--font-cormorant), Georgia, serif",
-                fontSize: "clamp(2rem, 5vw, 4rem)",
+                fontSize: "clamp(2.5rem, 6vw, 5rem)",
                 fontWeight: 300,
-                lineHeight: 1.05,
-                maxWidth: "20rem"
+                lineHeight: 1.02,
+                maxWidth: "22rem"
               }}
             >
               {contactNewsletterModule?.copy.headline}
             </h2>
             {contactNewsletterModule?.copy.subline ? (
               <p
-                className="mt-4 text-muted"
-                style={{ fontSize: "0.9rem", lineHeight: 1.6, maxWidth: "28rem" }}
+                className="mt-5 text-muted"
+                style={{ fontSize: "0.9rem", lineHeight: 1.7, maxWidth: "30rem" }}
               >
                 {contactNewsletterModule.copy.subline}
               </p>
             ) : null}
             {contactNewsletterModule?.copy.cta ? (
-              <Link href={contactNewsletterModule.copy.cta.href} className="mt-8 inline-block cta-primary">
+              <Link href={contactNewsletterModule.copy.cta.href} className="mt-10 inline-block cta-primary">
                 {contactNewsletterModule.copy.cta.label}
               </Link>
             ) : null}
@@ -474,8 +509,16 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Bottom marquee */}
+      <div className="py-4" style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+        <Marquee
+          items={["Dama Venus", "Artist", "Visual Storyteller", "Live Performer", "Rio de Janeiro", "Europe"]}
+          speed={55}
+        />
+      </div>
+
       {/* Bottom spacing */}
-      <div className="section-gap-lg" />
+      <div className="section-gap-md" />
 
     </div>
   );

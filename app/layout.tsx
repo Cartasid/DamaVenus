@@ -6,6 +6,7 @@ import SiteFooter from "@/components/layout/site-footer";
 import SiteHeader from "@/components/layout/site-header";
 import ScrollRevealProvider from "@/components/utils/scroll-reveal-provider";
 import ScrollProgress from "@/components/utils/scroll-progress";
+import CustomCursor from "@/components/utils/custom-cursor";
 import { resolveSiteUrl, siteConfig } from "@/content/data/site.config";
 
 const siteUrl = resolveSiteUrl();
@@ -124,6 +125,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           <style>{".reveal,.reveal-fade{opacity:1!important;transform:none!important}"}</style>
         </noscript>
         <ScrollProgress />
+        <CustomCursor />
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>

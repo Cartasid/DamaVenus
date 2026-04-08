@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { aboutPageModel } from "@/content/data/about.data";
 import { assetMap } from "@/content/data/site.config";
+import ParallaxHero from "@/components/utils/parallax-hero";
+import HeroTextReveal from "@/components/utils/hero-text-reveal";
 
 export const metadata: Metadata = {
   title: { absolute: "About | Dama Venus" },
@@ -53,41 +55,44 @@ export default function AboutPage() {
 
       {/* ── HERO PORTRAIT ── */}
       {leadPortraitAsset ? (
-        <section className="home-hero-enter relative" style={{ height: "85vh", minHeight: "560px" }}>
-          <div className="img-color-reveal absolute inset-0">
-            <Image
-              src={leadPortraitAsset.src}
-              alt={resolveAltText(leadPortrait.role, leadPortrait.altTextNote, leadPortraitAsset.alt)}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center img-hero-bw"
-            />
-            <div
-              className="absolute inset-0"
-              aria-hidden="true"
-              style={{
-                background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.1) 100%)"
-              }}
-            />
-          </div>
-          <div className="site-container relative z-10 flex h-full flex-col justify-end pb-14">
-            <p className="text-white/50 mb-3" style={labelStyle}>{aboutIntro.title}</p>
-            <h1
+        <section className="home-hero-enter relative" style={{ height: "90vh", minHeight: "560px" }}>
+          <ParallaxHero className="absolute inset-0" intensity={0.2}>
+            <div className="img-color-reveal absolute inset-0" style={{ height: "120%" }}>
+              <Image
+                src={leadPortraitAsset.src}
+                alt={resolveAltText(leadPortrait.role, leadPortrait.altTextNote, leadPortraitAsset.alt)}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-center img-hero-bw"
+              />
+              <div
+                className="absolute inset-0"
+                aria-hidden="true"
+                style={{
+                  background: "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.55) 35%, rgba(0,0,0,0.1) 100%)"
+                }}
+              />
+            </div>
+          </ParallaxHero>
+          <div className="site-container relative z-10 flex h-full flex-col justify-end pb-16">
+            <p className="text-white/40 mb-4" style={labelStyle}>{aboutIntro.title}</p>
+            <HeroTextReveal
+              text={aboutIntro.introLine}
+              tag="h1"
               id="about-title"
               className="text-white"
               style={{
                 fontFamily: "var(--font-cormorant), Georgia, serif",
-                fontSize: "clamp(3rem, 9vw, 7rem)",
+                fontSize: "clamp(3.5rem, 10vw, 8rem)",
                 fontWeight: 300,
-                lineHeight: 0.92,
-                letterSpacing: "-0.01em"
+                lineHeight: 0.9,
+                letterSpacing: "-0.02em"
               }}
-            >
-              {aboutIntro.introLine}
-            </h1>
+              delayMs={300}
+            />
             <p
-              className="mt-5 text-white/65"
+              className="mt-6 text-white/55"
               style={{ fontSize: "0.95rem", lineHeight: 1.7, maxWidth: "32rem" }}
             >
               {aboutIntro.shortText}
@@ -161,7 +166,7 @@ export default function AboutPage() {
           {keyStatements.map((statement) => (
             <li
               key={statement.id}
-              className="p-8"
+              className="p-8 shine-hover"
               style={{ background: "#000" }}
             >
               <h3
