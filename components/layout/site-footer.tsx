@@ -111,6 +111,7 @@ export default function SiteFooter() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`${item.label} (opens in new tab)`}
                     className="text-muted hover:text-offWhite no-underline"
                     style={linkStyleBase}
                   >

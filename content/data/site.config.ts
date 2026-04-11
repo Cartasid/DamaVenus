@@ -1,7 +1,7 @@
 import type { AssetMapItem } from "@/lib/types";
 import { prioritizedAssets } from "@/content/dama-venus/assets";
 
-const SITE_URL_FALLBACK = "https://damavenus.com";
+const SITE_URL_FALLBACK = "https://damavenus.eu";
 
 export function resolveSiteUrl(): string {
   const envUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();

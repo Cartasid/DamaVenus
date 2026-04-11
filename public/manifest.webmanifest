@@ -1,11 +1,11 @@
 {
-  "name": "Dama Venus",
+  "name": "Dama Venus — Sound. Vision. Reign.",
   "short_name": "Dama Venus",
-  "description": "Music. Image. Presence.",
+  "description": "The Brazilian voice redefining alternative pop across Europe. Cinematic sound, fashion-forward visuals, and uncompromising artistic vision.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#050505",
+  "theme_color": "#FF4FA8",
   "icons": [
     {
       "src": "/icon.svg",

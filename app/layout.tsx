@@ -92,6 +92,9 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1
     }
+  },
+  other: {
+    "theme-color": "#050505"
   }
 };
 
@@ -111,13 +114,23 @@ const jsonLd = {
     "https://open.spotify.com/artist/damavenus",
     "https://www.instagram.com/damavenus",
     "https://www.youtube.com/@damavenus"
-  ]
+  ],
+  member: {
+    "@type": "Person",
+    name: "Dama Venus",
+    nationality: "Brazilian"
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang={siteConfig.language}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://open.spotify.com" />
+        <link rel="dns-prefetch" href="https://www.instagram.com" />
+        <link rel="dns-prefetch" href="https://www.youtube.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
