@@ -113,8 +113,7 @@ export default function ImageLightbox() {
           position: "relative",
           width: "100%",
           maxWidth: "1200px",
-          maxHeight: "85vh",
-          aspectRatio: "auto",
+          height: "85vh",
           opacity: visible ? 1 : 0,
           transform: visible ? "scale(1)" : "scale(0.92)",
           transition: "opacity 500ms cubic-bezier(0.16,1,0.3,1), transform 500ms cubic-bezier(0.16,1,0.3,1)"

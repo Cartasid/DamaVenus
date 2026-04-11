@@ -10,8 +10,10 @@ interface ImageRevealProps {
   lightboxSrc?: string;
   /** Alt text passed to lightbox */
   lightboxAlt?: string;
-  /** Intersection threshold for auto-reveal (0-1). Default 0.25 */
+  /** Intersection threshold for auto-reveal (0-1). Default 0.6 */
   threshold?: number;
+  /** Delay in ms before color reveal after entering viewport. Default 400 */
+  revealDelay?: number;
 }
 
 /**
@@ -25,7 +27,8 @@ export default function ImageReveal({
   style,
   lightboxSrc,
   lightboxAlt,
-  threshold = 0.25
+  threshold = 0.6,
+  revealDelay = 400
 }: ImageRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -34,18 +37,25 @@ export default function ImageReveal({
     const el = ref.current;
     if (!el) return;
 
+    let timer: ReturnType<typeof setTimeout> | null = null;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.setAttribute("data-in-view", "true");
+          timer = setTimeout(() => {
+            el.setAttribute("data-in-view", "true");
+          }, revealDelay);
         }
       },
-      { threshold, rootMargin: "0px 0px -50px 0px" }
+      { threshold, rootMargin: "0px 0px -80px 0px" }
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
-  }, [threshold]);
+    return () => {
+      observer.disconnect();
+      if (timer) clearTimeout(timer);
+    };
+  }, [threshold, revealDelay]);
 
   const handleClick = () => {
     if (!lightboxSrc) return;

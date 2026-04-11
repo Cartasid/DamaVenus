@@ -61,19 +61,14 @@ body {
 /* ─────────────────────────────────────────────
    IMAGE EFFECTS — BLACK & WHITE → COLOR (Premium)
    Uses sepia tint in BW state for a warm,
-   cinematic tone. Color reveal uses a slow
-   dramatic ease with subtle scale & saturation.
+   cinematic tone. Color reveal on hover uses a
+   slow dramatic ease with subtle scale & saturation.
+   Effect only applies to images inside .img-color-reveal.
 ───────────────────────────────────────────── */
-img {
-  filter: grayscale(100%) sepia(15%) contrast(1.1) brightness(0.85);
-  transition:
-    filter 1200ms var(--transition-dramatic),
-    transform 900ms var(--transition-dramatic);
-  will-change: filter, transform;
-}
 
 .img-color-reveal {
   overflow: hidden;
+  position: relative;
 }
 
 .img-color-reveal img {
@@ -85,7 +80,7 @@ img {
   will-change: filter, transform;
 }
 
-img.img-hero-bw {
+.img-color-reveal img.img-hero-bw {
   filter: grayscale(100%) sepia(10%) contrast(1.15) brightness(0.6);
   transition: filter 1800ms var(--transition-dramatic);
 }
@@ -97,7 +92,6 @@ img.img-statement-bg {
 }
 
 /* Color reveal on hover — smooth, cinematic */
-img:hover,
 .img-color-reveal:hover img,
 .img-color-reveal:focus-within img {
   filter: grayscale(0%) sepia(0%) contrast(1.02) brightness(1) saturate(1.08);
@@ -831,7 +825,7 @@ hr {
   position: absolute;
   inset: 0;
   background: #0a0a0a;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
 }
 
