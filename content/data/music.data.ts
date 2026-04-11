@@ -24,7 +24,7 @@ const buildAction = (kind: MusicAction["kind"], href: string, label: string): Mu
 export const musicIntro: SectionContent = {
   label: "Music",
   headline: "Current Chapter",
-  subhead: "New music, framed in shadow and light."
+  subhead: "New music. Dark. Luminous. Unforgettable."
 };
 
 export const musicReleases: MusicRelease[] = [
@@ -32,7 +32,7 @@ export const musicReleases: MusicRelease[] = [
     id: "current-chapter",
     title: "Current Chapter",
     subtitle: "Featured Single",
-    shortText: "Lead release of the current phase with the clearest listen-first CTA.",
+    shortText: "The defining release of this era — a sonic statement in shadow and light.",
     releaseType: "single",
     status: "active",
     releaseDate: "2026-03-14",
@@ -53,7 +53,7 @@ export const musicReleases: MusicRelease[] = [
     id: "midnight-signal",
     title: "Midnight Signal",
     subtitle: "Selected Single",
-    shortText: "Secondary release for continuity in the release stack.",
+    shortText: "A nocturnal frequency. Mood-first sound that lingers long after the last note.",
     releaseType: "single",
     status: "active",
     year: "2025",
@@ -71,7 +71,7 @@ export const musicReleases: MusicRelease[] = [
     id: "afterglow-cut",
     title: "Afterglow Cut",
     subtitle: "Coming Soon",
-    shortText: "Prepared as upcoming item with status-driven CTA behavior.",
+    shortText: "Something is forming in the dark. Sign up to be the first to hear it.",
     releaseType: "upcoming",
     status: "coming-soon",
     year: "2026",
@@ -88,7 +88,7 @@ export const musicVisualReleases: MusicRelease[] = [
     id: "nocturne-line-visual",
     title: "Nocturne Line",
     subtitle: "Visual Release",
-    shortText: "Visual-led module for watch CTA and cinematic framing.",
+    shortText: "A cinematic visual experience — where the music becomes something you can see.",
     releaseType: "visual-release",
     status: "active",
     year: "2025",

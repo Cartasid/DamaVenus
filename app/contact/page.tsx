@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 const labelStyle = {
-  fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
+  fontFamily: "var(--font-syne), system-ui, sans-serif",
   fontSize: "0.6rem",
   letterSpacing: "0.22em",
   textTransform: "uppercase" as const
@@ -34,11 +34,11 @@ export default function ContactPage() {
       <section className="section-stack-md max-w-2xl">
 
         <header className="space-y-4">
-          <p className="text-accent" style={labelStyle}>Inquiries</p>
+          <p className="text-accent" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>Inquiries</p>
           <h1
             className="text-primary"
             style={{
-              fontFamily: "var(--font-cormorant), Georgia, serif",
+              fontFamily: "var(--font-bodoni), Georgia, serif",
               fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
               fontWeight: 300,
               lineHeight: 0.95
@@ -49,34 +49,38 @@ export default function ContactPage() {
           <p className="text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.75 }}>
             {contactContent.intro.subhead}
           </p>
+          <div className="h-px" style={{ background: "rgba(200,168,126,0.2)", width: "40px" }} />
         </header>
 
-        <div className="h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
+        <div className="h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
 
         <ContactForm />
 
         {contactContent.alternatePaths.length ? (
-          <section className="space-y-4" aria-label="Alternative contact options">
-            <p className="text-muted" style={labelStyle}>Alternative Contact</p>
-            <div className="space-y-4">
-              {contactContent.alternatePaths.map((path) => (
-                <div key={path.id}>
-                  {path.href ? (
-                    <a href={path.href} className="text-offWhite underline underline-offset-4">
-                      {path.label}
-                    </a>
-                  ) : path.email ? (
-                    <a href={`mailto:${path.email}`} className="text-offWhite underline underline-offset-4">
-                      {path.label}
-                    </a>
-                  ) : (
-                    <span className="text-offWhite">{path.label}</span>
-                  )}
-                  <p className="mt-1 text-muted" style={{ fontSize: "0.8rem" }}>{path.note}</p>
-                </div>
-              ))}
-            </div>
-          </section>
+          <>
+            <div className="h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
+            <section className="space-y-4" aria-label="Alternative contact options">
+              <p className="text-muted" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>Alternative Contact</p>
+              <div className="space-y-4">
+                {contactContent.alternatePaths.map((path) => (
+                  <div key={path.id}>
+                    {path.href ? (
+                      <a href={path.href} className="text-offWhite underline underline-offset-4" style={{ textDecorationColor: "rgba(200,168,126,0.6)" }}>
+                        {path.label}
+                      </a>
+                    ) : path.email ? (
+                      <a href={`mailto:${path.email}`} className="text-offWhite underline underline-offset-4" style={{ textDecorationColor: "rgba(200,168,126,0.6)" }}>
+                        {path.label}
+                      </a>
+                    ) : (
+                      <span className="text-offWhite">{path.label}</span>
+                    )}
+                    <p className="mt-1 text-muted" style={{ fontSize: "0.8rem" }}>{path.note}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </>
         ) : null}
 
       </section>

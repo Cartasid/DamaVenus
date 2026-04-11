@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import ImageReveal from "@/components/utils/image-reveal";
 import { musicData } from "@/content/data/music.data";
 import { assetMap } from "@/content/data/site.config";
 
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 };
 
 const labelStyle = {
-  fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
+  fontFamily: "var(--font-syne), system-ui, sans-serif",
   fontSize: "0.6rem",
   letterSpacing: "0.22em",
   textTransform: "uppercase" as const
@@ -72,7 +73,7 @@ export default function MusicPage() {
         <h1
           className="text-primary"
           style={{
-            fontFamily: "var(--font-cormorant), Georgia, serif",
+            fontFamily: "var(--font-bodoni), Georgia, serif",
             fontSize: "clamp(3rem, 8vw, 6rem)",
             fontWeight: 300,
             lineHeight: 0.95,
@@ -89,7 +90,7 @@ export default function MusicPage() {
             {musicData.intro.subhead}
           </p>
         ) : null}
-        <div className="mt-10 h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
+        <div className="mt-10 h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
       </div>
 
       {/* ── FEATURED RELEASE ── */}
@@ -99,13 +100,15 @@ export default function MusicPage() {
         className="reveal mt-0"
       >
         <div className="site-container">
-          <div className="grid gap-0 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+          <div className="grid gap-0 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]" style={{ borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
 
             {/* Cover */}
             {featuredAsset ? (
-              <div
-                className="img-color-reveal relative overflow-hidden"
+              <ImageReveal
+                className="relative overflow-hidden"
                 style={{ minHeight: "520px" }}
+                lightboxSrc={featuredAsset.src}
+                lightboxAlt={featuredAsset.alt ?? featured.title}
               >
                 <Image
                   src={featuredAsset.src}
@@ -115,20 +118,20 @@ export default function MusicPage() {
                   sizes="(max-width: 768px) 100vw, 40vw"
                   className="object-cover"
                 />
-              </div>
+              </ImageReveal>
             ) : null}
 
             {/* Info */}
             <div
               className="flex flex-col justify-end px-8 py-12 md:px-12"
-              style={{ borderLeft: "1px solid rgba(255,255,255,0.06)" }}
+              style={{ borderLeft: "1px solid rgba(200,168,126,0.12)" }}
             >
-              <p className="text-accent mb-2" style={labelStyle}>Featured Release</p>
+              <p className="mb-2" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>Featured Release</p>
               <h2
                 id="featured-release-title"
                 className="text-primary"
                 style={{
-                  fontFamily: "var(--font-cormorant), Georgia, serif",
+                  fontFamily: "var(--font-bodoni), Georgia, serif",
                   fontSize: "clamp(2rem, 5vw, 3.5rem)",
                   fontWeight: 300,
                   lineHeight: 1.05
@@ -140,7 +143,7 @@ export default function MusicPage() {
                 <p
                   className="mt-2 text-muted"
                   style={{
-                    fontFamily: "var(--font-cormorant), Georgia, serif",
+                    fontFamily: "var(--font-bodoni), Georgia, serif",
                     fontSize: "1.1rem",
                     fontStyle: "italic"
                   }}
@@ -170,22 +173,24 @@ export default function MusicPage() {
       {selectedReleases.length ? (
         <section id="selected-releases" className="reveal mt-20">
           <div className="site-container">
-            <p className="text-muted mb-8" style={labelStyle}>Selected Releases</p>
+            <div className="mb-8 pb-8" style={{ borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
+              <p className="text-muted" style={labelStyle}>Selected Releases</p>
+            </div>
 
             {selectedSingles.length ? (
-              <ul className="grid gap-px md:grid-cols-2" style={{ background: "rgba(255,255,255,0.05)" }}>
+              <ul className="grid gap-px md:grid-cols-2" style={{ background: "rgba(200,168,126,0.04)" }}>
                 {selectedSingles.map((release) => (
                   <li
                     key={release.id}
                     id={release.id}
                     className="reveal-child space-y-3 p-8"
-                    style={{ background: "#000" }}
+                    style={{ background: "#050505", border: "1px solid rgba(200,168,126,0.06)" }}
                   >
                     <p className="text-accent" style={labelStyle}>{release.status}</p>
                     <h3
                       className="text-primary"
                       style={{
-                        fontFamily: "var(--font-cormorant), Georgia, serif",
+                        fontFamily: "var(--font-bodoni), Georgia, serif",
                         fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)",
                         fontWeight: 300,
                         lineHeight: 1.1
@@ -205,7 +210,7 @@ export default function MusicPage() {
             ) : null}
 
             {followUpReleases.length ? (
-              <ul className="mt-px grid gap-px md:grid-cols-2" style={{ background: "rgba(255,255,255,0.05)" }}>
+              <ul className="mt-px grid gap-px md:grid-cols-2" style={{ background: "rgba(200,168,126,0.04)" }}>
                 {followUpReleases.map((release) => {
                   const releaseAsset = assetMap[release.coverAsset.id];
                   return (
@@ -213,10 +218,15 @@ export default function MusicPage() {
                       key={release.id}
                       id={release.id}
                       className="p-6"
-                      style={{ background: "#000" }}
+                      style={{ background: "#050505", border: "1px solid rgba(200,168,126,0.06)" }}
                     >
                       {releaseAsset ? (
-                        <div className="img-color-reveal relative mb-4 overflow-hidden" style={{ height: "200px" }}>
+                        <ImageReveal
+                          className="relative mb-4 overflow-hidden"
+                          style={{ height: "200px" }}
+                          lightboxSrc={releaseAsset.src}
+                          lightboxAlt={releaseAsset.alt ?? release.title}
+                        >
                           <Image
                             src={releaseAsset.src}
                             alt={releaseAsset.alt ?? release.title}
@@ -224,12 +234,12 @@ export default function MusicPage() {
                             sizes="(max-width: 768px) 100vw, 30vw"
                             className="object-cover"
                           />
-                        </div>
+                        </ImageReveal>
                       ) : null}
                       <h3
                         className="text-primary"
                         style={{
-                          fontFamily: "var(--font-cormorant), Georgia, serif",
+                          fontFamily: "var(--font-bodoni), Georgia, serif",
                           fontSize: "1.6rem",
                           fontWeight: 300
                         }}
@@ -254,8 +264,10 @@ export default function MusicPage() {
       {/* ── VISUAL RELEASES ── */}
       <section id="visual-releases" className="reveal mt-20">
         <div className="site-container">
-          <p className="text-muted mb-8" style={labelStyle}>Visual Releases</p>
-          <ul className="space-y-px" style={{ background: "rgba(255,255,255,0.05)" }}>
+          <div className="mb-8 pb-8" style={{ borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
+            <p className="text-muted" style={labelStyle}>Visual Releases</p>
+          </div>
+          <ul className="space-y-px" style={{ background: "rgba(200,168,126,0.04)" }}>
             {musicData.visualReleases.map((release) => {
               const releaseAsset = assetMap[release.coverAsset.id];
               const watchAction = release.watchLinks?.[0];
@@ -272,10 +284,15 @@ export default function MusicPage() {
                 : null;
 
               return (
-                <li key={release.id} className="p-6" style={{ background: "#000" }}>
+                <li key={release.id} className="p-6" style={{ background: "#050505", border: "1px solid rgba(200,168,126,0.06)" }}>
                   <article className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]" aria-labelledby={`${release.id}-title`}>
                     {watchAction && releaseAsset ? (
-                      <div className="img-color-reveal relative overflow-hidden" style={{ height: "160px" }}>
+                      <ImageReveal
+                        className="relative overflow-hidden"
+                        style={{ height: "160px" }}
+                        lightboxSrc={releaseAsset.src}
+                        lightboxAlt={releaseAsset.alt ?? `${release.title} visual still`}
+                      >
                         <Image
                           src={releaseAsset.src}
                           alt={releaseAsset.alt ?? `${release.title} visual still`}
@@ -283,14 +300,14 @@ export default function MusicPage() {
                           sizes="(max-width: 768px) 100vw, 40vw"
                           className="object-cover"
                         />
-                      </div>
+                      </ImageReveal>
                     ) : null}
                     <div className="flex flex-col justify-center space-y-3">
                       <h3
                         id={`${release.id}-title`}
                         className="text-primary"
                         style={{
-                          fontFamily: "var(--font-cormorant), Georgia, serif",
+                          fontFamily: "var(--font-bodoni), Georgia, serif",
                           fontSize: "1.6rem",
                           fontWeight: 300
                         }}

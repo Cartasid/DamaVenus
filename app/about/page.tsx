@@ -5,6 +5,7 @@ import { aboutPageModel } from "@/content/data/about.data";
 import { assetMap } from "@/content/data/site.config";
 import ParallaxHero from "@/components/utils/parallax-hero";
 import HeroTextReveal from "@/components/utils/hero-text-reveal";
+import ImageReveal from "@/components/utils/image-reveal";
 
 export const metadata: Metadata = {
   title: { absolute: "About | Dama Venus" },
@@ -24,10 +25,11 @@ export const metadata: Metadata = {
 };
 
 const labelStyle = {
-  fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
+  fontFamily: "var(--font-syne), system-ui, sans-serif",
   fontSize: "0.6rem",
   letterSpacing: "0.22em",
-  textTransform: "uppercase" as const
+  textTransform: "uppercase" as const,
+  color: "rgba(200,168,126,0.6)"
 };
 
 export default function AboutPage() {
@@ -57,7 +59,12 @@ export default function AboutPage() {
       {leadPortraitAsset ? (
         <section className="home-hero-enter relative" style={{ height: "90vh", minHeight: "560px" }}>
           <ParallaxHero className="absolute inset-0" intensity={0.2}>
-            <div className="img-color-reveal absolute inset-0" style={{ height: "120%" }}>
+            <ImageReveal
+              className="absolute inset-0"
+              style={{ height: "120%" }}
+              lightboxSrc={leadPortraitAsset.src}
+              lightboxAlt={resolveAltText(leadPortrait.role, leadPortrait.altTextNote, leadPortraitAsset.alt)}
+            >
               <Image
                 src={leadPortraitAsset.src}
                 alt={resolveAltText(leadPortrait.role, leadPortrait.altTextNote, leadPortraitAsset.alt)}
@@ -70,10 +77,10 @@ export default function AboutPage() {
                 className="absolute inset-0"
                 aria-hidden="true"
                 style={{
-                  background: "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.55) 35%, rgba(0,0,0,0.1) 100%)"
+                  background: "linear-gradient(to top, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.55) 35%, rgba(5,5,5,0.1) 100%)"
                 }}
               />
-            </div>
+            </ImageReveal>
           </ParallaxHero>
           <div className="site-container relative z-10 flex h-full flex-col justify-end pb-16">
             <p className="text-white/40 mb-4" style={labelStyle}>{aboutIntro.title}</p>
@@ -83,7 +90,7 @@ export default function AboutPage() {
               id="about-title"
               className="text-white"
               style={{
-                fontFamily: "var(--font-cormorant), Georgia, serif",
+                fontFamily: "var(--font-bodoni), Georgia, serif",
                 fontSize: "clamp(3.5rem, 10vw, 8rem)",
                 fontWeight: 300,
                 lineHeight: 0.9,
@@ -106,7 +113,7 @@ export default function AboutPage() {
             id="about-title"
             className="text-primary"
             style={{
-              fontFamily: "var(--font-cormorant), Georgia, serif",
+              fontFamily: "var(--font-bodoni), Georgia, serif",
               fontSize: "clamp(3rem, 8vw, 6rem)",
               fontWeight: 300,
               lineHeight: 0.95
@@ -127,7 +134,7 @@ export default function AboutPage() {
           <p
             className="text-primary"
             style={{
-              fontFamily: "var(--font-cormorant), Georgia, serif",
+              fontFamily: "var(--font-bodoni), Georgia, serif",
               fontSize: "1.4rem",
               fontWeight: 300,
               lineHeight: 1.6
@@ -137,7 +144,7 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="space-y-6">
-          <div style={{ borderLeft: "1px solid rgba(255,79,168,0.25)", paddingLeft: "1.5rem" }}>
+          <div style={{ borderLeft: "1px solid rgba(200,168,126,0.25)", paddingLeft: "1.5rem" }}>
             <p className="text-muted mb-2" style={labelStyle}>Short Bio</p>
             <p className="text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.75 }}>
               {aboutBio.shortText}
@@ -156,26 +163,31 @@ export default function AboutPage() {
 
       {/* ── DIVIDER ── */}
       <div className="site-container mt-16">
-        <div className="h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
+        <div className="h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
       </div>
 
       {/* ── METHOD / KEY STATEMENTS ── */}
       <section className="reveal site-container mt-16" aria-labelledby="about-method-heading">
         <p id="about-method-heading" className="text-muted mb-8" style={labelStyle}>Method</p>
-        <ul className="grid gap-px md:grid-cols-2" style={{ background: "rgba(255,255,255,0.05)" }}>
-          {keyStatements.map((statement) => (
+        <ul className="grid gap-px md:grid-cols-2" style={{ background: "rgba(200,168,126,0.04)", borderTop: "1px solid rgba(200,168,126,0.08)", borderLeft: "1px solid rgba(200,168,126,0.08)" }}>
+          {keyStatements.map((statement, index) => (
             <li
               key={statement.id}
               className="p-8 shine-hover"
-              style={{ background: "#000" }}
+              style={{
+                background: "#050505",
+                borderRight: "1px solid rgba(200,168,126,0.08)",
+                borderBottom: "1px solid rgba(200,168,126,0.08)"
+              }}
             >
               <h3
                 className="text-primary mb-3"
                 style={{
-                  fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
+                  fontFamily: "var(--font-syne), system-ui, sans-serif",
                   fontSize: "0.65rem",
                   letterSpacing: "0.2em",
-                  textTransform: "uppercase"
+                  textTransform: "uppercase",
+                  color: "rgba(200,168,126,0.8)"
                 }}
               >
                 {statement.title}
@@ -183,7 +195,7 @@ export default function AboutPage() {
               <p
                 className="text-muted"
                 style={{
-                  fontFamily: "var(--font-cormorant), Georgia, serif",
+                  fontFamily: "var(--font-bodoni), Georgia, serif",
                   fontSize: "1.2rem",
                   fontWeight: 300,
                   lineHeight: 1.5
@@ -197,7 +209,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA ── */}
-      <div className="reveal site-container mt-12">
+      <div className="reveal site-container mt-12" style={{ borderTop: "1px solid rgba(200,168,126,0.15)", paddingTop: "2rem" }}>
         <Link href={aboutCta.href} className="cta-primary">
           {aboutCta.label}
         </Link>
@@ -207,14 +219,20 @@ export default function AboutPage() {
       {supportingVisuals.length ? (
         <section className="reveal site-container mt-20" aria-labelledby="about-supporting-visuals-heading">
           <h2 id="about-supporting-visuals-heading" className="sr-only">Supporting Visuals</h2>
-          <div className="grid gap-px sm:grid-cols-2" style={{ background: "rgba(255,255,255,0.05)" }}>
+          <div className="grid gap-px sm:grid-cols-2" style={{ background: "rgba(200,168,126,0.04)", borderTop: "1px solid rgba(200,168,126,0.08)", borderLeft: "1px solid rgba(200,168,126,0.08)" }}>
             {supportingVisuals.map((visual) => {
               const asset = assetMap[visual.assetId];
               if (!asset) return null;
               const ratioClass = visual.role === "reserve" ? "aspect-[3/4]" : "aspect-[4/5]";
 
               return (
-                <div key={visual.assetId} className={`img-color-reveal relative ${ratioClass} overflow-hidden`}>
+                <ImageReveal
+                  key={visual.assetId}
+                  className={`relative ${ratioClass} overflow-hidden`}
+                  style={{ borderRight: "1px solid rgba(200,168,126,0.08)", borderBottom: "1px solid rgba(200,168,126,0.08)" }}
+                  lightboxSrc={asset.src}
+                  lightboxAlt={resolveAltText(visual.role, visual.altTextNote, asset.alt)}
+                >
                   <Image
                     src={asset.src}
                     alt={resolveAltText(visual.role, visual.altTextNote, asset.alt)}
@@ -222,7 +240,7 @@ export default function AboutPage() {
                     className="object-cover"
                     sizes="(min-width: 768px) 50vw, 100vw"
                   />
-                </div>
+                </ImageReveal>
               );
             })}
           </div>

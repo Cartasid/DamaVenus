@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { visualsData } from "@/content/data/visuals.data";
 import { assetMap } from "@/content/data/site.config";
+import ImageReveal from "@/components/utils/image-reveal";
 
 export const metadata: Metadata = {
   title: { absolute: "Visuals | Dama Venus" },
@@ -22,10 +23,11 @@ export const metadata: Metadata = {
 };
 
 const labelStyle = {
-  fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
+  fontFamily: "var(--font-syne), system-ui, sans-serif",
   fontSize: "0.6rem",
   letterSpacing: "0.22em",
-  textTransform: "uppercase" as const
+  textTransform: "uppercase" as const,
+  color: "rgba(200,168,126,0.6)"
 };
 
 export default function VisualsPage() {
@@ -62,7 +64,7 @@ export default function VisualsPage() {
               id="visuals-page-title"
               className="text-primary"
               style={{
-                fontFamily: "var(--font-cormorant), Georgia, serif",
+                fontFamily: "var(--font-bodoni), Georgia, serif",
                 fontSize: "clamp(3rem, 8vw, 6rem)",
                 fontWeight: 300,
                 lineHeight: 0.95
@@ -72,7 +74,12 @@ export default function VisualsPage() {
             </h1>
           </div>
           {openerAsset ? (
-            <div className="img-color-reveal relative overflow-hidden" style={{ height: "220px" }}>
+            <ImageReveal
+              className="relative overflow-hidden"
+              style={{ height: "220px" }}
+              lightboxSrc={openerAsset.src}
+              lightboxAlt={resolveAlt(openerAsset)}
+            >
               <Image
                 src={openerAsset.src}
                 alt={resolveAlt(openerAsset)}
@@ -81,7 +88,7 @@ export default function VisualsPage() {
                 sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover"
               />
-            </div>
+            </ImageReveal>
           ) : null}
         </div>
         {visualsData.intro.subhead ? (
@@ -89,13 +96,18 @@ export default function VisualsPage() {
             {visualsData.intro.subhead}
           </p>
         ) : null}
-        <div className="mt-14 h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
+        <div className="mt-14 h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
       </header>
 
       {/* ── LEAD VISUAL ── */}
       {leadSequenceEntry && leadAsset ? (
         <section className="reveal site-container mt-16" aria-labelledby={`${leadSequenceEntry.id}-lead-title`}>
-          <div className="img-color-reveal relative overflow-hidden" style={{ height: "70vh", minHeight: "480px" }}>
+          <ImageReveal
+            className="relative overflow-hidden"
+            style={{ height: "70vh", minHeight: "480px" }}
+            lightboxSrc={leadAsset.src}
+            lightboxAlt={resolveAlt(leadAsset, leadSequenceEntry.altTextNotes)}
+          >
             <Image
               src={leadAsset.src}
               alt={resolveAlt(leadAsset, leadSequenceEntry.altTextNotes)}
@@ -108,7 +120,7 @@ export default function VisualsPage() {
               className="absolute inset-0"
               aria-hidden="true"
               style={{
-                background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)"
+                background: "linear-gradient(to top, rgba(5,5,5,0.7) 0%, transparent 50%)"
               }}
             />
             <div className="absolute bottom-0 left-0 p-8">
@@ -116,7 +128,7 @@ export default function VisualsPage() {
                 id={`${leadSequenceEntry.id}-lead-title`}
                 className="text-white"
                 style={{
-                  fontFamily: "var(--font-cormorant), Georgia, serif",
+                  fontFamily: "var(--font-bodoni), Georgia, serif",
                   fontSize: "clamp(1.8rem, 4vw, 3rem)",
                   fontWeight: 300,
                   lineHeight: 1.05
@@ -130,7 +142,7 @@ export default function VisualsPage() {
                 </p>
               ) : null}
             </div>
-          </div>
+          </ImageReveal>
         </section>
       ) : null}
 
@@ -142,18 +154,24 @@ export default function VisualsPage() {
             id={`${entry.id}-series-title`}
             className="text-primary mb-8"
             style={{
-              fontFamily: "var(--font-cormorant), Georgia, serif",
+              fontFamily: "var(--font-bodoni), Georgia, serif",
               fontSize: "clamp(1.8rem, 4vw, 3rem)",
               fontWeight: 300
             }}
           >
             {entry.title}
           </h2>
-          <div className="grid gap-px md:grid-cols-3" style={{ background: "rgba(255,255,255,0.05)" }}>
+          <div className="grid gap-px md:grid-cols-3" style={{ background: "rgba(200,168,126,0.04)" }}>
             {entry.assets.map((assetId) => {
               const asset = assetMap[assetId];
               return asset ? (
-                <div key={assetId} className="img-color-reveal relative overflow-hidden" style={{ height: "320px" }}>
+                <ImageReveal
+                  key={assetId}
+                  className="relative overflow-hidden"
+                  style={{ height: "320px", padding: "1px", background: "rgba(200,168,126,0.08)" }}
+                  lightboxSrc={asset.src}
+                  lightboxAlt={resolveAlt(asset, entry.altTextNotes)}
+                >
                   <Image
                     src={asset.src}
                     alt={resolveAlt(asset, entry.altTextNotes)}
@@ -161,7 +179,7 @@ export default function VisualsPage() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover"
                   />
-                </div>
+                </ImageReveal>
               ) : null;
             })}
           </div>
@@ -181,18 +199,24 @@ export default function VisualsPage() {
             id={`${entry.id}-editorial-title`}
             className="text-primary mb-8"
             style={{
-              fontFamily: "var(--font-cormorant), Georgia, serif",
+              fontFamily: "var(--font-bodoni), Georgia, serif",
               fontSize: "clamp(1.8rem, 4vw, 3rem)",
               fontWeight: 300
             }}
           >
             {entry.title}
           </h2>
-          <div className="grid gap-px md:grid-cols-3" style={{ background: "rgba(255,255,255,0.05)" }}>
+          <div className="grid gap-px md:grid-cols-3" style={{ background: "rgba(200,168,126,0.04)" }}>
             {entry.assets.map((assetId) => {
               const asset = assetMap[assetId];
               return asset ? (
-                <div key={assetId} className="img-color-reveal relative aspect-video w-full overflow-hidden md:aspect-[3/2]">
+                <ImageReveal
+                  key={assetId}
+                  className="relative aspect-video w-full overflow-hidden md:aspect-[3/2]"
+                  style={{ padding: "1px", background: "rgba(200,168,126,0.08)" }}
+                  lightboxSrc={asset.src}
+                  lightboxAlt={resolveAlt(asset, entry.altTextNotes)}
+                >
                   <Image
                     src={asset.src}
                     alt={resolveAlt(asset, entry.altTextNotes)}
@@ -200,7 +224,7 @@ export default function VisualsPage() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover"
                   />
-                </div>
+                </ImageReveal>
               ) : null;
             })}
           </div>
@@ -215,14 +239,19 @@ export default function VisualsPage() {
             id={`${portraitFeature.id}-portrait-title`}
             className="text-primary mb-8"
             style={{
-              fontFamily: "var(--font-cormorant), Georgia, serif",
+              fontFamily: "var(--font-bodoni), Georgia, serif",
               fontSize: "clamp(1.8rem, 4vw, 3rem)",
               fontWeight: 300
             }}
           >
             {portraitFeature.title}
           </h2>
-          <div className="img-color-reveal relative overflow-hidden" style={{ height: "70vh", minHeight: "500px" }}>
+          <ImageReveal
+            className="relative overflow-hidden"
+            style={{ height: "70vh", minHeight: "500px" }}
+            lightboxSrc={portraitAsset.src}
+            lightboxAlt={resolveAlt(portraitAsset, portraitFeature.altTextNotes)}
+          >
             <Image
               src={portraitAsset.src}
               alt={resolveAlt(portraitAsset, portraitFeature.altTextNotes)}
@@ -230,7 +259,7 @@ export default function VisualsPage() {
               sizes="100vw"
               className="object-cover object-top"
             />
-          </div>
+          </ImageReveal>
         </section>
       ) : null}
 
@@ -241,19 +270,26 @@ export default function VisualsPage() {
             id={`${entry.id}-stills-title`}
             className="mb-6 text-muted"
             style={{
-              fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
+              fontFamily: "var(--font-syne), system-ui, sans-serif",
               fontSize: "0.6rem",
               letterSpacing: "0.22em",
-              textTransform: "uppercase"
+              textTransform: "uppercase",
+              color: "rgba(200,168,126,0.6)"
             }}
           >
             {entry.title}
           </h2>
-          <div className="grid gap-px md:grid-cols-3" style={{ background: "rgba(255,255,255,0.05)" }}>
+          <div className="grid gap-px md:grid-cols-3" style={{ background: "rgba(200,168,126,0.04)" }}>
             {entry.assets.map((assetId) => {
               const asset = assetMap[assetId];
               return asset ? (
-                <div key={assetId} className="img-color-reveal relative aspect-square overflow-hidden">
+                <ImageReveal
+                  key={assetId}
+                  className="relative aspect-square overflow-hidden"
+                  style={{ padding: "1px", background: "rgba(200,168,126,0.08)" }}
+                  lightboxSrc={asset.src}
+                  lightboxAlt={resolveAlt(asset, entry.altTextNotes)}
+                >
                   <Image
                     src={asset.src}
                     alt={resolveAlt(asset, entry.altTextNotes)}
@@ -261,7 +297,7 @@ export default function VisualsPage() {
                     sizes="(max-width: 768px) 50vw, 33vw"
                     className="object-cover"
                   />
-                </div>
+                </ImageReveal>
               ) : null;
             })}
           </div>
@@ -275,7 +311,7 @@ export default function VisualsPage() {
             id={`${linkedVisual.id}-linked-title`}
             className="text-primary mb-6"
             style={{
-              fontFamily: "var(--font-cormorant), Georgia, serif",
+              fontFamily: "var(--font-bodoni), Georgia, serif",
               fontSize: "clamp(1.8rem, 4vw, 3rem)",
               fontWeight: 300
             }}
@@ -290,29 +326,33 @@ export default function VisualsPage() {
           {visualsData.intro.cta && linkedVisualAsset ? (
             <Link
               href={visualsData.intro.cta.href}
-              className="img-color-reveal block relative overflow-hidden no-underline group"
-              style={{ height: "60vh", minHeight: "400px" }}
+              className="block no-underline group"
             >
-              <Image
-                src={linkedVisualAsset.src}
-                alt={resolveAlt(linkedVisualAsset, linkedVisual.altTextNotes)}
-                fill
-                sizes="100vw"
-                className="object-cover"
-              />
-              <div
-                className="absolute inset-0"
-                aria-hidden="true"
-                style={{ background: "rgba(0,0,0,0.35)" }}
-              />
-              <div className="absolute bottom-0 left-0 p-8">
-                <span
-                  className="cta-primary"
-                  style={{ display: "inline-block" }}
-                >
-                  {visualsData.intro.cta.label}
-                </span>
-              </div>
+              <ImageReveal
+                className="relative overflow-hidden"
+                style={{ height: "60vh", minHeight: "400px" }}
+              >
+                <Image
+                  src={linkedVisualAsset.src}
+                  alt={resolveAlt(linkedVisualAsset, linkedVisual.altTextNotes)}
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0"
+                  aria-hidden="true"
+                  style={{ background: "rgba(5,5,5,0.4)" }}
+                />
+                <div className="absolute bottom-0 left-0 p-8">
+                  <span
+                    className="cta-primary"
+                    style={{ display: "inline-block" }}
+                  >
+                    {visualsData.intro.cta.label}
+                  </span>
+                </div>
+              </ImageReveal>
             </Link>
           ) : null}
         </section>

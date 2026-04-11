@@ -37,7 +37,7 @@ const blockSectionIds: Partial<Record<(typeof pressEpkBlocks)[number]["id"], str
 };
 
 const labelStyle = {
-  fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
+  fontFamily: "var(--font-syne), system-ui, sans-serif",
   fontSize: "0.6rem",
   letterSpacing: "0.22em",
   textTransform: "uppercase" as const
@@ -78,16 +78,16 @@ function renderBlock(
       id={sectionId}
       aria-labelledby={headingId}
       className="p-6"
-      style={{ background: "rgba(255,255,255,0.015)", borderLeft: "1px solid rgba(255,255,255,0.06)" }}
+      style={{ background: "rgba(200,168,126,0.03)", borderLeft: "1px solid rgba(200,168,126,0.1)" }}
     >
       {purpose ? (
-        <p className="text-accent mb-2" style={labelStyle}>{purpose}</p>
+        <p className="text-accent mb-2" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>{purpose}</p>
       ) : null}
       <h3
         id={headingId}
         className="text-primary mb-1"
         style={{
-          fontFamily: "var(--font-cormorant), Georgia, serif",
+          fontFamily: "var(--font-bodoni), Georgia, serif",
           fontSize: "clamp(1.4rem, 3vw, 2rem)",
           fontWeight: 300
         }}
@@ -131,7 +131,7 @@ export default function PressPage() {
           <h1
             className="text-primary"
             style={{
-              fontFamily: "var(--font-cormorant), Georgia, serif",
+              fontFamily: "var(--font-bodoni), Georgia, serif",
               fontSize: "clamp(3rem, 8vw, 6rem)",
               fontWeight: 300,
               lineHeight: 0.95,
@@ -154,14 +154,14 @@ export default function PressPage() {
               {introBlock.ctaLabel}
             </Link>
           </div>
-          <div className="mt-14 h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
+          <div className="mt-14 h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
         </section>
       ) : null}
 
       {/* ── PRESS ESSENTIALS ── */}
       <section className="reveal site-container mt-16">
         <p className="text-muted mb-8" style={labelStyle}>Press Essentials</p>
-        <div className="grid gap-px md:grid-cols-2" style={{ background: "rgba(255,255,255,0.05)" }}>
+        <div className="grid gap-px md:grid-cols-2" style={{ background: "rgba(200,168,126,0.04)" }}>
           {primaryLeadBlocks.map((block) => renderBlock(block))}
         </div>
       </section>
@@ -169,7 +169,7 @@ export default function PressPage() {
       {/* ── ADDITIONAL RESOURCES ── */}
       <section className="reveal site-container mt-16">
         <p className="text-muted mb-8" style={labelStyle}>Additional Press Resources</p>
-        <div className="grid gap-px md:grid-cols-2" style={{ background: "rgba(255,255,255,0.05)" }}>
+        <div className="grid gap-px md:grid-cols-2" style={{ background: "rgba(200,168,126,0.04)" }}>
           {secondaryInfoBlocks.filter((block) => block.id !== "contactBlock").map((block) => renderBlock(block))}
           {secondaryLinkGroups.map((group) => {
             const groupBlocks = group.blockIds
@@ -191,15 +191,15 @@ export default function PressPage() {
           <div
             className="p-8 md:p-12"
             style={{
-              background: "linear-gradient(135deg, rgba(255,79,168,0.04) 0%, transparent 70%)",
-              border: "1px solid rgba(255,79,168,0.12)"
+              background: "linear-gradient(135deg, rgba(200,168,126,0.06) 0%, transparent 70%)",
+              border: "1px solid rgba(200,168,126,0.15)"
             }}
           >
             <p className="text-accent mb-3" style={labelStyle}>Contact</p>
             <h2
               className="text-primary mb-4"
               style={{
-                fontFamily: "var(--font-cormorant), Georgia, serif",
+                fontFamily: "var(--font-bodoni), Georgia, serif",
                 fontSize: "clamp(1.8rem, 4vw, 3rem)",
                 fontWeight: 300
               }}

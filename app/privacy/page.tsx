@@ -16,7 +16,7 @@ export default function PrivacyPage() {
           id="privacy-title"
           className="text-primary"
           style={{
-            fontFamily: "var(--font-cormorant), Georgia, serif",
+            fontFamily: "var(--font-bodoni), Georgia, serif",
             fontSize: "clamp(2.5rem, 6vw, 4rem)",
             fontWeight: 300,
             lineHeight: 0.95

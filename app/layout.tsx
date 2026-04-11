@@ -1,24 +1,27 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Inter, Space_Grotesk, Cormorant_Garamond } from "next/font/google";
+import { Syne, Bodoni_Moda, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import SiteFooter from "@/components/layout/site-footer";
 import SiteHeader from "@/components/layout/site-header";
 import ScrollRevealProvider from "@/components/utils/scroll-reveal-provider";
 import ScrollProgress from "@/components/utils/scroll-progress";
 import CustomCursor from "@/components/utils/custom-cursor";
+import ImageLightbox from "@/components/utils/image-lightbox";
 import { resolveSiteUrl, siteConfig } from "@/content/data/site.config";
 
 const siteUrl = resolveSiteUrl();
 
-const inter = Inter({
+const syne = Syne({
   subsets: ["latin"],
-  variable: "--font-inter"
+  variable: "--font-syne"
 });
 
-const spaceGrotesk = Space_Grotesk({
+const bodoni = Bodoni_Moda({
   subsets: ["latin"],
-  variable: "--font-space-grotesk"
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-bodoni"
 });
 
 const cormorant = Cormorant_Garamond({
@@ -120,7 +123,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} ${cormorant.variable} min-h-screen flex flex-col`}>
+      <body className={`${syne.variable} ${bodoni.variable} ${cormorant.variable} min-h-screen flex flex-col`}>
         <noscript>
           <style>{".reveal,.reveal-fade{opacity:1!important;transform:none!important}"}</style>
         </noscript>
@@ -134,6 +137,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           <ScrollRevealProvider>{children}</ScrollRevealProvider>
         </main>
         <SiteFooter />
+        <ImageLightbox />
       </body>
     </html>
   );

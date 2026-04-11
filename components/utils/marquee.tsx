@@ -22,7 +22,7 @@ export default function Marquee({
       style={{
         overflow: "hidden",
         whiteSpace: "nowrap",
-        fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
+        fontFamily: "var(--font-syne), system-ui, sans-serif",
         fontSize: "0.6rem",
         letterSpacing: "0.25em",
         textTransform: "uppercase",

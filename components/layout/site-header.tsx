@@ -57,16 +57,23 @@ export default function SiteHeader() {
   }, [isMenuOpen]);
 
   const headerBg = isScrolled
-    ? "bg-black/90 backdrop-blur-md border-b border-white/[0.06]"
-    : "bg-transparent border-b border-transparent";
+    ? "backdrop-blur-xl"
+    : "";
 
   return (
     <>
       <header
         className="sticky top-0 z-50"
-        style={{ transition: "background-color 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)" }}
+        style={{ transition: "background-color 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)" }}
       >
-        <div className={headerBg} style={{ transition: "background-color 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)" }}>
+        <div
+          className={headerBg}
+          style={{
+            backgroundColor: isScrolled ? "rgba(5,5,5,0.92)" : "transparent",
+            borderBottom: isScrolled ? "1px solid rgba(200,168,126,0.08)" : "1px solid transparent",
+            transition: "background-color 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+          }}
+        >
           <div className="site-container py-5">
             <div className="flex items-center justify-between">
 
@@ -79,11 +86,11 @@ export default function SiteHeader() {
                 <span
                   className="block text-primary"
                   style={{
-                    fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
-                    fontSize: "0.65rem",
-                    letterSpacing: "0.28em",
+                    fontFamily: "var(--font-bodoni), Georgia, serif",
+                    fontSize: "0.85rem",
+                    letterSpacing: "0.15em",
                     textTransform: "uppercase",
-                    fontWeight: 500,
+                    fontWeight: 400,
                     transition: "color 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)"
                   }}
                 >
@@ -100,8 +107,8 @@ export default function SiteHeader() {
                 aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
                 className="relative z-50 inline-flex min-h-11 items-center text-muted hover:text-primary md:hidden"
                 style={{
-                  fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
-                  fontSize: "0.65rem",
+                  fontFamily: "var(--font-syne), system-ui, sans-serif",
+                  fontSize: "0.6rem",
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
                   transition: "color 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)"
@@ -145,7 +152,7 @@ export default function SiteHeader() {
               </button>
 
               {/* Desktop navigation */}
-              <nav aria-label="Primary Navigation" className="hidden items-center gap-8 md:flex">
+              <nav aria-label="Primary Navigation" className="hidden items-center gap-10 md:flex">
                 {navigationItems.map((item) => (
                   <Link
                     key={item.href}
@@ -155,6 +162,13 @@ export default function SiteHeader() {
                       "nav-link inline-flex min-h-11 items-center focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-current md:min-h-0",
                       isActiveHref(item.href, pathname) ? "nav-link--active" : ""
                     ].filter(Boolean).join(" ")}
+                    style={{
+                      fontFamily: "var(--font-syne), system-ui, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "0.6rem",
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase"
+                    }}
                   >
                     {item.label}
                   </Link>
@@ -172,47 +186,61 @@ export default function SiteHeader() {
         className="mobile-menu-overlay md:hidden"
         data-open={isMenuOpen ? "true" : "false"}
       >
-        <div className="space-y-2">
+        <div className="space-y-1">
           {navigationItems.map((item, index) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              ref={index === 0 ? firstMobileLinkRef : undefined}
-              aria-current={isActiveHref(item.href, pathname) ? "page" : undefined}
-              className="mobile-nav-link"
-              onClick={() => setIsMenuOpen(false)}
-              style={{
-                opacity: isMenuOpen ? 1 : 0,
-                transform: isMenuOpen ? "translateY(0)" : "translateY(20px)",
-                transition: `opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.06}s, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.06}s, color 0.3s`
-              }}
-            >
-              {item.label}
-            </Link>
+            <div key={item.href}>
+              <Link
+                href={item.href}
+                ref={index === 0 ? firstMobileLinkRef : undefined}
+                aria-current={isActiveHref(item.href, pathname) ? "page" : undefined}
+                className="mobile-nav-link block"
+                onClick={() => setIsMenuOpen(false)}
+                style={{
+                  fontFamily: "var(--font-bodoni), Georgia, serif",
+                  fontStyle: "italic",
+                  fontSize: "clamp(2rem, 6vw, 3.5rem)",
+                  fontWeight: 300,
+                  opacity: isMenuOpen ? 1 : 0,
+                  transform: isMenuOpen ? "translateY(0)" : "translateY(24px)",
+                  transition: `opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.07}s, transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.07}s, color 0.3s`
+                }}
+              >
+                {item.label}
+              </Link>
+              {index < navigationItems.length - 1 && (
+                <div
+                  className="my-2"
+                  style={{
+                    height: "1px",
+                    background: "rgba(200,168,126,0.1)",
+                    opacity: isMenuOpen ? 1 : 0,
+                    transition: `opacity 0.4s ${index * 0.07 + 0.1}s`
+                  }}
+                />
+              )}
+            </div>
           ))}
         </div>
 
         {/* Bottom info in mobile menu */}
         <div
-          className="absolute bottom-12 left-0 right-0"
+          className="absolute bottom-12 left-0 right-0 px-6"
           style={{
-            paddingLeft: "inherit",
-            paddingRight: "inherit",
             opacity: isMenuOpen ? 1 : 0,
-            transition: "opacity 0.5s 0.3s"
+            transition: "opacity 0.6s 0.4s"
           }}
         >
-          <div className="h-px mb-6" style={{ background: "rgba(255,255,255,0.06)" }} />
+          <div className="h-px mb-6" style={{ background: "rgba(200,168,126,0.12)" }} />
           <p
             style={{
-              fontFamily: "var(--font-cormorant), Georgia, serif",
-              fontSize: "1rem",
-              fontStyle: "italic",
-              fontWeight: 300,
-              color: "rgba(255,255,255,0.3)"
+              fontFamily: "var(--font-syne), system-ui, sans-serif",
+              fontSize: "0.55rem",
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              color: "rgba(200,168,126,0.4)"
             }}
           >
-            Music. Image. Presence.
+            Sound. Vision. Reign.
           </p>
         </div>
       </nav>

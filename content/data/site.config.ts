@@ -25,10 +25,10 @@ export const siteConfig = {
   url: resolveSiteUrl(),
   metadata: {
     title: "Dama Venus",
-    description: "Dama Venus — artist, visual storyteller, and live performer. Explore new music, cinematic image work, and press materials."
+    description: "Dama Venus — the Brazilian voice redefining alternative pop across Europe. Cinematic sound, fashion-forward visuals, and uncompromising artistic vision."
   },
-  brandDescriptor: "Artist • Visual Narratives • Live Energy",
-  footerLine: "Dama Venus — Music. Image. Presence."
+  brandDescriptor: "Sound • Vision • Reign",
+  footerLine: "Dama Venus — Sound. Vision. Reign."
 } as const;
 
 export const assetMap: Record<string, AssetMapItem> = Object.fromEntries(

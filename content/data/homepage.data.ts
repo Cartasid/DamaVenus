@@ -3,12 +3,12 @@ import { contactContent } from "@/content/data/contact.data";
 import { pressContent } from "@/content/data/press.data";
 
 export const homepageIntro = {
-  statement: "Where image becomes frequency."
+  statement: "Every sound is a vision. Every image, a frequency."
 };
 
 export const homepageRelease: ReleaseItem = {
   title: "Current Chapter",
-  description: "New music, framed in shadow and light.",
+  description: "The latest sonic chapter — dark, luminous, unforgettable.",
   cta: {
     label: "Listen Now",
     href: "/music"
@@ -18,7 +18,7 @@ export const homepageRelease: ReleaseItem = {
 
 export const homepageVisuals: SectionContent = {
   headline: "Frames in Motion",
-  subhead: "Portraits, details, and atmosphere—curated in sequence.",
+  subhead: "A visual language crafted in shadow, light, and intention.",
   cta: {
     label: "View Visuals",
     href: "/visuals"
@@ -27,12 +27,12 @@ export const homepageVisuals: SectionContent = {
 };
 
 export const homepageStatement: SectionContent = {
-  headline: "I don’t chase volume. I shape presence."
+  headline: "I don’t follow trends. I set the atmosphere."
 };
 
 export const homepageServices: SectionContent = {
-  headline: "Work With Dama Venus",
-  subhead: "Curated offers for brands, media, and live platforms.",
+  headline: "Collaborate With Dama Venus",
+  subhead: "Exclusive partnerships for brands, cultural platforms, and visionary projects.",
   body: [
     "Artistic Direction",
     "Live Performance",

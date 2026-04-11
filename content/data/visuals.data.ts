@@ -26,7 +26,7 @@ export type VisualsEntry = {
 export const visualsIntro: SectionContent = {
   label: "Visuals",
   headline: "Frames in Motion",
-  subhead: "Portraits, details, and atmosphere—curated in sequence.",
+  subhead: "A visual language crafted in shadow, light, and intention.",
   cta: {
     label: "View Visuals",
     href: "/visuals"
@@ -46,7 +46,7 @@ export const visualsEntries: VisualsEntry[] = [
     layoutWeight: "xl",
     moduleType: "series-section",
     assets: ["visuals-cinderela-lead-241", "visuals-cinderela-frame-243", "visuals-cinderela-frame-288"],
-    shortText: "Core sequence for the main dramatic opening.",
+    shortText: "The signature series — dramatic, dark, and unforgettable.",
     cropFocusHint: "Keep eyes and shoulder line centered; preserve upper negative space for potential overlay.",
     bwColorSuitability: "dual",
     altTextNotes: "Use scene-specific alt text per frame; avoid generic 'portrait' repetition."
@@ -62,7 +62,7 @@ export const visualsEntries: VisualsEntry[] = [
     layoutWeight: "lg",
     moduleType: "editorial-image-row",
     assets: ["visuals-uuid-6824", "visuals-cinderela-landscape-210", "visuals-uuid-3493"],
-    shortText: "Mid-page color pulse before returning to calmer stillness.",
+    shortText: "Color fragments that pulse between darkness and brilliance.",
     cropFocusHint: "Anchor central subject; keep lateral breathing room for row crops.",
     bwColorSuitability: "color-first",
     altTextNotes: "Describe gesture/light direction; keep mood wording concise."
@@ -106,7 +106,7 @@ export const visualsEntries: VisualsEntry[] = [
     layoutWeight: "md",
     moduleType: "linked-visual-module",
     assets: ["visuals-linked-current-chapter"],
-    shortText: "Optional bridge module from visual world to release context.",
+    shortText: "Where the visual world meets the sonic chapter.",
     cropFocusHint: "Keep central motif visible and reserve one side for CTA copy.",
     bwColorSuitability: "color-first",
     altTextNotes: "Mention release relation in alt text where link purpose is not otherwise explicit."

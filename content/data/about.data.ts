@@ -16,11 +16,11 @@ export type AboutSection = {
 export const aboutPageModel = {
   aboutIntro: {
     title: "About",
-    introLine: "Built on atmosphere.",
+    introLine: "Born from atmosphere.",
     shortText:
-      "Dama Venus creates cinematic music and visual narratives with a dark editorial edge.",
+      "Dama Venus commands the intersection of cinematic sound and high-fashion visual narrative — an artist who doesn't just perform, but architects worlds.",
     mediumText:
-      "Every chapter is composed as one clear aesthetic world: image, sound, and intention in one line.",
+      "Each chapter is composed as a singular aesthetic universe: sound, image, and intention fused into one uncompromising vision.",
     sectionPriority: 1,
     primaryCtaPattern: {
       label: "Contact",
@@ -29,21 +29,21 @@ export const aboutPageModel = {
   },
   aboutBio: {
     shortText:
-      "The line stays reduced: calm pressure, clear form, no excess.",
+      "The artistic line is absolute: precision, presence, and purpose in every note and frame.",
     mediumText:
-      "Dama Venus composes one coherent language across sound, image, and timing.",
+      "Dama Venus speaks a singular language across sound, image, and timing — each element calibrated to command attention.",
     longArtistNote:
-      "The approach stays reduced: fewer words, clearer mood, stronger form. Feminine strength, modern mystique, and controlled intensity remain the constant line across each chapter."
+      "The approach is intentional: fewer words, deeper resonance, stronger form. Feminine power, modern mystique, and controlled intensity define every chapter."
   },
   aboutSections: [
     {
       id: "page-intro",
       title: "About",
-      introLine: "Built on atmosphere.",
+      introLine: "Born from atmosphere.",
       shortText:
-        "Dama Venus creates cinematic music and visual narratives with a dark editorial edge.",
+        "Dama Venus commands the intersection of cinematic sound and high-fashion visual narrative — an artist who doesn't just perform, but architects worlds.",
       mediumText:
-        "Every chapter is composed as one clear aesthetic world: image, sound, and intention in one line.",
+        "Each chapter is composed as a singular aesthetic universe: sound, image, and intention fused into one uncompromising vision.",
       associatedImageAssetIds: ["about-intro-entry-portrait-primary"],
       cropFocusHint: "face-center",
       altTextNote: "Primary portrait for the About entry and first-page orientation.",
@@ -52,11 +52,11 @@ export const aboutPageModel = {
     {
       id: "short-bio",
       title: "Short Bio",
-      introLine: "Artist language in image and sound.",
+      introLine: "A voice that transcends borders.",
       shortText:
-        "Dama Venus works between music, image, and presence—focused, cinematic, and precise.",
+        "From Rio de Janeiro to the stages of Europe — Dama Venus moves between music, image, and presence with cinematic precision.",
       mediumText:
-        "The work connects sonic storytelling with visual direction. Releases are built as complete atmospheres, not isolated tracks or standalone visuals.",
+        "The work bridges sonic storytelling with editorial direction. Every release is a complete atmosphere — not an isolated track, but a cinematic experience.",
       associatedImageAssetIds: ["about-supporting-visual-calm-02"],
       cropFocusHint: "upper-face-focus",
       altTextNote: "Calm portrait detail for text-near bio module.",
@@ -65,13 +65,13 @@ export const aboutPageModel = {
     {
       id: "artist-note",
       title: "Artist Note",
-      introLine: "Precision, mood, intention.",
+      introLine: "Discipline. Mood. Vision.",
       shortText:
-        "The artistic stance is reduced, atmospheric, and intentional rather than explanatory.",
+        "The artistic stance is uncompromising: atmospheric, intentional, and never explanatory.",
       mediumText:
-        "Music and visuals are developed in one direction so the audience enters a coherent mood-space.",
+        "Music and visuals converge in one direction so the audience doesn't just listen — they enter a world.",
       longerText:
-        "The approach stays reduced: fewer words, clearer mood, stronger form. Feminine strength, modern mystique, and controlled intensity remain the constant line across each chapter.",
+        "The approach is intentional: fewer words, deeper resonance, stronger form. Feminine power, modern mystique, and controlled intensity define every chapter.",
       associatedImageAssetIds: ["about-supporting-visual-calm-reserve-03"],
       cropFocusHint: "gaze-axis-center",
       altTextNote: "Secondary reserve visual for a quieter artist-note transition.",
@@ -82,10 +82,10 @@ export const aboutPageModel = {
     {
       id: "cinematic-worldbuilding",
       title: "Positioning",
-      introLine: "Image and frequency move together.",
-      shortText: "Projects are built as one atmosphere, not as separate assets.",
+      introLine: "Where sound and vision converge.",
+      shortText: "Every project is a world — sound, image, and atmosphere moving as one.",
       mediumText:
-        "Each release is conceived as one narrative arc across sound, image, and atmosphere.",
+        "Each release is conceived as a cinematic arc — sound, image, and atmosphere in perfect alignment.",
       associatedImageAssetIds: ["about-intro-entry-portrait-primary"],
       cropFocusHint: "face-center",
       altTextNote: "Lead portrait anchor for the worldbuilding statement.",
@@ -94,10 +94,10 @@ export const aboutPageModel = {
     {
       id: "editorial-edge",
       title: "Stance",
-      introLine: "Controlled intensity over volume.",
-      shortText: "The tone is restrained, dark, and precise.",
+      introLine: "Intensity over noise.",
+      shortText: "The tone is commanding: dark, precise, and deliberately restrained.",
       mediumText:
-        "Visual and musical decisions follow one editorial language with deliberate restraint.",
+        "Visual and musical decisions follow one editorial language — each choice made with the confidence of absolute clarity.",
       associatedImageAssetIds: ["about-supporting-visual-calm-02"],
       cropFocusHint: "mid-frame-subject",
       altTextNote: "Supporting portrait for the editorial-edge statement.",
@@ -106,10 +106,10 @@ export const aboutPageModel = {
     {
       id: "method-clarity",
       title: "Method",
-      introLine: "A complete aesthetic line.",
-      shortText: "Concept, execution, and rhythm follow one direction.",
+      introLine: "Total creative control.",
+      shortText: "Concept, execution, and rhythm — every element follows one artistic direction.",
       mediumText:
-        "The method keeps the experience compact, atmospheric, and legible across formats.",
+        "The method ensures every experience is immersive, atmospheric, and unmistakably Dama Venus.",
       associatedImageAssetIds: ["about-supporting-visual-calm-reserve-03"],
       cropFocusHint: "wide-environment",
       altTextNote: "Reserve image for quieter transition and spacing rhythm.",

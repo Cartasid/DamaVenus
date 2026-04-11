@@ -39,7 +39,7 @@ export type ContactContent = {
 export const contactContent: ContactContent = {
   intro: {
     headline: "Let’s Create the Next Chapter.",
-    subhead: "For bookings, collaborations, and selected requests."
+    subhead: "Bookings. Collaborations. Exclusive partnerships."
   },
   primaryContact: {
     href: "/contact",
@@ -77,7 +77,7 @@ export const contactContent: ContactContent = {
     ],
     ctaLabel: "Send Inquiry",
     success: {
-      title: "Inquiry received.",
+      title: "Message received.",
       message: "Thank you for reaching out. We’ll return with the right format."
     }
   },
@@ -87,18 +87,18 @@ export const contactContent: ContactContent = {
       label: "Press & EPK",
       href: "/press",
       email: "press@damavenus.com",
-      note: "Images, bio, and release facts for press inquiries."
+      note: "High-resolution imagery, artist biography, and release materials."
     },
     {
       id: "booking",
       label: "Booking",
       email: "booking@damavenus.com",
-      note: "For live bookings and curated performance formats."
+      note: "Live shows, festival appearances, and exclusive performances."
     },
     {
       id: "general",
       label: "General",
-      note: "For all other selected requests, please use the contact form."
+      note: "For all other inquiries, use the form above."
     }
   ]
 };
