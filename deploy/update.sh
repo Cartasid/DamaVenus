@@ -54,39 +54,34 @@ df -h / | tail -1
 # ─── 4. CLONE — OHNE pics/ ORDNER (spart ~125MB) ────
 echo ""
 echo "→ Repository klonen (ohne pics/)..."
-mkdir -p "$APP_DIR"
+
+# Shallow clone, dann pics/ nachträglich löschen (zuverlässiger als sparse-checkout)
+git clone --depth 1 --single-branch --branch "$BRANCH" "$REPO" "$APP_DIR"
 cd "$APP_DIR"
 
-git init
-git remote add origin "$REPO"
-git config core.sparseCheckout true
+# pics/ brauchen wir nicht — Assets sind in public/assets/ committed
+rm -rf pics/
+# .git brauchen wir nach dem Clone auch nicht mehr
+rm -rf .git
 
-# pics/ ausschließen — die verarbeiteten Assets in public/assets/ reichen
-cat > .git/info/sparse-checkout <<'SPARSE'
-/*
-!/pics/
-SPARSE
+echo "Repo-Größe (ohne pics, ohne .git):"
+du -sh "$APP_DIR" | tail -1
 
-git pull --depth 1 origin "$BRANCH"
-
-echo "Repo-Größe (ohne pics):"
-du -sh "$APP_DIR" --exclude=.git | tail -1
-
-# ─── 5. ENV + DEPLOY DATEIEN WIEDERHERSTELLEN ────────
+# ─── 5. ENV WIEDERHERSTELLEN ─────────────────────────
 echo ""
 echo "→ Konfiguration wiederherstellen..."
 cp -a "$BACKUP_DIR/.env.production" "$APP_DIR/" 2>/dev/null || true
-# deploy/ ist bereits im repo, aber ggf. lokale Overrides:
-cp -a "$BACKUP_DIR/deploy/"* "$APP_DIR/deploy/" 2>/dev/null || true
 
-# ─── 6. NPM INSTALL — PRODUCTION ONLY ───────────────
+# ─── 6. NPM INSTALL — INKL. devDependencies ─────────
+#     tailwindcss, postcss, autoprefixer, typescript sind devDeps,
+#     werden aber für den Next.js Build gebraucht.
 echo ""
-echo "→ Abhängigkeiten installieren (nur production + build-essentials)..."
+echo "→ Abhängigkeiten installieren..."
 export NEXT_TELEMETRY_DISABLED=1
-export NODE_ENV=production
 
-# npm ci mit minimaler Footprint
-npm ci --no-audit --no-fund --prefer-offline 2>&1 || {
+# WICHTIG: NICHT NODE_ENV=production setzen vor npm ci,
+# sonst werden devDependencies übersprungen und der Build schlägt fehl.
+npm ci --no-audit --no-fund 2>&1 || {
     echo "⚠ npm ci fehlgeschlagen, npm cache löschen und retry..."
     rm -rf /root/.npm/_cacache 2>/dev/null || true
     npm ci --no-audit --no-fund 2>&1
@@ -98,11 +93,13 @@ rm -rf /root/.npm/_cacache 2>/dev/null || true
 echo "Disk nach npm install:"
 df -h / | tail -1
 
-# ─── 7. BUILD — Ohne Asset-Preparation ──────────────
+# ─── 7. BUILD ────────────────────────────────────────
 #     prepare:dama-venus-assets braucht sharp + pics/
-#     Die Assets sind bereits in public/assets/ committed.
+#     Die Assets sind bereits in public/assets/ committed,
+#     also überspringen wir das und rufen next build direkt auf.
 echo ""
 echo "→ Next.js Build (standalone)..."
+export NODE_ENV=production
 ./node_modules/.bin/next build
 
 echo "Disk nach Build:"
@@ -127,8 +124,9 @@ echo "→ Build-Abhängigkeiten aufräumen..."
 # sharp wird vom standalone build mit eingebettet
 rm -rf "$APP_DIR/node_modules"
 
-# Dev-Artefakte löschen
-rm -rf "$APP_DIR/.git" 2>/dev/null || true
+# Quell-Dateien die nur für den Build gebraucht wurden
+rm -rf "$APP_DIR/pics" 2>/dev/null || true
+rm -rf "$APP_DIR/scripts" 2>/dev/null || true
 
 echo "Disk nach Cleanup:"
 df -h / | tail -1
