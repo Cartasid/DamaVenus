@@ -4,6 +4,9 @@ set -euo pipefail
 # ═══════════════════════════════════════════════════════
 #  Dama Venus — Speicher-optimiertes Deploy-Script
 #  Server: 10GB Disk (knapp → jedes MB zählt)
+#
+#  Nutzung:  bash /root/update.sh
+#  WICHTIG:  Nicht aus /opt/dama-venus heraus starten!
 # ═══════════════════════════════════════════════════════
 
 APP_DIR="/opt/dama-venus"
@@ -11,6 +14,10 @@ REPO="https://github.com/Cartasid/DamaVenus.git"
 BRANCH="main"
 SERVICE="dama-venus"
 BACKUP_DIR="/root/dama-venus-backup-min"
+
+# Sofort in ein sicheres Verzeichnis wechseln,
+# damit rm -rf $APP_DIR keine "cwd deleted" Fehler gibt
+cd /root
 
 echo "═══ Dama Venus Deploy ═══"
 echo "Disk vor Deploy:"
@@ -51,21 +58,21 @@ rm -rf "$APP_DIR"
 echo "Disk nach Entfernung:"
 df -h / | tail -1
 
-# ─── 4. CLONE — OHNE pics/ ORDNER (spart ~125MB) ────
+# ─── 4. CLONE ────────────────────────────────────────
 echo ""
-echo "→ Repository klonen (ohne pics/)..."
+echo "→ Repository klonen..."
 
-# Shallow clone, dann pics/ nachträglich löschen (zuverlässiger als sparse-checkout)
+# Shallow clone: nur main, nur letzter Commit
 git clone --depth 1 --single-branch --branch "$BRANCH" "$REPO" "$APP_DIR"
 cd "$APP_DIR"
 
-# pics/ brauchen wir nicht — Assets sind in public/assets/ committed
+# pics/ (125MB Quellbilder) nicht gebraucht — Assets in public/assets/ sind committed
 rm -rf pics/
-# .git brauchen wir nach dem Clone auch nicht mehr
+# .git (240MB) sofort löschen — brauchen wir nach Clone nicht mehr
 rm -rf .git
 
-echo "Repo-Größe (ohne pics, ohne .git):"
-du -sh "$APP_DIR" | tail -1
+echo "Repo-Größe (bereinigt):"
+du -sh "$APP_DIR"
 
 # ─── 5. ENV WIEDERHERSTELLEN ─────────────────────────
 echo ""
@@ -75,12 +82,11 @@ cp -a "$BACKUP_DIR/.env.production" "$APP_DIR/" 2>/dev/null || true
 # ─── 6. NPM INSTALL — INKL. devDependencies ─────────
 #     tailwindcss, postcss, autoprefixer, typescript sind devDeps,
 #     werden aber für den Next.js Build gebraucht.
+#     Daher NODE_ENV NICHT auf production setzen vor npm ci!
 echo ""
 echo "→ Abhängigkeiten installieren..."
 export NEXT_TELEMETRY_DISABLED=1
 
-# WICHTIG: NICHT NODE_ENV=production setzen vor npm ci,
-# sonst werden devDependencies übersprungen und der Build schlägt fehl.
 npm ci --no-audit --no-fund 2>&1 || {
     echo "⚠ npm ci fehlgeschlagen, npm cache löschen und retry..."
     rm -rf /root/.npm/_cacache 2>/dev/null || true
@@ -94,13 +100,11 @@ echo "Disk nach npm install:"
 df -h / | tail -1
 
 # ─── 7. BUILD ────────────────────────────────────────
-#     prepare:dama-venus-assets braucht sharp + pics/
-#     Die Assets sind bereits in public/assets/ committed,
-#     also überspringen wir das und rufen next build direkt auf.
+#     Assets sind bereits in public/assets/ committed →
+#     prepare:dama-venus-assets überspringen, next build direkt aufrufen.
 echo ""
 echo "→ Next.js Build (standalone)..."
-export NODE_ENV=production
-./node_modules/.bin/next build
+NODE_ENV=production ./node_modules/.bin/next build
 
 echo "Disk nach Build:"
 df -h / | tail -1
@@ -116,16 +120,13 @@ ln -sf "$APP_DIR/public" .next/standalone/public
 ln -sf "$APP_DIR/.next/static" .next/standalone/.next/static
 
 # ─── 9. NODE_MODULES AUFRÄUMEN ──────────────────────
-#     Standalone hat eigene node_modules, die großen brauchen wir nicht mehr
 echo ""
 echo "→ Build-Abhängigkeiten aufräumen..."
 
-# Nur die standalone node_modules behalten, Rest löschen
-# sharp wird vom standalone build mit eingebettet
+# Root node_modules löschen — standalone hat eigene
 rm -rf "$APP_DIR/node_modules"
 
 # Quell-Dateien die nur für den Build gebraucht wurden
-rm -rf "$APP_DIR/pics" 2>/dev/null || true
 rm -rf "$APP_DIR/scripts" 2>/dev/null || true
 
 echo "Disk nach Cleanup:"
@@ -152,6 +153,6 @@ echo ""
 echo "═══ Finaler Disk-Status ═══"
 df -h /
 echo ""
-du -sh "$APP_DIR" --exclude=.git 2>/dev/null || du -sh "$APP_DIR"
+du -sh "$APP_DIR"
 echo ""
 echo "Fertig."
