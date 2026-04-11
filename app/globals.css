@@ -660,15 +660,13 @@ body::before {
 
 /* ─────────────────────────────────────────────
    CUSTOM CURSOR STYLES
+   Native cursor remains visible — custom cursor
+   is a decorative accent layer, not a replacement.
 ───────────────────────────────────────────── */
 @media (hover: hover) and (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
-
   .custom-cursor-outer.cursor-hover {
-    width: 60px !important;
-    height: 60px !important;
+    width: 56px !important;
+    height: 56px !important;
     border-color: var(--gold) !important;
     transform-origin: center center;
   }

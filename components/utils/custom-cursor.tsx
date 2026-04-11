@@ -60,7 +60,11 @@ export default function CustomCursor() {
     rafRef.current = requestAnimationFrame(animate);
     attachHoverListeners();
 
-    const observer = new MutationObserver(() => attachHoverListeners());
+    let debounceTimer: ReturnType<typeof setTimeout>;
+    const observer = new MutationObserver(() => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(attachHoverListeners, 300);
+    });
     observer.observe(document.body, { childList: true, subtree: true });
 
     return () => {
@@ -84,7 +88,7 @@ export default function CustomCursor() {
           width: "40px",
           height: "40px",
           borderRadius: "50%",
-          border: "1px solid rgba(255,79,168,0.4)",
+          border: "1px solid rgba(200,168,126,0.35)",
           pointerEvents: "none",
           zIndex: 9999,
           opacity: 0,
@@ -102,7 +106,7 @@ export default function CustomCursor() {
           width: "8px",
           height: "8px",
           borderRadius: "50%",
-          backgroundColor: "#FF4FA8",
+          backgroundColor: "rgba(200,168,126,0.7)",
           pointerEvents: "none",
           zIndex: 9999,
           opacity: 0,
