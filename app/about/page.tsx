@@ -161,35 +161,114 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── AS SEEN IN ── */}
-      <section className="reveal site-container mt-16">
-        <div style={{ borderTop: "1px solid rgba(200,168,126,0.08)", paddingTop: "2rem" }}>
-          <p className="text-center mb-6" style={{ ...labelStyle, color: "rgba(200,168,126,0.4)" }}>As Seen In</p>
-          <div className="flex items-center justify-center gap-10 flex-wrap">
-            <a
-              href="https://www.thereviewgeek.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted hover:text-offWhite no-underline"
+      {/* ── PRESS FEATURE — THE REVIEW GEEK ── */}
+      <section className="reveal site-container mt-24" aria-labelledby="press-feature-heading">
+        <div
+          className="grid gap-0 md:grid-cols-[minmax(0,5fr)_minmax(0,3fr)]"
+          style={{ border: "1px solid rgba(200,168,126,0.1)" }}
+        >
+          {/* Quote & CTA */}
+          <div className="flex flex-col justify-center px-10 py-16 md:px-16 md:py-20">
+            <p className="mb-8" style={labelStyle}>Press</p>
+
+            {/* Publication Name */}
+            <p
               style={{
                 fontFamily: "var(--font-syne), system-ui, sans-serif",
-                fontSize: "0.75rem",
-                fontWeight: 600,
-                letterSpacing: "0.12em",
+                fontSize: "0.7rem",
+                fontWeight: 700,
+                letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                transition: "color 300ms",
-                opacity: 0.6
+                color: "rgba(245,240,235,0.35)",
+                marginBottom: "1.5rem"
               }}
-              aria-label="The Review Geek (opens in new tab)"
             >
               The Review Geek
-            </a>
+            </p>
+
+            {/* Quote */}
+            <blockquote
+              id="press-feature-heading"
+              style={{
+                fontFamily: "var(--font-bodoni), Georgia, serif",
+                fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)",
+                fontWeight: 300,
+                fontStyle: "italic",
+                lineHeight: 1.55,
+                color: "rgba(245,240,235,0.85)",
+                margin: 0,
+                padding: 0
+              }}
+            >
+              &ldquo;Dáma Venus blends atmospheric depth with a unique sonic vision, marking her as a rising force in the international scene.&rdquo;
+            </blockquote>
+
+            <p
+              className="mt-6"
+              style={{
+                fontFamily: "var(--font-syne), system-ui, sans-serif",
+                fontSize: "0.6rem",
+                fontWeight: 600,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: "rgba(200,168,126,0.5)"
+              }}
+            >
+              — The Review Geek
+            </p>
+
+            {/* Divider */}
+            <div
+              className="mt-10 mb-10 w-16 h-px"
+              style={{ background: "linear-gradient(to right, rgba(200,168,126,0.4), transparent)" }}
+              aria-hidden="true"
+            />
+
+            {/* CTA */}
+            <div>
+              <a
+                href="https://www.thereviewgeek.com/damavenus-eclipsebossanovaedition-review/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ghost-btn no-underline"
+                aria-label="Read full review on The Review Geek (opens in new tab)"
+              >
+                Read Full Review
+              </a>
+            </div>
           </div>
+
+          {/* Portrait Visual */}
+          {(() => {
+            const pressPortrait = assetMap["about-supporting-visual-calm-02"] ?? assetMap["about-intro-entry-portrait-primary"];
+            return pressPortrait ? (
+              <ImageReveal
+                className="relative overflow-hidden hidden md:block"
+                style={{ minHeight: "480px", borderLeft: "1px solid rgba(200,168,126,0.1)" }}
+                lightboxSrc={pressPortrait.src}
+                lightboxAlt={pressPortrait.alt ?? "Dáma Venus portrait"}
+              >
+                <Image
+                  src={pressPortrait.src}
+                  alt={pressPortrait.alt ?? "Dáma Venus portrait"}
+                  fill
+                  sizes="40vw"
+                  className="object-cover"
+                  style={{ objectPosition: pressPortrait.objectPosition ?? "center 25%" }}
+                />
+                <div
+                  className="absolute inset-0"
+                  aria-hidden="true"
+                  style={{ background: "linear-gradient(to left, transparent 60%, rgba(0,0,0,0.3) 100%)" }}
+                />
+              </ImageReveal>
+            ) : null;
+          })()}
         </div>
       </section>
 
       {/* ── DIVIDER ── */}
-      <div className="site-container mt-16">
+      <div className="site-container mt-20">
         <div className="h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
       </div>
 
