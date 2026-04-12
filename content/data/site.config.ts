@@ -37,7 +37,7 @@ export const siteConfig = {
  */
 const assetObjectPositions: Record<string, string> = {
   // ── HOME ──
-  "home-lead-portrait":           "center 25%",    // Roma Trevi portrait — figure upper portion, architecture backdrop
+  "home-lead-portrait":           "center 25%",    // Roma Trevi portrait — figure upper portion
   "home-release-cover":           "center center", // album cover — keep title visible
   "home-visual-preview":          "center center", // 16:9 landscape — subject centered
   "home-statement-editorial":     "center center", // 16:9 landscape — negative space for text
@@ -65,7 +65,7 @@ const assetObjectPositions: Record<string, string> = {
   "visuals-linked-current-chapter":   "center center", // 9:16 tall — subject centered
 
   // ── ABOUT ──
-  "about-intro-entry-portrait-primary":     "center 20%",   // portrait — eyes in upper third
+  "about-intro-entry-portrait-primary":     "center 25%",   // 2041E42A magenta portrait — face upper third
   "about-intro-entry-portrait-secondary":   "center 30%",   // portrait — face & shoulders
   "about-supporting-visual-calm-01":        "center center", // 16:9 landscape
   "about-supporting-visual-calm-02":        "center 25%",   // portrait — face upper center
