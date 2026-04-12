@@ -27,14 +27,14 @@ export type PrioritizedAsset = {
 export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "home-lead-portrait",
-    finalPath: "/assets/dama-venus/visuals/editorial/69bf1c97-c7f0-4855-b2f0-5d50840a153f-portrait-v01.jpg",
-    sourcePath: "pics/69BF1C97-C7F0-4855-B2F0-5D50840A153F.JPG",
+    finalPath: "/assets/dama-venus/visuals/editorial/img-4671-portrait-v01.jpg",
+    sourcePath: "pics/IMG_4671.jpg",
     area: "home",
     recommendedModuleType: "image",
-    altDraft: "Dáma Venus — Bordeaux editorial portrait with deep red backdrop",
-    cropHint: "Portrait crop, keep full figure visible",
-    focusHint: "Keep face in upper third, preserve full-body pose and red background",
-    swColorMode: "excellent",
+    altDraft: "Dáma Venus at Fontana di Trevi, Roma — cinematic editorial portrait",
+    cropHint: "Full-width cinematic poster crop",
+    focusHint: "Keep figure centered with architectural backdrop visible",
+    swColorMode: "good",
     overlaySuitability: "supports-dark-overlay",
     priority: 100,
     role: "decorative"

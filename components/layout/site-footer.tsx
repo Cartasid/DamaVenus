@@ -109,7 +109,7 @@ export default function SiteFooter() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${item.label} (opens in new tab)`}
-                    className="text-muted hover:text-offWhite no-underline"
+                    className="text-offWhite hover:text-accent no-underline"
                     style={linkStyleBase}
                   >
                     {item.label}

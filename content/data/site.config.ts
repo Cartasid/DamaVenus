@@ -37,7 +37,7 @@ export const siteConfig = {
  */
 const assetObjectPositions: Record<string, string> = {
   // ── HOME ──
-  "home-lead-portrait":           "center 30%",   // Bordeaux portrait — face upper third, full-body pose
+  "home-lead-portrait":           "center center", // Roma portrait — figure centered with Fontana di Trevi backdrop
   "home-release-cover":           "center center", // album cover — keep title visible
   "home-visual-preview":          "center center", // 16:9 landscape — subject centered
   "home-statement-editorial":     "center center", // 16:9 landscape — negative space for text

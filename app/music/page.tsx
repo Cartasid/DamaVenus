@@ -170,6 +170,53 @@ export default function MusicPage() {
         </div>
       </section>
 
+      {/* ── VIDEO SHORT ── */}
+      <section className="reveal mt-20" aria-labelledby="video-short-heading">
+        <div className="site-container">
+          <div className="mb-8 pb-8" style={{ borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
+            <p id="video-short-heading" className="text-muted" style={labelStyle}>Latest Visual</p>
+          </div>
+          <div className="grid gap-0 md:grid-cols-[minmax(0,9fr)_minmax(0,16fr)]" style={{ border: "1px solid rgba(200,168,126,0.08)" }}>
+            {/* Video */}
+            <div className="relative overflow-hidden" style={{ background: "#000" }}>
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="w-full h-full object-cover"
+                style={{ aspectRatio: "9/16", maxHeight: "680px" }}
+                aria-label="Lonely Berlin Day 1 — Short by Dáma Venus"
+              >
+                <source src="/assets/dama-venus/video/lonely-berlin-day-1.mp4" type="video/mp4" />
+              </video>
+            </div>
+            {/* Info */}
+            <div
+              className="flex flex-col justify-end px-8 py-12 md:px-12"
+              style={{ borderLeft: "1px solid rgba(200,168,126,0.08)" }}
+            >
+              <p className="mb-3" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>Short Film</p>
+              <h3
+                className="text-primary"
+                style={{
+                  fontFamily: "var(--font-bodoni), Georgia, serif",
+                  fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
+                  fontWeight: 300,
+                  lineHeight: 1.1
+                }}
+              >
+                Lonely Berlin Day 1°
+              </h3>
+              <p className="mt-4 text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.6, maxWidth: "28rem" }}>
+                A cinematic glimpse into the Berlin atmosphere — raw, intimate, and unfiltered.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── SELECTED RELEASES ── */}
       {selectedReleases.length ? (
         <section id="selected-releases" className="reveal mt-20">

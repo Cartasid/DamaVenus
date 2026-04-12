@@ -74,11 +74,6 @@ export default function HomePage() {
                 aria-hidden="true"
                 style={{ background: "linear-gradient(135deg, rgba(200,168,126,0.04) 0%, transparent 40%)" }}
               />
-              <div
-                className="absolute bottom-0 left-0 top-0 w-px"
-                aria-hidden="true"
-                style={{ background: "linear-gradient(to bottom, transparent, rgba(200,168,126,0.5), transparent)" }}
-              />
             </ImageReveal>
           </ParallaxHero>
         ) : (
