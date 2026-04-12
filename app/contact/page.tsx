@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import ImageReveal from "@/components/utils/image-reveal";
 import { contactContent } from "@/content/data/contact.data";
 import { ContactForm } from "./ContactForm";
 
@@ -37,7 +38,12 @@ export default function ContactPage() {
       <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
 
         {/* Mood Image */}
-        <div className="relative hidden lg:block overflow-hidden" style={{ minHeight: "600px" }}>
+        <ImageReveal
+          className="relative hidden lg:block overflow-hidden"
+          style={{ minHeight: "600px" }}
+          lightboxSrc={CONTACT_MOOD_IMAGE}
+          lightboxAlt="Dáma Venus — editorial portrait"
+        >
           <Image
             src={CONTACT_MOOD_IMAGE}
             alt="Dáma Venus — editorial portrait"
@@ -47,7 +53,7 @@ export default function ContactPage() {
             className="object-cover"
             style={{ objectPosition: "center center" }}
           />
-        </div>
+        </ImageReveal>
 
       <section className="section-stack-md max-w-2xl">
 
