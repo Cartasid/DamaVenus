@@ -45,7 +45,6 @@ export default function VisualsPage() {
   const editorialRows = sortedEntries.filter((entry) => entry.moduleType === "editorial-image-row");
   const portraitFeature = sortedEntries.find((entry) => entry.type === "portrait");
   const quietStills = sortedEntries.filter((entry) => entry.role === "quiet-spacer" || entry.type === "still");
-  const linkedVisual = sortedEntries.find((entry) => entry.moduleType === "linked-visual-module");
 
   // Group by category
   const entriesByCategory = visualsCategories.map((cat) => ({
@@ -56,7 +55,6 @@ export default function VisualsPage() {
   const openerAsset = visualsData.intro.asset ? assetMap[visualsData.intro.asset.id] : undefined;
   const leadAsset = leadSequenceEntry?.assets[0] ? assetMap[leadSequenceEntry.assets[0]] : undefined;
   const portraitAsset = portraitFeature?.assets[0] ? assetMap[portraitFeature.assets[0]] : undefined;
-  const linkedVisualAsset = linkedVisual?.assets[0] ? assetMap[linkedVisual.assets[0]] : undefined;
 
   return (
     <div className="pb-28" aria-labelledby="visuals-page-title">
@@ -371,61 +369,6 @@ export default function VisualsPage() {
         </section>
       ))}
 
-      {/* ── LINKED VISUAL ── */}
-      {linkedVisual ? (
-        <section className="reveal site-container mt-20" aria-labelledby={`${linkedVisual.id}-linked-title`}>
-          <h2
-            id={`${linkedVisual.id}-linked-title`}
-            className="text-primary mb-6"
-            style={{
-              fontFamily: "var(--font-bodoni), Georgia, serif",
-              fontSize: "clamp(1.8rem, 4vw, 3rem)",
-              fontWeight: 300
-            }}
-          >
-            {linkedVisual.title}
-          </h2>
-          {linkedVisual.shortText ? (
-            <p className="mb-6 text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>
-              {linkedVisual.shortText}
-            </p>
-          ) : null}
-          {visualsData.intro.cta && linkedVisualAsset ? (
-            <Link
-              href={visualsData.intro.cta.href}
-              className="block no-underline group"
-            >
-              <ImageReveal
-                className="relative overflow-hidden"
-                style={{ height: "60vh", minHeight: "400px" }}
-              >
-                <Image
-                  src={linkedVisualAsset.src}
-                  alt={resolveAlt(linkedVisualAsset, linkedVisual.altTextNotes)}
-                  fill
-                  loading="lazy"
-                  sizes="100vw"
-                  className="object-cover"
-                  style={{ objectPosition: linkedVisualAsset?.objectPosition ?? "center center" }}
-                />
-                <div
-                  className="absolute inset-0"
-                  aria-hidden="true"
-                  style={{ background: "rgba(5,5,5,0.4)" }}
-                />
-                <div className="absolute bottom-0 left-0 p-8">
-                  <span
-                    className="cta-primary"
-                    style={{ display: "inline-block" }}
-                  >
-                    {visualsData.intro.cta.label}
-                  </span>
-                </div>
-              </ImageReveal>
-            </Link>
-          ) : null}
-        </section>
-      ) : null}
 
       {/* ── FOOTER CTA ── */}
       {visualsData.intro.cta ? (

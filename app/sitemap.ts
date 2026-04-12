@@ -3,7 +3,7 @@ import { resolveSiteUrl } from "@/content/data/site.config";
 
 const siteUrl = resolveSiteUrl();
 
-const routes = ["", "/music", "/visuals", "/about", "/press", "/industry", "/contact", "/privacy", "/imprint"];
+const routes = ["", "/music", "/visuals", "/about", "/press", "/contact", "/privacy", "/imprint"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({

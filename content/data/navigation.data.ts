@@ -14,6 +14,5 @@ export const extendedNavigationItems: NavigationItem[] = [
   { label: "Visuals", href: "/visuals" },
   { label: "Bio", href: "/about" },
   { label: "Press", href: "/press" },
-  { label: "Industry Access", href: "/industry" },
   { label: "Contact", href: "/contact" }
 ];
