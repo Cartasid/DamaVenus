@@ -171,7 +171,7 @@ export default function HomePage() {
           <div className="grid gap-0 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] premium-card shine-hover">
             <ImageReveal className="relative overflow-hidden" style={{ minHeight: "600px" }} lightboxSrc={featuredReleaseAsset?.src} lightboxAlt={featuredReleaseAsset?.alt ?? featuredReleaseModule?.alt ?? ""}>
               {featuredReleaseAsset ? (
-                <Image src={featuredReleaseAsset.src} alt={featuredReleaseAsset.alt ?? featuredReleaseModule?.alt ?? ""} fill sizes="(max-width: 768px) 100vw, 60vw" className="object-cover" style={{ objectPosition: featuredReleaseAsset.objectPosition ?? "center center" }} />
+                <Image src={featuredReleaseAsset.src} alt={featuredReleaseAsset.alt ?? featuredReleaseModule?.alt ?? ""} fill loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="object-cover" style={{ objectPosition: featuredReleaseAsset.objectPosition ?? "center center" }} />
               ) : (
                 <div className="absolute inset-0 bg-surfaceElevated" />
               )}

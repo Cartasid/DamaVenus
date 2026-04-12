@@ -235,6 +235,7 @@ export default function VisualsPage() {
                     src={asset.src}
                     alt={resolveAlt(asset, entry.altTextNotes)}
                     fill
+                    loading="lazy"
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover"
                     style={{ objectPosition: asset.objectPosition ?? "center center" }}
@@ -281,6 +282,7 @@ export default function VisualsPage() {
                     src={asset.src}
                     alt={resolveAlt(asset, entry.altTextNotes)}
                     fill
+                    loading="lazy"
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover"
                     style={{ objectPosition: asset.objectPosition ?? "center center" }}
@@ -317,6 +319,7 @@ export default function VisualsPage() {
               src={portraitAsset.src}
               alt={resolveAlt(portraitAsset, portraitFeature.altTextNotes)}
               fill
+              loading="lazy"
               sizes="100vw"
               className="object-cover"
               style={{ objectPosition: portraitAsset.objectPosition ?? "center 25%" }}
@@ -356,6 +359,7 @@ export default function VisualsPage() {
                     src={asset.src}
                     alt={resolveAlt(asset, entry.altTextNotes)}
                     fill
+                    loading="lazy"
                     sizes="(max-width: 768px) 50vw, 33vw"
                     className="object-cover"
                     style={{ objectPosition: asset.objectPosition ?? "center center" }}
@@ -399,6 +403,7 @@ export default function VisualsPage() {
                   src={linkedVisualAsset.src}
                   alt={resolveAlt(linkedVisualAsset, linkedVisual.altTextNotes)}
                   fill
+                  loading="lazy"
                   sizes="100vw"
                   className="object-cover"
                   style={{ objectPosition: linkedVisualAsset?.objectPosition ?? "center center" }}

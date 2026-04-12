@@ -8,6 +8,7 @@ import ScrollRevealProvider from "@/components/utils/scroll-reveal-provider";
 import ScrollProgress from "@/components/utils/scroll-progress";
 import CustomCursor from "@/components/utils/custom-cursor";
 import ImageLightbox from "@/components/utils/image-lightbox";
+import ImageLoadObserver from "@/components/utils/image-load-observer";
 import { resolveSiteUrl, siteConfig } from "@/content/data/site.config";
 
 const siteUrl = resolveSiteUrl();
@@ -180,6 +181,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         </main>
         <SiteFooter />
         <ImageLightbox />
+        <ImageLoadObserver />
       </body>
     </html>
   );

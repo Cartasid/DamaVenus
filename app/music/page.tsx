@@ -279,6 +279,7 @@ export default function MusicPage() {
                             src={releaseAsset.src}
                             alt={releaseAsset.alt ?? release.title}
                             fill
+                            loading="lazy"
                             sizes="(max-width: 768px) 100vw, 30vw"
                             className="object-cover"
                             style={{ objectPosition: releaseAsset.objectPosition ?? "center center" }}
@@ -346,6 +347,7 @@ export default function MusicPage() {
                           src={releaseAsset.src}
                           alt={releaseAsset.alt ?? `${release.title} visual still`}
                           fill
+                          loading="lazy"
                           sizes="(max-width: 768px) 100vw, 40vw"
                           className="object-cover"
                           style={{ objectPosition: releaseAsset.objectPosition ?? "center center" }}

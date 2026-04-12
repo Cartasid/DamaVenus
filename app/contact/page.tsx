@@ -42,6 +42,7 @@ export default function ContactPage() {
             src={CONTACT_MOOD_IMAGE}
             alt="Dáma Venus — editorial portrait"
             fill
+            loading="lazy"
             sizes="40vw"
             className="object-cover"
             style={{ objectPosition: "center center" }}

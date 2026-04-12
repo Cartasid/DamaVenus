@@ -252,6 +252,7 @@ export default function AboutPage() {
                   src={pressPortrait.src}
                   alt={pressPortrait.alt ?? "Dáma Venus portrait"}
                   fill
+                  loading="lazy"
                   sizes="40vw"
                   className="object-cover"
                   style={{ objectPosition: pressPortrait.objectPosition ?? "center 25%" }}
@@ -343,6 +344,7 @@ export default function AboutPage() {
                     src={asset.src}
                     alt={resolveAltText(visual.role, visual.altTextNote, asset.alt)}
                     fill
+                    loading="lazy"
                     className="object-cover"
                     style={{ objectPosition: asset.objectPosition ?? "center center" }}
                     sizes="(min-width: 768px) 50vw, 100vw"
