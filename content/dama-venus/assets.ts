@@ -112,11 +112,11 @@ export const prioritizedAssets: PrioritizedAsset[] = [
 
   {
     id: "music-current-chapter-cover",
-    finalPath: "/assets/dama-venus/music/dv_music_current_chapter_cover_color_4x5_v01.jpg",
-    sourcePath: "pics/spotify_canvas_9x16.jpg",
+    finalPath: "/assets/dama-venus/visuals/editorial/cover-neon-portrait-v01.png",
+    sourcePath: "pics/cover.png",
     area: "music",
     recommendedModuleType: "featured-release",
-    altDraft: "Current Chapter single cover by Dama Venus",
+    altDraft: "Current Chapter — neon magenta portrait by Dáma Venus",
     cropHint: "4:5 center crop with title-safe area",
     focusHint: "Keep artist and release title visible in center",
     swColorMode: "good",

@@ -45,7 +45,7 @@ const assetObjectPositions: Record<string, string> = {
   "home-press-preview":           "center 20%",   // portrait — face with headroom
 
   // ── MUSIC ──
-  "music-current-chapter-cover":  "center center", // 4:5 cover — title safe
+  "music-current-chapter-cover":  "60% center",    // Neon portrait — face slightly right of center
   "music-current-chapter-visual": "center center", // 16:9 cinematic
   "music-midnight-signal-cover":  "center 30%",   // 4:5 portrait — face & shoulders upper center
   "music-afterglow-cut-cover":    "center center", // 1:1 square — eyes on horizontal center

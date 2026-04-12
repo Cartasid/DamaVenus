@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { contactContent } from "@/content/data/contact.data";
 import { ContactForm } from "./ContactForm";
+
+const CONTACT_MOOD_IMAGE = "/assets/dama-venus/music/dv_music_current_chapter_cover_color_4x5_v01.jpg";
 
 export const metadata: Metadata = {
   title: { absolute: "Contact | Dama Venus" },
@@ -31,6 +34,20 @@ const labelStyle = {
 export default function ContactPage() {
   return (
     <div className="site-container py-16 pb-28">
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+
+        {/* Mood Image */}
+        <div className="relative hidden lg:block overflow-hidden" style={{ minHeight: "600px" }}>
+          <Image
+            src={CONTACT_MOOD_IMAGE}
+            alt="Dáma Venus — editorial portrait"
+            fill
+            sizes="40vw"
+            className="object-cover"
+            style={{ objectPosition: "center center" }}
+          />
+        </div>
+
       <section className="section-stack-md max-w-2xl">
 
         <header className="space-y-4">
@@ -84,6 +101,7 @@ export default function ContactPage() {
         ) : null}
 
       </section>
+      </div>
     </div>
   );
 }
