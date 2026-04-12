@@ -92,7 +92,8 @@ export default function VisualsPage() {
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 40vw"
-                className="object-cover object-top"
+                className="object-cover"
+                style={{ objectPosition: openerAsset.objectPosition ?? "center center" }}
               />
             </ImageReveal>
           ) : null}
@@ -144,7 +145,8 @@ export default function VisualsPage() {
               fill
               priority
               sizes="100vw"
-              className="object-cover object-top"
+              className="object-cover"
+              style={{ objectPosition: leadAsset.objectPosition ?? "center center" }}
             />
             <div
               className="absolute inset-0"
@@ -234,7 +236,8 @@ export default function VisualsPage() {
                     alt={resolveAlt(asset, entry.altTextNotes)}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover object-top"
+                    className="object-cover"
+                    style={{ objectPosition: asset.objectPosition ?? "center center" }}
                   />
                 </ImageReveal>
               ) : null;
@@ -279,7 +282,8 @@ export default function VisualsPage() {
                     alt={resolveAlt(asset, entry.altTextNotes)}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover object-top"
+                    className="object-cover"
+                    style={{ objectPosition: asset.objectPosition ?? "center center" }}
                   />
                 </ImageReveal>
               ) : null;
@@ -314,7 +318,8 @@ export default function VisualsPage() {
               alt={resolveAlt(portraitAsset, portraitFeature.altTextNotes)}
               fill
               sizes="100vw"
-              className="object-cover object-top"
+              className="object-cover"
+              style={{ objectPosition: portraitAsset.objectPosition ?? "center 25%" }}
             />
           </ImageReveal>
         </section>
@@ -352,7 +357,8 @@ export default function VisualsPage() {
                     alt={resolveAlt(asset, entry.altTextNotes)}
                     fill
                     sizes="(max-width: 768px) 50vw, 33vw"
-                    className="object-cover object-top"
+                    className="object-cover"
+                    style={{ objectPosition: asset.objectPosition ?? "center center" }}
                   />
                 </ImageReveal>
               ) : null;
@@ -394,7 +400,8 @@ export default function VisualsPage() {
                   alt={resolveAlt(linkedVisualAsset, linkedVisual.altTextNotes)}
                   fill
                   sizes="100vw"
-                  className="object-cover object-top"
+                  className="object-cover"
+                  style={{ objectPosition: linkedVisualAsset?.objectPosition ?? "center center" }}
                 />
                 <div
                   className="absolute inset-0"

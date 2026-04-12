@@ -176,7 +176,7 @@ export default function HomePage() {
           <div className="grid gap-0 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] premium-card shine-hover">
             <ImageReveal className="relative overflow-hidden" style={{ minHeight: "600px" }} lightboxSrc={featuredReleaseAsset?.src} lightboxAlt={featuredReleaseAsset?.alt ?? featuredReleaseModule?.alt ?? ""}>
               {featuredReleaseAsset ? (
-                <Image src={featuredReleaseAsset.src} alt={featuredReleaseAsset.alt ?? featuredReleaseModule?.alt ?? ""} fill sizes="(max-width: 768px) 100vw, 60vw" className="object-cover object-top" />
+                <Image src={featuredReleaseAsset.src} alt={featuredReleaseAsset.alt ?? featuredReleaseModule?.alt ?? ""} fill sizes="(max-width: 768px) 100vw, 60vw" className="object-cover" style={{ objectPosition: featuredReleaseAsset.objectPosition ?? "center center" }} />
               ) : (
                 <div className="absolute inset-0 bg-surfaceElevated" />
               )}
@@ -217,7 +217,7 @@ export default function HomePage() {
           <div className="grid gap-0 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-stretch premium-card">
             {visualsAsset ? (
               <ImageReveal className="img-hover-zoom relative overflow-hidden" style={{ minHeight: "520px" }} lightboxSrc={visualsAsset.src} lightboxAlt={visualsAsset.alt ?? visualsModule?.alt ?? ""}>
-                <Image src={visualsAsset.src} alt={visualsAsset.alt ?? visualsModule?.alt ?? ""} fill loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="object-cover object-top" />
+                <Image src={visualsAsset.src} alt={visualsAsset.alt ?? visualsModule?.alt ?? ""} fill loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="object-cover" style={{ objectPosition: visualsAsset.objectPosition ?? "center center" }} />
               </ImageReveal>
             ) : null}
             <div className="flex flex-col justify-end px-8 py-14 md:px-12" style={{ borderTop: "1px solid rgba(200,168,126,0.08)", borderLeft: "1px solid rgba(200,168,126,0.08)", borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
@@ -247,7 +247,7 @@ export default function HomePage() {
             </div>
             {pressAsset ? (
               <ImageReveal className="img-hover-zoom relative overflow-hidden" style={{ minHeight: "440px", borderLeft: "1px solid rgba(200,168,126,0.08)" }} lightboxSrc={pressAsset.src} lightboxAlt={pressAsset.alt ?? pressModule?.alt ?? ""}>
-                <Image src={pressAsset.src} alt={pressAsset.alt ?? pressModule?.alt ?? ""} fill loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="object-cover object-top" />
+                <Image src={pressAsset.src} alt={pressAsset.alt ?? pressModule?.alt ?? ""} fill loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="object-cover" style={{ objectPosition: pressAsset.objectPosition ?? "center center" }} />
               </ImageReveal>
             ) : null}
           </div>

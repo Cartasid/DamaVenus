@@ -116,7 +116,8 @@ export default function MusicPage() {
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-cover object-top"
+                  className="object-cover"
+                  style={{ objectPosition: featuredAsset.objectPosition ?? "center center" }}
                 />
               </ImageReveal>
             ) : null}
@@ -232,7 +233,8 @@ export default function MusicPage() {
                             alt={releaseAsset.alt ?? release.title}
                             fill
                             sizes="(max-width: 768px) 100vw, 30vw"
-                            className="object-cover object-top"
+                            className="object-cover"
+                            style={{ objectPosition: releaseAsset.objectPosition ?? "center center" }}
                           />
                         </ImageReveal>
                       ) : null}
@@ -298,7 +300,8 @@ export default function MusicPage() {
                           alt={releaseAsset.alt ?? `${release.title} visual still`}
                           fill
                           sizes="(max-width: 768px) 100vw, 40vw"
-                          className="object-cover object-top"
+                          className="object-cover"
+                          style={{ objectPosition: releaseAsset.objectPosition ?? "center center" }}
                         />
                       </ImageReveal>
                     ) : null}

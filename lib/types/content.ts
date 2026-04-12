@@ -22,6 +22,8 @@ export type AssetMapItem = {
   overlaySuitability: AssetOverlaySuitability;
   role: AssetRole;
   copyKey?: string;
+  /** CSS object-position value, derived from focusHint. Defaults to "center center". */
+  objectPosition?: string;
 };
 
 export type CTA = {
