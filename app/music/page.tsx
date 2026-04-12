@@ -197,7 +197,7 @@ export default function MusicPage() {
               className="flex flex-col justify-end px-8 py-12 md:px-12"
               style={{ borderLeft: "1px solid rgba(200,168,126,0.08)" }}
             >
-              <p className="mb-3" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>Short Film</p>
+              <p className="mb-3" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>The rebirth of the after-dark aesthetic</p>
               <h3
                 className="text-primary"
                 style={{
@@ -207,10 +207,10 @@ export default function MusicPage() {
                   lineHeight: 1.1
                 }}
               >
-                Lonely Berlin Day 1°
+                More than music, a cinematic experience from the heart of Berlin.
               </h3>
               <p className="mt-4 text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.6, maxWidth: "28rem" }}>
-                A cinematic glimpse into the Berlin atmosphere — raw, intimate, and unfiltered.
+                Are you ready to step into the neon?
               </p>
             </div>
           </div>
