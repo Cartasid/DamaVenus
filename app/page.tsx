@@ -5,6 +5,7 @@ import { homepageCoreModules, homepageIntro } from "@/content/data/homepage.data
 import { navigationItems } from "@/content/data/navigation.data";
 import { assetMap, siteConfig } from "@/content/data/site.config";
 import HeroTextReveal from "@/components/utils/hero-text-reveal";
+import SocialIcon from "@/components/utils/social-icons";
 import Marquee from "@/components/utils/marquee";
 import ParallaxHero from "@/components/utils/parallax-hero";
 import ImageReveal from "@/components/utils/image-reveal";
@@ -240,7 +241,7 @@ export default function HomePage() {
                 { label: "Instagram", href: "https://www.instagram.com/ichbindamavenus" },
                 { label: "YouTube", href: "https://www.youtube.com/@damavenus" }
               ].map((social) => (
-                <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.label} (opens in new tab)`} className="text-muted hover:text-offWhite no-underline" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", transition: "color 300ms" }}>{social.label}</a>
+                <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.label} (opens in new tab)`} className="text-muted hover:text-offWhite no-underline flex items-center gap-2" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", transition: "color 300ms" }}><SocialIcon name={social.label} />{social.label}</a>
               ))}
             </div>
           </div>

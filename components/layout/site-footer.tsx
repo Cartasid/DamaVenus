@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/content/data/site.config";
 import { extendedNavigationItems } from "@/content/data/navigation.data";
+import SocialIcon from "@/components/utils/social-icons";
 
 const socialLinks = [
   { label: "Spotify", href: "https://open.spotify.com/artist/damavenus" },
@@ -109,9 +110,10 @@ export default function SiteFooter() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${item.label} (opens in new tab)`}
-                    className="text-offWhite hover:text-accent no-underline"
+                    className="text-offWhite hover:text-accent no-underline flex items-center gap-2"
                     style={linkStyleBase}
                   >
+                    <SocialIcon name={item.label} />
                     {item.label}
                   </a>
                 ))}
