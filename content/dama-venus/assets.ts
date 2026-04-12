@@ -195,6 +195,20 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     role: "informative"
   },
   {
+    id: "visuals-night-portrait-0e9128",
+    finalPath: "/assets/dama-venus/visuals/editorial/0e912806-night-portrait-v01.jpg",
+    sourcePath: "pics/0E912806-184C-4164-9441-5501C3010BB3.JPG",
+    area: "visuals",
+    recommendedModuleType: "lead-sequence",
+    altDraft: "Dáma Venus — night portrait in car with dog, pink outfit",
+    cropHint: "Portrait 3:4 crop",
+    focusHint: "Keep face and upper body centered, dog visible",
+    swColorMode: "excellent",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 1,
+    role: "informative"
+  },
+  {
     id: "visuals-cinderela-frame-243",
     finalPath: "/assets/dama-venus/visuals/dv_visuals_cinderela_frame_243_bw_3x4_v01.jpeg",
     sourcePath: "pics/Cinderela-243.JPEG",
