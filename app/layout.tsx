@@ -43,23 +43,25 @@ export const metadata: Metadata = {
   description: metadataDescription,
   metadataBase: new URL(siteUrl),
   keywords: [
+    "Dáma Venus",
     "Dama Venus",
+    "Visual Author",
+    "international actress",
+    "producer",
+    "Miss Americas",
+    "Berlin artist",
     "Brazilian artist",
     "alternative pop",
-    "trap pop",
-    "R&B",
-    "vaporwave",
+    "synth-pop",
+    "cinematic music",
     "music",
     "Rio de Janeiro",
     "Europe",
     "fashion artist",
-    "visual artist",
-    "Valentines",
-    "Eclipse Bossanova",
-    "Blue Cinderella"
+    "visual artist"
   ],
-  authors: [{ name: "Dama Venus" }],
-  creator: "Dama Venus",
+  authors: [{ name: "Dáma Venus" }],
+  creator: "Dáma Venus",
   openGraph: {
     siteName: siteConfig.name,
     type: "website",
@@ -101,7 +103,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "MusicGroup",
-  name: "Dama Venus",
+  name: "Dáma Venus",
   description: metadataDescription,
   url: siteUrl,
   genre: ["Alternative Pop", "Trap Pop", "R&B", "Vaporwave"],
@@ -109,16 +111,23 @@ const jsonLd = {
     "@type": "Place",
     name: "Rio de Janeiro, Brazil"
   },
+  location: {
+    "@type": "Place",
+    name: "Berlin, Germany"
+  },
   image: `${siteUrl}/og-default.png`,
   sameAs: [
     "https://open.spotify.com/artist/damavenus",
     "https://www.instagram.com/damavenus",
-    "https://www.youtube.com/@damavenus"
+    "https://www.youtube.com/@damavenus",
+    "https://www.linkedin.com/in/damavenus",
+    "https://www.filmmakers.eu/damavenus"
   ],
   member: {
     "@type": "Person",
-    name: "Dama Venus",
-    nationality: "Brazilian"
+    name: "Dáma Venus",
+    nationality: "Brazilian",
+    jobTitle: "Visual Author, International Actress, Producer"
   }
 };
 

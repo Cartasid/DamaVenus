@@ -366,6 +366,26 @@ a:hover {
     @apply text-primary;
   }
 
+  .ghost-btn {
+    display: inline-block;
+    font-family: var(--font-syne), system-ui, sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 14px 36px;
+    background: transparent;
+    transition: all 350ms var(--transition-dramatic);
+  }
+
+  .ghost-btn:hover {
+    border-color: #FF4FA8;
+    color: #FF4FA8;
+    box-shadow: 0 0 30px -8px rgba(255,79,168,0.25);
+  }
+
   .text-link {
     @apply text-sm text-muted underline underline-offset-4;
     transition: color 250ms var(--transition-luxury);

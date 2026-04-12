@@ -161,6 +161,33 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── AS SEEN IN ── */}
+      <section className="reveal site-container mt-16">
+        <div style={{ borderTop: "1px solid rgba(200,168,126,0.08)", paddingTop: "2rem" }}>
+          <p className="text-center mb-6" style={{ ...labelStyle, color: "rgba(200,168,126,0.4)" }}>As Seen In</p>
+          <div className="flex items-center justify-center gap-10 flex-wrap">
+            <a
+              href="https://www.thereviewgeek.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted hover:text-offWhite no-underline"
+              style={{
+                fontFamily: "var(--font-syne), system-ui, sans-serif",
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                transition: "color 300ms",
+                opacity: 0.6
+              }}
+              aria-label="The Review Geek (opens in new tab)"
+            >
+              The Review Geek
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ── DIVIDER ── */}
       <div className="site-container mt-16">
         <div className="h-px" style={{ background: "rgba(200,168,126,0.08)" }} />

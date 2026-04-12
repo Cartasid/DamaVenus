@@ -29,9 +29,9 @@ export const aboutPageModel = {
   },
   aboutBio: {
     shortText:
-      "The artistic line is absolute: precision, presence, and purpose in every note and frame.",
+      "Dáma Venus is a Berlin-based Visual Author and international actress. Her work bridges high-end cinematic textures with the precision of modern synth-pop.",
     mediumText:
-      "Dama Venus speaks a singular language across sound, image, and timing — each element calibrated to command attention.",
+      "Dáma Venus is a Berlin-based Visual Author and international actress. Her work bridges high-end cinematic textures with the precision of modern synth-pop. Currently finalizing her upcoming album (June 12th), she architects worlds where fashion, sound, and screen collide.",
     longArtistNote:
       "The approach is intentional: fewer words, deeper resonance, stronger form. Feminine power, modern mystique, and controlled intensity define every chapter."
   },

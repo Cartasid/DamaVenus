@@ -4,7 +4,9 @@ import { siteConfig } from "@/content/data/site.config";
 const socialLinks = [
   { label: "Spotify", href: "https://open.spotify.com/artist/damavenus" },
   { label: "Instagram", href: "https://www.instagram.com/damavenus" },
-  { label: "YouTube", href: "https://www.youtube.com/@damavenus" }
+  { label: "YouTube", href: "https://www.youtube.com/@damavenus" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/damavenus" },
+  { label: "Filmmakers.eu", href: "https://www.filmmakers.eu/damavenus" }
 ];
 
 const footerNav = [
@@ -12,6 +14,7 @@ const footerNav = [
   { label: "Visuals", href: "/visuals" },
   { label: "About", href: "/about" },
   { label: "Press", href: "/press" },
+  { label: "Industry Access", href: "/industry" },
   { label: "Contact", href: "/contact" }
 ];
 
@@ -146,8 +149,33 @@ export default function SiteFooter() {
           </div>
         </div>
 
+        {/* Management */}
+        <div className="my-10" style={{ borderTop: "1px solid rgba(200,168,126,0.06)", paddingTop: "1.5rem" }}>
+          <p style={categoryLabel} className="mb-3">Management</p>
+          <p
+            style={{
+              fontFamily: "var(--font-syne), system-ui, sans-serif",
+              fontSize: "0.6rem",
+              letterSpacing: "0.1em",
+              color: "rgba(245,240,235,0.5)"
+            }}
+          >
+            Office of Dáma Venus
+          </p>
+          <a
+            href="mailto:contact@damavenus.eu"
+            className="text-muted hover:text-offWhite no-underline"
+            style={{
+              ...linkStyleBase,
+              fontSize: "0.55rem"
+            }}
+          >
+            contact@damavenus.eu
+          </a>
+        </div>
+
         {/* Divider */}
-        <div className="my-12 h-px" style={{ background: "rgba(200,168,126,0.06)" }} />
+        <div className="my-8 h-px" style={{ background: "rgba(200,168,126,0.06)" }} />
 
         {/* Bottom row */}
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">

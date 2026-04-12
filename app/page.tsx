@@ -10,17 +10,17 @@ import ParallaxHero from "@/components/utils/parallax-hero";
 import ImageReveal from "@/components/utils/image-reveal";
 
 export const metadata: Metadata = {
-  title: { absolute: "Dama Venus — Sound. Vision. Reign." },
-  description: "Dama Venus — the Brazilian voice redefining alternative pop across Europe. Cinematic sound, fashion-forward visuals, and uncompromising artistic vision.",
+  title: { absolute: "Dáma Venus | Official Website | Visual Author & Actress" },
+  description: "Explore the cinematic world of Dáma Venus. Berlin-based artist, producer, and Miss Americas. New album launching June 12th.",
   openGraph: {
-    title: "Dama Venus — Sound. Vision. Reign.",
-    description: "Dama Venus — the Brazilian voice redefining alternative pop across Europe.",
+    title: "Dáma Venus | Official Website | Visual Author & Actress",
+    description: "Explore the cinematic world of Dáma Venus. Berlin-based artist, producer, and Miss Americas. New album launching June 12th.",
     url: "/",
     images: [{ url: "/og-default.png" }]
   },
   twitter: {
-    title: "Dama Venus — Sound. Vision. Reign.",
-    description: "Dama Venus — the Brazilian voice redefining alternative pop across Europe.",
+    title: "Dáma Venus | Official Website | Visual Author & Actress",
+    description: "Explore the cinematic world of Dáma Venus. Berlin-based artist, producer, and Miss Americas.",
     images: ["/og-default.png"]
   },
   alternates: { canonical: "/" }
@@ -102,16 +102,17 @@ export default function HomePage() {
             </p>
 
             <HeroTextReveal
-              text={siteConfig.name}
+              text="DÁMA VENUS"
               tag="h1"
               id="home-title"
               className="text-white"
               style={{
-                fontFamily: "var(--font-bodoni), Georgia, serif",
-                fontSize: "clamp(5rem, 15vw, 14rem)",
-                fontWeight: 400,
-                lineHeight: 0.85,
-                letterSpacing: "-0.03em"
+                fontFamily: "var(--font-syne), system-ui, sans-serif",
+                fontSize: "clamp(3.5rem, 10vw, 9rem)",
+                fontWeight: 800,
+                lineHeight: 0.9,
+                letterSpacing: "0.06em",
+                textTransform: "uppercase"
               }}
               delayMs={400}
             />
@@ -119,20 +120,22 @@ export default function HomePage() {
             <p
               className="mt-8"
               style={{
-                fontFamily: "var(--font-bodoni), Georgia, serif",
-                fontSize: "clamp(1.2rem, 2.8vw, 1.9rem)",
+                fontFamily: "var(--font-syne), system-ui, sans-serif",
+                fontSize: "clamp(0.7rem, 1.5vw, 0.95rem)",
                 fontWeight: 400,
-                fontStyle: "italic",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
                 maxWidth: "32rem",
-                color: "rgba(245,240,235,0.55)"
+                color: "rgba(245,240,235,0.5)"
               }}
             >
               {homepageIntro.statement}
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Link href="/music" className="cta-primary">Listen Now</Link>
-              <Link href="/contact" className="cta-secondary">Get in Touch</Link>
+            <div className="mt-10">
+              <Link href="/music" className="ghost-btn no-underline">
+                Enter the After-Dark Architecture
+              </Link>
             </div>
 
             <div className="mt-8 flex items-center gap-4 flex-wrap">
@@ -265,7 +268,7 @@ export default function HomePage() {
             {contactNewsletterModule?.copy.subline ? <p className="mt-6 text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "30rem" }}>{contactNewsletterModule.copy.subline}</p> : null}
             {contactNewsletterModule?.copy.cta ? <Link href={contactNewsletterModule.copy.cta.href} className="mt-10 inline-block cta-primary">{contactNewsletterModule.copy.cta.label}</Link> : null}
             <div className="mt-8 flex flex-wrap items-center gap-6">
-              <a href="mailto:booking@damavenus.com" className="text-muted hover:text-offWhite no-underline" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", transition: "color 300ms" }} aria-label="Send email to booking@damavenus.com">booking@damavenus.com</a>
+              <a href="mailto:contact@damavenus.eu" className="text-muted hover:text-offWhite no-underline" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", transition: "color 300ms" }} aria-label="Send email to contact@damavenus.eu">contact@damavenus.eu</a>
               <span style={{ width: "1px", height: "16px", background: "rgba(200,168,126,0.2)" }} aria-hidden="true" />
               {[
                 { label: "Spotify", href: "https://open.spotify.com/artist/damavenus" },

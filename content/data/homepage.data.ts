@@ -3,7 +3,7 @@ import { contactContent } from "@/content/data/contact.data";
 import { pressContent } from "@/content/data/press.data";
 
 export const homepageIntro = {
-  statement: "Every sound is a vision. Every image, a frequency."
+  statement: "Visual Author | International Actress | Producer"
 };
 
 export const homepageRelease: ReleaseItem = {

@@ -24,8 +24,8 @@ export const siteConfig = {
   language: "en",
   url: resolveSiteUrl(),
   metadata: {
-    title: "Dama Venus",
-    description: "Dama Venus — the Brazilian voice redefining alternative pop across Europe. Cinematic sound, fashion-forward visuals, and uncompromising artistic vision."
+    title: "Dáma Venus | Official Website | Visual Author & Actress",
+    description: "Explore the cinematic world of Dáma Venus. Berlin-based artist, producer, and Miss Americas. New album launching June 12th."
   },
   brandDescriptor: "Sound • Vision • Reign",
   footerLine: "Dama Venus — Sound. Vision. Reign."

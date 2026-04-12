@@ -34,11 +34,20 @@ export const visualsIntro: SectionContent = {
   asset: { id: "visuals-cinderela-lead-241" }
 };
 
-export const visualsEntries: VisualsEntry[] = [
+export type VisualsCategory = "editorial" | "cinematic" | "miss-americas";
+
+export const visualsCategories: { id: VisualsCategory; label: string; description: string }[] = [
+  { id: "editorial", label: "Editorial", description: "Fashion-forward editorial imagery and curated portrait sequences." },
+  { id: "cinematic", label: "Cinematic", description: "Frames from visual narratives, music videos, and cinematic direction." },
+  { id: "miss-americas", label: "Miss Americas", description: "The pageant chapter — crowns, stages, and sovereign presence." }
+];
+
+export const visualsEntries: (VisualsEntry & { category?: VisualsCategory })[] = [
   {
     id: "visuals-series-cinderela",
     title: "Cinderela Series",
     subtitle: "Dark Editorial Arc",
+    category: "editorial",
     type: "series",
     role: "lead",
     order: 1,
@@ -55,6 +64,7 @@ export const visualsEntries: VisualsEntry[] = [
     id: "visuals-group-night-signals",
     title: "Night Signals",
     subtitle: "Color Accent Sequence",
+    category: "cinematic",
     type: "series",
     role: "supporting",
     order: 2,
@@ -70,6 +80,7 @@ export const visualsEntries: VisualsEntry[] = [
   {
     id: "visuals-portrait-tamiris",
     title: "Tamiris Portrait",
+    category: "editorial",
     type: "portrait",
     role: "lead",
     order: 3,
@@ -85,6 +96,7 @@ export const visualsEntries: VisualsEntry[] = [
     id: "visuals-group-square-stills",
     title: "Still Fragments",
     subtitle: "Quiet Texture Row",
+    category: "cinematic",
     type: "still",
     role: "quiet-spacer",
     order: 4,
@@ -99,6 +111,7 @@ export const visualsEntries: VisualsEntry[] = [
   {
     id: "visuals-linked-current-chapter",
     title: "Current Chapter — Visual Link",
+    category: "cinematic",
     type: "linked-visual",
     role: "supporting",
     order: 5,
