@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { visualsData, visualsCategories } from "@/content/data/visuals.data";
+import { visualsData } from "@/content/data/visuals.data";
 import { assetMap } from "@/content/data/site.config";
 import ImageReveal from "@/components/utils/image-reveal";
 
@@ -45,12 +45,6 @@ export default function VisualsPage() {
   const editorialRows = sortedEntries.filter((entry) => entry.moduleType === "editorial-image-row");
   const portraitFeature = sortedEntries.find((entry) => entry.type === "portrait");
   const quietStills = sortedEntries.filter((entry) => entry.role === "quiet-spacer" || entry.type === "still");
-
-  // Group by category
-  const entriesByCategory = visualsCategories.map((cat) => ({
-    ...cat,
-    entries: sortedEntries.filter((e) => e.category === cat.id)
-  }));
 
   const openerAsset = visualsData.intro.asset ? assetMap[visualsData.intro.asset.id] : undefined;
   const leadAsset = leadSequenceEntry?.assets[0] ? assetMap[leadSequenceEntry.assets[0]] : undefined;
@@ -101,29 +95,6 @@ export default function VisualsPage() {
             {visualsData.intro.subhead}
           </p>
         ) : null}
-
-        {/* Category Navigation */}
-        <nav aria-label="Visual categories" className="mt-10 flex flex-wrap items-center gap-6">
-          {visualsCategories.map((cat) => (
-            <a
-              key={cat.id}
-              href={`#category-${cat.id}`}
-              className="text-muted hover:text-offWhite no-underline"
-              style={{
-                fontFamily: "var(--font-syne), system-ui, sans-serif",
-                fontSize: "0.6rem",
-                fontWeight: 700,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                transition: "color 300ms",
-                borderBottom: "1px solid rgba(200,168,126,0.25)",
-                paddingBottom: "4px"
-              }}
-            >
-              {cat.label}
-            </a>
-          ))}
-        </nav>
 
         <div className="mt-14 h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
       </header>
@@ -176,32 +147,6 @@ export default function VisualsPage() {
         </section>
       ) : null}
 
-      {/* ── CATEGORY SECTIONS ── */}
-      {entriesByCategory.map((cat) => cat.entries.length > 0 ? (
-        <div key={cat.id} id={`category-${cat.id}`} className="scroll-mt-24">
-          <div className="site-container mt-20 mb-8">
-            <div className="flex items-center gap-4">
-              <div className="h-px flex-1" style={{ background: "rgba(200,168,126,0.12)" }} />
-              <h2
-                style={{
-                  fontFamily: "var(--font-syne), system-ui, sans-serif",
-                  fontSize: "0.65rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.25em",
-                  textTransform: "uppercase",
-                  color: "rgba(200,168,126,0.7)"
-                }}
-              >
-                {cat.label}
-              </h2>
-              <div className="h-px flex-1" style={{ background: "rgba(200,168,126,0.12)" }} />
-            </div>
-            <p className="mt-3 text-center text-muted" style={{ fontSize: "0.85rem", lineHeight: 1.6 }}>
-              {cat.description}
-            </p>
-          </div>
-        </div>
-      ) : null)}
 
       {/* ── SERIES ENTRIES ── */}
       {seriesEntries.map((entry) => (
