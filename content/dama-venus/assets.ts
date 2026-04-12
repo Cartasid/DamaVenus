@@ -27,13 +27,13 @@ export type PrioritizedAsset = {
 export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "home-lead-portrait",
-    finalPath: "/assets/dama-venus/home/dv_home_lead_portrait_main_color_3x4_v01.jpeg",
-    sourcePath: "pics/Cinderela-241.jpg",
+    finalPath: "/assets/dama-venus/visuals/editorial/69bf1c97-c7f0-4855-b2f0-5d50840a153f-portrait-v01.jpg",
+    sourcePath: "pics/69BF1C97-C7F0-4855-B2F0-5D50840A153F.JPG",
     area: "home",
     recommendedModuleType: "image",
-    altDraft: "Dama Venus lead portrait",
-    cropHint: "Portrait crop",
-    focusHint: "Keep face centered with headroom",
+    altDraft: "Dáma Venus — Bordeaux editorial portrait with deep red backdrop",
+    cropHint: "Portrait crop, keep full figure visible",
+    focusHint: "Keep face in upper third, preserve full-body pose and red background",
     swColorMode: "excellent",
     overlaySuitability: "supports-dark-overlay",
     priority: 100,

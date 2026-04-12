@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "@/content/data/site.config";
+import { extendedNavigationItems } from "@/content/data/navigation.data";
 
 const socialLinks = [
   { label: "Spotify", href: "https://open.spotify.com/artist/damavenus" },
@@ -9,14 +10,7 @@ const socialLinks = [
   { label: "Filmmakers.eu", href: "https://www.filmmakers.eu/damavenus" }
 ];
 
-const footerNav = [
-  { label: "Music", href: "/music" },
-  { label: "Visuals", href: "/visuals" },
-  { label: "About", href: "/about" },
-  { label: "Press", href: "/press" },
-  { label: "Industry Access", href: "/industry" },
-  { label: "Contact", href: "/contact" }
-];
+const footerNav = extendedNavigationItems;
 
 const linkStyleBase = {
   fontFamily: "var(--font-syne), system-ui, sans-serif",
