@@ -3,6 +3,7 @@ import type { NavigationItem } from "@/lib/types";
 /** Primary navigation — minimal, high-end. */
 export const navigationItems: NavigationItem[] = [
   { label: "Music", href: "/music" },
+  { label: "Visuals", href: "/visuals" },
   { label: "Bio", href: "/about" },
   { label: "Contact", href: "/contact" }
 ];
