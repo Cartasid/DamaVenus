@@ -23,7 +23,7 @@ export type VisualsEntry = {
   altTextNotes: string;
 };
 
-export const visualsIntro: SectionContent = {
+export const visualsIntro: SectionContent & { leadAsset?: { id: string } } = {
   label: "Visuals",
   headline: "Frames in Motion",
   subhead: "A visual language crafted in shadow, light, and intention.",
@@ -31,7 +31,8 @@ export const visualsIntro: SectionContent = {
     label: "View Visuals",
     href: "/visuals"
   },
-  asset: { id: "visuals-night-portrait-0e9128" }
+  asset: { id: "visuals-cinderela-lead-241" },
+  leadAsset: { id: "visuals-night-portrait-0e9128" }
 };
 
 export type VisualsCategory = "editorial" | "cinematic" | "miss-americas";
@@ -54,7 +55,7 @@ export const visualsEntries: (VisualsEntry & { category?: VisualsCategory })[] =
     priority: 1,
     layoutWeight: "xl",
     moduleType: "series-section",
-    assets: ["visuals-night-portrait-0e9128", "visuals-cinderela-frame-243", "visuals-cinderela-frame-288"],
+    assets: ["visuals-cinderela-lead-241", "visuals-cinderela-frame-243", "visuals-cinderela-frame-288"],
     shortText: "The signature series — dramatic, dark, and unforgettable.",
     cropFocusHint: "Keep eyes and shoulder line centered; preserve upper negative space for potential overlay.",
     bwColorSuitability: "dual",

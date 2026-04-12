@@ -47,7 +47,8 @@ export default function VisualsPage() {
   const quietStills = sortedEntries.filter((entry) => entry.role === "quiet-spacer" || entry.type === "still");
 
   const openerAsset = visualsData.intro.asset ? assetMap[visualsData.intro.asset.id] : undefined;
-  const leadAsset = leadSequenceEntry?.assets[0] ? assetMap[leadSequenceEntry.assets[0]] : undefined;
+  const introLeadAsset = visualsData.intro.leadAsset?.id ? assetMap[visualsData.intro.leadAsset.id] : undefined;
+  const leadAsset = introLeadAsset ?? (leadSequenceEntry?.assets[0] ? assetMap[leadSequenceEntry.assets[0]] : undefined);
   const portraitAsset = portraitFeature?.assets[0] ? assetMap[portraitFeature.assets[0]] : undefined;
 
   return (
