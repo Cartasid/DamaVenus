@@ -185,6 +185,65 @@ export default function PressPage() {
         </div>
       </section>
 
+      {/* ── EPK DOWNLOADS ── */}
+      <section className="reveal site-container mt-16" id="epk-downloads">
+        <p className="text-muted mb-8" style={labelStyle}>Electronic Press Kit</p>
+        <div className="grid gap-px md:grid-cols-2" style={{ background: "rgba(200,168,126,0.04)" }}>
+          <div
+            className="p-6"
+            style={{ background: "rgba(200,168,126,0.03)", borderLeft: "1px solid rgba(200,168,126,0.1)" }}
+          >
+            <p className="text-accent mb-2" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>English</p>
+            <h3
+              className="text-primary mb-1"
+              style={{
+                fontFamily: "var(--font-bodoni), Georgia, serif",
+                fontSize: "clamp(1.4rem, 3vw, 2rem)",
+                fontWeight: 300
+              }}
+            >
+              EPK — English
+            </h3>
+            <p className="text-muted mb-5" style={{ fontSize: "0.9rem", lineHeight: 1.75 }}>
+              Full press kit with biography, discography, press photos, and contact details.
+            </p>
+            <a
+              href="/assets/dama-venus/docs/dama-venus-epk-en.pdf"
+              download
+              className="ghost-btn no-underline inline-block"
+            >
+              Download PDF
+            </a>
+          </div>
+          <div
+            className="p-6"
+            style={{ background: "rgba(200,168,126,0.03)", borderLeft: "1px solid rgba(200,168,126,0.1)" }}
+          >
+            <p className="text-accent mb-2" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>Português</p>
+            <h3
+              className="text-primary mb-1"
+              style={{
+                fontFamily: "var(--font-bodoni), Georgia, serif",
+                fontSize: "clamp(1.4rem, 3vw, 2rem)",
+                fontWeight: 300
+              }}
+            >
+              EPK — Português
+            </h3>
+            <p className="text-muted mb-5" style={{ fontSize: "0.9rem", lineHeight: 1.75 }}>
+              Press kit completo com biografia, discografia, fotos e contato.
+            </p>
+            <a
+              href="/assets/dama-venus/docs/dama-venus-epk-pt.pdf"
+              download
+              className="ghost-btn no-underline inline-block"
+            >
+              Download PDF
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ── CONTACT ── */}
       {contactBlock ? (
         <section className="reveal site-container mt-16">
