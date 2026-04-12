@@ -33,14 +33,12 @@ export default function HomePage() {
     homepageCoreModules.find((m) => m.id === "featuredRelease") ??
     homepageCoreModules.find((m) => Boolean(m.assetId));
 
-  const featuredReleaseModule = homepageCoreModules.find((m) => m.id === "featuredRelease");
   const visualsModule = homepageCoreModules.find((m) => m.id === "visuals");
   const statementModule = homepageCoreModules.find((m) => m.id === "statement");
   const pressModule = homepageCoreModules.find((m) => m.id === "press");
   const contactNewsletterModule = homepageCoreModules.find((m) => m.id === "contactNewsletter");
 
   const leadAsset = leadModule?.assetId ? assetMap[leadModule.assetId] : undefined;
-  const featuredReleaseAsset = featuredReleaseModule?.assetId ? assetMap[featuredReleaseModule.assetId] : undefined;
   const visualsAsset = visualsModule?.assetId ? assetMap[visualsModule.assetId] : undefined;
   const statementAsset = statementModule?.assetId ? assetMap[statementModule.assetId] : undefined;
   const pressAsset = pressModule?.assetId ? assetMap[pressModule.assetId] : undefined;
@@ -164,34 +162,6 @@ export default function HomePage() {
       <div className="py-7" style={{ borderTop: "1px solid rgba(200,168,126,0.08)", borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
         <Marquee items={["Sound", "Vision", "Reign", "Alternative Pop", "Trap-Pop", "R&B", "Vaporwave", "Rio de Janeiro", "Europe", "Cinematic Artist"]} speed={40} />
       </div>
-
-      {/* ═══ FEATURED RELEASE ═══ */}
-      <section aria-labelledby="featured-release-title" className="reveal section-gap-lg">
-        <div className="site-container">
-          <div className="grid gap-0 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] premium-card shine-hover">
-            <ImageReveal className="relative overflow-hidden" style={{ minHeight: "600px" }} lightboxSrc={featuredReleaseAsset?.src} lightboxAlt={featuredReleaseAsset?.alt ?? featuredReleaseModule?.alt ?? ""}>
-              {featuredReleaseAsset ? (
-                <Image src={featuredReleaseAsset.src} alt={featuredReleaseAsset.alt ?? featuredReleaseModule?.alt ?? ""} fill loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="object-cover" style={{ objectPosition: featuredReleaseAsset.objectPosition ?? "center center" }} />
-              ) : (
-                <div className="absolute inset-0 bg-surfaceElevated" />
-              )}
-            </ImageReveal>
-            <div className="flex flex-col justify-center px-8 py-16 md:px-14" style={{ background: "rgba(245,240,235,0.015)", borderLeft: "1px solid rgba(200,168,126,0.12)" }}>
-              <p className="mb-5" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(200,168,126,0.8)" }}>Featured Release</p>
-              <h2 id="featured-release-title" className="text-primary" style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "clamp(2.5rem, 5vw, 4.5rem)", fontWeight: 400, lineHeight: 1.0, fontStyle: "italic" }}>
-                {featuredReleaseModule?.copy.headline}
-              </h2>
-              {featuredReleaseModule?.copy.subline ? (
-                <p className="mt-5 text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.7 }}>{featuredReleaseModule.copy.subline}</p>
-              ) : null}
-              <div className="mt-8 w-12 h-px" style={{ background: "linear-gradient(to right, rgba(200,168,126,0.6), transparent)" }} aria-hidden="true" />
-              {featuredReleaseModule?.copy.cta ? (
-                <div className="mt-8"><Link href={featuredReleaseModule.copy.cta.href} className="cta-primary">{featuredReleaseModule.copy.cta.label}</Link></div>
-              ) : null}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ═══ STATEMENT ═══ */}
       <section aria-labelledby="statement-title" className="reveal-fade section-gap-lg statement-block">
