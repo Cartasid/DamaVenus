@@ -139,7 +139,7 @@ const jsonLd = {
   image: `${siteUrl}/og-default.png`,
   sameAs: [
     "https://open.spotify.com/artist/damavenus",
-    "https://www.instagram.com/damavenus",
+    "https://www.instagram.com/ichbindamavenus",
     "https://www.youtube.com/@damavenus",
     "https://www.linkedin.com/in/damavenus",
     "https://www.filmmakers.eu/damavenus"

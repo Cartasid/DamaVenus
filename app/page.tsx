@@ -237,7 +237,7 @@ export default function HomePage() {
               <span style={{ width: "1px", height: "16px", background: "rgba(200,168,126,0.2)" }} aria-hidden="true" />
               {[
                 { label: "Spotify", href: "https://open.spotify.com/artist/damavenus" },
-                { label: "Instagram", href: "https://www.instagram.com/damavenus" },
+                { label: "Instagram", href: "https://www.instagram.com/ichbindamavenus" },
                 { label: "YouTube", href: "https://www.youtube.com/@damavenus" }
               ].map((social) => (
                 <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.label} (opens in new tab)`} className="text-muted hover:text-offWhite no-underline" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", transition: "color 300ms" }}>{social.label}</a>
