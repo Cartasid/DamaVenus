@@ -95,8 +95,8 @@ export const contactContent: ContactContent = {
     ],
     ctaLabel: "Send Inquiry",
     success: {
-      title: "Message received.",
-      message: "Thank you for reaching out. We’ll return with the right format."
+      title: "Inquiry received.",
+      message: "Your inquiry has been received. The Office of Dáma Venus will contact you shortly."
     }
   },
   alternatePaths: [

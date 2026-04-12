@@ -11,10 +11,10 @@ import ImageReveal from "@/components/utils/image-reveal";
 
 export const metadata: Metadata = {
   title: { absolute: "Dáma Venus | Official Website | Visual Author & Actress" },
-  description: "Explore the cinematic world of Dáma Venus. Berlin-based artist, producer, and Miss Americas. New album launching June 12th.",
+  description: "Official platform for Dáma Venus. Berlin-based producer, actress, and Miss Americas. Exploring the after-dark cinematic architecture. New album June 12th.",
   openGraph: {
     title: "Dáma Venus | Official Website | Visual Author & Actress",
-    description: "Explore the cinematic world of Dáma Venus. Berlin-based artist, producer, and Miss Americas. New album launching June 12th.",
+    description: "Official platform for Dáma Venus. Berlin-based producer, actress, and Miss Americas. Exploring the after-dark cinematic architecture. New album June 12th.",
     url: "/",
     images: [{ url: "/og-default.png" }]
   },
@@ -257,10 +257,10 @@ export default function HomePage() {
       {/* ═══ CONTACT CTA ═══ */}
       <section aria-labelledby="contact-newsletter-title" className="reveal section-gap-lg">
         <div className="site-container">
-          <div className="relative overflow-hidden px-8 py-28 md:px-16 md:py-36 glow-accent" style={{ background: "linear-gradient(135deg, rgba(200,168,126,0.04) 0%, rgba(5,5,5,0.95) 50%, rgba(255,79,168,0.03) 100%)", border: "1px solid rgba(200,168,126,0.12)" }}>
+          <div className="relative overflow-hidden px-8 py-28 md:px-16 md:py-36 glow-accent" style={{ background: "linear-gradient(135deg, rgba(200,168,126,0.04) 0%, rgba(5,5,5,0.95) 50%, rgba(255,0,255,0.03) 100%)", border: "1px solid rgba(200,168,126,0.12)" }}>
             <div className="absolute right-0 top-0 bottom-0 w-px" style={{ background: "linear-gradient(to bottom, transparent, rgba(200,168,126,0.3), transparent)" }} aria-hidden="true" />
             <div className="absolute left-0 top-0 right-0 h-px" style={{ background: "linear-gradient(to right, rgba(200,168,126,0.25), transparent 40%)" }} aria-hidden="true" />
-            <div className="absolute left-0 bottom-0 right-0 h-px" style={{ background: "linear-gradient(to left, rgba(255,79,168,0.15), transparent 40%)" }} aria-hidden="true" />
+            <div className="absolute left-0 bottom-0 right-0 h-px" style={{ background: "linear-gradient(to left, rgba(255,0,255,0.15), transparent 40%)" }} aria-hidden="true" />
             <p className="mb-6" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(200,168,126,0.8)" }}>Inquiries</p>
             <h2 id="contact-newsletter-title" className="text-primary" style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "clamp(2.8rem, 6vw, 5.5rem)", fontWeight: 400, lineHeight: 1.0, fontStyle: "italic", maxWidth: "24rem" }}>
               {contactNewsletterModule?.copy.headline}

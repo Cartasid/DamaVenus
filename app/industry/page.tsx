@@ -61,7 +61,7 @@ export default function IndustryPage() {
         <div
           className="relative overflow-hidden px-8 py-20 md:px-16 md:py-28"
           style={{
-            background: "linear-gradient(135deg, rgba(200,168,126,0.03) 0%, rgba(0,0,0,0.95) 50%, rgba(255,79,168,0.02) 100%)",
+            background: "linear-gradient(135deg, rgba(200,168,126,0.03) 0%, rgba(0,0,0,0.95) 50%, rgba(255,0,255,0.02) 100%)",
             border: "1px solid rgba(200,168,126,0.12)"
           }}
         >
@@ -106,8 +106,8 @@ export default function IndustryPage() {
                   {item.desc}
                 </p>
                 <div className="mt-4 flex items-center gap-2">
-                  <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "rgba(255,79,168,0.6)" }} aria-hidden="true" />
-                  <span style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.5rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,79,168,0.7)" }}>Access Required</span>
+                  <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "rgba(255,0,255,0.6)" }} aria-hidden="true" />
+                  <span style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.5rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,0,255,0.7)" }}>Access Required</span>
                 </div>
               </div>
             ))}

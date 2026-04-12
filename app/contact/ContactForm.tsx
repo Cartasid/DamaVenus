@@ -60,9 +60,9 @@ function getInputStyle(isFocused: boolean, hasError: boolean): React.CSSProperti
     backgroundColor: "transparent",
     border: "none",
     borderBottom: isFocused
-      ? "1px solid rgba(255,79,168,0.6)"
+      ? "1px solid rgba(255,0,255,0.6)"
       : hasError
-        ? "1px solid rgba(255,79,168,0.8)"
+        ? "1px solid rgba(255,0,255,0.8)"
         : "1px solid rgba(255,255,255,0.12)",
     borderRadius: 0,
     padding: "0.75rem 0",
@@ -196,7 +196,7 @@ export function ContactForm() {
               <p
                 id={errorId}
                 role="alert"
-                style={{ fontSize: "0.7rem", color: "#FF4FA8", fontFamily: "var(--font-syne)", letterSpacing: "0.05em", marginTop: "0.375rem" }}
+                style={{ fontSize: "0.7rem", color: "#FF00FF", fontFamily: "var(--font-syne)", letterSpacing: "0.05em", marginTop: "0.375rem" }}
               >
                 {fieldError}
               </p>
@@ -216,7 +216,7 @@ export function ContactForm() {
         <p
           role="alert"
           aria-live="assertive"
-          style={{ fontSize: "0.75rem", color: "#FF4FA8", fontFamily: "var(--font-syne)", letterSpacing: "0.05em" }}
+          style={{ fontSize: "0.75rem", color: "#FF00FF", fontFamily: "var(--font-syne)", letterSpacing: "0.05em" }}
         >
           {errorMessage}
         </p>
@@ -240,7 +240,7 @@ export function ContactForm() {
           role="status"
           aria-live="polite"
           data-feature="contact-success-message"
-          style={{ borderLeft: "1px solid rgba(255,79,168,0.4)", paddingLeft: "1.25rem", marginTop: "1.5rem" }}
+          style={{ borderLeft: "1px solid rgba(255,0,255,0.4)", paddingLeft: "1.25rem", marginTop: "1.5rem" }}
         >
           <p style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "1.4rem", fontWeight: 300, color: "#F0EBF0", lineHeight: 1.3 }}>
             {contactContent.form.success.title}

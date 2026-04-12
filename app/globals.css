@@ -301,7 +301,7 @@ a:hover {
   /* ── CTA BUTTONS — PREMIUM ── */
   .cta-primary {
     @apply typo-cta inline-flex min-h-12 items-center justify-center px-8 py-3 text-black no-underline;
-    background: linear-gradient(135deg, #FF4FA8, #FF6FBD);
+    background: linear-gradient(135deg, #FF00FF, #FF66FF);
     position: relative;
     overflow: hidden;
     clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
@@ -329,7 +329,7 @@ a:hover {
     transform: translateY(-3px);
     box-shadow:
       0 12px 40px -4px rgba(255, 79, 168, 0.45),
-      0 0 80px -12px rgba(255,79,168,0.2);
+      0 0 80px -12px rgba(255,0,255,0.2);
     @apply text-black;
   }
 
@@ -381,9 +381,9 @@ a:hover {
   }
 
   .ghost-btn:hover {
-    border-color: #FF4FA8;
-    color: #FF4FA8;
-    box-shadow: 0 0 30px -8px rgba(255,79,168,0.25);
+    border-color: #FF00FF;
+    color: #FF00FF;
+    box-shadow: 0 0 30px -8px rgba(255,0,255,0.25);
   }
 
   .text-link {
@@ -534,7 +534,7 @@ a:hover {
     transform: translateY(-5px);
     box-shadow:
       0 24px 60px -15px rgba(200,168,126,0.08),
-      0 8px 20px -5px rgba(255,79,168,0.06);
+      0 8px 20px -5px rgba(255,0,255,0.06);
   }
 
   .premium-card:hover::after {
@@ -705,14 +705,14 @@ body::before {
 ───────────────────────────────────────────── */
 .glow-accent {
   box-shadow:
-    0 0 60px -12px rgba(255,79,168,0.12),
+    0 0 60px -12px rgba(255,0,255,0.12),
     0 0 30px -8px rgba(200,168,126,0.08);
   transition: box-shadow 600ms var(--transition-dramatic);
 }
 
 .glow-accent:hover {
   box-shadow:
-    0 0 80px -8px rgba(255,79,168,0.25),
+    0 0 80px -8px rgba(255,0,255,0.25),
     0 0 40px -5px rgba(200,168,126,0.12);
 }
 
