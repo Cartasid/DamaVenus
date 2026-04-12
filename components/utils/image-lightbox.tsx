@@ -60,7 +60,7 @@ export default function ImageLightbox() {
       role="dialog"
       aria-modal="true"
       aria-label={state.alt || "Image preview"}
-      onClick={(e) => { if (e.target === backdropRef.current) close(); }}
+      onClick={close}
       style={{
         position: "fixed",
         inset: 0,
@@ -75,39 +75,7 @@ export default function ImageLightbox() {
         padding: "2rem"
       }}
     >
-      {/* Close button */}
-      <button
-        onClick={close}
-        aria-label="Close preview"
-        style={{
-          position: "absolute",
-          top: "1.5rem",
-          right: "1.5rem",
-          zIndex: 10,
-          color: "rgba(200,168,126,0.6)",
-          fontFamily: "var(--font-syne), system-ui, sans-serif",
-          fontSize: "0.6rem",
-          letterSpacing: "0.2em",
-          textTransform: "uppercase",
-          background: "none",
-          border: "1px solid rgba(200,168,126,0.15)",
-          padding: "0.6rem 1.2rem",
-          cursor: "pointer",
-          transition: "color 300ms, border-color 300ms"
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.color = "rgba(200,168,126,1)";
-          e.currentTarget.style.borderColor = "rgba(200,168,126,0.4)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.color = "rgba(200,168,126,0.6)";
-          e.currentTarget.style.borderColor = "rgba(200,168,126,0.15)";
-        }}
-      >
-        Close
-      </button>
-
-      {/* Image */}
+      {/* Image — click anywhere to close */}
       <div
         style={{
           position: "relative",
