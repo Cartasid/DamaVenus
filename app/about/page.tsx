@@ -8,18 +8,18 @@ import HeroTextReveal from "@/components/utils/hero-text-reveal";
 import ImageReveal from "@/components/utils/image-reveal";
 
 export const metadata: Metadata = {
-  title: { absolute: "About | Dama Venus" },
-  description: "Dama Venus — Brazilian artist from Rio de Janeiro, based in Europe. Building an international music identity where sound, fashion, and visual authorship move together.",
+  title: { absolute: "Bio | Dáma Venus — Singer, Visual Author & Actress from Rio de Janeiro" },
+  description: "Dáma Venus — Brazilian singer, visual author, and international actress based in Berlin. From Rio de Janeiro to Europe, building an identity where sound, fashion, and cinematic vision converge.",
   openGraph: {
-    title: "About | Dama Venus",
-    description: "Read the artist profile of Dama Venus — an atmosphere-driven practice between music, image, and intention.",
+    title: "Bio | Dáma Venus — Singer, Visual Author & Actress",
+    description: "Brazilian singer, visual author, and international actress — from Rio de Janeiro to Berlin.",
     url: "/about",
-    images: [{ url: "/og-default.svg" }]
+    images: [{ url: "/og-default.png" }]
   },
   twitter: {
-    title: "About | Dama Venus",
-    description: "Read the artist profile of Dama Venus.",
-    images: ["/og-default.svg"]
+    title: "Bio | Dáma Venus — Singer, Visual Author & Actress",
+    description: "Brazilian singer, visual author, and international actress — from Rio de Janeiro to Berlin.",
+    images: ["/og-default.png"]
   },
   alternates: { canonical: "/about" }
 };
@@ -355,6 +355,24 @@ export default function AboutPage() {
           </div>
         </section>
       ) : null}
+
+      {/* ── CROSS-LINKS ── */}
+      <nav aria-label="Explore more" className="reveal site-container mt-20">
+        <div className="grid gap-px md:grid-cols-3" style={{ background: "rgba(200,168,126,0.04)" }}>
+          <Link href="/music" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
+            <p className="text-accent mb-2" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.22em", textTransform: "uppercase" }}>Music</p>
+            <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>Selected releases and visual chapters — alternative pop, trap-pop, R&B, and vaporwave.</p>
+          </Link>
+          <Link href="/visuals" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
+            <p className="text-accent mb-2" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.22em", textTransform: "uppercase" }}>Visuals</p>
+            <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>Curated portraits and editorial sequences in the cinematic signature of Dáma Venus.</p>
+          </Link>
+          <Link href="/press" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
+            <p className="text-accent mb-2" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.22em", textTransform: "uppercase" }}>Press &amp; EPK</p>
+            <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>Bio, press-ready images, and release facts for editorial use.</p>
+          </Link>
+        </div>
+      </nav>
     </div>
   );
 }

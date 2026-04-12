@@ -209,6 +209,20 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     role: "informative"
   },
   {
+    id: "contact-red-portrait-69bf",
+    finalPath: "/assets/dama-venus/visuals/editorial/69bf1c97-c7f0-4855-b2f0-5d50840a153f-landscape-v01.jpg",
+    sourcePath: "pics/69BF1C97-C7F0-4855-B2F0-5D50840A153F.JPG",
+    area: "home",
+    recommendedModuleType: "background",
+    altDraft: "Dáma Venus — editorial portrait with red backdrop, black outfit",
+    cropHint: "Landscape 16:9 crop",
+    focusHint: "Keep face and upper body centered",
+    swColorMode: "excellent",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 1,
+    role: "decorative"
+  },
+  {
     id: "visuals-cinderela-frame-243",
     finalPath: "/assets/dama-venus/visuals/dv_visuals_cinderela_frame_243_bw_3x4_v01.jpeg",
     sourcePath: "pics/Cinderela-243.JPEG",

@@ -121,35 +121,69 @@ export const metadata: Metadata = {
   }
 };
 
-const jsonLd = {
+const jsonLdGraph = {
   "@context": "https://schema.org",
-  "@type": "MusicGroup",
-  name: "Dáma Venus",
-  description: metadataDescription,
-  url: siteUrl,
-  genre: ["Alternative Pop", "Trap Pop", "R&B", "Vaporwave"],
-  foundingLocation: {
-    "@type": "Place",
-    name: "Rio de Janeiro, Brazil"
-  },
-  location: {
-    "@type": "Place",
-    name: "Berlin, Germany"
-  },
-  image: `${siteUrl}/og-default.png`,
-  sameAs: [
-    "https://open.spotify.com/artist/damavenus",
-    "https://www.instagram.com/ichbindamavenus",
-    "https://www.youtube.com/@damavenus",
-    "https://www.linkedin.com/in/damavenus",
-    "https://www.filmmakers.eu/damavenus"
-  ],
-  member: {
-    "@type": "Person",
-    name: "Dáma Venus",
-    nationality: "Brazilian",
-    jobTitle: "Visual Author, International Actress, Producer"
-  }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: siteConfig.name,
+      url: siteUrl,
+      description: metadataDescription,
+      inLanguage: "en",
+      publisher: { "@id": `${siteUrl}/#musicgroup` }
+    },
+    {
+      "@type": "MusicGroup",
+      "@id": `${siteUrl}/#musicgroup`,
+      name: "Dáma Venus",
+      alternateName: ["Dama Venus", "DamaVenus"],
+      description: metadataDescription,
+      url: siteUrl,
+      genre: ["Alternative Pop", "Trap Pop", "R&B", "Vaporwave"],
+      foundingLocation: {
+        "@type": "Place",
+        name: "Rio de Janeiro, Brazil"
+      },
+      location: {
+        "@type": "Place",
+        name: "Berlin, Germany"
+      },
+      image: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/og-default.png`,
+        width: 1200,
+        height: 630
+      },
+      sameAs: [
+        "https://open.spotify.com/artist/damavenus",
+        "https://www.instagram.com/ichbindamavenus",
+        "https://www.youtube.com/@damavenus",
+        "https://www.linkedin.com/in/damavenus",
+        "https://www.filmmakers.eu/damavenus"
+      ],
+      member: {
+        "@type": "Person",
+        "@id": `${siteUrl}/#person`,
+        name: "Dáma Venus",
+        nationality: { "@type": "Country", name: "Brazil" },
+        jobTitle: "Singer, Songwriter, Visual Author, International Actress, Producer",
+        knowsLanguage: ["en", "pt", "de"]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${siteUrl}/#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+        { "@type": "ListItem", position: 2, name: "Music", item: `${siteUrl}/music` },
+        { "@type": "ListItem", position: 3, name: "Visuals", item: `${siteUrl}/visuals` },
+        { "@type": "ListItem", position: 4, name: "Bio", item: `${siteUrl}/about` },
+        { "@type": "ListItem", position: 5, name: "Press & EPK", item: `${siteUrl}/press` },
+        { "@type": "ListItem", position: 6, name: "Contact", item: `${siteUrl}/contact` }
+      ]
+    }
+  ]
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
@@ -163,7 +197,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
         />
       </head>
       <body className={`${syne.variable} ${bodoni.variable} ${cormorant.variable} ${montserrat.variable} min-h-screen flex flex-col`}>

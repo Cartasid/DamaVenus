@@ -54,6 +54,7 @@ const assetObjectPositions: Record<string, string> = {
   // ── VISUALS ──
   "visuals-cinderela-lead-241":       "center 25%",   // portrait — eyes/torso with breathing room
   "visuals-night-portrait-0e9128":    "center 65%",   // night portrait — person with dog in lower half of image
+  "contact-red-portrait-69bf":        "center 30%",   // red backdrop editorial — face in upper third
   "visuals-cinderela-frame-243":      "center 30%",   // portrait — face center & shoulder line
   "visuals-cinderela-frame-288":      "center 35%",   // portrait close — eyes above midpoint
   "visuals-cinderela-landscape-210":  "center center", // 16:9 landscape

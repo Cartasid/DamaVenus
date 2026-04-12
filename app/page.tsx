@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { homepageCoreModules, homepageIntro } from "@/content/data/homepage.data";
-import { navigationItems } from "@/content/data/navigation.data";
 import { assetMap, siteConfig } from "@/content/data/site.config";
 import HeroTextReveal from "@/components/utils/hero-text-reveal";
 import SocialIcon from "@/components/utils/social-icons";
@@ -81,20 +80,6 @@ export default function HomePage() {
 
         <div className="site-container relative z-10 pb-24 pt-40">
           <div className="max-w-5xl">
-            <p
-              className="mb-6"
-              style={{
-                fontFamily: "var(--font-syne), system-ui, sans-serif",
-                fontSize: "0.58rem",
-                fontWeight: 700,
-                letterSpacing: "0.4em",
-                textTransform: "uppercase",
-                color: "rgba(200,168,126,0.7)"
-              }}
-            >
-              Rio de Janeiro &middot; Europe &middot; Worldwide
-            </p>
-
             <HeroTextReveal
               text="DÁMA VENUS"
               tag="h1"
@@ -126,12 +111,6 @@ export default function HomePage() {
               {homepageIntro.statement}
             </p>
 
-            <div className="mt-10">
-              <Link href="/music" className="ghost-btn no-underline">
-                Enter the After-Dark Architecture
-              </Link>
-            </div>
-
             <div className="mt-8 flex items-center gap-4 flex-wrap">
               {["Alternative Pop", "Trap-Pop", "R&B", "Vaporwave"].map((genre, i) => (
                 <span key={genre} className="flex items-center gap-4">
@@ -141,19 +120,6 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-
-          <nav aria-label="Home navigation" className="mt-16 flex flex-wrap items-center gap-x-10 gap-y-3">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="interactive-hint text-white/35 hover:text-white/90 no-underline"
-                style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.56rem", fontWeight: 600, letterSpacing: "0.24em", textTransform: "uppercase", transition: "color 300ms cubic-bezier(0.16, 1, 0.3, 1)" }}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
         </div>
 
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10" aria-hidden="true" style={{ width: "1px", height: "48px", background: "linear-gradient(to bottom, rgba(200,168,126,0.5), transparent)", animation: "pulse 2.5s ease-in-out infinite" }} />
@@ -223,26 +189,36 @@ export default function HomePage() {
       {/* ═══ CONTACT CTA ═══ */}
       <section aria-labelledby="contact-newsletter-title" className="reveal section-gap-lg">
         <div className="site-container">
-          <div className="relative overflow-hidden px-8 py-28 md:px-16 md:py-36 glow-accent" style={{ background: "linear-gradient(135deg, rgba(200,168,126,0.04) 0%, rgba(5,5,5,0.95) 50%, rgba(255,0,255,0.03) 100%)", border: "1px solid rgba(200,168,126,0.12)" }}>
+          <div className="relative overflow-hidden px-8 py-28 md:px-16 md:py-36 glow-accent" style={{ border: "1px solid rgba(200,168,126,0.12)" }}>
+            {assetMap["contact-red-portrait-69bf"] ? (
+              <div className="absolute inset-0" aria-hidden="true">
+                <Image src={assetMap["contact-red-portrait-69bf"].src} alt="" fill sizes="100vw" loading="lazy" className="object-cover" style={{ objectPosition: assetMap["contact-red-portrait-69bf"].objectPosition ?? "center 30%", filter: "brightness(0.3) contrast(1.1) saturate(0.8)", opacity: 0.7 }} />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(5,5,5,0.85) 0%, rgba(5,5,5,0.5) 50%, rgba(5,5,5,0.7) 100%)" }} />
+              </div>
+            ) : (
+              <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(200,168,126,0.04) 0%, rgba(5,5,5,0.95) 50%, rgba(255,0,255,0.03) 100%)" }} aria-hidden="true" />
+            )}
             <div className="absolute right-0 top-0 bottom-0 w-px" style={{ background: "linear-gradient(to bottom, transparent, rgba(200,168,126,0.3), transparent)" }} aria-hidden="true" />
             <div className="absolute left-0 top-0 right-0 h-px" style={{ background: "linear-gradient(to right, rgba(200,168,126,0.25), transparent 40%)" }} aria-hidden="true" />
             <div className="absolute left-0 bottom-0 right-0 h-px" style={{ background: "linear-gradient(to left, rgba(255,0,255,0.15), transparent 40%)" }} aria-hidden="true" />
-            <p className="mb-6" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(200,168,126,0.8)" }}>Inquiries</p>
-            <h2 id="contact-newsletter-title" className="text-primary" style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "clamp(2.8rem, 6vw, 5.5rem)", fontWeight: 400, lineHeight: 1.0, fontStyle: "italic", maxWidth: "24rem" }}>
-              {contactNewsletterModule?.copy.headline}
-            </h2>
-            {contactNewsletterModule?.copy.subline ? <p className="mt-6 text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "30rem" }}>{contactNewsletterModule.copy.subline}</p> : null}
-            {contactNewsletterModule?.copy.cta ? <Link href={contactNewsletterModule.copy.cta.href} className="mt-10 inline-block cta-primary">{contactNewsletterModule.copy.cta.label}</Link> : null}
-            <div className="mt-8 flex flex-wrap items-center gap-6">
-              <a href="mailto:contact@damavenus.eu" className="text-muted hover:text-offWhite no-underline" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", transition: "color 300ms" }} aria-label="Send email to contact@damavenus.eu">contact@damavenus.eu</a>
-              <span style={{ width: "1px", height: "16px", background: "rgba(200,168,126,0.2)" }} aria-hidden="true" />
-              {[
-                { label: "Spotify", href: "https://open.spotify.com/artist/damavenus" },
-                { label: "Instagram", href: "https://www.instagram.com/ichbindamavenus" },
-                { label: "YouTube", href: "https://www.youtube.com/@damavenus" }
-              ].map((social) => (
-                <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.label} (opens in new tab)`} className="text-muted hover:text-offWhite no-underline flex items-center gap-2" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", transition: "color 300ms" }}><SocialIcon name={social.label} />{social.label}</a>
-              ))}
+            <div className="relative z-10">
+              <p className="mb-6" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(200,168,126,0.8)" }}>Inquiries</p>
+              <h2 id="contact-newsletter-title" className="text-primary" style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "clamp(2.8rem, 6vw, 5.5rem)", fontWeight: 400, lineHeight: 1.0, fontStyle: "italic", maxWidth: "24rem" }}>
+                {contactNewsletterModule?.copy.headline}
+              </h2>
+              {contactNewsletterModule?.copy.subline ? <p className="mt-6 text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "30rem" }}>{contactNewsletterModule.copy.subline}</p> : null}
+              {contactNewsletterModule?.copy.cta ? <Link href={contactNewsletterModule.copy.cta.href} className="mt-10 inline-block cta-primary">{contactNewsletterModule.copy.cta.label}</Link> : null}
+              <div className="mt-8 flex flex-wrap items-center gap-6">
+                <a href="mailto:contact@damavenus.eu" className="text-muted hover:text-offWhite no-underline" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", transition: "color 300ms" }} aria-label="Send email to contact@damavenus.eu">contact@damavenus.eu</a>
+                <span style={{ width: "1px", height: "16px", background: "rgba(200,168,126,0.2)" }} aria-hidden="true" />
+                {[
+                  { label: "Spotify", href: "https://open.spotify.com/artist/damavenus" },
+                  { label: "Instagram", href: "https://www.instagram.com/ichbindamavenus" },
+                  { label: "YouTube", href: "https://www.youtube.com/@damavenus" }
+                ].map((social) => (
+                  <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.label} (opens in new tab)`} className="text-muted hover:text-offWhite no-underline flex items-center gap-2" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", transition: "color 300ms" }}><SocialIcon name={social.label} />{social.label}</a>
+                ))}
+              </div>
             </div>
           </div>
         </div>

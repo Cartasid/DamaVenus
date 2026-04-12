@@ -131,7 +131,7 @@ export default function SiteFooter() {
                   className="text-muted hover:text-offWhite no-underline"
                   style={linkStyleBase}
                 >
-                  Privacy
+                  Privacy Policy
                 </Link>
                 <Link
                   href="/imprint"
@@ -140,6 +140,13 @@ export default function SiteFooter() {
                 >
                   Imprint
                 </Link>
+                <a
+                  href="/sitemap.xml"
+                  className="text-muted hover:text-offWhite no-underline"
+                  style={linkStyleBase}
+                >
+                  Sitemap
+                </a>
               </nav>
             </div>
           </div>

@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Image from "next/image";
 import { visualsData } from "@/content/data/visuals.data";
 import { assetMap } from "@/content/data/site.config";
 import ImageReveal from "@/components/utils/image-reveal";
 
 export const metadata: Metadata = {
-  title: { absolute: "Visuals | Dama Venus" },
-  description: "Curated visuals, portraits, and editorial sequences in the cinematic signature of Dama Venus — fashion-driven image direction.",
+  title: { absolute: "Visuals & Photography | Dáma Venus — Editorial Portraits & Cinematic Imagery" },
+  description: "Curated editorial portraits, cinematic photography, and fashion-driven visual direction by Dáma Venus — from Rio de Janeiro to Berlin.",
   openGraph: {
-    title: "Visuals | Dama Venus",
-    description: "Curated visuals, portraits, and editorial sequences shaped in the signature of Dama Venus.",
+    title: "Visuals & Photography | Dáma Venus",
+    description: "Curated editorial portraits and cinematic photography by Dáma Venus — fashion-driven visual direction.",
     url: "/visuals",
-    images: [{ url: "/og-default.svg" }]
+    images: [{ url: "/og-default.png" }]
   },
   twitter: {
-    title: "Visuals | Dama Venus",
-    description: "Curated visuals, portraits, and editorial sequences shaped in the signature of Dama Venus.",
-    images: ["/og-default.svg"]
+    title: "Visuals & Photography | Dáma Venus",
+    description: "Curated editorial portraits and cinematic photography by Dáma Venus.",
+    images: ["/og-default.png"]
   },
   alternates: { canonical: "/visuals" }
 };
@@ -291,6 +292,23 @@ export default function VisualsPage() {
         </section>
       ))}
 
+      {/* ── CROSS-LINKS ── */}
+      <nav aria-label="Explore more" className="reveal site-container mt-20">
+        <div className="grid gap-px md:grid-cols-3" style={{ background: "rgba(200,168,126,0.04)" }}>
+          <Link href="/music" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
+            <p className="text-accent mb-2" style={labelStyle}>Music</p>
+            <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>Selected releases and visual chapters — alternative pop, trap-pop, R&B, and vaporwave.</p>
+          </Link>
+          <Link href="/about" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
+            <p className="text-accent mb-2" style={labelStyle}>Bio</p>
+            <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>The story behind the cinematic universe of Dáma Venus — from Rio de Janeiro to Europe.</p>
+          </Link>
+          <Link href="/contact" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
+            <p className="text-accent mb-2" style={labelStyle}>Contact</p>
+            <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>Bookings, collaborations, and exclusive partnerships.</p>
+          </Link>
+        </div>
+      </nav>
 
     </div>
   );

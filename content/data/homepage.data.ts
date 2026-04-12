@@ -3,7 +3,7 @@ import { contactContent } from "@/content/data/contact.data";
 import { pressContent } from "@/content/data/press.data";
 
 export const homepageIntro = {
-  statement: "Visual Author | International Actress | Producer"
+  statement: "Singer & Songwriter | Visual Author | International Actress | Producer"
 };
 
 export const homepageRelease: ReleaseItem = {

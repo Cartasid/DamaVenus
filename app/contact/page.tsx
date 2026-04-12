@@ -7,18 +7,18 @@ import { ContactForm } from "./ContactForm";
 const CONTACT_MOOD_IMAGE = "/assets/dama-venus/music/dv_music_current_chapter_cover_color_4x5_v01.jpg";
 
 export const metadata: Metadata = {
-  title: { absolute: "Contact | Dama Venus" },
-  description: "Send booking, press, or collaboration inquiries to Dama Venus via the official contact channel.",
+  title: { absolute: "Contact & Bookings | Dáma Venus — Collaborations & Inquiries" },
+  description: "Book Dáma Venus for live performances, music collaborations, film projects, and brand partnerships. Send your inquiry via the official contact form.",
   openGraph: {
-    title: "Contact | Dama Venus",
-    description: "Send booking, press, or collaboration inquiries to Dama Venus via the official contact channel.",
+    title: "Contact & Bookings | Dáma Venus",
+    description: "Book Dáma Venus for performances, collaborations, film projects, and brand partnerships.",
     url: "/contact",
-    images: [{ url: "/og-default.svg" }]
+    images: [{ url: "/og-default.png" }]
   },
   twitter: {
-    title: "Contact | Dama Venus",
-    description: "Send booking, press, or collaboration inquiries to Dama Venus via the official contact channel.",
-    images: ["/og-default.svg"]
+    title: "Contact & Bookings | Dáma Venus",
+    description: "Book Dáma Venus for performances, collaborations, film projects, and brand partnerships.",
+    images: ["/og-default.png"]
   },
   alternates: {
     canonical: "/contact"
