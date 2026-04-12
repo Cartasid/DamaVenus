@@ -264,7 +264,7 @@ export default function AboutPage() {
                     src={asset.src}
                     alt={resolveAltText(visual.role, visual.altTextNote, asset.alt)}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="(min-width: 768px) 50vw, 100vw"
                   />
                 </ImageReveal>

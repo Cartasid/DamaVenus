@@ -92,7 +92,7 @@ export default function VisualsPage() {
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 40vw"
-                className="object-cover"
+                className="object-cover object-top"
               />
             </ImageReveal>
           ) : null}
@@ -144,7 +144,7 @@ export default function VisualsPage() {
               fill
               priority
               sizes="100vw"
-              className="object-cover"
+              className="object-cover object-top"
             />
             <div
               className="absolute inset-0"
@@ -234,7 +234,7 @@ export default function VisualsPage() {
                     alt={resolveAlt(asset, entry.altTextNotes)}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                 </ImageReveal>
               ) : null;
@@ -279,7 +279,7 @@ export default function VisualsPage() {
                     alt={resolveAlt(asset, entry.altTextNotes)}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                 </ImageReveal>
               ) : null;
@@ -352,7 +352,7 @@ export default function VisualsPage() {
                     alt={resolveAlt(asset, entry.altTextNotes)}
                     fill
                     sizes="(max-width: 768px) 50vw, 33vw"
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                 </ImageReveal>
               ) : null;
@@ -394,7 +394,7 @@ export default function VisualsPage() {
                   alt={resolveAlt(linkedVisualAsset, linkedVisual.altTextNotes)}
                   fill
                   sizes="100vw"
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
                 <div
                   className="absolute inset-0"
