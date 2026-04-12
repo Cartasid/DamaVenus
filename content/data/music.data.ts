@@ -11,7 +11,7 @@ const musicCtaLabels = {
 const platformLinks = {
   spotify: "https://open.spotify.com/",
   appleMusic: "https://music.apple.com/",
-  youtube: "https://www.youtube.com/",
+  youtube: "https://www.youtube.com/@damavenus",
   soundcloud: "https://soundcloud.com/"
 } as const;
 

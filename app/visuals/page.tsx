@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { visualsData } from "@/content/data/visuals.data";
 import { assetMap } from "@/content/data/site.config";
@@ -46,7 +45,6 @@ export default function VisualsPage() {
   const portraitFeature = sortedEntries.find((entry) => entry.type === "portrait");
   const quietStills = sortedEntries.filter((entry) => entry.role === "quiet-spacer" || entry.type === "still");
 
-  const openerAsset = visualsData.intro.asset ? assetMap[visualsData.intro.asset.id] : undefined;
   const introLeadAsset = visualsData.intro.leadAsset?.id ? assetMap[visualsData.intro.leadAsset.id] : undefined;
   const leadAsset = introLeadAsset ?? (leadSequenceEntry?.assets[0] ? assetMap[leadSequenceEntry.assets[0]] : undefined);
   const portraitAsset = portraitFeature?.assets[0] ? assetMap[portraitFeature.assets[0]] : undefined;
@@ -55,49 +53,27 @@ export default function VisualsPage() {
     <div className="pb-28" aria-labelledby="visuals-page-title">
 
       {/* ── PAGE HEADER ── */}
-      <header className="home-hero-enter site-container pt-16 pb-0">
-        <div className="grid gap-12 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
-          <div>
-            <p className="text-muted mb-3" style={labelStyle}>{visualsData.intro.label}</p>
-            <h1
-              id="visuals-page-title"
-              className="text-primary"
-              style={{
-                fontFamily: "var(--font-bodoni), Georgia, serif",
-                fontSize: "clamp(3rem, 8vw, 6rem)",
-                fontWeight: 300,
-                lineHeight: 0.95
-              }}
-            >
-              {visualsData.intro.headline}
-            </h1>
-          </div>
-          {openerAsset ? (
-            <ImageReveal
-              className="relative overflow-hidden"
-              style={{ height: "220px" }}
-              lightboxSrc={openerAsset.src}
-              lightboxAlt={resolveAlt(openerAsset)}
-            >
-              <Image
-                src={openerAsset.src}
-                alt={resolveAlt(openerAsset)}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 40vw"
-                className="object-cover"
-                style={{ objectPosition: openerAsset.objectPosition ?? "center center" }}
-              />
-            </ImageReveal>
-          ) : null}
-        </div>
+      <header className="home-hero-enter site-container pt-24 pb-0">
+        <p className="text-muted mb-4" style={labelStyle}>{visualsData.intro.label}</p>
+        <h1
+          id="visuals-page-title"
+          className="text-primary"
+          style={{
+            fontFamily: "var(--font-bodoni), Georgia, serif",
+            fontSize: "clamp(3.5rem, 10vw, 8rem)",
+            fontWeight: 300,
+            lineHeight: 0.92,
+            maxWidth: "14ch"
+          }}
+        >
+          {visualsData.intro.headline}
+        </h1>
         {visualsData.intro.subhead ? (
-          <p className="mt-6 text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.75, maxWidth: "36rem" }}>
+          <p className="mt-8 text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "34rem" }}>
             {visualsData.intro.subhead}
           </p>
         ) : null}
-
-        <div className="mt-14 h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
+        <div className="mt-16 h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
       </header>
 
       {/* ── LEAD VISUAL ── */}
@@ -316,14 +292,6 @@ export default function VisualsPage() {
       ))}
 
 
-      {/* ── FOOTER CTA ── */}
-      {visualsData.intro.cta ? (
-        <div className="reveal site-container mt-16">
-          <Link href={visualsData.intro.cta.href} className="cta-secondary">
-            {visualsData.intro.cta.label}
-          </Link>
-        </div>
-      ) : null}
     </div>
   );
 }
