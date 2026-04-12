@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Syne, Bodoni_Moda, Cormorant_Garamond } from "next/font/google";
+import { Syne, Bodoni_Moda, Cormorant_Garamond, Montserrat } from "next/font/google";
 import "./globals.css";
 import SiteFooter from "@/components/layout/site-footer";
 import SiteHeader from "@/components/layout/site-header";
@@ -29,6 +29,13 @@ const cormorant = Cormorant_Garamond({
   weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
   variable: "--font-cormorant"
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  style: ["normal", "italic"],
+  variable: "--font-montserrat"
 });
 
 const metadataTitle = {
@@ -96,7 +103,7 @@ export const metadata: Metadata = {
     }
   },
   other: {
-    "theme-color": "#050505"
+    "theme-color": "#000000"
   }
 };
 
@@ -145,7 +152,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${syne.variable} ${bodoni.variable} ${cormorant.variable} min-h-screen flex flex-col`}>
+      <body className={`${syne.variable} ${bodoni.variable} ${cormorant.variable} ${montserrat.variable} min-h-screen flex flex-col`}>
         <noscript>
           <style>{".reveal,.reveal-fade{opacity:1!important;transform:none!important}"}</style>
         </noscript>

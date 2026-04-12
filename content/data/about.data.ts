@@ -29,9 +29,9 @@ export const aboutPageModel = {
   },
   aboutBio: {
     shortText:
-      "Dáma Venus is a Berlin-based Visual Author and international actress. Her work bridges high-end cinematic textures with the precision of modern synth-pop.",
+      "Dáma Venus is a Berlin-based Visual Author, producer, and international actress. Her artistic identity is defined by the 'after-dark' architecture — a cinematic fusion of 80s-inspired synth-pop and high-end visual storytelling.",
     mediumText:
-      "Dáma Venus is a Berlin-based Visual Author and international actress. Her work bridges high-end cinematic textures with the precision of modern synth-pop. Currently finalizing her upcoming album (June 12th), she architects worlds where fashion, sound, and screen collide.",
+      "Dáma Venus is a Berlin-based Visual Author, producer, and international actress. Her artistic identity is defined by the 'after-dark' architecture — a cinematic fusion of 80s-inspired synth-pop and high-end visual storytelling. From the high-stakes world of international beauty pageants as Miss Americas to the underground electronic scene of Europe, she bridges the gap between raw emotion and technical precision. Her upcoming album, launching June 12th, marks a new era in the international alternative landscape.",
     longArtistNote:
       "The approach is intentional: fewer words, deeper resonance, stronger form. Feminine power, modern mystique, and controlled intensity define every chapter."
   },

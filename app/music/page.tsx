@@ -184,7 +184,7 @@ export default function MusicPage() {
                     key={release.id}
                     id={release.id}
                     className="reveal-child space-y-3 p-8"
-                    style={{ background: "#050505", border: "1px solid rgba(200,168,126,0.06)" }}
+                    style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}
                   >
                     <p className="text-accent" style={labelStyle}>{release.status}</p>
                     <h3
@@ -218,7 +218,7 @@ export default function MusicPage() {
                       key={release.id}
                       id={release.id}
                       className="p-6"
-                      style={{ background: "#050505", border: "1px solid rgba(200,168,126,0.06)" }}
+                      style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}
                     >
                       {releaseAsset ? (
                         <ImageReveal
@@ -284,7 +284,7 @@ export default function MusicPage() {
                 : null;
 
               return (
-                <li key={release.id} className="p-6" style={{ background: "#050505", border: "1px solid rgba(200,168,126,0.06)" }}>
+                <li key={release.id} className="p-6" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
                   <article className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]" aria-labelledby={`${release.id}-title`}>
                     {watchAction && releaseAsset ? (
                       <ImageReveal

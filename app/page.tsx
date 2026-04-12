@@ -82,7 +82,7 @@ export default function HomePage() {
             </ImageReveal>
           </ParallaxHero>
         ) : (
-          <div className="absolute inset-0" style={{ background: "#050505" }} />
+          <div className="absolute inset-0" style={{ background: "#000000" }} />
         )}
 
         <div className="site-container relative z-10 pb-24 pt-40">

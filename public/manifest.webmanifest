@@ -4,7 +4,7 @@
   "description": "The Brazilian voice redefining alternative pop across Europe. Cinematic sound, fashion-forward visuals, and uncompromising artistic vision.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#050505",
+  "background_color": "#000000",
   "theme_color": "#FF4FA8",
   "icons": [
     {

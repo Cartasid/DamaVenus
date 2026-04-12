@@ -53,9 +53,18 @@ export const contactContent: ContactContent = {
         name: "fullName",
         type: "text",
         required: true,
-        label: "Full Name",
+        label: "Name",
         placeholder: "e.g. Ana Martínez",
         helperText: "Please share the name used for correspondence."
+      },
+      {
+        id: "organization",
+        name: "organization",
+        type: "text",
+        required: false,
+        label: "Organization / Role",
+        placeholder: "e.g. Press, Agency, Academy Member",
+        helperText: "Your affiliation helps us route your inquiry."
       },
       {
         id: "email",
@@ -67,11 +76,20 @@ export const contactContent: ContactContent = {
         helperText: "We’ll respond to this address."
       },
       {
+        id: "subject",
+        name: "subject",
+        type: "text",
+        required: false,
+        label: "Subject",
+        placeholder: "e.g. Industry Access Request, Booking Inquiry",
+        helperText: "Brief subject line for your inquiry."
+      },
+      {
         id: "message",
         name: "message",
         type: "textarea",
         required: true,
-        label: "Inquiry",
+        label: "Message",
         helperText: "Include timeline, scope, and context so we can match the right format."
       }
     ],

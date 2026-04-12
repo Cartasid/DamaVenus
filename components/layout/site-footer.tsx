@@ -182,24 +182,24 @@ export default function SiteFooter() {
           <span
             className="text-mutedFaint"
             style={{
-              fontFamily: "var(--font-syne), system-ui, sans-serif",
+              fontFamily: "var(--font-montserrat), var(--font-syne), system-ui, sans-serif",
               fontSize: "0.5rem",
               letterSpacing: "0.12em",
               textTransform: "uppercase"
             }}
           >
-            &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} Dáma Venus. All Rights Reserved. | Visual Author &amp; Producer
           </span>
           <span
             style={{
-              fontFamily: "var(--font-syne), system-ui, sans-serif",
+              fontFamily: "var(--font-montserrat), var(--font-syne), system-ui, sans-serif",
               fontSize: "0.5rem",
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               color: "rgba(200,168,126,0.25)"
             }}
           >
-            Rio de Janeiro &middot; Europe &middot; Worldwide
+            Berlin &middot; Amsterdam &middot; London
           </span>
         </div>
 

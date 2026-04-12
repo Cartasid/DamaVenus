@@ -202,7 +202,7 @@ export default function AboutPage() {
               key={statement.id}
               className="p-8 shine-hover"
               style={{
-                background: "#050505",
+                background: "#000000",
                 borderRight: "1px solid rgba(200,168,126,0.08)",
                 borderBottom: "1px solid rgba(200,168,126,0.08)"
               }}

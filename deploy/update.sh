@@ -45,6 +45,8 @@ if [ -d "$APP_DIR/.git" ]; then
   git fetch origin "$BRANCH" --depth 1
   git reset --hard "origin/$BRANCH"
   git clean -fd
+  # Force-checkout aller Dateien (shallow clone stellt Binaries nicht immer her)
+  git checkout HEAD -- .
 else
   echo "→ Fresh clone..."
   rm -rf "$APP_DIR"

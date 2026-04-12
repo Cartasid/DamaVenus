@@ -8,9 +8,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#050505",
-        surface: "#0a0a0a",
-        surfaceElevated: "#111111",
+        background: "#000000",
+        surface: "#080808",
+        surfaceElevated: "#0f0f0f",
         primary: "#F5F0EB",
         offWhite: "#F5F0EB",
         accent: "#FF4FA8",
@@ -23,10 +23,10 @@ const config: Config = {
         divider: "rgba(255,255,255,0.06)"
       },
       fontFamily: {
-        sans: ["var(--font-syne)", "system-ui", "sans-serif"],
-        display: ["var(--font-bodoni)", "Georgia", "serif"],
+        sans: ["var(--font-montserrat)", "var(--font-syne)", "system-ui", "sans-serif"],
+        display: ["var(--font-montserrat)", "var(--font-bodoni)", "Georgia", "serif"],
         editorial: ["var(--font-cormorant)", "Georgia", "serif"],
-        ui: ["var(--font-syne)", "system-ui", "sans-serif"]
+        ui: ["var(--font-montserrat)", "var(--font-syne)", "system-ui", "sans-serif"]
       },
       letterSpacing: {
         widest2: "0.3em",

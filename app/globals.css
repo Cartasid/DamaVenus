@@ -54,8 +54,8 @@ html {
 
 body {
   @apply bg-background text-primary antialiased;
-  font-family: var(--font-syne), system-ui, sans-serif;
-  background-color: #050505;
+  font-family: var(--font-montserrat), var(--font-syne), system-ui, sans-serif;
+  background-color: #000000;
 }
 
 /* ─────────────────────────────────────────────
@@ -752,7 +752,7 @@ a, button, [role="button"] {
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
