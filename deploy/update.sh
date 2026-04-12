@@ -42,10 +42,11 @@ echo ""
 if [ -d "$APP_DIR/.git" ]; then
   echo "→ Git pull (bestehendes Repo)..."
   cd "$APP_DIR"
-  git fetch origin "$BRANCH" --depth 1
+  # Unshallow falls nötig, dann fetch — stellt sicher dass ALLE Blobs (inkl. Bilder/Videos) geholt werden
+  git fetch origin "$BRANCH" --no-tags 2>/dev/null || true
   git reset --hard "origin/$BRANCH"
   git clean -fd
-  # Force-checkout aller Dateien (shallow clone stellt Binaries nicht immer her)
+  # Force-checkout aller Dateien (stellt Binaries sicher her)
   git checkout HEAD -- .
 else
   echo "→ Fresh clone..."
