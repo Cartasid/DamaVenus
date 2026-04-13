@@ -37,7 +37,7 @@ const blockSectionIds: Partial<Record<(typeof pressEpkBlocks)[number]["id"], str
 };
 
 const labelStyle = {
-  fontFamily: "var(--font-syne), system-ui, sans-serif",
+  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
   fontSize: "0.6rem",
   letterSpacing: "0.22em",
   textTransform: "uppercase" as const
@@ -159,7 +159,7 @@ export default function PressPage() {
       ) : null}
 
       {/* ── PRESS ESSENTIALS ── */}
-      <section className="reveal site-container mt-16">
+      <section className="reveal site-container mt-24">
         <p className="text-muted mb-8" style={labelStyle}>Press Essentials</p>
         <div className="grid gap-px md:grid-cols-2" style={{ background: "rgba(200,168,126,0.04)" }}>
           {primaryLeadBlocks.map((block) => renderBlock(block))}
@@ -167,7 +167,7 @@ export default function PressPage() {
       </section>
 
       {/* ── ADDITIONAL RESOURCES ── */}
-      <section className="reveal site-container mt-16">
+      <section className="reveal site-container mt-24">
         <p className="text-muted mb-8" style={labelStyle}>Additional Press Resources</p>
         <div className="grid gap-px md:grid-cols-2" style={{ background: "rgba(200,168,126,0.04)" }}>
           {secondaryInfoBlocks.filter((block) => block.id !== "contactBlock").map((block) => renderBlock(block))}
@@ -186,7 +186,7 @@ export default function PressPage() {
       </section>
 
       {/* ── EPK DOWNLOADS ── */}
-      <section className="reveal site-container mt-16" id="epk-downloads">
+      <section className="reveal site-container mt-24" id="epk-downloads">
         <p className="text-muted mb-8" style={labelStyle}>Electronic Press Kit</p>
         <div className="grid gap-px md:grid-cols-2" style={{ background: "rgba(200,168,126,0.04)" }}>
           <div
@@ -246,7 +246,7 @@ export default function PressPage() {
 
       {/* ── CONTACT ── */}
       {contactBlock ? (
-        <section className="reveal site-container mt-16">
+        <section className="reveal site-container mt-24">
           <div
             className="p-8 md:p-12"
             style={{

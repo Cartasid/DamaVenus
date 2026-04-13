@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 };
 
 const labelStyle = {
-  fontFamily: "var(--font-syne), system-ui, sans-serif",
+  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
   fontSize: "0.6rem",
   letterSpacing: "0.22em",
   textTransform: "uppercase" as const
@@ -171,7 +171,7 @@ export default function MusicPage() {
       </section>
 
       {/* ── VIDEO SHORT ── */}
-      <section className="reveal mt-20" aria-labelledby="video-short-heading">
+      <section className="reveal mt-28" aria-labelledby="video-short-heading">
         <div className="site-container">
           <div className="mb-8 pb-8" style={{ borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
             <p id="video-short-heading" className="text-muted" style={labelStyle}>Latest Visual</p>
@@ -186,7 +186,7 @@ export default function MusicPage() {
                 playsInline
                 preload="metadata"
                 className="w-full h-full object-cover"
-                style={{ aspectRatio: "9/16", maxHeight: "680px" }}
+                style={{ aspectRatio: "9/16", maxHeight: "780px" }}
                 aria-label="Lonely Berlin Day 1 — Short by Dáma Venus"
               >
                 <source src="/assets/dama-venus/video/lonely-berlin-day-1.mp4" type="video/mp4" />
@@ -219,7 +219,7 @@ export default function MusicPage() {
 
       {/* ── SELECTED RELEASES ── */}
       {selectedReleases.length ? (
-        <section id="selected-releases" className="reveal mt-20">
+        <section id="selected-releases" className="reveal mt-28">
           <div className="site-container">
             <div className="mb-8 pb-8" style={{ borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
               <p className="text-muted" style={labelStyle}>Selected Releases</p>
@@ -312,7 +312,7 @@ export default function MusicPage() {
       ) : null}
 
       {/* ── VISUAL RELEASES ── */}
-      <section id="visual-releases" className="reveal mt-20">
+      <section id="visual-releases" className="reveal mt-28">
         <div className="site-container">
           <div className="mb-8 pb-8" style={{ borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
             <p className="text-muted" style={labelStyle}>Visual Releases</p>
@@ -388,7 +388,7 @@ export default function MusicPage() {
       </section>
 
       {/* ── CROSS-LINKS ── */}
-      <nav aria-label="Explore more" className="reveal mt-20">
+      <nav aria-label="Explore more" className="reveal mt-28">
         <div className="site-container">
           <div className="mb-8 pb-8" style={{ borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
             <p className="text-muted" style={labelStyle}>Explore</p>

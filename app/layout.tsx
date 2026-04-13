@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Syne, Bodoni_Moda, Cormorant_Garamond, Montserrat } from "next/font/google";
+import { Bodoni_Moda, Montserrat } from "next/font/google";
 import "./globals.css";
 import SiteFooter from "@/components/layout/site-footer";
 import SiteHeader from "@/components/layout/site-header";
@@ -13,23 +13,11 @@ import { resolveSiteUrl, siteConfig } from "@/content/data/site.config";
 
 const siteUrl = resolveSiteUrl();
 
-const syne = Syne({
-  subsets: ["latin"],
-  variable: "--font-syne"
-});
-
 const bodoni = Bodoni_Moda({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
   style: ["normal", "italic"],
   variable: "--font-bodoni"
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant"
 });
 
 const montserrat = Montserrat({
@@ -200,7 +188,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
         />
       </head>
-      <body className={`${syne.variable} ${bodoni.variable} ${cormorant.variable} ${montserrat.variable} min-h-screen flex flex-col`}>
+      <body className={`${bodoni.variable} ${montserrat.variable} min-h-screen flex flex-col`}>
         <noscript>
           <style>{".reveal,.reveal-fade{opacity:1!important;transform:none!important}"}</style>
         </noscript>

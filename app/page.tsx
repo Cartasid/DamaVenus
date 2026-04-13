@@ -86,7 +86,7 @@ export default function HomePage() {
               id="home-title"
               className="text-white"
               style={{
-                fontFamily: "var(--font-syne), system-ui, sans-serif",
+                fontFamily: "var(--font-montserrat), system-ui, sans-serif",
                 fontSize: "clamp(3.5rem, 10vw, 9rem)",
                 fontWeight: 800,
                 lineHeight: 0.9,
@@ -99,7 +99,7 @@ export default function HomePage() {
             <p
               className="mt-8"
               style={{
-                fontFamily: "var(--font-syne), system-ui, sans-serif",
+                fontFamily: "var(--font-montserrat), system-ui, sans-serif",
                 fontSize: "clamp(0.7rem, 1.5vw, 0.95rem)",
                 fontWeight: 400,
                 letterSpacing: "0.18em",
@@ -115,7 +115,7 @@ export default function HomePage() {
               {["Alternative Pop", "Trap-Pop", "R&B", "Vaporwave"].map((genre, i) => (
                 <span key={genre} className="flex items-center gap-4">
                   {i > 0 && <span style={{ width: "20px", height: "1px", background: "rgba(200,168,126,0.35)" }} aria-hidden="true" />}
-                  <span style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.52rem", fontWeight: 600, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(245,240,235,0.25)" }}>{genre}</span>
+                  <span style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.52rem", fontWeight: 600, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(245,240,235,0.25)" }}>{genre}</span>
                 </span>
               ))}
             </div>
@@ -126,7 +126,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ MARQUEE ═══ */}
-      <div className="py-7" style={{ borderTop: "1px solid rgba(200,168,126,0.08)", borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
+      <div className="py-10" style={{ borderTop: "1px solid rgba(200,168,126,0.08)", borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
         <Marquee items={["Sound", "Vision", "Reign", "Alternative Pop", "Trap-Pop", "R&B", "Vaporwave", "Rio de Janeiro", "Europe", "Cinematic Artist"]} speed={40} />
       </div>
 
@@ -148,12 +148,12 @@ export default function HomePage() {
         <div className="site-container">
           <div className="grid gap-0 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-stretch premium-card">
             {visualsAsset ? (
-              <ImageReveal className="img-hover-zoom relative overflow-hidden" style={{ minHeight: "520px" }} lightboxSrc={visualsAsset.src} lightboxAlt={visualsAsset.alt ?? visualsModule?.alt ?? ""}>
+              <ImageReveal className="img-hover-zoom relative overflow-hidden" style={{ minHeight: "600px" }} lightboxSrc={visualsAsset.src} lightboxAlt={visualsAsset.alt ?? visualsModule?.alt ?? ""}>
                 <Image src={visualsAsset.src} alt={visualsAsset.alt ?? visualsModule?.alt ?? ""} fill loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="object-cover" style={{ objectPosition: visualsAsset.objectPosition ?? "center center" }} />
               </ImageReveal>
             ) : null}
-            <div className="flex flex-col justify-end px-8 py-14 md:px-12" style={{ borderTop: "1px solid rgba(200,168,126,0.08)", borderLeft: "1px solid rgba(200,168,126,0.08)", borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
-              <p className="mb-4" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(200,168,126,0.7)" }}>Visual World</p>
+            <div className="flex flex-col justify-end px-10 py-20 md:px-16" style={{ borderTop: "1px solid rgba(200,168,126,0.08)", borderLeft: "1px solid rgba(200,168,126,0.08)", borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
+              <p className="mb-4" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(200,168,126,0.7)" }}>Visual World</p>
               <h2 id="visual-story-title" className="text-primary" style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "clamp(2rem, 4.5vw, 3.8rem)", fontWeight: 400, lineHeight: 1.05, fontStyle: "italic" }}>
                 {visualsModule?.copy.headline}
               </h2>
@@ -169,8 +169,8 @@ export default function HomePage() {
       <section aria-labelledby="press-epk-title" className="reveal section-gap-lg">
         <div className="site-container">
           <div className="grid gap-0 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-stretch premium-card shine-hover" style={{ border: "1px solid rgba(200,168,126,0.08)" }}>
-            <div className="flex flex-col justify-center px-8 py-16 md:px-12">
-              <p className="mb-3" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(245,240,235,0.4)" }}>Press &amp; EPK</p>
+            <div className="flex flex-col justify-center px-10 py-20 md:px-16">
+              <p className="mb-3" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(245,240,235,0.4)" }}>Press &amp; EPK</p>
               <h2 id="press-epk-title" className="text-primary" style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "clamp(2rem, 4.5vw, 3.5rem)", fontWeight: 400, lineHeight: 1.02, fontStyle: "italic" }}>
                 {pressModule?.copy.headline}
               </h2>
@@ -178,7 +178,7 @@ export default function HomePage() {
               {pressModule?.copy.cta ? <Link href={pressModule.copy.cta.href} className="mt-10 inline-block cta-primary self-start">{pressModule.copy.cta.label}</Link> : null}
             </div>
             {pressAsset ? (
-              <ImageReveal className="img-hover-zoom relative overflow-hidden" style={{ minHeight: "440px", borderLeft: "1px solid rgba(200,168,126,0.08)" }} lightboxSrc={pressAsset.src} lightboxAlt={pressAsset.alt ?? pressModule?.alt ?? ""}>
+              <ImageReveal className="img-hover-zoom relative overflow-hidden" style={{ minHeight: "540px", borderLeft: "1px solid rgba(200,168,126,0.08)" }} lightboxSrc={pressAsset.src} lightboxAlt={pressAsset.alt ?? pressModule?.alt ?? ""}>
                 <Image src={pressAsset.src} alt={pressAsset.alt ?? pressModule?.alt ?? ""} fill loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="object-cover" style={{ objectPosition: pressAsset.objectPosition ?? "center center" }} />
               </ImageReveal>
             ) : null}
@@ -189,11 +189,11 @@ export default function HomePage() {
       {/* ═══ CONTACT CTA ═══ */}
       <section aria-labelledby="contact-newsletter-title" className="reveal section-gap-lg">
         <div className="site-container">
-          <div className="relative overflow-hidden px-8 py-28 md:px-16 md:py-36 glow-accent" style={{ border: "1px solid rgba(200,168,126,0.12)" }}>
+          <div className="relative overflow-hidden px-10 py-36 md:px-20 md:py-44 glow-accent" style={{ border: "1px solid rgba(200,168,126,0.12)" }}>
             {assetMap["contact-red-portrait-69bf"] ? (
               <div className="absolute inset-0" aria-hidden="true">
-                <Image src={assetMap["contact-red-portrait-69bf"].src} alt="" fill sizes="100vw" loading="lazy" className="object-cover" style={{ objectPosition: assetMap["contact-red-portrait-69bf"].objectPosition ?? "center 30%", filter: "brightness(0.3) contrast(1.1) saturate(0.8)", opacity: 0.7 }} />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(5,5,5,0.85) 0%, rgba(5,5,5,0.5) 50%, rgba(5,5,5,0.7) 100%)" }} />
+                <Image src={assetMap["contact-red-portrait-69bf"].src} alt="" fill sizes="100vw" loading="lazy" className="object-cover" style={{ objectPosition: assetMap["contact-red-portrait-69bf"].objectPosition ?? "center 30%", filter: "brightness(0.5) contrast(1.05) saturate(0.9)", opacity: 0.85 }} />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(5,5,5,0.75) 0%, rgba(5,5,5,0.3) 60%, rgba(5,5,5,0.5) 100%)" }} />
               </div>
             ) : (
               <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(200,168,126,0.04) 0%, rgba(5,5,5,0.95) 50%, rgba(255,0,255,0.03) 100%)" }} aria-hidden="true" />
@@ -202,21 +202,21 @@ export default function HomePage() {
             <div className="absolute left-0 top-0 right-0 h-px" style={{ background: "linear-gradient(to right, rgba(200,168,126,0.25), transparent 40%)" }} aria-hidden="true" />
             <div className="absolute left-0 bottom-0 right-0 h-px" style={{ background: "linear-gradient(to left, rgba(255,0,255,0.15), transparent 40%)" }} aria-hidden="true" />
             <div className="relative z-10">
-              <p className="mb-6" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(200,168,126,0.8)" }}>Inquiries</p>
+              <p className="mb-6" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(200,168,126,0.8)" }}>Inquiries</p>
               <h2 id="contact-newsletter-title" className="text-primary" style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "clamp(2.8rem, 6vw, 5.5rem)", fontWeight: 400, lineHeight: 1.0, fontStyle: "italic", maxWidth: "24rem" }}>
                 {contactNewsletterModule?.copy.headline}
               </h2>
               {contactNewsletterModule?.copy.subline ? <p className="mt-6 text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "30rem" }}>{contactNewsletterModule.copy.subline}</p> : null}
               {contactNewsletterModule?.copy.cta ? <Link href={contactNewsletterModule.copy.cta.href} className="mt-10 inline-block cta-primary">{contactNewsletterModule.copy.cta.label}</Link> : null}
               <div className="mt-8 flex flex-wrap items-center gap-6">
-                <a href="mailto:contact@damavenus.eu" className="text-muted hover:text-offWhite no-underline" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", transition: "color 300ms" }} aria-label="Send email to contact@damavenus.eu">contact@damavenus.eu</a>
+                <a href="mailto:contact@damavenus.eu" className="text-muted hover:text-offWhite no-underline" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", transition: "color 300ms" }} aria-label="Send email to contact@damavenus.eu">contact@damavenus.eu</a>
                 <span style={{ width: "1px", height: "16px", background: "rgba(200,168,126,0.2)" }} aria-hidden="true" />
                 {[
                   { label: "Spotify", href: "https://open.spotify.com/artist/damavenus" },
                   { label: "Instagram", href: "https://www.instagram.com/ichbindamavenus" },
                   { label: "YouTube", href: "https://www.youtube.com/@damavenus" }
                 ].map((social) => (
-                  <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.label} (opens in new tab)`} className="text-muted hover:text-offWhite no-underline flex items-center gap-2" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", transition: "color 300ms" }}><SocialIcon name={social.label} />{social.label}</a>
+                  <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.label} (opens in new tab)`} className="text-muted hover:text-offWhite no-underline flex items-center gap-2" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", transition: "color 300ms" }}><SocialIcon name={social.label} />{social.label}</a>
                 ))}
               </div>
             </div>
@@ -225,7 +225,7 @@ export default function HomePage() {
       </section>
 
       {/* Bottom marquee */}
-      <div className="py-5" style={{ borderTop: "1px solid rgba(200,168,126,0.06)" }}>
+      <div className="py-8" style={{ borderTop: "1px solid rgba(200,168,126,0.06)" }}>
         <Marquee items={["Dama Venus", "Sound", "Vision", "Reign", "Live Performer", "Rio de Janeiro", "Europe"]} speed={50} />
       </div>
 

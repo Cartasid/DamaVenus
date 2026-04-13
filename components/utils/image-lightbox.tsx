@@ -108,7 +108,7 @@ export default function ImageLightbox() {
             bottom: "1.5rem",
             left: "50%",
             transform: "translateX(-50%)",
-            fontFamily: "var(--font-syne), system-ui, sans-serif",
+            fontFamily: "var(--font-montserrat), system-ui, sans-serif",
             fontSize: "0.5rem",
             letterSpacing: "0.15em",
             textTransform: "uppercase",

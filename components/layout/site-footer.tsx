@@ -14,7 +14,7 @@ const socialLinks = [
 const footerNav = extendedNavigationItems;
 
 const linkStyleBase = {
-  fontFamily: "var(--font-syne), system-ui, sans-serif",
+  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
   fontSize: "0.6rem",
   letterSpacing: "0.15em",
   textTransform: "uppercase" as const,
@@ -22,7 +22,7 @@ const linkStyleBase = {
 };
 
 const categoryLabel = {
-  fontFamily: "var(--font-syne), system-ui, sans-serif",
+  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
   fontSize: "0.5rem",
   letterSpacing: "0.25em",
   textTransform: "uppercase" as const,
@@ -36,7 +36,7 @@ export default function SiteFooter() {
         borderTop: "1px solid rgba(200,168,126,0.1)"
       }}
     >
-      <div className="site-container py-20">
+      <div className="site-container py-28">
 
         {/* Top — Brand + Statement */}
         <div className="grid gap-16 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
@@ -157,7 +157,7 @@ export default function SiteFooter() {
           <p style={categoryLabel} className="mb-3">Management</p>
           <p
             style={{
-              fontFamily: "var(--font-syne), system-ui, sans-serif",
+              fontFamily: "var(--font-montserrat), system-ui, sans-serif",
               fontSize: "0.6rem",
               letterSpacing: "0.1em",
               color: "rgba(245,240,235,0.5)"
@@ -180,23 +180,36 @@ export default function SiteFooter() {
         {/* Divider */}
         <div className="my-8 h-px" style={{ background: "rgba(200,168,126,0.06)" }} />
 
-        {/* Bottom row */}
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        {/* Copyright notice */}
+        <p
+          style={{
+            fontFamily: "var(--font-montserrat), system-ui, sans-serif",
+            fontSize: "0.6rem",
+            letterSpacing: "0.08em",
+            lineHeight: 1.7,
+            color: "rgba(245,240,235,0.45)",
+            maxWidth: "42rem"
+          }}
+        >
+          &copy; {new Date().getFullYear()} Dáma Venus. All rights reserved. Any unauthorized use of visual or sonic assets will be subject to international legal action.
+        </p>
+
+        <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <span
             className="text-mutedFaint"
             style={{
-              fontFamily: "var(--font-montserrat), var(--font-syne), system-ui, sans-serif",
-              fontSize: "0.5rem",
+              fontFamily: "var(--font-montserrat), system-ui, sans-serif",
+              fontSize: "0.48rem",
               letterSpacing: "0.12em",
               textTransform: "uppercase"
             }}
           >
-            &copy; {new Date().getFullYear()} Dáma Venus. All Rights Reserved. | Visual Author &amp; Producer
+            Visual Author &amp; Producer
           </span>
           <span
             style={{
-              fontFamily: "var(--font-montserrat), var(--font-syne), system-ui, sans-serif",
-              fontSize: "0.5rem",
+              fontFamily: "var(--font-montserrat), system-ui, sans-serif",
+              fontSize: "0.48rem",
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               color: "rgba(200,168,126,0.25)"

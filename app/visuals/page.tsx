@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 };
 
 const labelStyle = {
-  fontFamily: "var(--font-syne), system-ui, sans-serif",
+  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
   fontSize: "0.6rem",
   letterSpacing: "0.22em",
   textTransform: "uppercase" as const,
@@ -128,7 +128,7 @@ export default function VisualsPage() {
 
       {/* ── SERIES ENTRIES ── */}
       {seriesEntries.map((entry) => (
-        <section key={entry.id} className="reveal site-container mt-20" aria-labelledby={`${entry.id}-series-title`}>
+        <section key={entry.id} className="reveal site-container mt-28" aria-labelledby={`${entry.id}-series-title`}>
           <p className="text-muted mb-2" style={labelStyle}>Series</p>
           <h2
             id={`${entry.id}-series-title`}
@@ -175,7 +175,7 @@ export default function VisualsPage() {
 
       {/* ── EDITORIAL ROWS ── */}
       {editorialRows.map((entry) => (
-        <section key={entry.id} className="reveal site-container mt-20" aria-labelledby={`${entry.id}-editorial-title`}>
+        <section key={entry.id} className="reveal site-container mt-28" aria-labelledby={`${entry.id}-editorial-title`}>
           <p className="text-muted mb-2" style={labelStyle}>Editorial</p>
           <h2
             id={`${entry.id}-editorial-title`}
@@ -217,7 +217,7 @@ export default function VisualsPage() {
 
       {/* ── PORTRAIT FEATURE ── */}
       {portraitFeature && portraitAsset ? (
-        <section className="reveal site-container mt-20" aria-labelledby={`${portraitFeature.id}-portrait-title`}>
+        <section className="reveal site-container mt-28" aria-labelledby={`${portraitFeature.id}-portrait-title`}>
           <p className="text-muted mb-2" style={labelStyle}>Portrait</p>
           <h2
             id={`${portraitFeature.id}-portrait-title`}
@@ -251,12 +251,12 @@ export default function VisualsPage() {
 
       {/* ── QUIET STILLS ── */}
       {quietStills.map((entry) => (
-        <section key={entry.id} className="reveal site-container mt-20" aria-labelledby={`${entry.id}-stills-title`}>
+        <section key={entry.id} className="reveal site-container mt-28" aria-labelledby={`${entry.id}-stills-title`}>
           <h2
             id={`${entry.id}-stills-title`}
             className="mb-6 text-muted"
             style={{
-              fontFamily: "var(--font-syne), system-ui, sans-serif",
+              fontFamily: "var(--font-montserrat), system-ui, sans-serif",
               fontSize: "0.6rem",
               letterSpacing: "0.22em",
               textTransform: "uppercase",
@@ -293,7 +293,7 @@ export default function VisualsPage() {
       ))}
 
       {/* ── CROSS-LINKS ── */}
-      <nav aria-label="Explore more" className="reveal site-container mt-20">
+      <nav aria-label="Explore more" className="reveal site-container mt-28">
         <div className="grid gap-px md:grid-cols-3" style={{ background: "rgba(200,168,126,0.04)" }}>
           <Link href="/music" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
             <p className="text-accent mb-2" style={labelStyle}>Music</p>

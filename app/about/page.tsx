@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 const labelStyle = {
-  fontFamily: "var(--font-syne), system-ui, sans-serif",
+  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
   fontSize: "0.6rem",
   letterSpacing: "0.22em",
   textTransform: "uppercase" as const,
@@ -128,7 +128,7 @@ export default function AboutPage() {
       )}
 
       {/* ── BIO ── */}
-      <section className="reveal site-container mt-20 grid gap-16 md:grid-cols-2">
+      <section className="reveal site-container mt-28 grid gap-20 md:grid-cols-2">
         <div>
           <p className="text-muted mb-6" style={labelStyle}>About</p>
           <p
@@ -162,7 +162,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── PRESS FEATURE — THE REVIEW GEEK ── */}
-      <section className="reveal site-container mt-24" aria-labelledby="press-feature-heading">
+      <section className="reveal site-container mt-32" aria-labelledby="press-feature-heading">
         <div
           className="grid gap-0 md:grid-cols-[minmax(0,5fr)_minmax(0,3fr)]"
           style={{ border: "1px solid rgba(200,168,126,0.1)" }}
@@ -174,7 +174,7 @@ export default function AboutPage() {
             {/* Publication Name */}
             <p
               style={{
-                fontFamily: "var(--font-syne), system-ui, sans-serif",
+                fontFamily: "var(--font-montserrat), system-ui, sans-serif",
                 fontSize: "0.7rem",
                 fontWeight: 700,
                 letterSpacing: "0.2em",
@@ -206,7 +206,7 @@ export default function AboutPage() {
             <p
               className="mt-6"
               style={{
-                fontFamily: "var(--font-syne), system-ui, sans-serif",
+                fontFamily: "var(--font-montserrat), system-ui, sans-serif",
                 fontSize: "0.6rem",
                 fontWeight: 600,
                 letterSpacing: "0.15em",
@@ -269,12 +269,12 @@ export default function AboutPage() {
       </section>
 
       {/* ── DIVIDER ── */}
-      <div className="site-container mt-20">
+      <div className="site-container mt-28">
         <div className="h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
       </div>
 
       {/* ── METHOD / KEY STATEMENTS ── */}
-      <section className="reveal site-container mt-16" aria-labelledby="about-method-heading">
+      <section className="reveal site-container mt-20" aria-labelledby="about-method-heading">
         <p id="about-method-heading" className="text-muted mb-8" style={labelStyle}>Method</p>
         <ul className="grid gap-px md:grid-cols-2" style={{ background: "rgba(200,168,126,0.04)", borderTop: "1px solid rgba(200,168,126,0.08)", borderLeft: "1px solid rgba(200,168,126,0.08)" }}>
           {keyStatements.map((statement, index) => (
@@ -290,7 +290,7 @@ export default function AboutPage() {
               <h3
                 className="text-primary mb-3"
                 style={{
-                  fontFamily: "var(--font-syne), system-ui, sans-serif",
+                  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
                   fontSize: "0.65rem",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
@@ -316,7 +316,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA ── */}
-      <div className="reveal site-container mt-12" style={{ borderTop: "1px solid rgba(200,168,126,0.15)", paddingTop: "2rem" }}>
+      <div className="reveal site-container mt-16" style={{ borderTop: "1px solid rgba(200,168,126,0.15)", paddingTop: "2.5rem" }}>
         <Link href={aboutCta.href} className="cta-primary">
           {aboutCta.label}
         </Link>
@@ -324,7 +324,7 @@ export default function AboutPage() {
 
       {/* ── SUPPORTING VISUALS ── */}
       {supportingVisuals.length ? (
-        <section className="reveal site-container mt-20" aria-labelledby="about-supporting-visuals-heading">
+        <section className="reveal site-container mt-28" aria-labelledby="about-supporting-visuals-heading">
           <h2 id="about-supporting-visuals-heading" className="sr-only">Supporting Visuals</h2>
           <div className="grid gap-px sm:grid-cols-2" style={{ background: "rgba(200,168,126,0.04)", borderTop: "1px solid rgba(200,168,126,0.08)", borderLeft: "1px solid rgba(200,168,126,0.08)" }}>
             {supportingVisuals.map((visual) => {
@@ -357,18 +357,18 @@ export default function AboutPage() {
       ) : null}
 
       {/* ── CROSS-LINKS ── */}
-      <nav aria-label="Explore more" className="reveal site-container mt-20">
+      <nav aria-label="Explore more" className="reveal site-container mt-28">
         <div className="grid gap-px md:grid-cols-3" style={{ background: "rgba(200,168,126,0.04)" }}>
           <Link href="/music" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
-            <p className="text-accent mb-2" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.22em", textTransform: "uppercase" }}>Music</p>
+            <p className="text-accent mb-2" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.22em", textTransform: "uppercase" }}>Music</p>
             <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>Selected releases and visual chapters — alternative pop, trap-pop, R&B, and vaporwave.</p>
           </Link>
           <Link href="/visuals" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
-            <p className="text-accent mb-2" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.22em", textTransform: "uppercase" }}>Visuals</p>
+            <p className="text-accent mb-2" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.22em", textTransform: "uppercase" }}>Visuals</p>
             <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>Curated portraits and editorial sequences in the cinematic signature of Dáma Venus.</p>
           </Link>
           <Link href="/press" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
-            <p className="text-accent mb-2" style={{ fontFamily: "var(--font-syne), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.22em", textTransform: "uppercase" }}>Press &amp; EPK</p>
+            <p className="text-accent mb-2" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.22em", textTransform: "uppercase" }}>Press &amp; EPK</p>
             <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>Bio, press-ready images, and release facts for editorial use.</p>
           </Link>
         </div>

@@ -23,10 +23,10 @@ const config: Config = {
         divider: "rgba(255,255,255,0.06)"
       },
       fontFamily: {
-        sans: ["var(--font-montserrat)", "var(--font-syne)", "system-ui", "sans-serif"],
+        sans: ["var(--font-montserrat)", "var(--font-montserrat)", "system-ui", "sans-serif"],
         display: ["var(--font-montserrat)", "var(--font-bodoni)", "Georgia", "serif"],
-        editorial: ["var(--font-cormorant)", "Georgia", "serif"],
-        ui: ["var(--font-montserrat)", "var(--font-syne)", "system-ui", "sans-serif"]
+        editorial: ["var(--font-montserrat)", "Georgia", "serif"],
+        ui: ["var(--font-montserrat)", "var(--font-montserrat)", "system-ui", "sans-serif"]
       },
       letterSpacing: {
         widest2: "0.3em",

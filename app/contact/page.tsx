@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 };
 
 const labelStyle = {
-  fontFamily: "var(--font-syne), system-ui, sans-serif",
+  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
   fontSize: "0.6rem",
   letterSpacing: "0.22em",
   textTransform: "uppercase" as const
@@ -34,7 +34,7 @@ const labelStyle = {
 
 export default function ContactPage() {
   return (
-    <div className="site-container py-16 pb-28">
+    <div className="site-container py-24 pb-36">
       <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
 
         {/* Mood Image */}

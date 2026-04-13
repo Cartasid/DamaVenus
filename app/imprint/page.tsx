@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const sectionHeading = {
-  fontFamily: "var(--font-syne), system-ui, sans-serif",
+  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
   fontSize: "0.65rem",
   fontWeight: 700,
   letterSpacing: "0.2em",
@@ -17,7 +17,7 @@ const sectionHeading = {
 };
 
 const bodyText = {
-  fontFamily: "var(--font-syne), system-ui, sans-serif",
+  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
   fontSize: "0.85rem",
   lineHeight: 1.75,
   color: "rgba(245,240,235,0.6)"

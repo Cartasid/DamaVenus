@@ -43,7 +43,7 @@ const VALIDATION_MESSAGES = {
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const labelStyle: React.CSSProperties = {
-  fontFamily: "var(--font-syne), system-ui, sans-serif",
+  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
   fontSize: "0.6rem",
   letterSpacing: "0.18em",
   textTransform: "uppercase",
@@ -54,7 +54,7 @@ const labelStyle: React.CSSProperties = {
 
 function getInputStyle(isFocused: boolean, hasError: boolean): React.CSSProperties {
   return {
-    fontFamily: "var(--font-syne), system-ui, sans-serif",
+    fontFamily: "var(--font-montserrat), system-ui, sans-serif",
     fontSize: "0.9rem",
     lineHeight: 1.5,
     backgroundColor: "transparent",
@@ -185,7 +185,7 @@ export function ContactForm() {
             )}
 
             {field.helperText ? (
-              <p id={helperId} style={{ fontSize: "0.72rem", color: "#555555", fontFamily: "var(--font-syne), system-ui, sans-serif", marginTop: "0.375rem" }}>
+              <p id={helperId} style={{ fontSize: "0.72rem", color: "#555555", fontFamily: "var(--font-montserrat), system-ui, sans-serif", marginTop: "0.375rem" }}>
                 {field.helperText}
               </p>
             ) : (
@@ -196,7 +196,7 @@ export function ContactForm() {
               <p
                 id={errorId}
                 role="alert"
-                style={{ fontSize: "0.7rem", color: "#FF00FF", fontFamily: "var(--font-syne)", letterSpacing: "0.05em", marginTop: "0.375rem" }}
+                style={{ fontSize: "0.7rem", color: "#FF00FF", fontFamily: "var(--font-montserrat)", letterSpacing: "0.05em", marginTop: "0.375rem" }}
               >
                 {fieldError}
               </p>
@@ -216,7 +216,7 @@ export function ContactForm() {
         <p
           role="alert"
           aria-live="assertive"
-          style={{ fontSize: "0.75rem", color: "#FF00FF", fontFamily: "var(--font-syne)", letterSpacing: "0.05em" }}
+          style={{ fontSize: "0.75rem", color: "#FF00FF", fontFamily: "var(--font-montserrat)", letterSpacing: "0.05em" }}
         >
           {errorMessage}
         </p>

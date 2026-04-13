@@ -107,7 +107,7 @@ export default function SiteHeader() {
                 aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
                 className="relative z-50 inline-flex min-h-11 items-center text-muted hover:text-primary md:hidden"
                 style={{
-                  fontFamily: "var(--font-syne), system-ui, sans-serif",
+                  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
                   fontSize: "0.6rem",
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
@@ -163,7 +163,7 @@ export default function SiteHeader() {
                       isActiveHref(item.href, pathname) ? "nav-link--active" : ""
                     ].filter(Boolean).join(" ")}
                     style={{
-                      fontFamily: "var(--font-syne), system-ui, sans-serif",
+                      fontFamily: "var(--font-montserrat), system-ui, sans-serif",
                       fontWeight: 500,
                       fontSize: "0.6rem",
                       letterSpacing: "0.18em",
@@ -233,7 +233,7 @@ export default function SiteHeader() {
           <div className="h-px mb-6" style={{ background: "rgba(200,168,126,0.12)" }} />
           <p
             style={{
-              fontFamily: "var(--font-syne), system-ui, sans-serif",
+              fontFamily: "var(--font-montserrat), system-ui, sans-serif",
               fontSize: "0.55rem",
               letterSpacing: "0.25em",
               textTransform: "uppercase",
