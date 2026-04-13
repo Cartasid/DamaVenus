@@ -4,6 +4,11 @@ import Image from "next/image";
 import { visualsData } from "@/content/data/visuals.data";
 import { assetMap } from "@/content/data/site.config";
 import ImageReveal from "@/components/utils/image-reveal";
+import VideoReveal from "@/components/utils/video-reveal";
+
+const VIDEO_ASSETS: Record<string, string> = {
+  "visuals-cinderela-landscape-210": "/assets/dama-venus/visuals/dv_visuals_cinderela_hover_video_v01.mp4"
+};
 
 export const metadata: Metadata = {
   title: { absolute: "Visuals | Dáma Venus — Editorial Portraits & Photography" },
@@ -192,6 +197,18 @@ export default function VisualsPage() {
           </h2>
           <div className="grid gap-px md:grid-cols-3" style={{ background: "rgba(200,168,126,0.04)" }}>
             {entry.assets.map((assetId) => {
+              const videoSrc = VIDEO_ASSETS[assetId];
+              if (videoSrc) {
+                return (
+                  <VideoReveal
+                    key={assetId}
+                    src={videoSrc}
+                    className="aspect-video w-full md:aspect-[3/2]"
+                    style={{ padding: "1px", background: "rgba(200,168,126,0.08)" }}
+                    aria-label="Dáma Venus — Cinderela cinematic sequence"
+                  />
+                );
+              }
               const asset = assetMap[assetId];
               return asset ? (
                 <ImageReveal
