@@ -389,28 +389,6 @@ export default function MusicPage() {
         </div>
       </section>
 
-      {/* ── CROSS-LINKS ── */}
-      <nav aria-label="Explore more" className="reveal mt-28">
-        <div className="site-container">
-          <div className="mb-8 pb-8" style={{ borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
-            <p className="text-muted" style={labelStyle}>Explore</p>
-          </div>
-          <div className="grid gap-px md:grid-cols-3" style={{ background: "rgba(200,168,126,0.04)" }}>
-            <Link href="/visuals" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
-              <p className="text-accent mb-2" style={labelStyle}>Visuals</p>
-              <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>Curated portraits and editorial sequences in the cinematic signature of Dáma Venus.</p>
-            </Link>
-            <Link href="/press" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
-              <p className="text-accent mb-2" style={labelStyle}>Press &amp; EPK</p>
-              <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>Bio, press-ready images, and release facts for editorial use.</p>
-            </Link>
-            <Link href="/contact" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
-              <p className="text-accent mb-2" style={labelStyle}>Contact</p>
-              <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>Bookings, collaborations, and exclusive partnerships.</p>
-            </Link>
-          </div>
-        </div>
-      </nav>
     </div>
   );
 }

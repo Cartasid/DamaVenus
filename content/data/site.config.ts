@@ -39,8 +39,8 @@ const assetObjectPositions: Record<string, string> = {
   // ── HOME ──
   "home-lead-portrait":           "center 25%",    // Roma Trevi portrait — figure upper portion
   "home-release-cover":           "center center", // album cover — keep title visible
-  "home-visual-preview":          "center center", // 16:9 landscape — subject centered
-  "home-statement-editorial":     "center center", // 16:9 landscape — negative space for text
+  "home-visual-preview":          "center 25%",    // 4:3 portrait/landscape — face upper center
+  "home-statement-editorial":     "center 20%",    // portrait — face/upper body for text overlay
   "home-contact-newsletter":      "center center", // cover — central motif
   "home-press-preview":           "center 20%",   // portrait — face with headroom
 
@@ -48,8 +48,8 @@ const assetObjectPositions: Record<string, string> = {
   "music-current-chapter-cover":  "60% center",    // Neon portrait — face slightly right of center
   "music-current-chapter-visual": "center center", // 16:9 cinematic
   "music-midnight-signal-cover":  "center 30%",   // 4:5 portrait — face & shoulders upper center
-  "music-afterglow-cut-cover":    "center center", // 1:1 square — eyes on horizontal center
-  "music-nocturne-line-visual":   "center center", // 16:9 — gesture center-right
+  "music-afterglow-cut-cover":    "center center", // 3:2 landscape — subject centered
+  "music-nocturne-line-visual":   "center center", // 3:2 landscape — subject centered
 
   // ── VISUALS ──
   "visuals-cinderela-lead-241":       "center 25%",   // portrait — eyes/torso with breathing room

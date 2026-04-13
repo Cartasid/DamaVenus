@@ -2418,20 +2418,20 @@
       },
       {
         "id": "home-statement-editorial",
-        "finalPath": "/assets/dama-venus/visuals/dv_visuals_story_frame01_bw_16x9_v01.jpeg",
-        "sourcePath": "pics/Cinderela-210.JPEG",
+        "finalPath": "/assets/dama-venus/visuals/editorial/gduuz-portrait-v01.jpg",
+        "sourcePath": "pics/GDUUZ.JPG",
         "status": "copied"
       },
       {
         "id": "home-visual-preview",
-        "finalPath": "/assets/dama-venus/visuals/dv_visuals_story_frame01_bw_16x9_v01.jpeg",
-        "sourcePath": "pics/Cinderela-210.JPEG",
+        "finalPath": "/assets/dama-venus/visuals/dv_visuals_frames_portrait_color_4x3_v01.jpg",
+        "sourcePath": "pics/3.jpeg",
         "status": "copied"
       },
       {
         "id": "music-afterglow-cut-cover",
-        "finalPath": "/assets/dama-venus/music/dv_music_afterglow_cut_cover_color_1x1_v01.jpg",
-        "sourcePath": "pics/Cinderela-241.jpg",
+        "finalPath": "/assets/dama-venus/music/dv_music_afterglow_cut_cover_color_3x2_v01.jpg",
+        "sourcePath": "pics/Pink and Purple.png",
         "status": "copied"
       },
       {
@@ -2455,10 +2455,9 @@
       },
       {
         "id": "music-nocturne-line-visual",
-        "finalPath": "/assets/dama-venus/music/dv_music_nocturne_line_visual_bw_16x9_v01.jpg",
-        "sourcePath": "pics/Cinderela-210.JPEG",
-        "status": "converted",
-        "format": "jpeg"
+        "finalPath": "/assets/dama-venus/music/dv_music_nocturne_line_visual_color_3x2_v01.jpg",
+        "sourcePath": "pics/ChatGPT Image Apr 13, 2026, 04_13_26 PM.png",
+        "status": "copied"
       },
       {
         "id": "press-detail-still",

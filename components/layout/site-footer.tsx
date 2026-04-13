@@ -152,31 +152,6 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        {/* Management */}
-        <div className="my-10" style={{ borderTop: "1px solid rgba(200,168,126,0.06)", paddingTop: "1.5rem" }}>
-          <p style={categoryLabel} className="mb-3">Management</p>
-          <p
-            style={{
-              fontFamily: "var(--font-montserrat), system-ui, sans-serif",
-              fontSize: "0.6rem",
-              letterSpacing: "0.1em",
-              color: "rgba(245,240,235,0.5)"
-            }}
-          >
-            Office of Dáma Venus
-          </p>
-          <a
-            href="mailto:contact@damavenus.eu"
-            className="text-muted hover:text-offWhite no-underline"
-            style={{
-              ...linkStyleBase,
-              fontSize: "0.55rem"
-            }}
-          >
-            contact@damavenus.eu
-          </a>
-        </div>
-
         {/* Divider */}
         <div className="my-8 h-px" style={{ background: "rgba(200,168,126,0.06)" }} />
 
@@ -194,18 +169,7 @@ export default function SiteFooter() {
           &copy; {new Date().getFullYear()} Dáma Venus. All rights reserved. Any unauthorized use of visual or sonic assets will be subject to international legal action.
         </p>
 
-        <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <span
-            className="text-mutedFaint"
-            style={{
-              fontFamily: "var(--font-montserrat), system-ui, sans-serif",
-              fontSize: "0.48rem",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase"
-            }}
-          >
-            Visual Author &amp; Producer
-          </span>
+        <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
           <span
             style={{
               fontFamily: "var(--font-montserrat), system-ui, sans-serif",

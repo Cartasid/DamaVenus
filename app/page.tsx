@@ -119,6 +119,22 @@ export default function HomePage() {
                 </span>
               ))}
             </div>
+
+            <div className="mt-10 flex items-center gap-4 flex-wrap">
+              <a
+                href="https://open.spotify.com/artist/damavenus"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-primary no-underline"
+                aria-label="Listen on Spotify (opens in new tab)"
+              >
+                <SocialIcon name="Spotify" />
+                <span className="ml-2">Listen on Spotify</span>
+              </a>
+              <Link href="/music" className="cta-secondary no-underline">
+                Explore Music
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -129,6 +145,21 @@ export default function HomePage() {
       <div className="py-10" style={{ borderTop: "1px solid rgba(200,168,126,0.08)", borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
         <Marquee items={["Sound", "Vision", "Reign", "Alternative Pop", "Trap-Pop", "R&B", "Vaporwave", "Rio de Janeiro", "Europe", "Cinematic Artist"]} speed={40} />
       </div>
+
+      {/* ═══ PRESS QUOTE ═══ */}
+      <section className="reveal section-gap-lg" aria-label="Press quote">
+        <div className="site-container text-center" style={{ maxWidth: "52rem", margin: "0 auto" }}>
+          <p style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(200,168,126,0.5)", marginBottom: "1.5rem" }}>
+            Press
+          </p>
+          <blockquote style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "clamp(1.2rem, 2.5vw, 1.7rem)", fontWeight: 300, fontStyle: "italic", lineHeight: 1.6, color: "rgba(245,240,235,0.75)", margin: 0 }}>
+            &ldquo;Dáma Venus blends atmospheric depth with a unique sonic vision, marking her as a rising force in the international scene.&rdquo;
+          </blockquote>
+          <p className="mt-4" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(200,168,126,0.4)" }}>
+            — The Review Geek
+          </p>
+        </div>
+      </section>
 
       {/* ═══ STATEMENT ═══ */}
       <section aria-labelledby="statement-title" className="reveal-fade section-gap-lg statement-block">
@@ -161,27 +192,6 @@ export default function HomePage() {
               {visualsModule?.copy.cta ? <Link href={visualsModule.copy.cta.href} className="mt-10 inline-block cta-secondary self-start">{visualsModule.copy.cta.label}</Link> : null}
               <div className="mt-12 w-20 h-px" style={{ background: "linear-gradient(to right, rgba(200,168,126,0.5), transparent)" }} aria-hidden="true" />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ PRESS / EPK ═══ */}
-      <section aria-labelledby="press-epk-title" className="reveal section-gap-lg">
-        <div className="site-container">
-          <div className="grid gap-0 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-stretch premium-card shine-hover" style={{ border: "1px solid rgba(200,168,126,0.08)" }}>
-            <div className="flex flex-col justify-center px-10 py-20 md:px-16">
-              <p className="mb-3" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(245,240,235,0.4)" }}>Press &amp; EPK</p>
-              <h2 id="press-epk-title" className="text-primary" style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "clamp(2rem, 4.5vw, 3.5rem)", fontWeight: 400, lineHeight: 1.02, fontStyle: "italic" }}>
-                {pressModule?.copy.headline}
-              </h2>
-              {pressModule?.copy.subline ? <p className="mt-4 text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.75 }}>{pressModule.copy.subline}</p> : null}
-              {pressModule?.copy.cta ? <Link href={pressModule.copy.cta.href} className="mt-10 inline-block cta-primary self-start">{pressModule.copy.cta.label}</Link> : null}
-            </div>
-            {pressAsset ? (
-              <ImageReveal className="img-hover-zoom relative overflow-hidden" style={{ minHeight: "540px", borderLeft: "1px solid rgba(200,168,126,0.08)" }} lightboxSrc={pressAsset.src} lightboxAlt={pressAsset.alt ?? pressModule?.alt ?? ""}>
-                <Image src={pressAsset.src} alt={pressAsset.alt ?? pressModule?.alt ?? ""} fill loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="object-cover" style={{ objectPosition: pressAsset.objectPosition ?? "center center" }} />
-              </ImageReveal>
-            ) : null}
           </div>
         </div>
       </section>
