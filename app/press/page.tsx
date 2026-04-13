@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { pressEpkBlocks } from "@/content/data/press.data";
 
 export const metadata: Metadata = {
@@ -124,39 +125,61 @@ export default function PressPage() {
   return (
     <div className="pb-28">
 
-      {/* ── PAGE HEADER ── */}
-      {introBlock ? (
-        <section className="home-hero-enter site-container pt-16 pb-0">
-          <p className="text-accent mb-3" style={labelStyle}>Press &amp; EPK</p>
-          <h1
-            className="text-primary"
-            style={{
-              fontFamily: "var(--font-bodoni), Georgia, serif",
-              fontSize: "clamp(3rem, 8vw, 6rem)",
-              fontWeight: 300,
-              lineHeight: 0.95,
-              maxWidth: "22rem"
-            }}
-          >
-            {introBlock.title}
-          </h1>
-          {summaryBlock ? (
-            <div className="mt-6 max-w-2xl">
-              {typeof summaryBlock.body === "string" ? (
-                <p className="text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.75 }}>
-                  {summaryBlock.body}
-                </p>
-              ) : renderBody(summaryBlock.body)}
+      {/* ── HERO ── */}
+      <section
+        className="img-color-reveal relative overflow-hidden"
+        style={{ height: "70vh", minHeight: "520px" }}
+        aria-label="Press hero"
+      >
+        <Image
+          src="/assets/dama-venus/press/press-hero-img6485-v01.jpg"
+          alt="Dáma Venus — press editorial"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover img-press-hero"
+          style={{ objectPosition: "center 20%" }}
+        />
+        {/* gradient — text legibility left, breathing room right */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to right, rgba(5,5,5,0.72) 0%, rgba(5,5,5,0.25) 55%, rgba(5,5,5,0.15) 100%)" }}
+          aria-hidden="true"
+        />
+        {/* text overlay */}
+        {introBlock ? (
+          <div className="relative z-10 flex h-full flex-col justify-end site-container pb-14">
+            <p
+              className="mb-3"
+              style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase", color: "rgba(200,168,126,0.9)" }}
+            >
+              Press &amp; EPK
+            </p>
+            <h1
+              className="text-primary"
+              style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 300, lineHeight: 0.95, maxWidth: "28rem" }}
+            >
+              {introBlock.title}
+            </h1>
+            {summaryBlock && typeof summaryBlock.body === "string" ? (
+              <p className="mt-5 text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "34rem" }}>
+                {summaryBlock.body}
+              </p>
+            ) : null}
+            <div className="mt-8">
+              <Link href={introBlock.target} className="cta-primary">
+                {introBlock.ctaLabel}
+              </Link>
             </div>
-          ) : null}
-          <div className="mt-8">
-            <Link href={introBlock.target} className="cta-primary">
-              {introBlock.ctaLabel}
-            </Link>
           </div>
-          <div className="mt-14 h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
-        </section>
-      ) : null}
+        ) : null}
+      </section>
+
+      {/* spacer line */}
+      <div className="site-container">
+        <div className="mt-12 h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
+      </div>
+
 
       {/* ── PRESS ESSENTIALS ── */}
       <section className="reveal site-container mt-24">
