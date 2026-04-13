@@ -108,7 +108,7 @@ export default function MusicPage() {
             {featuredAsset ? (
               <ImageReveal
                 className="relative overflow-hidden"
-                style={{ minHeight: "520px" }}
+                style={{ minHeight: "680px" }}
                 lightboxSrc={featuredAsset.src}
                 lightboxAlt={featuredAsset.alt ?? featured.title}
               >
@@ -119,7 +119,7 @@ export default function MusicPage() {
                   priority
                   sizes="(max-width: 768px) 100vw, 40vw"
                   className="object-cover"
-                  style={{ objectPosition: featuredAsset.objectPosition ?? "center center" }}
+                  style={{ objectPosition: "center 15%" }}
                 />
               </ImageReveal>
             ) : null}
