@@ -148,7 +148,7 @@ const jsonLdGraph = {
         "https://www.instagram.com/ichbindamavenus",
         "https://www.youtube.com/@damavenus",
         "https://www.linkedin.com/in/damavenus",
-        "https://www.filmmakers.eu/damavenus"
+        "https://www.filmmakers.eu/de/actors/tamiris-bittencourt-da-silva-brasil"
       ],
       member: {
         "@type": "Person",

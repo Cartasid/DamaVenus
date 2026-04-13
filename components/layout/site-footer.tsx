@@ -8,7 +8,7 @@ const socialLinks = [
   { label: "Instagram", href: "https://www.instagram.com/ichbindamavenus" },
   { label: "YouTube", href: "https://www.youtube.com/@damavenus" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/damavenus" },
-  { label: "Filmmakers.eu", href: "https://www.filmmakers.eu/damavenus" }
+  { label: "Filmmakers.eu", href: "https://www.filmmakers.eu/de/actors/tamiris-bittencourt-da-silva-brasil" }
 ];
 
 const footerNav = extendedNavigationItems;
