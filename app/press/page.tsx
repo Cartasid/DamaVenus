@@ -244,34 +244,6 @@ export default function PressPage() {
         </div>
       </section>
 
-      {/* ── CONTACT ── */}
-      {contactBlock ? (
-        <section className="reveal site-container mt-24">
-          <div
-            className="p-8 md:p-12"
-            style={{
-              background: "linear-gradient(135deg, rgba(200,168,126,0.06) 0%, transparent 70%)",
-              border: "1px solid rgba(200,168,126,0.15)"
-            }}
-          >
-            <p className="text-accent mb-3" style={labelStyle}>Contact</p>
-            <h2
-              className="text-primary mb-4"
-              style={{
-                fontFamily: "var(--font-bodoni), Georgia, serif",
-                fontSize: "clamp(1.8rem, 4vw, 3rem)",
-                fontWeight: 300
-              }}
-            >
-              {contactBlock.title}
-            </h2>
-            {renderBody(contactBlock.body)}
-            <Link href={contactBlock.target} className="mt-6 inline-block cta-primary">
-              {contactBlock.ctaLabel}
-            </Link>
-          </div>
-        </section>
-      ) : null}
     </div>
   );
 }
