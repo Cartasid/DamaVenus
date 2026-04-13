@@ -336,12 +336,12 @@ export default function MusicPage() {
                 : null;
 
               return (
-                <li key={release.id} className="p-6" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
-                  <article className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]" aria-labelledby={`${release.id}-title`}>
+                <li key={release.id} className="p-8" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
+                  <article className="grid gap-8 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center" aria-labelledby={`${release.id}-title`}>
                     {watchAction && releaseAsset ? (
                       <ImageReveal
                         className="relative overflow-hidden"
-                        style={{ height: "160px" }}
+                        style={{ height: "300px" }}
                         lightboxSrc={releaseAsset.src}
                         lightboxAlt={releaseAsset.alt ?? `${release.title} visual still`}
                       >
