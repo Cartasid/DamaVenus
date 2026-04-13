@@ -131,24 +131,19 @@ export default function PressPage() {
         style={{ height: "70vh", minHeight: "520px" }}
         aria-label="Press hero"
       >
-        {/* Portrait image — right-aligned, full height, correct aspect ratio so entire image is visible */}
-        <div
-          className="absolute right-0 top-0 h-full"
-          style={{ aspectRatio: "5504 / 8256" }}
-        >
-          <Image
-            src="/assets/dama-venus/press/press-hero-img6485-v01.jpg"
-            alt="Dáma Venus — press editorial"
-            fill
-            priority
-            sizes="50vw"
-            className="object-cover img-press-hero"
-          />
-        </div>
+        <Image
+          src="/assets/dama-venus/press/press-hero-img6485-v01.jpg"
+          alt="Dáma Venus — press editorial"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover img-press-hero"
+          style={{ objectPosition: "center 35%" }}
+        />
         {/* gradient — text legibility left */}
         <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(to right, rgba(5,5,5,0.85) 0%, rgba(5,5,5,0.55) 45%, rgba(5,5,5,0.1) 75%, rgba(5,5,5,0.0) 100%)" }}
+          style={{ background: "linear-gradient(to right, rgba(5,5,5,0.78) 0%, rgba(5,5,5,0.4) 50%, rgba(5,5,5,0.15) 100%)" }}
           aria-hidden="true"
         />
         {/* text overlay */}
