@@ -120,21 +120,6 @@ export default function HomePage() {
               ))}
             </div>
 
-            <div className="mt-10 flex items-center gap-4 flex-wrap">
-              <a
-                href="https://open.spotify.com/artist/damavenus"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cta-primary no-underline"
-                aria-label="Listen on Spotify (opens in new tab)"
-              >
-                <SocialIcon name="Spotify" />
-                <span className="ml-2">Listen on Spotify</span>
-              </a>
-              <Link href="/music" className="cta-secondary no-underline">
-                Explore Music
-              </Link>
-            </div>
           </div>
         </div>
 
