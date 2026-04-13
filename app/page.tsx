@@ -199,11 +199,11 @@ export default function HomePage() {
       {/* ═══ CONTACT CTA ═══ */}
       <section aria-labelledby="contact-newsletter-title" className="reveal section-gap-lg">
         <div className="site-container">
-          <div className="relative overflow-hidden px-10 py-36 md:px-20 md:py-44 glow-accent" style={{ border: "1px solid rgba(200,168,126,0.12)" }}>
+          <div className="relative overflow-hidden px-10 py-36 md:px-20 md:py-44 glow-accent img-color-reveal" style={{ border: "1px solid rgba(200,168,126,0.12)" }}>
             {assetMap["contact-red-portrait-69bf"] ? (
-              <div className="absolute inset-0 img-color-reveal" aria-hidden="true">
+              <div className="absolute inset-0" aria-hidden="true">
                 <Image src={assetMap["contact-red-portrait-69bf"].src} alt="" fill sizes="100vw" loading="lazy" className="object-cover img-contact-bg" style={{ objectPosition: assetMap["contact-red-portrait-69bf"].objectPosition ?? "center 30%" }} />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(5,5,5,0.6) 0%, rgba(5,5,5,0.15) 55%, rgba(5,5,5,0.35) 100%)" }} />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.05) 55%, rgba(5,5,5,0.3) 100%)" }} />
               </div>
             ) : (
               <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(200,168,126,0.04) 0%, rgba(5,5,5,0.95) 50%, rgba(255,0,255,0.03) 100%)" }} aria-hidden="true" />
