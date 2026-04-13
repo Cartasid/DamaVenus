@@ -218,17 +218,6 @@ export default function HomePage() {
               </h2>
               {contactNewsletterModule?.copy.subline ? <p className="mt-6 text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "30rem" }}>{contactNewsletterModule.copy.subline}</p> : null}
               {contactNewsletterModule?.copy.cta ? <Link href={contactNewsletterModule.copy.cta.href} className="mt-10 inline-block cta-primary">{contactNewsletterModule.copy.cta.label}</Link> : null}
-              <div className="mt-8 flex flex-wrap items-center gap-6">
-                <a href="mailto:contact@damavenus.eu" className="text-muted hover:text-offWhite no-underline" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.6rem", letterSpacing: "0.12em", textTransform: "uppercase", transition: "color 300ms" }} aria-label="Send email to contact@damavenus.eu">contact@damavenus.eu</a>
-                <span style={{ width: "1px", height: "16px", background: "rgba(200,168,126,0.2)" }} aria-hidden="true" />
-                {[
-                  { label: "Spotify", href: "https://open.spotify.com/artist/damavenus" },
-                  { label: "Instagram", href: "https://www.instagram.com/ichbindamavenus" },
-                  { label: "YouTube", href: "https://www.youtube.com/@damavenus" }
-                ].map((social) => (
-                  <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.label} (opens in new tab)`} className="text-muted hover:text-offWhite no-underline flex items-center gap-2" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.55rem", letterSpacing: "0.15em", textTransform: "uppercase", transition: "color 300ms" }}><SocialIcon name={social.label} />{social.label}</a>
-                ))}
-              </div>
             </div>
           </div>
         </div>
