@@ -8,18 +8,18 @@ import HeroTextReveal from "@/components/utils/hero-text-reveal";
 import ImageReveal from "@/components/utils/image-reveal";
 
 export const metadata: Metadata = {
-  title: { absolute: "Bio | Dáma Venus — Singer, Visual Author & Actress from Rio de Janeiro" },
-  description: "Dáma Venus — Brazilian singer, visual author, and international actress based in Berlin. From Rio de Janeiro to Europe, building an identity where sound, fashion, and cinematic vision converge.",
+  title: { absolute: "Bio | Dáma Venus — Singer & Actress from Rio de Janeiro" },
+  description: "Dáma Venus — Brazilian singer, songwriter, visual author, and actress based in Berlin. From Rio de Janeiro to Europe, where sound, fashion, and cinematic vision converge.",
   openGraph: {
-    title: "Bio | Dáma Venus — Singer, Visual Author & Actress",
-    description: "Brazilian singer, visual author, and international actress — from Rio de Janeiro to Berlin.",
+    title: "Bio | Dáma Venus — Singer & Actress",
+    description: "Brazilian singer, songwriter, visual author, and actress — from Rio de Janeiro to Berlin.",
     url: "/about",
-    images: [{ url: "/og-default.png" }]
+    images: [{ url: "/og-about.png" }]
   },
   twitter: {
-    title: "Bio | Dáma Venus — Singer, Visual Author & Actress",
-    description: "Brazilian singer, visual author, and international actress — from Rio de Janeiro to Berlin.",
-    images: ["/og-default.png"]
+    title: "Bio | Dáma Venus — Singer & Actress",
+    description: "Brazilian singer, songwriter, visual author, and actress — from Rio de Janeiro to Berlin.",
+    images: ["/og-about.png"]
   },
   alternates: { canonical: "/about" }
 };

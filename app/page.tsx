@@ -10,18 +10,18 @@ import ParallaxHero from "@/components/utils/parallax-hero";
 import ImageReveal from "@/components/utils/image-reveal";
 
 export const metadata: Metadata = {
-  title: { absolute: "Dáma Venus | Official Website | Visual Author & Actress" },
-  description: "Official platform for Dáma Venus. Berlin-based producer, actress, and Miss Americas. Exploring the after-dark cinematic architecture. New album June 12th.",
+  title: { absolute: "Dáma Venus — Singer, Songwriter & Visual Author | Official Site" },
+  description: "Dáma Venus — Brazilian singer, songwriter, and visual author based in Berlin. Alternative pop, trap-pop, R&B, and vaporwave. Explore music, visuals, and bookings.",
   openGraph: {
-    title: "Dáma Venus | Official Website | Visual Author & Actress",
-    description: "Official platform for Dáma Venus. Berlin-based producer, actress, and Miss Americas. Exploring the after-dark cinematic architecture. New album June 12th.",
+    title: "Dáma Venus — Singer, Songwriter & Visual Author",
+    description: "Brazilian singer, songwriter, and visual author based in Berlin. Alternative pop, trap-pop, R&B, and vaporwave.",
     url: "/",
-    images: [{ url: "/og-default.png" }]
+    images: [{ url: "/og-home.png" }]
   },
   twitter: {
-    title: "Dáma Venus | Official Website | Visual Author & Actress",
-    description: "Explore the cinematic world of Dáma Venus. Berlin-based artist, producer, and Miss Americas.",
-    images: ["/og-default.png"]
+    title: "Dáma Venus — Singer, Songwriter & Visual Author",
+    description: "Brazilian singer, songwriter, and visual author based in Berlin. Explore music, visuals, and bookings.",
+    images: ["/og-home.png"]
   },
   alternates: { canonical: "/" }
 };
@@ -191,10 +191,10 @@ export default function HomePage() {
         <div className="site-container">
           <div className="relative overflow-hidden px-10 py-36 md:px-20 md:py-44 glow-accent" style={{ border: "1px solid rgba(200,168,126,0.12)" }}>
             {assetMap["contact-red-portrait-69bf"] ? (
-              <ImageReveal className="absolute inset-0 img-color-reveal" aria-hidden="true">
+              <div className="absolute inset-0 img-color-reveal" aria-hidden="true">
                 <Image src={assetMap["contact-red-portrait-69bf"].src} alt="" fill sizes="100vw" loading="lazy" className="object-cover img-contact-bg" style={{ objectPosition: assetMap["contact-red-portrait-69bf"].objectPosition ?? "center 30%" }} />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(5,5,5,0.6) 0%, rgba(5,5,5,0.15) 55%, rgba(5,5,5,0.35) 100%)" }} />
-              </ImageReveal>
+              </div>
             ) : (
               <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(200,168,126,0.04) 0%, rgba(5,5,5,0.95) 50%, rgba(255,0,255,0.03) 100%)" }} aria-hidden="true" />
             )}

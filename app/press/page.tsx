@@ -3,18 +3,18 @@ import Link from "next/link";
 import { pressEpkBlocks } from "@/content/data/press.data";
 
 export const metadata: Metadata = {
-  title: { absolute: "Press & EPK | Dáma Venus — Bio, Images & Release Facts for Media" },
+  title: { absolute: "Press & EPK | Dáma Venus — Bio, Images & Release Facts" },
   description: "Download the press kit of Dáma Venus — artist bio, high-resolution images, release facts, and EPK for journalists, bloggers, and media professionals.",
   openGraph: {
     title: "Press & EPK | Dáma Venus",
     description: "Download the press kit — bio, high-res images, release facts, and EPK for media use.",
     url: "/press",
-    images: [{ url: "/og-default.png" }]
+    images: [{ url: "/og-press.png" }]
   },
   twitter: {
     title: "Press & EPK | Dáma Venus",
     description: "Download the press kit — bio, high-res images, release facts, and EPK for media use.",
-    images: ["/og-default.png"]
+    images: ["/og-press.png"]
   },
   alternates: { canonical: "/press" }
 };

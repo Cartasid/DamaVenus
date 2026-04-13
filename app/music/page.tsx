@@ -12,12 +12,12 @@ export const metadata: Metadata = {
     title: "Music & Releases | Dáma Venus",
     description: "Stream releases, watch cinematic visuals, and discover new singles by Dáma Venus — alternative pop from Berlin.",
     url: "/music",
-    images: [{ url: "/og-default.png" }]
+    images: [{ url: "/og-music.png" }]
   },
   twitter: {
     title: "Music & Releases | Dáma Venus",
     description: "Stream releases, watch cinematic visuals, and discover new singles by Dáma Venus.",
-    images: ["/og-default.png"]
+    images: ["/og-music.png"]
   },
   alternates: { canonical: "/music" }
 };
@@ -67,10 +67,12 @@ export default function MusicPage() {
 
       {/* ── PAGE HEADER ── */}
       <div className="site-container pt-16 pb-0">
+        <h1 className="sr-only">Dáma Venus — Music &amp; Releases</h1>
         <div className="mb-2">
           <p className="text-muted" style={labelStyle}>{musicData.intro.label}</p>
         </div>
-        <h1
+        <p
+          role="doc-subtitle"
           className="text-primary"
           style={{
             fontFamily: "var(--font-bodoni), Georgia, serif",
@@ -81,7 +83,7 @@ export default function MusicPage() {
           }}
         >
           {musicData.intro.headline}
-        </h1>
+        </p>
         {musicData.intro.subhead ? (
           <p
             className="mt-5 text-muted"

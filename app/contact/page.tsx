@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     title: "Contact & Bookings | Dáma Venus",
     description: "Book Dáma Venus for performances, collaborations, film projects, and brand partnerships.",
     url: "/contact",
-    images: [{ url: "/og-default.png" }]
+    images: [{ url: "/og-contact.png" }]
   },
   twitter: {
     title: "Contact & Bookings | Dáma Venus",
     description: "Book Dáma Venus for performances, collaborations, film projects, and brand partnerships.",
-    images: ["/og-default.png"]
+    images: ["/og-contact.png"]
   },
   alternates: {
     canonical: "/contact"
@@ -58,8 +58,10 @@ export default function ContactPage() {
       <section className="section-stack-md max-w-2xl">
 
         <header className="space-y-4">
+          <h1 className="sr-only">Contact &amp; Bookings — Dáma Venus</h1>
           <p className="text-accent" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>Inquiries</p>
-          <h1
+          <p
+            role="doc-subtitle"
             className="text-primary"
             style={{
               fontFamily: "var(--font-bodoni), Georgia, serif",
@@ -69,7 +71,7 @@ export default function ContactPage() {
             }}
           >
             {contactContent.intro.headline}
-          </h1>
+          </p>
           <p className="text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.75 }}>
             {contactContent.intro.subhead}
           </p>

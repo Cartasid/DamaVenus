@@ -6,18 +6,18 @@ import { assetMap } from "@/content/data/site.config";
 import ImageReveal from "@/components/utils/image-reveal";
 
 export const metadata: Metadata = {
-  title: { absolute: "Visuals & Photography | Dáma Venus — Editorial Portraits & Cinematic Imagery" },
-  description: "Curated editorial portraits, cinematic photography, and fashion-driven visual direction by Dáma Venus — from Rio de Janeiro to Berlin.",
+  title: { absolute: "Visuals | Dáma Venus — Editorial Portraits & Photography" },
+  description: "Curated editorial portraits, cinematic photography, and fashion-driven visual direction by Dáma Venus — from Rio de Janeiro to Berlin. View the full visual world.",
   openGraph: {
-    title: "Visuals & Photography | Dáma Venus",
+    title: "Visuals | Dáma Venus — Editorial Portraits & Photography",
     description: "Curated editorial portraits and cinematic photography by Dáma Venus — fashion-driven visual direction.",
     url: "/visuals",
-    images: [{ url: "/og-default.png" }]
+    images: [{ url: "/og-visuals.png" }]
   },
   twitter: {
-    title: "Visuals & Photography | Dáma Venus",
+    title: "Visuals | Dáma Venus — Editorial Portraits & Photography",
     description: "Curated editorial portraits and cinematic photography by Dáma Venus.",
-    images: ["/og-default.png"]
+    images: ["/og-visuals.png"]
   },
   alternates: { canonical: "/visuals" }
 };
@@ -55,8 +55,10 @@ export default function VisualsPage() {
 
       {/* ── PAGE HEADER ── */}
       <header className="home-hero-enter site-container pt-24 pb-0">
+        <h1 className="sr-only">Dáma Venus — Visuals &amp; Photography</h1>
         <p className="text-muted mb-4" style={labelStyle}>{visualsData.intro.label}</p>
-        <h1
+        <p
+          role="doc-subtitle"
           id="visuals-page-title"
           className="text-primary"
           style={{
@@ -68,7 +70,7 @@ export default function VisualsPage() {
           }}
         >
           {visualsData.intro.headline}
-        </h1>
+        </p>
         {visualsData.intro.subhead ? (
           <p className="mt-8 text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "34rem" }}>
             {visualsData.intro.subhead}
