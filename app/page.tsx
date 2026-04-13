@@ -228,7 +228,6 @@ export default function HomePage() {
         <Marquee items={["Dama Venus", "Sound", "Vision", "Reign", "Live Performer", "Rio de Janeiro", "Europe"]} speed={50} />
       </div>
 
-      <div className="section-gap-md" />
     </div>
   );
 }

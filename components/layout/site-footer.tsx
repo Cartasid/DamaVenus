@@ -36,7 +36,7 @@ export default function SiteFooter() {
         borderTop: "1px solid rgba(200,168,126,0.1)"
       }}
     >
-      <div className="site-container py-28">
+      <div className="site-container py-16">
 
         {/* Top — Brand + Statement */}
         <div className="grid gap-16 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
