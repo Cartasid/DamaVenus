@@ -138,7 +138,7 @@ export default function PressPage() {
           priority
           sizes="100vw"
           className="object-cover img-press-hero"
-          style={{ objectPosition: "center 25%" }}
+          style={{ objectPosition: "center 55%" }}
         />
         {/* gradient — text legibility left */}
         <div
