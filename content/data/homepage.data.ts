@@ -3,7 +3,7 @@ import { contactContent } from "@/content/data/contact.data";
 import { pressContent } from "@/content/data/press.data";
 
 export const homepageIntro = {
-  statement: "Visual Author"
+  statement: "Dama Venus Productions"
 };
 
 export const homepageRelease: ReleaseItem = {
