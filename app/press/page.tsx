@@ -132,13 +132,13 @@ export default function PressPage() {
         aria-label="Press hero"
       >
         <Image
-          src="/assets/dama-venus/press/press-hero-img6485-v01.jpg"
+          src="/assets/dama-venus/press/press-hero-bnj7p-v01.jpg"
           alt="Dáma Venus — press editorial"
           fill
           priority
           sizes="100vw"
           className="object-cover img-press-hero"
-          style={{ objectPosition: "center 35%" }}
+          style={{ objectPosition: "center 25%" }}
         />
         {/* gradient — text legibility left */}
         <div
