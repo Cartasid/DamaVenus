@@ -3,7 +3,7 @@ import { contactContent } from "@/content/data/contact.data";
 import { pressContent } from "@/content/data/press.data";
 
 export const homepageIntro = {
-  statement: "Cinematic Sound from Rio de Janeiro to Berlin"
+  statement: "Visual Author"
 };
 
 export const homepageRelease: ReleaseItem = {
