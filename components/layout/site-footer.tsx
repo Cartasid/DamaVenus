@@ -7,6 +7,7 @@ const socialLinks = [
   { label: "Spotify", href: "https://open.spotify.com/artist/damavenus" },
   { label: "Instagram", href: "https://www.instagram.com/ichbindamavenus" },
   { label: "YouTube", href: "https://www.youtube.com/@damavenus" },
+  { label: "IMDb", href: "https://www.imdb.com/de/user/p.4wto5j2r4u46tj5xjjvvwzj7tu" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/damavenus" },
   { label: "Filmmakers.eu", href: "https://www.filmmakers.eu/de/actors/tamiris-bittencourt-da-silva-brasil" }
 ];

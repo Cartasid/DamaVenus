@@ -147,6 +147,7 @@ const jsonLdGraph = {
         "https://open.spotify.com/artist/damavenus",
         "https://www.instagram.com/ichbindamavenus",
         "https://www.youtube.com/@damavenus",
+        "https://www.imdb.com/de/user/p.4wto5j2r4u46tj5xjjvvwzj7tu",
         "https://www.linkedin.com/in/damavenus",
         "https://www.filmmakers.eu/de/actors/tamiris-bittencourt-da-silva-brasil"
       ],

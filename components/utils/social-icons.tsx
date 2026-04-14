@@ -34,6 +34,12 @@ export default function SocialIcon({ name }: { name: string }) {
           <path d="M19.6 3H4.4C3.1 3 2 4.1 2 5.4v13.2C2 19.9 3.1 21 4.4 21h15.2c1.3 0 2.4-1.1 2.4-2.4V5.4C22 4.1 20.9 3 19.6 3zM7 7h2v2H7V7zm-3 0h2v2H4V7zm3 4h2v2H7v-2zm-3 0h2v2H4v-2zm3 4h2v2H7v-2zm-3 0h2v2H4v-2zm16-1H10V8h10v6zm0 4h-2v-2h2v2zm0-8h-2V8h2v2z"/>
         </svg>
       );
+    case "IMDb":
+      return (
+        <svg viewBox="0 0 24 24" style={iconStyle} aria-hidden="true">
+          <path d="M1 3.5h3v17H1v-17zm5 0h4.5l1.1 7.5 1.1-7.5H17v17h-3V9l-1.5 11.5h-2L9 9v11.5H6v-17zm13 0h4v17h-4v-17z"/>
+        </svg>
+      );
     default:
       return null;
   }
