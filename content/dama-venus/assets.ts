@@ -405,6 +405,20 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     role: "decorative"
   },
   {
+    id: "about-press-feature-tamiris",
+    finalPath: "/assets/dama-venus/about/dv_about_supporting_visual_calm_02_color_3x4_v01.jpeg",
+    sourcePath: "pics/Tamiris-12.JPEG",
+    area: "about",
+    recommendedModuleType: "about-supporting-visual",
+    altDraft: "Dáma Venus — editorial portrait",
+    cropHint: "Portrait 3:4 crop with face-safe area",
+    focusHint: "Keep face upper center",
+    swColorMode: "excellent",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 5,
+    role: "informative"
+  },
+  {
     id: "about-supporting-visual-calm-02",
     finalPath: "/assets/dama-venus/about/dv_about_supporting_img7138_v01.jpg",
     sourcePath: "pics/IMG_7138.HEIC",

@@ -2379,6 +2379,12 @@
         "status": "copied"
       },
       {
+        "id": "about-press-feature-tamiris",
+        "finalPath": "/assets/dama-venus/about/dv_about_supporting_visual_calm_02_color_3x4_v01.jpeg",
+        "sourcePath": "pics/Tamiris-12.JPEG",
+        "status": "copied"
+      },
+      {
         "id": "about-supporting-visual-calm-02",
         "finalPath": "/assets/dama-venus/about/dv_about_supporting_img7138_v01.jpg",
         "sourcePath": "pics/IMG_7138.HEIC",
