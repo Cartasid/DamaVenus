@@ -6,9 +6,7 @@ import { assetMap } from "@/content/data/site.config";
 import ImageReveal from "@/components/utils/image-reveal";
 import VideoReveal from "@/components/utils/video-reveal";
 
-const VIDEO_ASSETS: Record<string, string> = {
-  "visuals-cinderela-landscape-210": "/assets/dama-venus/visuals/dv_visuals_cinderela_hover_video_v01.mp4"
-};
+const VIDEO_ASSETS: Record<string, string> = {};
 
 export const metadata: Metadata = {
   title: { absolute: "Visuals | Dáma Venus — Editorial Portraits & Photography" },

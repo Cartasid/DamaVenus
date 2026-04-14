@@ -57,7 +57,7 @@ const assetObjectPositions: Record<string, string> = {
   "contact-red-portrait-69bf":        "center 30%",   // red backdrop editorial — face in upper third
   "visuals-cinderela-frame-243":      "center 30%",   // portrait — face center & shoulder line
   "visuals-cinderela-frame-288":      "center 35%",   // portrait close — eyes above midpoint
-  "visuals-cinderela-landscape-210":  "center center", // 16:9 landscape
+  "visuals-cinderela-landscape-210":  "center 25%", // portrait RET.png in 3:2 grid — upper body/face
   "visuals-uuid-6824":                "center center", // wide landscape
   "visuals-uuid-3493":                "center 30%",   // portrait — face & gaze axis
   "visuals-portrait-tamiris-12":      "center 25%",   // portrait — face upper center

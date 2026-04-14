@@ -2514,8 +2514,8 @@ export const damaVenusAssetMap = {
       },
       {
         "id": "visuals-cinderela-landscape-210",
-        "finalPath": "/assets/dama-venus/visuals/dv_visuals_cinderela_landscape_210_bw_16x9_v01.jpeg",
-        "sourcePath": "pics/Cinderela-210.JPEG",
+        "finalPath": "/assets/dama-venus/visuals/dv_visuals_ret_portrait_v01.png",
+        "sourcePath": "pics/RET.png",
         "status": "copied"
       },
       {
