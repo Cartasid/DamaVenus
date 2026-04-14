@@ -219,6 +219,54 @@ export default function MusicPage() {
         </div>
       </section>
 
+      {/* ── DIRECTOR'S STATEMENT ── */}
+      <section className="reveal mt-28" aria-labelledby="director-statement-heading">
+        <div className="site-container">
+          <div className="mb-8 pb-8" style={{ borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
+            <p className="text-muted" style={labelStyle}>Director&apos;s Statement</p>
+          </div>
+          <div
+            style={{
+              border: "1px solid rgba(200,168,126,0.08)",
+              borderLeft: "2px solid rgba(200,168,126,0.15)"
+            }}
+            className="px-10 py-12 md:px-14 md:py-16"
+          >
+            <h3
+              id="director-statement-heading"
+              style={{
+                fontFamily: "var(--font-bodoni), Georgia, serif",
+                fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)",
+                fontWeight: 300,
+                fontStyle: "italic",
+                lineHeight: 1.4,
+                color: "rgba(245,240,235,0.85)"
+              }}
+            >
+              The Architecture of Loneliness
+            </h3>
+            <div
+              className="mt-6 mb-6"
+              style={{ width: "40px", height: "1px", background: "rgba(200,168,126,0.3)" }}
+              aria-hidden="true"
+            />
+            <p
+              style={{
+                fontFamily: "var(--font-montserrat), system-ui, sans-serif",
+                fontSize: "0.85rem",
+                lineHeight: 1.85,
+                letterSpacing: "0.01em",
+                color: "rgba(245,240,235,0.55)",
+                maxWidth: "42rem"
+              }}
+            >
+              Lonely Berlin is a testament to Vanguarda and cinematic precision. This project rejects the noise of mass production to focus on the raw, neo-noir atmosphere of Berlin&apos;s after-dark identity.
+              My goal was to prove that high-end aesthetics are born from an uncompromising vision. By merging sophisticated lighting with architectural storytelling, I&apos;ve established a Soberania of style that is impossible to replicate. This is a visual manifesto for the new era of international cinema&mdash;where the author&apos;s DNA is the most valuable currency.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ── VISUAL RELEASES ── */}
       <section id="visual-releases" className="reveal mt-28">
         <div className="site-container">
