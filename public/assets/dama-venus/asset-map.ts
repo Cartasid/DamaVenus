@@ -2532,8 +2532,8 @@ export const damaVenusAssetMap = {
       },
       {
         "id": "visuals-portrait-tamiris-12",
-        "finalPath": "/assets/dama-venus/visuals/dv_visuals_portrait_tamiris_zrztf_v01.jpg",
-        "sourcePath": "pics/ZRZTF.png",
+        "finalPath": "/assets/dama-venus/visuals/dv_visuals_portrait_img4671_v01.jpg",
+        "sourcePath": "pics/IMG_4671.JPEG",
         "status": "copied"
       },
       {
