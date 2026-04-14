@@ -234,40 +234,6 @@ export default function VisualsPage() {
         </section>
       ))}
 
-      {/* ── PORTRAIT FEATURE ── */}
-      {portraitFeature && portraitAsset ? (
-        <section className="reveal site-container mt-28" aria-labelledby={`${portraitFeature.id}-portrait-title`}>
-          <p className="text-muted mb-2" style={labelStyle}>Portrait</p>
-          <h2
-            id={`${portraitFeature.id}-portrait-title`}
-            className="text-primary mb-8"
-            style={{
-              fontFamily: "var(--font-bodoni), Georgia, serif",
-              fontSize: "clamp(1.8rem, 4vw, 3rem)",
-              fontWeight: 300
-            }}
-          >
-            {portraitFeature.title}
-          </h2>
-          <ImageReveal
-            className="relative overflow-hidden"
-            style={{ height: "70vh", minHeight: "500px" }}
-            lightboxSrc={portraitAsset.src}
-            lightboxAlt={resolveAlt(portraitAsset, portraitFeature.altTextNotes)}
-          >
-            <Image
-              src={portraitAsset.src}
-              alt={resolveAlt(portraitAsset, portraitFeature.altTextNotes)}
-              fill
-              loading="lazy"
-              sizes="100vw"
-              className="object-cover"
-              style={{ objectPosition: portraitAsset.objectPosition ?? "center 25%" }}
-            />
-          </ImageReveal>
-        </section>
-      ) : null}
-
       {/* ── QUIET STILLS ── */}
       {quietStills.map((entry) => (
         <section key={entry.id} className="reveal site-container mt-28" aria-labelledby={`${entry.id}-stills-title`}>
