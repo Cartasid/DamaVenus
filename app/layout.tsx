@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Bodoni_Moda, Montserrat } from "next/font/google";
 import "./globals.css";
+import "./premium-polish.css";
 import SiteFooter from "@/components/layout/site-footer";
 import SiteHeader from "@/components/layout/site-header";
 import ScrollRevealProvider from "@/components/utils/scroll-reveal-provider";
@@ -17,14 +18,16 @@ const bodoni = Bodoni_Moda({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
   style: ["normal", "italic"],
-  variable: "--font-bodoni"
+  variable: "--font-bodoni",
+  display: "swap"
 });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
   style: ["normal", "italic"],
-  variable: "--font-montserrat"
+  variable: "--font-montserrat",
+  display: "swap"
 });
 
 const metadataTitle = {
@@ -178,19 +181,16 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang={siteConfig.language}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://open.spotify.com" />
-        <link rel="dns-prefetch" href="https://www.instagram.com" />
-        <link rel="dns-prefetch" href="https://www.youtube.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
         />
       </head>
-      <body className={`${bodoni.variable} ${montserrat.variable} min-h-screen flex flex-col`}>
+      <body className={`${bodoni.variable} ${montserrat.variable} premium-site min-h-screen flex flex-col`}>
         <noscript>
-          <style>{".reveal,.reveal-fade{opacity:1!important;transform:none!important}"}</style>
+          <style>{
+            ".reveal,.reveal-fade{opacity:1!important;transform:none!important}img[loading='lazy']{opacity:1!important}"
+          }</style>
         </noscript>
         <ScrollProgress />
         <CustomCursor />
