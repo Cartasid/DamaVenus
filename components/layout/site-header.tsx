@@ -10,30 +10,63 @@ function isActiveHref(href: string, pathname: string): boolean {
   return pathname === href || pathname.startsWith(href + "/");
 }
 
+function getFocusableElements(
+  menu: HTMLElement | null,
+  toggle: HTMLButtonElement | null
+): HTMLElement[] {
+  const menuElements = menu
+    ? Array.from(
+        menu.querySelectorAll<HTMLElement>(
+          'a[href]:not([tabindex="-1"]), button:not([disabled]):not([tabindex="-1"])'
+        )
+      )
+    : [];
+
+  return toggle ? [toggle, ...menuElements] : menuElements;
+}
+
 export default function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const menuId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLElement>(null);
   const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+    let frame = 0;
+
+    const updateScrolledState = () => {
+      frame = 0;
+      const nextState = window.scrollY > 40;
+      setIsScrolled((currentState) =>
+        currentState === nextState ? currentState : nextState
+      );
     };
+
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(updateScrolledState);
+    };
+
+    updateScrolledState();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!isMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, [isMenuOpen]);
 
@@ -42,63 +75,72 @@ export default function SiteHeader() {
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        event.preventDefault();
         setIsMenuOpen(false);
         toggleRef.current?.focus();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const focusable = getFocusableElements(menuRef.current, toggleRef.current);
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
 
     window.addEventListener("keydown", onKeyDown);
-    const timeout = setTimeout(() => firstMobileLinkRef.current?.focus(), 100);
+    const timeout = window.setTimeout(() => firstMobileLinkRef.current?.focus(), 80);
 
     return () => {
       window.removeEventListener("keydown", onKeyDown);
-      clearTimeout(timeout);
+      window.clearTimeout(timeout);
     };
   }, [isMenuOpen]);
 
-  const headerBg = isScrolled
-    ? "backdrop-blur-xl"
-    : "";
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   return (
     <>
       <header
-        className="sticky top-0 z-50"
-        style={{ transition: "background-color 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)" }}
+        className="site-header sticky top-0 z-50"
+        data-scrolled={isScrolled ? "true" : "false"}
+        data-menu-open={isMenuOpen ? "true" : "false"}
       >
-        <div
-          className={headerBg}
-          style={{
-            backgroundColor: isScrolled ? "rgba(5,5,5,0.92)" : "transparent",
-            borderBottom: isScrolled ? "1px solid rgba(200,168,126,0.08)" : "1px solid transparent",
-            transition: "background-color 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)"
-          }}
-        >
+        <div className="site-header__surface">
           <div className="site-container py-5">
             <div className="flex items-center justify-between">
-
-              {/* Logo */}
               <Link
                 href="/"
                 className="no-underline group relative z-50"
                 aria-label="Dama Venus — Home"
               >
                 <span
-                  className="block text-primary"
+                  className="site-header__brand block text-primary"
                   style={{
                     fontFamily: "var(--font-bodoni), Georgia, serif",
                     fontSize: "0.85rem",
                     letterSpacing: "0.15em",
                     textTransform: "uppercase",
-                    fontWeight: 400,
-                    transition: "color 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+                    fontWeight: 400
                   }}
                 >
                   Dama Venus
                 </span>
               </Link>
 
-              {/* Mobile menu toggle */}
               <button
                 ref={toggleRef}
                 type="button"
@@ -116,8 +158,8 @@ export default function SiteHeader() {
                 onClick={() => setIsMenuOpen((open) => !open)}
               >
                 <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
-                  {/* Hamburger / X icon */}
                   <span
+                    aria-hidden="true"
                     style={{
                       display: "flex",
                       flexDirection: "column",
@@ -151,7 +193,6 @@ export default function SiteHeader() {
                 </span>
               </button>
 
-              {/* Desktop navigation */}
               <nav aria-label="Primary Navigation" className="hidden items-center gap-10 md:flex">
                 {navigationItems.map((item) => (
                   <Link
@@ -161,7 +202,9 @@ export default function SiteHeader() {
                     className={[
                       "nav-link inline-flex min-h-11 items-center focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-current md:min-h-0",
                       isActiveHref(item.href, pathname) ? "nav-link--active" : ""
-                    ].filter(Boolean).join(" ")}
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
                     style={{
                       fontFamily: "var(--font-montserrat), system-ui, sans-serif",
                       fontWeight: 500,
@@ -179,10 +222,11 @@ export default function SiteHeader() {
         </div>
       </header>
 
-      {/* Fullscreen Mobile Menu */}
       <nav
+        ref={menuRef}
         id={menuId}
         aria-label="Primary Navigation Mobile"
+        aria-hidden={!isMenuOpen}
         className="mobile-menu-overlay md:hidden"
         data-open={isMenuOpen ? "true" : "false"}
       >
@@ -192,6 +236,7 @@ export default function SiteHeader() {
               <Link
                 href={item.href}
                 ref={index === 0 ? firstMobileLinkRef : undefined}
+                tabIndex={isMenuOpen ? undefined : -1}
                 aria-current={isActiveHref(item.href, pathname) ? "page" : undefined}
                 className="mobile-nav-link block"
                 onClick={() => setIsMenuOpen(false)}
@@ -199,7 +244,7 @@ export default function SiteHeader() {
                   fontFamily: "var(--font-bodoni), Georgia, serif",
                   fontStyle: "italic",
                   fontSize: "clamp(2rem, 6vw, 3.5rem)",
-                  fontWeight: 300,
+                  fontWeight: 400,
                   opacity: isMenuOpen ? 1 : 0,
                   transform: isMenuOpen ? "translateY(0)" : "translateY(24px)",
                   transition: `opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.07}s, transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.07}s, color 0.3s`
@@ -216,19 +261,20 @@ export default function SiteHeader() {
                     opacity: isMenuOpen ? 1 : 0,
                     transition: `opacity 0.4s ${index * 0.07 + 0.1}s`
                   }}
+                  aria-hidden="true"
                 />
               )}
             </div>
           ))}
         </div>
 
-        {/* Bottom info in mobile menu */}
         <div
           className="absolute bottom-12 left-0 right-0 px-6"
           style={{
             opacity: isMenuOpen ? 1 : 0,
             transition: "opacity 0.6s 0.4s"
           }}
+          aria-hidden="true"
         >
           <div className="h-px mb-6" style={{ background: "rgba(200,168,126,0.12)" }} />
           <p
