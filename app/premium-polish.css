@@ -149,7 +149,7 @@ body.premium-site .image-reveal-button:focus-visible {
     visibility 0s linear 0.6s;
 }
 
-.mobile-menu-overlay[aria-hidden="false"] {
+.mobile-menu-overlay[data-open="true"] {
   visibility: visible;
   transition-delay: 0s;
 }
