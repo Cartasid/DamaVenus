@@ -226,7 +226,6 @@ export default function SiteHeader() {
         ref={menuRef}
         id={menuId}
         aria-label="Primary Navigation Mobile"
-        aria-hidden={!isMenuOpen}
         className="mobile-menu-overlay md:hidden"
         data-open={isMenuOpen ? "true" : "false"}
       >
