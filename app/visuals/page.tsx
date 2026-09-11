@@ -54,11 +54,10 @@ export default function VisualsPage() {
   const introLeadAsset = visualsData.intro.leadAsset?.id ? assetMap[visualsData.intro.leadAsset.id] : undefined;
   const leadAsset = introLeadAsset ?? (leadSequenceEntry?.assets[0] ? assetMap[leadSequenceEntry.assets[0]] : undefined);
   const portraitAsset = portraitFeature?.assets[0] ? assetMap[portraitFeature.assets[0]] : undefined;
+  void portraitAsset;
 
   return (
     <div className="pb-28" aria-labelledby="visuals-page-title">
-
-      {/* ── PAGE HEADER ── */}
       <header className="home-hero-enter site-container pt-24 pb-0">
         <h1 className="sr-only">Dáma Venus — Visuals &amp; Photography</h1>
         <p className="text-muted mb-4" style={labelStyle}>{visualsData.intro.label}</p>
@@ -77,14 +76,18 @@ export default function VisualsPage() {
           {visualsData.intro.headline}
         </p>
         {visualsData.intro.subhead ? (
-          <p className="mt-8 text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "34rem" }}>
+          <p className="mt-8 text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "42rem" }}>
             {visualsData.intro.subhead}
           </p>
+        ) : null}
+        {visualsData.intro.cta ? (
+          <Link href={visualsData.intro.cta.href} className="mt-8 inline-block cta-secondary">
+            {visualsData.intro.cta.label}
+          </Link>
         ) : null}
         <div className="mt-16 h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
       </header>
 
-      {/* ── LEAD VISUAL ── */}
       {leadSequenceEntry && leadAsset ? (
         <section className="reveal site-container mt-16" aria-labelledby={`${leadSequenceEntry.id}-lead-title`}>
           <ImageReveal
@@ -105,9 +108,7 @@ export default function VisualsPage() {
             <div
               className="absolute inset-0"
               aria-hidden="true"
-              style={{
-                background: "linear-gradient(to top, rgba(5,5,5,0.7) 0%, transparent 50%)"
-              }}
+              style={{ background: "linear-gradient(to top, rgba(5,5,5,0.7) 0%, transparent 50%)" }}
             />
             <div className="absolute bottom-0 left-0 p-8">
               <h2
@@ -132,8 +133,6 @@ export default function VisualsPage() {
         </section>
       ) : null}
 
-
-      {/* ── SERIES ENTRIES ── */}
       {seriesEntries.map((entry) => (
         <section key={entry.id} className="reveal site-container mt-28" aria-labelledby={`${entry.id}-series-title`}>
           <p className="text-muted mb-2" style={labelStyle}>Series</p>
@@ -180,7 +179,6 @@ export default function VisualsPage() {
         </section>
       ))}
 
-      {/* ── EDITORIAL ROWS ── */}
       {editorialRows.map((entry) => (
         <section key={entry.id} className="reveal site-container mt-28" aria-labelledby={`${entry.id}-editorial-title`}>
           <p className="text-muted mb-2" style={labelStyle}>Editorial</p>
@@ -234,7 +232,6 @@ export default function VisualsPage() {
         </section>
       ))}
 
-      {/* ── QUIET STILLS ── */}
       {quietStills.map((entry) => (
         <section key={entry.id} className="reveal site-container mt-28" aria-labelledby={`${entry.id}-stills-title`}>
           <h2
@@ -277,24 +274,40 @@ export default function VisualsPage() {
         </section>
       ))}
 
-      {/* ── CROSS-LINKS ── */}
       <nav aria-label="Explore more" className="reveal site-container mt-28">
         <div className="grid gap-px md:grid-cols-3" style={{ background: "rgba(200,168,126,0.04)" }}>
-          <Link href="/music" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
+          <Link
+            href="/music"
+            className="block p-8 no-underline hover:bg-white/[0.02] transition-colors"
+            style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}
+          >
             <p className="text-accent mb-2" style={labelStyle}>Music</p>
-            <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>Selected releases and visual chapters — alternative pop, trap-pop, R&B, and vaporwave.</p>
+            <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>
+              High-Performance Avant-Garde Rap, Alternative Trap, Pop, and High-Fidelity Audio Architecture.
+            </p>
           </Link>
-          <Link href="/about" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
+          <Link
+            href="/about"
+            className="block p-8 no-underline hover:bg-white/[0.02] transition-colors"
+            style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}
+          >
             <p className="text-accent mb-2" style={labelStyle}>Bio</p>
-            <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>The story behind the cinematic universe of Dáma Venus — from Rio de Janeiro to Europe.</p>
+            <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>
+              The artist, visual author, and production architecture behind Dama Venus Productions.
+            </p>
           </Link>
-          <Link href="/contact" className="block p-8 no-underline hover:bg-white/[0.02] transition-colors" style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}>
-            <p className="text-accent mb-2" style={labelStyle}>Contact</p>
-            <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>Bookings, collaborations, and exclusive partnerships.</p>
+          <Link
+            href="/contact"
+            className="block p-8 no-underline hover:bg-white/[0.02] transition-colors"
+            style={{ background: "#000000", border: "1px solid rgba(200,168,126,0.06)" }}
+          >
+            <p className="text-accent mb-2" style={labelStyle}>Strategic Access</p>
+            <p className="text-muted" style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>
+              Intellectual-property licensing, strategic partnerships, and 2027 Performance Framework access.
+            </p>
           </Link>
         </div>
       </nav>
-
     </div>
   );
 }

@@ -74,12 +74,25 @@ const assetObjectPositions: Record<string, string> = {
   "curated-release-cover": "center center"
 };
 
+// Historical asset IDs remain stable to avoid breaking generated files and
+// references, while public alt text follows the current release/content model.
+const assetAltOverrides: Record<string, string> = {
+  "home-release-cover": "Dáma Venus — Lonely Berlin release visual",
+  "home-visual-preview": "Dáma Venus — musical worlds connecting art and visuals",
+  "music-current-chapter-cover": "Lonely Berlin — official release visual by Dáma Venus",
+  "music-current-chapter-visual": "Lonely Berlin — visual frame by Dáma Venus",
+  "music-midnight-signal-cover": "Valentines — official release visual by Dáma Venus",
+  "music-afterglow-cut-cover": "Eclipse — official release visual by Dáma Venus",
+  "music-nocturne-line-visual": "Close Friend — official release visual by Dáma Venus",
+  "visuals-linked-current-chapter": "Lonely Berlin — linked visual by Dáma Venus"
+};
+
 export const assetMap: Record<string, AssetMapItem> = Object.fromEntries(
   prioritizedAssets.map((asset) => [
     asset.id,
     {
       src: asset.finalPath,
-      alt: asset.altDraft,
+      alt: assetAltOverrides[asset.id] ?? asset.altDraft,
       cropHint: asset.cropHint,
       focusHint: asset.focusHint,
       priority: asset.priority,
