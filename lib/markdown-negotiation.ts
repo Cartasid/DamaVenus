@@ -63,11 +63,14 @@ export function prefersMarkdown(acceptHeader: string | null): boolean {
   const explicitHtml = preferences
     .filter((entry) => entry.mediaType === "text/html" || entry.mediaType === "application/xhtml+xml")
     .reduce((best, entry) => Math.max(best, entry.q), 0);
+  const wildcard = preferences
+    .filter((entry) => entry.mediaType === "*/*")
+    .reduce((best, entry) => Math.max(best, entry.q), 0);
 
   // */* by itself remains HTML, matching browser/default Cloudflare behavior.
-  // Markdown wins only when it is explicitly acceptable and is not outranked
-  // by an explicit HTML preference.
-  return markdown.q >= explicitHtml;
+  // A wildcard only defeats an explicitly requested Markdown representation
+  // when its q-value is strictly higher; an explicit Markdown tie is kept.
+  return markdown.q >= explicitHtml && markdown.q >= wildcard;
 }
 
 export function estimateMarkdownTokens(markdown: string): number {
