@@ -23,14 +23,24 @@ const retiredMusicPlaceholders = [
   'Nocturne Line',
 ];
 
+const retiredHomepageCopy = [
+  'Alternative Pop Trap-Pop R&B Vaporwave',
+  'Frames in Motion',
+  'Let’s Create the Next Chapter.',
+];
+
 const userFacingSourceFiles = [
   'app/page.tsx',
   'app/music/page.tsx',
   'app/press/page.tsx',
   'app/visuals/page.tsx',
+  'app/contact/page.tsx',
+  'components/layout/site-footer.tsx',
+  'content/data/homepage.data.ts',
   'content/data/music.data.ts',
   'content/data/press.data.ts',
   'content/data/visuals.data.ts',
+  'content/data/contact.data.ts',
 ];
 
 async function listFiles(dirPath) {
@@ -54,24 +64,17 @@ async function ensureAtLeastOneBuiltCss() {
   let cssFiles = [];
 
   try {
-    cssFiles = (await listFiles(cssDir)).filter((filePath) =>
-      filePath.endsWith('.css'),
-    );
+    cssFiles = (await listFiles(cssDir)).filter((filePath) => filePath.endsWith('.css'));
   } catch {
-    throw new Error(
-      'CSS-Datei fehlt: Build-CSS-Verzeichnis fehlt (.next/static/css).',
-    );
+    throw new Error('CSS-Datei fehlt: Build-CSS-Verzeichnis fehlt (.next/static/css).');
   }
 
   if (cssFiles.length < 1) {
-    throw new Error(
-      'CSS-Datei fehlt: Keine CSS-Datei unter .next/static/css gefunden.',
-    );
+    throw new Error('CSS-Datei fehlt: Keine CSS-Datei unter .next/static/css gefunden.');
   }
 
   const containsTailwindOutput = (cssSource) => {
-    const hasUtilitySelector =
-      /(?:^|[}\s])\.[_a-zA-Z][\w-]*(?:\\:[\w-]+)*\s*\{/m.test(cssSource);
+    const hasUtilitySelector = /(?:^|[}\s])\.[_a-zA-Z][\w-]*(?:\\:[\w-]+)*\s*\{/m.test(cssSource);
     const hasTailwindVariable = /--tw-[\w-]+\s*:/.test(cssSource);
     return hasUtilitySelector && hasTailwindVariable;
   };
@@ -81,16 +84,11 @@ async function ensureAtLeastOneBuiltCss() {
     if (containsTailwindOutput(cssSource)) return;
   }
 
-  throw new Error(
-    'CSS-Datei vorhanden, aber Tailwind-Ausgabe nicht erkannt.',
-  );
+  throw new Error('CSS-Datei vorhanden, aber Tailwind-Ausgabe nicht erkannt.');
 }
 
 async function parsePrioritizedAssets() {
-  const assetsTsPath = path.resolve(
-    projectRoot,
-    'content/dama-venus/assets.ts',
-  );
+  const assetsTsPath = path.resolve(projectRoot, 'content/dama-venus/assets.ts');
   const source = await fs.readFile(assetsTsPath, 'utf8');
   const objectPattern = /{[\s\S]*?}/g;
   const assets = [];
@@ -131,20 +129,13 @@ async function validateImageFile(absolutePath) {
   }
 
   await sharp(absolutePath, { failOn: 'error' })
-    .resize({
-      width: 1,
-      height: 1,
-      fit: 'inside',
-      withoutEnlargement: true,
-    })
+    .resize({ width: 1, height: 1, fit: 'inside', withoutEnlargement: true })
     .toBuffer();
 }
 
 async function ensureAllPrioritizedAssetsAreValid(assets) {
   if (assets.length === 0) {
-    throw new Error(
-      'Keine priorisierten Assets in content/dama-venus/assets.ts gefunden.',
-    );
+    throw new Error('Keine priorisierten Assets in content/dama-venus/assets.ts gefunden.');
   }
 
   const failures = [];
@@ -166,9 +157,7 @@ async function ensureAllPrioritizedAssetsAreValid(assets) {
     try {
       const stat = await fs.stat(absolutePath);
       if (!stat.isFile() || stat.size <= 0) {
-        throw new Error(
-          'Datei fehlt, ist leer oder ist keine reguläre Datei.',
-        );
+        throw new Error('Datei fehlt, ist leer oder ist keine reguläre Datei.');
       }
       await validateImageFile(absolutePath);
     } catch (error) {
@@ -179,9 +168,7 @@ async function ensureAllPrioritizedAssetsAreValid(assets) {
   }
 
   if (failures.length > 0) {
-    throw new Error(
-      `Ungültige Produktions-Assets: ${failures.join('; ')}`,
-    );
+    throw new Error(`Ungültige Produktions-Assets: ${failures.join('; ')}`);
   }
 }
 
@@ -202,9 +189,7 @@ async function ensureRequiredPublicFilesExist() {
   }
 
   if (failures.length) {
-    throw new Error(
-      `Erforderliche öffentliche Dateien fehlen: ${failures.join('; ')}`,
-    );
+    throw new Error(`Erforderliche öffentliche Dateien fehlen: ${failures.join('; ')}`);
   }
 }
 
@@ -212,26 +197,39 @@ async function ensureMusicContentUsesOfficialReleaseNames() {
   const musicPath = path.resolve(projectRoot, 'content/data/music.data.ts');
   const source = await fs.readFile(musicPath, 'utf8');
 
-  const staleTitles = retiredMusicPlaceholders.filter((title) =>
-    source.includes(title),
-  );
+  const staleTitles = retiredMusicPlaceholders.filter((title) => source.includes(title));
 
   if (staleTitles.length) {
-    throw new Error(
-      `Veraltete Platzhalter-Releases gefunden: ${staleTitles.join(', ')}`,
-    );
+    throw new Error(`Veraltete Platzhalter-Releases gefunden: ${staleTitles.join(', ')}`);
   }
 
-  for (const expectedTitle of [
-    'Lonely Berlin',
-    'Valentines',
-    'Eclipse',
-    'Close Friend',
-  ]) {
+  for (const expectedTitle of ['Lonely Berlin', 'Valentines', 'Eclipse', 'Close Friend']) {
     if (!source.includes(`title: "${expectedTitle}"`)) {
-      throw new Error(
-        `Offizieller Release fehlt in music.data.ts: ${expectedTitle}`,
-      );
+      throw new Error(`Offizieller Release fehlt in music.data.ts: ${expectedTitle}`);
+    }
+  }
+}
+
+async function ensureCurrentPositioningCopy() {
+  const expectations = [
+    ['app/page.tsx', 'High-Performance Avant-Garde Rap'],
+    ['app/page.tsx', 'High-Fidelity Audio Architecture'],
+    ['content/data/homepage.data.ts', 'Building musical worlds connecting art & visuals'],
+    [
+      'content/data/homepage.data.ts',
+      'Concept Lead & Visual Author at Dama Venus Productions | High-Fidelity Audio Architect | Proprietary Intellectual Design | Natürlich by Dama Venus',
+    ],
+    ['app/contact/page.tsx', 'Strategic Access'],
+    [
+      'content/data/contact.data.ts',
+      'Intellectual Property Licensing & Strategic Architectural Partnerships. Accessing the 2027 Performance Framework.',
+    ],
+  ];
+
+  for (const [relativePath, marker] of expectations) {
+    const source = await fs.readFile(path.resolve(projectRoot, relativePath), 'utf8');
+    if (!source.includes(marker)) {
+      throw new Error(`Aktuelle Positionierungs-Copy fehlt in ${relativePath}: ${marker}`);
     }
   }
 }
@@ -257,12 +255,16 @@ async function ensureNoLegacyPublicCopy() {
     ) {
       violations.push(`${relativePath}: veralteter portugiesischer EPK-Verweis`);
     }
+
+    for (const marker of retiredHomepageCopy) {
+      if (source.includes(marker)) {
+        violations.push(`${relativePath}: veraltete Live-Copy "${marker}"`);
+      }
+    }
   }
 
   if (violations.length) {
-    throw new Error(
-      `Veraltete öffentliche Copy/Links gefunden: ${violations.join('; ')}`,
-    );
+    throw new Error(`Veraltete öffentliche Copy/Links gefunden: ${violations.join('; ')}`);
   }
 }
 
@@ -273,10 +275,11 @@ async function run() {
   await ensureAllPrioritizedAssetsAreValid(assets);
   await ensureRequiredPublicFilesExist();
   await ensureMusicContentUsesOfficialReleaseNames();
+  await ensureCurrentPositioningCopy();
   await ensureNoLegacyPublicCopy();
 
   console.log(
-    'Production-Artefakte validiert: CSS, Bilddateien, aktuelles EPK/Video, Release-Daten und öffentliche Links sind vorhanden und konsistent.',
+    'Production-Artefakte validiert: CSS, Bilddateien, aktuelles EPK/Video, Release-Daten, Positionierungs-Copy und öffentliche Links sind vorhanden und konsistent.',
   );
 }
 
