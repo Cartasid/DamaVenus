@@ -2,22 +2,28 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import ImageReveal from "@/components/utils/image-reveal";
 import { contactContent } from "@/content/data/contact.data";
+import { assetMap } from "@/content/data/site.config";
 import { ContactForm } from "./ContactForm";
 
-const CONTACT_MOOD_IMAGE = "/assets/dama-venus/music/dv_music_current_chapter_cover_color_4x5_v01.jpg";
+const CONTACT_MOOD_IMAGE =
+  assetMap["music-current-chapter-cover"]?.src ??
+  "/assets/dama-venus/music/dv_music_current_chapter_cover_color_4x5_v01.jpg";
 
 export const metadata: Metadata = {
-  title: { absolute: "Contact & Bookings | Dáma Venus — Collaborations & Inquiries" },
-  description: "Book Dáma Venus for live performances, music collaborations, film projects, and brand partnerships. Send your inquiry via the official contact form.",
+  title: { absolute: "Strategic Access | Dáma Venus — IP Licensing & Partnerships" },
+  description:
+    "Access Dáma Venus for intellectual property licensing, strategic architectural partnerships, performance opportunities, and the 2027 Performance Framework.",
   openGraph: {
-    title: "Contact & Bookings | Dáma Venus",
-    description: "Book Dáma Venus for performances, collaborations, film projects, and brand partnerships.",
+    title: "Strategic Access | Dáma Venus",
+    description:
+      "Intellectual property licensing, strategic architectural partnerships, performance opportunities, and 2027 Performance Framework access.",
     url: "/contact",
     images: [{ url: "/og-contact.png" }]
   },
   twitter: {
-    title: "Contact & Bookings | Dáma Venus",
-    description: "Book Dáma Venus for performances, collaborations, film projects, and brand partnerships.",
+    title: "Strategic Access | Dáma Venus",
+    description:
+      "Intellectual property licensing, strategic architectural partnerships, performance opportunities, and 2027 Performance Framework access.",
     images: ["/og-contact.png"]
   },
   alternates: {
@@ -36,8 +42,6 @@ export default function ContactPage() {
   return (
     <div className="site-container py-24 pb-36">
       <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-
-        {/* Mood Image */}
         <ImageReveal
           className="relative hidden lg:block overflow-hidden"
           style={{ minHeight: "600px" }}
@@ -55,61 +59,82 @@ export default function ContactPage() {
           />
         </ImageReveal>
 
-      <section className="section-stack-md max-w-2xl">
+        <section className="section-stack-md max-w-2xl">
+          <header className="space-y-4">
+            <h1 className="sr-only">Strategic Access — Dáma Venus</h1>
+            <p
+              className="text-accent"
+              style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}
+            >
+              Strategic Access
+            </p>
+            <p
+              role="doc-subtitle"
+              className="text-primary"
+              style={{
+                fontFamily: "var(--font-bodoni), Georgia, serif",
+                fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+                fontWeight: 300,
+                lineHeight: 0.95
+              }}
+            >
+              {contactContent.intro.headline}
+            </p>
+            <p className="text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.75 }}>
+              {contactContent.intro.subhead}
+            </p>
+            <div
+              className="h-px"
+              style={{ background: "rgba(200,168,126,0.2)", width: "40px" }}
+            />
+          </header>
 
-        <header className="space-y-4">
-          <h1 className="sr-only">Contact &amp; Bookings — Dáma Venus</h1>
-          <p className="text-accent" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>Strategic Access</p>
-          <p
-            role="doc-subtitle"
-            className="text-primary"
-            style={{
-              fontFamily: "var(--font-bodoni), Georgia, serif",
-              fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
-              fontWeight: 300,
-              lineHeight: 0.95
-            }}
-          >
-            {contactContent.intro.headline}
-          </p>
-          <p className="text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.75 }}>
-            {contactContent.intro.subhead}
-          </p>
-          <div className="h-px" style={{ background: "rgba(200,168,126,0.2)", width: "40px" }} />
-        </header>
+          <div className="h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
 
-        <div className="h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
+          <ContactForm />
 
-        <ContactForm />
-
-        {contactContent.alternatePaths.length ? (
-          <>
-            <div className="h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
-            <section className="space-y-4" aria-label="Alternative contact options">
-              <p className="text-muted" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>Alternative Contact</p>
-              <div className="space-y-4">
-                {contactContent.alternatePaths.map((path) => (
-                  <div key={path.id}>
-                    {path.href ? (
-                      <a href={path.href} className="text-offWhite underline underline-offset-4" style={{ textDecorationColor: "rgba(200,168,126,0.6)" }}>
-                        {path.label}
-                      </a>
-                    ) : path.email ? (
-                      <a href={`mailto:${path.email}`} className="text-offWhite underline underline-offset-4" style={{ textDecorationColor: "rgba(200,168,126,0.6)" }}>
-                        {path.label}
-                      </a>
-                    ) : (
-                      <span className="text-offWhite">{path.label}</span>
-                    )}
-                    <p className="mt-1 text-muted" style={{ fontSize: "0.8rem" }}>{path.note}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </>
-        ) : null}
-
-      </section>
+          {contactContent.alternatePaths.length ? (
+            <>
+              <div className="h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
+              <section className="space-y-4" aria-label="Strategic access routes">
+                <p
+                  className="text-muted"
+                  style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}
+                >
+                  Access Routes
+                </p>
+                <div className="space-y-4">
+                  {contactContent.alternatePaths.map((path) => (
+                    <div key={path.id}>
+                      {path.href ? (
+                        <a
+                          href={path.href}
+                          className="text-offWhite underline underline-offset-4"
+                          style={{ textDecorationColor: "rgba(200,168,126,0.6)" }}
+                        >
+                          {path.label}
+                        </a>
+                      ) : path.email ? (
+                        <a
+                          href={`mailto:${path.email}`}
+                          className="text-offWhite underline underline-offset-4"
+                          style={{ textDecorationColor: "rgba(200,168,126,0.6)" }}
+                        >
+                          {path.label}
+                        </a>
+                      ) : (
+                        <span className="text-offWhite">{path.label}</span>
+                      )}
+                      <p className="mt-1 text-muted" style={{ fontSize: "0.8rem" }}>
+                        {path.note}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </>
+          ) : null}
+        </section>
       </div>
     </div>
   );

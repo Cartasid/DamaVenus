@@ -40,12 +40,13 @@ export const contactContent: ContactContent = {
   intro: {
     headline:
       "Intellectual Property Licensing & Strategic Architectural Partnerships. Accessing the 2027 Performance Framework.",
-    subhead: "Licensing. Strategic partnerships. 2027 Performance Framework access."
+    subhead:
+      "Licensing. Strategic partnerships. Performance opportunities. 2027 Performance Framework access."
   },
   primaryContact: {
     href: "/contact",
     email: "booking@damavenus.com",
-    label: "Direct booking contact"
+    label: "Strategic access contact"
   },
   form: {
     fields: [
@@ -65,7 +66,7 @@ export const contactContent: ContactContent = {
         required: false,
         label: "Organization / Role",
         placeholder: "e.g. Press, Agency, Academy Member",
-        helperText: "Your affiliation helps us route your inquiry."
+        helperText: "Your affiliation helps us route your request."
       },
       {
         id: "email",
@@ -82,8 +83,8 @@ export const contactContent: ContactContent = {
         type: "text",
         required: false,
         label: "Subject",
-        placeholder: "e.g. Industry Access Request, Booking Inquiry",
-        helperText: "Brief subject line for your inquiry."
+        placeholder: "e.g. IP Licensing, Strategic Partnership, Performance Access",
+        helperText: "Briefly identify the purpose of your request."
       },
       {
         id: "message",
@@ -91,13 +92,13 @@ export const contactContent: ContactContent = {
         type: "textarea",
         required: true,
         label: "Message",
-        helperText: "Include timeline, scope, and context so we can match the right format."
+        helperText: "Include timeline, scope, territory, and relevant project context."
       }
     ],
-    ctaLabel: "Send Inquiry",
+    ctaLabel: "Request Strategic Access",
     success: {
-      title: "Inquiry received.",
-      message: "Your inquiry has been received. The Office of Dáma Venus will contact you shortly."
+      title: "Request received.",
+      message: "Your request has been received. The Office of Dáma Venus will contact you shortly."
     }
   },
   alternatePaths: [
@@ -106,18 +107,18 @@ export const contactContent: ContactContent = {
       label: "Press & EPK",
       href: "/press",
       email: "press@damavenus.com",
-      note: "High-resolution imagery, artist biography, and release materials."
+      note: "Current official EPK, high-resolution imagery, biography, and release materials."
     },
     {
       id: "booking",
-      label: "Booking",
+      label: "Performance / Booking",
       email: "booking@damavenus.com",
-      note: "Live shows, festival appearances, and exclusive performances."
+      note: "Live performances, festival appearances, and selected performance opportunities."
     },
     {
       id: "general",
-      label: "General",
-      note: "For all other inquiries, use the form above."
+      label: "Strategic Request",
+      note: "For IP licensing, architectural partnerships, and other strategic requests, use the form above."
     }
   ]
 };
