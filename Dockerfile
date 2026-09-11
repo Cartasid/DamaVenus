@@ -5,6 +5,11 @@ RUN npm ci
 
 FROM node:22-alpine AS builder
 WORKDIR /app
+# The asset pipeline contains required HEIC sources. Sharp's prebuilt Alpine
+# binary does not necessarily include HEIC decoding, so provide the pipeline's
+# supported heif-convert fallback in the build stage only.
+RUN apk add --no-cache libheif-tools \
+    && command -v heif-convert >/dev/null
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build && npm run build:verify
