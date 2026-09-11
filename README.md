@@ -52,6 +52,7 @@ Enthaltene Scripts:
 - `npm run typecheck` -> TypeScript-Check ohne Emit
 - `npm run check` -> kombiniert Lint + Typecheck
 - `npm run build:check` -> vollständiger Produktions-Build als zusätzlicher Validierungscheck
+- `npm run build:verify` -> prüft Build-CSS sowie Existenz, Dateiformat und Dekodierbarkeit aller priorisierten Bilder
 - Interne Aufschlüsselung: `npm run build:check` entspricht `npm run build` + `npm run build:verify`
 
 ## Asset-Pipeline
@@ -64,8 +65,7 @@ npm run prepare:dama-venus-assets
 Pipeline-Logik:
 - `scripts/prepare-dama-venus-assets.mjs` liest Quellen aus `pics/` und `assets-src/dama-venus/` (beides reine, nicht-public Input-Pfade der Pipeline).
 - Die Pipeline schreibt aufbereitete Dateien nach `public/assets/dama-venus/` (dieser Pfad ist der finale Auslieferungspfad; `pics/` ist nie Auslieferung).
-- Anschließend optimiert `scripts/optimize-dama-venus-assets.mjs` ausschließlich priorisierte JPEG/WebP-Ausgaben, wenn sie größer als 750 KiB oder an einer Kante größer als 2400 px sind. Kleinere Assets bleiben unverändert.
-- Die Nachoptimierung arbeitet ausschließlich buildseitig mit dem bereits vorhandenen `sharp`; es entsteht kein zusätzlicher Runtime-Bilddienst und keine zusätzliche Serverlast pro Request.
+- Es gibt keinen separaten Post-Pass, der bereits erzeugte priorisierte Bilder im Build nachträglich überschreibt.
 - Generierte Mapping-Dateien:
   - `public/assets/dama-venus/asset-map.json`
   - `public/assets/dama-venus/asset-map.ts`
