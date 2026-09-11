@@ -1,8 +1,15 @@
 #!/usr/bin/env node
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import sharp from 'sharp';
 
 const projectRoot = process.cwd();
+const imageFormatsByExtension = new Map([
+  ['.jpg', 'jpeg'],
+  ['.jpeg', 'jpeg'],
+  ['.png', 'png'],
+  ['.webp', 'webp'],
+]);
 
 async function listFiles(dirPath) {
   const entries = await fs.readdir(dirPath, { withFileTypes: true });
@@ -39,45 +46,10 @@ async function ensureAtLeastOneBuiltCss() {
 
   for (const cssFile of cssFiles) {
     const cssSource = await fs.readFile(cssFile, 'utf8');
-    if (containsTailwindOutput(cssSource)) {
-      return;
-    }
+    if (containsTailwindOutput(cssSource)) return;
   }
 
   throw new Error('CSS-Datei vorhanden, aber Tailwind-Ausgabe nicht erkannt.');
-}
-
-async function ensureHomepageReferencesCssInBuildManifest() {
-  const manifestCandidates = [
-    { file: '.next/build-manifest.json', keys: ['/', '/index'] },
-    { file: '.next/app-build-manifest.json', keys: ['/', '/page'] },
-  ];
-
-  for (const candidate of manifestCandidates) {
-    const manifestPath = path.resolve(projectRoot, candidate.file);
-    let manifest;
-    try {
-      manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
-    } catch {
-      continue;
-    }
-
-    const pages = manifest?.pages;
-    if (!pages || typeof pages !== 'object') {
-      continue;
-    }
-
-    for (const key of candidate.keys) {
-      const assets = pages[key];
-      if (Array.isArray(assets) && assets.some((asset) => typeof asset === 'string' && asset.endsWith('.css'))) {
-        return;
-      }
-    }
-  }
-
-  throw new Error(
-    'Build-Manifest-Check fehlgeschlagen: Startseite referenziert kein CSS-Asset.'
-  );
 }
 
 async function parsePrioritizedAssets() {
@@ -103,37 +75,67 @@ async function parsePrioritizedAssets() {
   return assets;
 }
 
-async function ensureAllPrioritizedAssetsExist(assets) {
+async function validateImageFile(absolutePath) {
+  const extension = path.extname(absolutePath).toLowerCase();
+  const expectedFormat = imageFormatsByExtension.get(extension);
+  if (!expectedFormat) return;
+
+  const metadata = await sharp(absolutePath, { failOn: 'error' }).metadata();
+  if (!metadata.width || !metadata.height) {
+    throw new Error('Bilddimensionen fehlen oder sind ungültig.');
+  }
+  if (metadata.format !== expectedFormat) {
+    throw new Error(`Dateiendung ${extension} enthält Format ${metadata.format ?? 'unbekannt'}.`);
+  }
+
+  await sharp(absolutePath, { failOn: 'error' })
+    .resize({ width: 1, height: 1, fit: 'inside', withoutEnlargement: true })
+    .toBuffer();
+}
+
+async function ensureAllPrioritizedAssetsAreValid(assets) {
   if (assets.length === 0) {
     throw new Error('Keine priorisierten Assets in content/dama-venus/assets.ts gefunden.');
   }
 
-  const missingIdMappings = referencedAssetIds.filter((id) => !idToFinalPath.has(id));
-  const missingFiles = [];
+  const failures = [];
+  const uniqueFinalPaths = new Map();
   for (const asset of assets) {
-    const finalPath = asset.finalPath;
-    const absolutePath = path.resolve(projectRoot, 'public', finalPath.replace(/^\/+/, ''));
+    if (!uniqueFinalPaths.has(asset.finalPath)) uniqueFinalPaths.set(asset.finalPath, asset);
+  }
+
+  for (const asset of uniqueFinalPaths.values()) {
+    const absolutePath = path.resolve(
+      projectRoot,
+      'public',
+      asset.finalPath.replace(/^\/+/, ''),
+    );
+
     try {
-      await fs.access(absolutePath);
-    } catch {
-      missingFiles.push(
-        `id="${asset.id}" finalPath="${asset.finalPath}" sourcePath="${asset.sourcePath}"`
+      const stat = await fs.stat(absolutePath);
+      if (!stat.isFile() || stat.size <= 0) {
+        throw new Error('Datei fehlt, ist leer oder ist keine reguläre Datei.');
+      }
+      await validateImageFile(absolutePath);
+    } catch (error) {
+      failures.push(
+        `id="${asset.id}" finalPath="${asset.finalPath}" sourcePath="${asset.sourcePath}": ${error.message}`,
       );
     }
   }
 
-  if (missingFiles.length > 0) {
-    throw new Error(
-      `Pflicht-Assets fehlen unter public/: ${missingFiles.join('; ')}`
-    );
+  if (failures.length > 0) {
+    throw new Error(`Ungültige Produktions-Assets: ${failures.join('; ')}`);
   }
 }
 
 async function run() {
   await ensureAtLeastOneBuiltCss();
   const assets = await parsePrioritizedAssets();
-  await ensureAllPrioritizedAssetsExist(assets);
-  console.log('Production-Artefakte validiert: CSS vorhanden und alle finalPath-Assets unter public/ vorhanden.');
+  await ensureAllPrioritizedAssetsAreValid(assets);
+  console.log(
+    'Production-Artefakte validiert: CSS vorhanden und alle priorisierten Bilddateien existieren und sind dekodierbar.',
+  );
 }
 
 run().catch((error) => {
