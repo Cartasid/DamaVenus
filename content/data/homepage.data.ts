@@ -7,11 +7,11 @@ export const homepageIntro = {
 };
 
 export const homepageRelease: ReleaseItem = {
-  title: "Current Chapter",
-  description: "The latest sonic chapter — dark, luminous, unforgettable.",
+  title: "Lonely Berlin",
+  description: "Latest official single — released April 24, 2026.",
   cta: {
-    label: "Listen Now",
-    href: "/music"
+    label: "Explore Release",
+    href: "/music#lonely-berlin"
   },
   coverAsset: { id: "home-release-cover" }
 };
@@ -85,7 +85,7 @@ export const homepageCoreModules: HomepageModule[] = [
   {
     id: "featuredRelease",
     assetId: homepageRelease.coverAsset.id,
-    alt: "Cover image of the current chapter release",
+    alt: "Dáma Venus release visual for Lonely Berlin",
     cropFocusHint: "center-subject",
     priority: "high",
     swColorLogic: "derive-from-cover",
@@ -153,18 +153,31 @@ export const homepageCoreModules: HomepageModule[] = [
 ];
 
 const expectedHomeModuleCtas: Partial<Record<HomepageModuleId, CTA>> = {
-  featuredRelease: { label: "Listen Now", href: "/music" },
+  featuredRelease: { label: "Explore Release", href: "/music#lonely-berlin" },
   visuals: { label: "View Visuals", href: "/visuals" },
-  press: { label: pressContent.cta?.label ?? "Zum Press & EPK Überblick", href: pressContent.cta?.href ?? "/press" },
-  contactNewsletter: { label: "Send Inquiry", href: contactContent.primaryContact.href }
+  press: {
+    label: pressContent.cta?.label ?? "Open Press & EPK",
+    href: pressContent.cta?.href ?? "/press"
+  },
+  contactNewsletter: {
+    label: "Send Inquiry",
+    href: contactContent.primaryContact.href
+  }
 };
 
-const primaryToSecondaryCtaSequence: HomepageModuleId[] = ["featuredRelease", "visuals", "press", "contactNewsletter"];
+const primaryToSecondaryCtaSequence: HomepageModuleId[] = [
+  "featuredRelease",
+  "visuals",
+  "press",
+  "contactNewsletter"
+];
 
 function validateHomeModuleCtasAndFlow(modules: HomepageModule[]): void {
   const moduleById = new Map(modules.map((module) => [module.id, module]));
 
-  for (const [moduleId, expectedCta] of Object.entries(expectedHomeModuleCtas) as [HomepageModuleId, CTA][]) {
+  for (const [moduleId, expectedCta] of Object.entries(
+    expectedHomeModuleCtas
+  ) as [HomepageModuleId, CTA][]) {
     const cta = moduleById.get(moduleId)?.copy.cta;
     if (!cta || cta.label !== expectedCta.label || cta.href !== expectedCta.href) {
       throw new Error(`Invalid CTA config for home module: ${moduleId}`);
@@ -172,17 +185,29 @@ function validateHomeModuleCtasAndFlow(modules: HomepageModule[]): void {
     validateCta(cta, `homepage module ${moduleId}`);
   }
 
-  const sequenceIndexes = primaryToSecondaryCtaSequence.map((moduleId) => modules.findIndex((module) => module.id === moduleId));
+  const sequenceIndexes = primaryToSecondaryCtaSequence.map((moduleId) =>
+    modules.findIndex((module) => module.id === moduleId)
+  );
+
   for (let index = 1; index < sequenceIndexes.length; index += 1) {
-    if (sequenceIndexes[index - 1] === -1 || sequenceIndexes[index] === -1 || sequenceIndexes[index - 1] > sequenceIndexes[index]) {
-      throw new Error("Invalid home CTA sequence: expected Release/Visuals -> Press/EPK -> Contact");
+    if (
+      sequenceIndexes[index - 1] === -1 ||
+      sequenceIndexes[index] === -1 ||
+      sequenceIndexes[index - 1] > sequenceIndexes[index]
+    ) {
+      throw new Error(
+        "Invalid home CTA sequence: expected Release/Visuals -> Press/EPK -> Contact"
+      );
     }
   }
 }
 
 validateHomeModuleCtasAndFlow(homepageCoreModules);
 
-const contactModuleCta = homepageCoreModules.find((module) => module.id === "contactNewsletter")?.copy.cta;
+const contactModuleCta = homepageCoreModules.find(
+  (module) => module.id === "contactNewsletter"
+)?.copy.cta;
+
 if (!contactModuleCta || getCtaActionKind(contactModuleCta.href) !== "internal") {
   throw new Error("Homepage contact CTA must use internal contact endpoint.");
 }

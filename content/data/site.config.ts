@@ -19,68 +19,59 @@ export function resolveSiteUrl(): string {
 
 export const siteConfig = {
   name: "Dama Venus",
-  /** Primary site language for UI, metadata, and document language attributes. */
   primaryLanguage: "en",
   language: "en",
   url: resolveSiteUrl(),
   metadata: {
-    title: "Dáma Venus | Official Website | Visual Author & Actress",
-    description: "Official platform for Dáma Venus — Berlin-based singer, songwriter, visual author, producer, and actress. Alternative pop, trap-pop, R&B, vaporwave, and cinematic visuals."
+    title: "Dáma Venus | Official Website | Singer, Visual Author & Actress",
+    description:
+      "Official platform for Dáma Venus — Berlin-based singer, songwriter, visual author, producer, and actress. Official releases, cinematic visuals, press materials, and bookings."
   },
   brandDescriptor: "Sound • Vision • Reign",
   footerLine: "Dama Venus — Sound. Vision. Reign."
 } as const;
 
-/**
- * Per-asset object-position overrides based on focusHint analysis.
- * Portraits with faces → upper portion; landscapes/covers → center.
- */
 const assetObjectPositions: Record<string, string> = {
-  // ── HOME ──
-  "home-lead-portrait":           "center 25%",    // Roma Trevi portrait — figure upper portion
-  "home-release-cover":           "center center", // album cover — keep title visible
-  "home-visual-preview":          "center 25%",    // 4:3 portrait/landscape — face upper center
-  "home-statement-editorial":     "center 20%",    // portrait — face/upper body for text overlay
-  "home-contact-newsletter":      "center center", // cover — central motif
-  "home-press-preview":           "center 20%",   // portrait — face with headroom
+  "home-lead-portrait": "center 25%",
+  "home-release-cover": "center center",
+  "home-visual-preview": "center 25%",
+  "home-statement-editorial": "center 20%",
+  "home-contact-newsletter": "center center",
+  "home-press-preview": "center 20%",
 
-  // ── MUSIC ──
-  "music-current-chapter-cover":  "60% center",    // Neon portrait — face slightly right of center
-  "music-current-chapter-visual": "center center", // 16:9 cinematic
-  "music-midnight-signal-cover":  "center 30%",   // 4:5 portrait — face & shoulders upper center
-  "music-afterglow-cut-cover":    "center center", // 3:2 landscape — subject centered
-  "music-nocturne-line-visual":   "center center", // 3:2 landscape — subject centered
+  "music-current-chapter-cover": "60% center",
+  "music-current-chapter-visual": "center center",
+  "music-midnight-signal-cover": "center 30%",
+  "music-afterglow-cut-cover": "center center",
+  "music-nocturne-line-visual": "center center",
 
-  // ── VISUALS ──
-  "visuals-cinderela-lead-241":       "center 25%",   // portrait — eyes/torso with breathing room
-  "visuals-night-portrait-0e9128":    "center 65%",   // night portrait — person with dog in lower half of image
-  "contact-red-portrait-69bf":        "center 30%",   // red backdrop editorial — face in upper third
-  "visuals-cinderela-frame-243":      "center 30%",   // portrait — face center & shoulder line
-  "visuals-cinderela-frame-288":      "center 35%",   // portrait close — eyes above midpoint
-  "visuals-cinderela-landscape-210":  "center center", // 16:9 landscape
-  "visuals-uuid-6824":                "center center", // wide landscape
-  "visuals-uuid-3493":                "center 30%",   // portrait — face & gaze axis
-  "visuals-portrait-tamiris-12":      "center 25%",   // portrait — face upper center
-  "visuals-still-unnamed-1":          "center center", // 1:1 square
-  "visuals-still-unnamed-2":          "center center", // 1:1 square
-  "visuals-still-unnamed-3":          "center center", // 1:1 square
-  "visuals-linked-current-chapter":   "center center", // 9:16 tall — subject centered
+  "visuals-cinderela-lead-241": "center 25%",
+  "visuals-night-portrait-0e9128": "center 65%",
+  "contact-red-portrait-69bf": "center 30%",
+  "visuals-cinderela-frame-243": "center 30%",
+  "visuals-cinderela-frame-288": "center 35%",
+  "visuals-cinderela-landscape-210": "center center",
+  "visuals-uuid-6824": "center center",
+  "visuals-uuid-3493": "center 30%",
+  "visuals-portrait-tamiris-12": "center 25%",
+  "visuals-still-unnamed-1": "center center",
+  "visuals-still-unnamed-2": "center center",
+  "visuals-still-unnamed-3": "center center",
+  "visuals-linked-current-chapter": "center center",
 
-  // ── ABOUT ──
-  "about-intro-entry-portrait-primary":     "center 25%",   // 2041E42A magenta portrait — face upper third
-  "about-intro-entry-portrait-secondary":   "center 30%",   // portrait — face & shoulders
-  "about-supporting-visual-calm-01":        "center center", // 16:9 landscape
-  "about-supporting-visual-calm-02":        "center 25%",   // portrait — face upper center
-  "about-supporting-visual-calm-reserve-03":"center 30%",   // portrait — gaze axis centered
+  "about-intro-entry-portrait-primary": "center 25%",
+  "about-intro-entry-portrait-secondary": "center 30%",
+  "about-supporting-visual-calm-01": "center center",
+  "about-supporting-visual-calm-02": "center 25%",
+  "about-supporting-visual-calm-reserve-03": "center 30%",
 
-  // ── PRESS ──
-  "press-featured-portrait-primary":   "center 20%",   // portrait — eye-line upper third
-  "press-featured-portrait-secondary": "center 30%",   // portrait — face & shoulders
-  "press-editorial-landscape":         "center center", // 16:9 landscape
-  "press-detail-still":                "center center", // 1:1 square
-  "contact-mood-canvas":               "center center", // mood visual
-  "curated-contact-mood-canvas":       "center center", // mood visual
-  "curated-release-cover":             "center center", // cover
+  "press-featured-portrait-primary": "center 20%",
+  "press-featured-portrait-secondary": "center 30%",
+  "press-editorial-landscape": "center center",
+  "press-detail-still": "center center",
+  "contact-mood-canvas": "center center",
+  "curated-contact-mood-canvas": "center center",
+  "curated-release-cover": "center center"
 };
 
 export const assetMap: Record<string, AssetMapItem> = Object.fromEntries(

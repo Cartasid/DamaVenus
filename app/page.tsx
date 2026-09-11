@@ -2,25 +2,28 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { homepageCoreModules, homepageIntro } from "@/content/data/homepage.data";
-import { assetMap, siteConfig } from "@/content/data/site.config";
+import { assetMap } from "@/content/data/site.config";
+import { officialReleaseLinks } from "@/content/data/official-links";
 import HeroTextReveal from "@/components/utils/hero-text-reveal";
-import SocialIcon from "@/components/utils/social-icons";
 import Marquee from "@/components/utils/marquee";
 import ParallaxHero from "@/components/utils/parallax-hero";
 import ImageReveal from "@/components/utils/image-reveal";
 
 export const metadata: Metadata = {
   title: { absolute: "Dáma Venus — Singer, Songwriter & Visual Author | Official Site" },
-  description: "Dáma Venus — Brazilian singer, songwriter, and visual author based in Berlin. Alternative pop, trap-pop, R&B, and vaporwave. Explore music, visuals, and bookings.",
+  description:
+    "Dáma Venus — Brazilian singer, songwriter, and visual author based in Berlin. Explore official music releases, cinematic visuals, press materials, and bookings.",
   openGraph: {
     title: "Dáma Venus — Singer, Songwriter & Visual Author",
-    description: "Brazilian singer, songwriter, and visual author based in Berlin. Alternative pop, trap-pop, R&B, and vaporwave.",
+    description:
+      "Brazilian singer, songwriter, and visual author based in Berlin. Explore official releases, cinematic visuals, and bookings.",
     url: "/",
     images: [{ url: "/og-home.png" }]
   },
   twitter: {
     title: "Dáma Venus — Singer, Songwriter & Visual Author",
-    description: "Brazilian singer, songwriter, and visual author based in Berlin. Explore music, visuals, and bookings.",
+    description:
+      "Brazilian singer, songwriter, and visual author based in Berlin. Explore official releases, visuals, and bookings.",
     images: ["/og-home.png"]
   },
   alternates: { canonical: "/" }
@@ -33,27 +36,32 @@ export default function HomePage() {
     homepageCoreModules.find((m) => m.id === "featuredRelease") ??
     homepageCoreModules.find((m) => Boolean(m.assetId));
 
+  const featuredReleaseModule = homepageCoreModules.find((m) => m.id === "featuredRelease");
   const visualsModule = homepageCoreModules.find((m) => m.id === "visuals");
   const statementModule = homepageCoreModules.find((m) => m.id === "statement");
-  const pressModule = homepageCoreModules.find((m) => m.id === "press");
   const contactNewsletterModule = homepageCoreModules.find((m) => m.id === "contactNewsletter");
 
   const leadAsset = leadModule?.assetId ? assetMap[leadModule.assetId] : undefined;
+  const featuredReleaseAsset = featuredReleaseModule?.assetId
+    ? assetMap[featuredReleaseModule.assetId]
+    : undefined;
   const visualsAsset = visualsModule?.assetId ? assetMap[visualsModule.assetId] : undefined;
   const statementAsset = statementModule?.assetId ? assetMap[statementModule.assetId] : undefined;
-  const pressAsset = pressModule?.assetId ? assetMap[pressModule.assetId] : undefined;
 
   return (
     <div className="home-composition">
-
-      {/* ═══ HERO — CINEMATIC FULL VIEWPORT ═══ */}
       <section
         className="home-hero-enter relative min-h-[100vh] flex flex-col justify-end overflow-hidden"
         aria-labelledby="home-title"
       >
         {leadAsset ? (
           <ParallaxHero className="absolute inset-0" intensity={0.25}>
-            <ImageReveal className="absolute inset-0" style={{ height: "120%" }} lightboxSrc={leadAsset.src} lightboxAlt={leadAsset.alt ?? "Dama Venus"}>
+            <ImageReveal
+              className="absolute inset-0"
+              style={{ height: "120%" }}
+              lightboxSrc={leadAsset.src}
+              lightboxAlt={leadAsset.alt ?? "Dama Venus"}
+            >
               <Image
                 src={leadAsset.src}
                 alt={leadAsset.alt ?? leadModule?.alt ?? ""}
@@ -65,12 +73,18 @@ export default function HomePage() {
               <div
                 className="absolute inset-0"
                 aria-hidden="true"
-                style={{ background: "linear-gradient(to top, rgba(5,5,5,0.98) 0%, rgba(5,5,5,0.7) 25%, rgba(5,5,5,0.3) 55%, rgba(5,5,5,0.05) 100%)" }}
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(5,5,5,0.98) 0%, rgba(5,5,5,0.7) 25%, rgba(5,5,5,0.3) 55%, rgba(5,5,5,0.05) 100%)"
+                }}
               />
               <div
                 className="absolute inset-0"
                 aria-hidden="true"
-                style={{ background: "linear-gradient(135deg, rgba(200,168,126,0.04) 0%, transparent 40%)" }}
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(200,168,126,0.04) 0%, transparent 40%)"
+                }}
               />
             </ImageReveal>
           </ParallaxHero>
@@ -114,105 +128,431 @@ export default function HomePage() {
             <div className="mt-8 flex items-center gap-4 flex-wrap">
               {["Alternative Pop", "Trap-Pop", "R&B", "Vaporwave"].map((genre, i) => (
                 <span key={genre} className="flex items-center gap-4">
-                  {i > 0 && <span style={{ width: "20px", height: "1px", background: "rgba(200,168,126,0.35)" }} aria-hidden="true" />}
-                  <span style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.52rem", fontWeight: 600, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(245,240,235,0.25)" }}>{genre}</span>
+                  {i > 0 && (
+                    <span
+                      style={{
+                        width: "20px",
+                        height: "1px",
+                        background: "rgba(200,168,126,0.35)"
+                      }}
+                      aria-hidden="true"
+                    />
+                  )}
+                  <span
+                    style={{
+                      fontFamily: "var(--font-montserrat), system-ui, sans-serif",
+                      fontSize: "0.52rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.25em",
+                      textTransform: "uppercase",
+                      color: "rgba(245,240,235,0.25)"
+                    }}
+                  >
+                    {genre}
+                  </span>
                 </span>
               ))}
             </div>
-
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10" aria-hidden="true" style={{ width: "1px", height: "48px", background: "linear-gradient(to bottom, rgba(200,168,126,0.5), transparent)", animation: "pulse 2.5s ease-in-out infinite" }} />
+        <div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+          aria-hidden="true"
+          style={{
+            width: "1px",
+            height: "48px",
+            background: "linear-gradient(to bottom, rgba(200,168,126,0.5), transparent)",
+            animation: "pulse 2.5s ease-in-out infinite"
+          }}
+        />
       </section>
 
-      {/* ═══ MARQUEE ═══ */}
-      <div className="py-10" style={{ borderTop: "1px solid rgba(200,168,126,0.08)", borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
-        <Marquee items={["Sound", "Vision", "Reign", "Alternative Pop", "Trap-Pop", "R&B", "Vaporwave", "Rio de Janeiro", "Europe", "Cinematic Artist"]} speed={40} />
+      <div
+        className="py-10"
+        style={{
+          borderTop: "1px solid rgba(200,168,126,0.08)",
+          borderBottom: "1px solid rgba(200,168,126,0.08)"
+        }}
+      >
+        <Marquee
+          items={[
+            "Sound",
+            "Vision",
+            "Reign",
+            "Alternative Pop",
+            "Trap-Pop",
+            "R&B",
+            "Vaporwave",
+            "Rio de Janeiro",
+            "Europe",
+            "Cinematic Artist"
+          ]}
+          speed={40}
+        />
       </div>
 
-      {/* ═══ PRESS QUOTE ═══ */}
       <section className="reveal section-gap-lg" aria-label="Press quote">
         <div className="site-container text-center" style={{ maxWidth: "52rem", margin: "0 auto" }}>
-          <p style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(200,168,126,0.5)", marginBottom: "1.5rem" }}>
+          <p
+            style={{
+              fontFamily: "var(--font-montserrat), system-ui, sans-serif",
+              fontSize: "0.55rem",
+              fontWeight: 700,
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              color: "rgba(200,168,126,0.5)",
+              marginBottom: "1.5rem"
+            }}
+          >
             Press
           </p>
-          <blockquote style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "clamp(1.2rem, 2.5vw, 1.7rem)", fontWeight: 300, fontStyle: "italic", lineHeight: 1.6, color: "rgba(245,240,235,0.75)", margin: 0 }}>
-            &ldquo;Dáma Venus blends atmospheric depth with a unique sonic vision, marking her as a rising force in the international scene.&rdquo;
+          <blockquote
+            style={{
+              fontFamily: "var(--font-bodoni), Georgia, serif",
+              fontSize: "clamp(1.2rem, 2.5vw, 1.7rem)",
+              fontWeight: 300,
+              fontStyle: "italic",
+              lineHeight: 1.6,
+              color: "rgba(245,240,235,0.75)",
+              margin: 0
+            }}
+          >
+            &ldquo;Dáma Venus blends atmospheric depth with a unique sonic vision, marking her as a
+            rising force in the international scene.&rdquo;
           </blockquote>
-          <p className="mt-4" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(200,168,126,0.4)" }}>
+          <p
+            className="mt-4"
+            style={{
+              fontFamily: "var(--font-montserrat), system-ui, sans-serif",
+              fontSize: "0.55rem",
+              fontWeight: 600,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: "rgba(200,168,126,0.4)"
+            }}
+          >
             — The Review Geek
           </p>
         </div>
       </section>
 
-      {/* ═══ STATEMENT ═══ */}
-      <section aria-labelledby="statement-title" className="reveal-fade section-gap-lg statement-block">
+      {featuredReleaseModule ? (
+        <section
+          id="latest-release"
+          className="reveal section-gap-lg"
+          aria-labelledby="latest-release-title"
+        >
+          <div className="site-container">
+            <div
+              className="grid gap-0 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] premium-card"
+              style={{ border: "1px solid rgba(200,168,126,0.08)" }}
+            >
+              {featuredReleaseAsset ? (
+                <ImageReveal
+                  className="relative overflow-hidden"
+                  style={{ minHeight: "560px" }}
+                  lightboxSrc={featuredReleaseAsset.src}
+                  lightboxAlt="Dáma Venus — Lonely Berlin release visual"
+                >
+                  <Image
+                    src={featuredReleaseAsset.src}
+                    alt="Dáma Venus — Lonely Berlin release visual"
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                    className="object-cover"
+                    style={{
+                      objectPosition: featuredReleaseAsset.objectPosition ?? "center center"
+                    }}
+                  />
+                </ImageReveal>
+              ) : null}
+
+              <div className="flex flex-col justify-end px-10 py-16 md:px-16 md:py-20">
+                <p
+                  className="mb-4"
+                  style={{
+                    fontFamily: "var(--font-montserrat), system-ui, sans-serif",
+                    fontSize: "0.55rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.25em",
+                    textTransform: "uppercase",
+                    color: "rgba(200,168,126,0.7)"
+                  }}
+                >
+                  Latest Official Release
+                </p>
+                <h2
+                  id="latest-release-title"
+                  className="text-primary"
+                  style={{
+                    fontFamily: "var(--font-bodoni), Georgia, serif",
+                    fontSize: "clamp(2.4rem, 5vw, 4.5rem)",
+                    fontWeight: 300,
+                    lineHeight: 1.02
+                  }}
+                >
+                  {featuredReleaseModule.copy.headline}
+                </h2>
+                {featuredReleaseModule.copy.subline ? (
+                  <p
+                    className="mt-5 text-muted"
+                    style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "30rem" }}
+                  >
+                    {featuredReleaseModule.copy.subline}
+                  </p>
+                ) : null}
+                <div className="mt-10 flex flex-wrap gap-3">
+                  {featuredReleaseModule.copy.cta ? (
+                    <Link href={featuredReleaseModule.copy.cta.href} className="cta-primary">
+                      {featuredReleaseModule.copy.cta.label}
+                    </Link>
+                  ) : null}
+                  <a
+                    href={officialReleaseLinks.lonelyBerlin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-secondary no-underline"
+                  >
+                    Listen on Amazon Music
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      <section
+        aria-labelledby="statement-title"
+        className="reveal-fade section-gap-lg statement-block"
+      >
         {statementAsset ? (
           <div className="statement-block__bg" aria-hidden="true">
-            <Image src={statementAsset.src} alt="" fill sizes="100vw" loading="lazy" className="object-cover img-statement-bg" />
+            <Image
+              src={statementAsset.src}
+              alt=""
+              fill
+              sizes="100vw"
+              loading="lazy"
+              className="object-cover img-statement-bg"
+            />
           </div>
         ) : null}
         <div className="statement-block__content">
           <p className="statement-block__eyebrow">Manifesto</p>
-          <h2 id="statement-title" className="statement-block__headline">{statementModule?.copy.headline}</h2>
+          <h2 id="statement-title" className="statement-block__headline">
+            {statementModule?.copy.headline}
+          </h2>
         </div>
       </section>
 
-      {/* ═══ VISUALS ═══ */}
       <section aria-labelledby="visual-story-title" className="reveal section-gap-lg">
         <div className="site-container">
           <div className="grid gap-0 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-stretch premium-card">
             {visualsAsset ? (
-              <ImageReveal className="img-hover-zoom relative overflow-hidden" style={{ minHeight: "600px" }} lightboxSrc={visualsAsset.src} lightboxAlt={visualsAsset.alt ?? visualsModule?.alt ?? ""}>
-                <Image src={visualsAsset.src} alt={visualsAsset.alt ?? visualsModule?.alt ?? ""} fill loading="lazy" sizes="(max-width: 768px) 100vw, 60vw" className="object-cover" style={{ objectPosition: visualsAsset.objectPosition ?? "center center" }} />
+              <ImageReveal
+                className="img-hover-zoom relative overflow-hidden"
+                style={{ minHeight: "600px" }}
+                lightboxSrc={visualsAsset.src}
+                lightboxAlt={visualsAsset.alt ?? visualsModule?.alt ?? ""}
+              >
+                <Image
+                  src={visualsAsset.src}
+                  alt={visualsAsset.alt ?? visualsModule?.alt ?? ""}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, 60vw"
+                  className="object-cover"
+                  style={{ objectPosition: visualsAsset.objectPosition ?? "center center" }}
+                />
               </ImageReveal>
             ) : null}
-            <div className="flex flex-col justify-end px-10 py-20 md:px-16" style={{ borderTop: "1px solid rgba(200,168,126,0.08)", borderLeft: "1px solid rgba(200,168,126,0.08)", borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
-              <p className="mb-4" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(200,168,126,0.7)" }}>Visual World</p>
-              <h2 id="visual-story-title" className="text-primary" style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "clamp(2rem, 4.5vw, 3.8rem)", fontWeight: 400, lineHeight: 1.05, fontStyle: "italic" }}>
+            <div
+              className="flex flex-col justify-end px-10 py-20 md:px-16"
+              style={{
+                borderTop: "1px solid rgba(200,168,126,0.08)",
+                borderLeft: "1px solid rgba(200,168,126,0.08)",
+                borderBottom: "1px solid rgba(200,168,126,0.08)"
+              }}
+            >
+              <p
+                className="mb-4"
+                style={{
+                  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
+                  fontSize: "0.55rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.25em",
+                  textTransform: "uppercase",
+                  color: "rgba(200,168,126,0.7)"
+                }}
+              >
+                Visual World
+              </p>
+              <h2
+                id="visual-story-title"
+                className="text-primary"
+                style={{
+                  fontFamily: "var(--font-bodoni), Georgia, serif",
+                  fontSize: "clamp(2rem, 4.5vw, 3.8rem)",
+                  fontWeight: 400,
+                  lineHeight: 1.05,
+                  fontStyle: "italic"
+                }}
+              >
                 {visualsModule?.copy.headline}
               </h2>
-              {visualsModule?.copy.subline ? <p className="mt-4 text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.75 }}>{visualsModule.copy.subline}</p> : null}
-              {visualsModule?.copy.cta ? <Link href={visualsModule.copy.cta.href} className="mt-10 inline-block cta-secondary self-start">{visualsModule.copy.cta.label}</Link> : null}
-              <div className="mt-12 w-20 h-px" style={{ background: "linear-gradient(to right, rgba(200,168,126,0.5), transparent)" }} aria-hidden="true" />
+              {visualsModule?.copy.subline ? (
+                <p className="mt-4 text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.75 }}>
+                  {visualsModule.copy.subline}
+                </p>
+              ) : null}
+              {visualsModule?.copy.cta ? (
+                <Link
+                  href={visualsModule.copy.cta.href}
+                  className="mt-10 inline-block cta-secondary self-start"
+                >
+                  {visualsModule.copy.cta.label}
+                </Link>
+              ) : null}
+              <div
+                className="mt-12 w-20 h-px"
+                style={{
+                  background: "linear-gradient(to right, rgba(200,168,126,0.5), transparent)"
+                }}
+                aria-hidden="true"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ═══ CONTACT CTA ═══ */}
       <section aria-labelledby="contact-newsletter-title" className="reveal section-gap-lg">
         <div className="site-container">
-          <div className="relative overflow-hidden px-10 py-36 md:px-20 md:py-44 glow-accent img-color-reveal" style={{ border: "1px solid rgba(200,168,126,0.12)" }}>
+          <div
+            className="relative overflow-hidden px-10 py-36 md:px-20 md:py-44 glow-accent img-color-reveal"
+            style={{ border: "1px solid rgba(200,168,126,0.12)" }}
+          >
             {assetMap["contact-red-portrait-69bf"] ? (
               <div className="absolute inset-0" aria-hidden="true">
-                <Image src={assetMap["contact-red-portrait-69bf"].src} alt="" fill sizes="100vw" loading="lazy" className="object-cover img-contact-bg" style={{ objectPosition: assetMap["contact-red-portrait-69bf"].objectPosition ?? "center 30%" }} />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.05) 55%, rgba(5,5,5,0.3) 100%)" }} />
+                <Image
+                  src={assetMap["contact-red-portrait-69bf"].src}
+                  alt=""
+                  fill
+                  sizes="100vw"
+                  loading="lazy"
+                  className="object-cover img-contact-bg"
+                  style={{
+                    objectPosition:
+                      assetMap["contact-red-portrait-69bf"].objectPosition ?? "center 30%"
+                  }}
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to right, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.05) 55%, rgba(5,5,5,0.3) 100%)"
+                  }}
+                />
               </div>
             ) : (
-              <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(200,168,126,0.04) 0%, rgba(5,5,5,0.95) 50%, rgba(255,0,255,0.03) 100%)" }} aria-hidden="true" />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(200,168,126,0.04) 0%, rgba(5,5,5,0.95) 50%, rgba(255,0,255,0.03) 100%)"
+                }}
+                aria-hidden="true"
+              />
             )}
-            <div className="absolute right-0 top-0 bottom-0 w-px" style={{ background: "linear-gradient(to bottom, transparent, rgba(200,168,126,0.3), transparent)" }} aria-hidden="true" />
-            <div className="absolute left-0 top-0 right-0 h-px" style={{ background: "linear-gradient(to right, rgba(200,168,126,0.25), transparent 40%)" }} aria-hidden="true" />
-            <div className="absolute left-0 bottom-0 right-0 h-px" style={{ background: "linear-gradient(to left, rgba(255,0,255,0.15), transparent 40%)" }} aria-hidden="true" />
+            <div
+              className="absolute right-0 top-0 bottom-0 w-px"
+              style={{
+                background:
+                  "linear-gradient(to bottom, transparent, rgba(200,168,126,0.3), transparent)"
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute left-0 top-0 right-0 h-px"
+              style={{
+                background:
+                  "linear-gradient(to right, rgba(200,168,126,0.25), transparent 40%)"
+              }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute left-0 bottom-0 right-0 h-px"
+              style={{
+                background:
+                  "linear-gradient(to left, rgba(255,0,255,0.15), transparent 40%)"
+              }}
+              aria-hidden="true"
+            />
             <div className="relative z-10">
-              <p className="mb-6" style={{ fontFamily: "var(--font-montserrat), system-ui, sans-serif", fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(200,168,126,0.8)" }}>Inquiries</p>
-              <h2 id="contact-newsletter-title" className="text-primary" style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "clamp(2.8rem, 6vw, 5.5rem)", fontWeight: 400, lineHeight: 1.0, fontStyle: "italic", maxWidth: "24rem" }}>
+              <p
+                className="mb-6"
+                style={{
+                  fontFamily: "var(--font-montserrat), system-ui, sans-serif",
+                  fontSize: "0.55rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.3em",
+                  textTransform: "uppercase",
+                  color: "rgba(200,168,126,0.8)"
+                }}
+              >
+                Inquiries
+              </p>
+              <h2
+                id="contact-newsletter-title"
+                className="text-primary"
+                style={{
+                  fontFamily: "var(--font-bodoni), Georgia, serif",
+                  fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
+                  fontWeight: 400,
+                  lineHeight: 1,
+                  fontStyle: "italic",
+                  maxWidth: "24rem"
+                }}
+              >
                 {contactNewsletterModule?.copy.headline}
               </h2>
-              {contactNewsletterModule?.copy.subline ? <p className="mt-6 text-muted" style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "30rem" }}>{contactNewsletterModule.copy.subline}</p> : null}
-              {contactNewsletterModule?.copy.cta ? <Link href={contactNewsletterModule.copy.cta.href} className="mt-10 inline-block cta-primary">{contactNewsletterModule.copy.cta.label}</Link> : null}
+              {contactNewsletterModule?.copy.subline ? (
+                <p
+                  className="mt-6 text-muted"
+                  style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "30rem" }}
+                >
+                  {contactNewsletterModule.copy.subline}
+                </p>
+              ) : null}
+              {contactNewsletterModule?.copy.cta ? (
+                <Link
+                  href={contactNewsletterModule.copy.cta.href}
+                  className="mt-10 inline-block cta-primary"
+                >
+                  {contactNewsletterModule.copy.cta.label}
+                </Link>
+              ) : null}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Bottom marquee */}
       <div className="py-8" style={{ borderTop: "1px solid rgba(200,168,126,0.06)" }}>
-        <Marquee items={["Dama Venus", "Sound", "Vision", "Reign", "Live Performer", "Rio de Janeiro", "Europe"]} speed={50} />
+        <Marquee
+          items={[
+            "Dama Venus",
+            "Sound",
+            "Vision",
+            "Reign",
+            "Live Performer",
+            "Rio de Janeiro",
+            "Europe"
+          ]}
+          speed={50}
+        />
       </div>
-
     </div>
   );
 }

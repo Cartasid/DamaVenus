@@ -11,9 +11,22 @@ const imageFormatsByExtension = new Map([
   ['.webp', 'webp'],
 ]);
 
+const requiredPublicFiles = [
+  'assets/dama-venus/docs/dama-venus-epk-en.pdf',
+  'assets/dama-venus/docs/dama-venus-epk-pt.pdf',
+  'assets/dama-venus/video/lonely-berlin-day-1.mp4',
+];
+
+const retiredMusicPlaceholders = [
+  'Midnight Signal',
+  'Afterglow Cut',
+  'Nocturne Line',
+];
+
 async function listFiles(dirPath) {
   const entries = await fs.readdir(dirPath, { withFileTypes: true });
   const files = [];
+
   for (const entry of entries) {
     const fullPath = path.join(dirPath, entry.name);
     if (entry.isDirectory()) {
@@ -22,24 +35,33 @@ async function listFiles(dirPath) {
       files.push(fullPath);
     }
   }
+
   return files;
 }
 
 async function ensureAtLeastOneBuiltCss() {
   const cssDir = path.resolve(projectRoot, '.next/static/css');
   let cssFiles = [];
+
   try {
-    cssFiles = (await listFiles(cssDir)).filter((filePath) => filePath.endsWith('.css'));
+    cssFiles = (await listFiles(cssDir)).filter((filePath) =>
+      filePath.endsWith('.css'),
+    );
   } catch {
-    throw new Error('CSS-Datei fehlt: Build-CSS-Verzeichnis fehlt (.next/static/css).');
+    throw new Error(
+      'CSS-Datei fehlt: Build-CSS-Verzeichnis fehlt (.next/static/css).',
+    );
   }
 
   if (cssFiles.length < 1) {
-    throw new Error('CSS-Datei fehlt: Keine CSS-Datei unter .next/static/css gefunden.');
+    throw new Error(
+      'CSS-Datei fehlt: Keine CSS-Datei unter .next/static/css gefunden.',
+    );
   }
 
   const containsTailwindOutput = (cssSource) => {
-    const hasUtilitySelector = /(?:^|[}\s])\.[_a-zA-Z][\w-]*(?:\\:[\w-]+)*\s*\{/m.test(cssSource);
+    const hasUtilitySelector =
+      /(?:^|[}\s])\.[_a-zA-Z][\w-]*(?:\\:[\w-]+)*\s*\{/m.test(cssSource);
     const hasTailwindVariable = /--tw-[\w-]+\s*:/.test(cssSource);
     return hasUtilitySelector && hasTailwindVariable;
   };
@@ -49,11 +71,16 @@ async function ensureAtLeastOneBuiltCss() {
     if (containsTailwindOutput(cssSource)) return;
   }
 
-  throw new Error('CSS-Datei vorhanden, aber Tailwind-Ausgabe nicht erkannt.');
+  throw new Error(
+    'CSS-Datei vorhanden, aber Tailwind-Ausgabe nicht erkannt.',
+  );
 }
 
 async function parsePrioritizedAssets() {
-  const assetsTsPath = path.resolve(projectRoot, 'content/dama-venus/assets.ts');
+  const assetsTsPath = path.resolve(
+    projectRoot,
+    'content/dama-venus/assets.ts',
+  );
   const source = await fs.readFile(assetsTsPath, 'utf8');
   const objectPattern = /{[\s\S]*?}/g;
   const assets = [];
@@ -63,6 +90,7 @@ async function parsePrioritizedAssets() {
     const idMatch = objectContent.match(/id:\s*"([^"]+)"/);
     const finalPathMatch = objectContent.match(/finalPath:\s*"([^"]+)"/);
     const sourcePathMatch = objectContent.match(/sourcePath:\s*"([^"]+)"/);
+
     if (idMatch && finalPathMatch && sourcePathMatch) {
       assets.push({
         id: idMatch[1],
@@ -81,27 +109,41 @@ async function validateImageFile(absolutePath) {
   if (!expectedFormat) return;
 
   const metadata = await sharp(absolutePath, { failOn: 'error' }).metadata();
+
   if (!metadata.width || !metadata.height) {
     throw new Error('Bilddimensionen fehlen oder sind ungültig.');
   }
+
   if (metadata.format !== expectedFormat) {
-    throw new Error(`Dateiendung ${extension} enthält Format ${metadata.format ?? 'unbekannt'}.`);
+    throw new Error(
+      `Dateiendung ${extension} enthält Format ${metadata.format ?? 'unbekannt'}.`,
+    );
   }
 
   await sharp(absolutePath, { failOn: 'error' })
-    .resize({ width: 1, height: 1, fit: 'inside', withoutEnlargement: true })
+    .resize({
+      width: 1,
+      height: 1,
+      fit: 'inside',
+      withoutEnlargement: true,
+    })
     .toBuffer();
 }
 
 async function ensureAllPrioritizedAssetsAreValid(assets) {
   if (assets.length === 0) {
-    throw new Error('Keine priorisierten Assets in content/dama-venus/assets.ts gefunden.');
+    throw new Error(
+      'Keine priorisierten Assets in content/dama-venus/assets.ts gefunden.',
+    );
   }
 
   const failures = [];
   const uniqueFinalPaths = new Map();
+
   for (const asset of assets) {
-    if (!uniqueFinalPaths.has(asset.finalPath)) uniqueFinalPaths.set(asset.finalPath, asset);
+    if (!uniqueFinalPaths.has(asset.finalPath)) {
+      uniqueFinalPaths.set(asset.finalPath, asset);
+    }
   }
 
   for (const asset of uniqueFinalPaths.values()) {
@@ -114,7 +156,9 @@ async function ensureAllPrioritizedAssetsAreValid(assets) {
     try {
       const stat = await fs.stat(absolutePath);
       if (!stat.isFile() || stat.size <= 0) {
-        throw new Error('Datei fehlt, ist leer oder ist keine reguläre Datei.');
+        throw new Error(
+          'Datei fehlt, ist leer oder ist keine reguläre Datei.',
+        );
       }
       await validateImageFile(absolutePath);
     } catch (error) {
@@ -125,16 +169,73 @@ async function ensureAllPrioritizedAssetsAreValid(assets) {
   }
 
   if (failures.length > 0) {
-    throw new Error(`Ungültige Produktions-Assets: ${failures.join('; ')}`);
+    throw new Error(
+      `Ungültige Produktions-Assets: ${failures.join('; ')}`,
+    );
+  }
+}
+
+async function ensureRequiredPublicFilesExist() {
+  const failures = [];
+
+  for (const relativePath of requiredPublicFiles) {
+    const absolutePath = path.resolve(projectRoot, 'public', relativePath);
+
+    try {
+      const stat = await fs.stat(absolutePath);
+      if (!stat.isFile() || stat.size <= 0) {
+        throw new Error('Datei ist leer oder keine reguläre Datei.');
+      }
+    } catch (error) {
+      failures.push(`${relativePath}: ${error.message}`);
+    }
+  }
+
+  if (failures.length) {
+    throw new Error(
+      `Erforderliche öffentliche Dateien fehlen: ${failures.join('; ')}`,
+    );
+  }
+}
+
+async function ensureMusicContentUsesOfficialReleaseNames() {
+  const musicPath = path.resolve(projectRoot, 'content/data/music.data.ts');
+  const source = await fs.readFile(musicPath, 'utf8');
+
+  const staleTitles = retiredMusicPlaceholders.filter((title) =>
+    source.includes(title),
+  );
+
+  if (staleTitles.length) {
+    throw new Error(
+      `Veraltete Platzhalter-Releases gefunden: ${staleTitles.join(', ')}`,
+    );
+  }
+
+  for (const expectedTitle of [
+    'Lonely Berlin',
+    'Valentines',
+    'Eclipse',
+    'Close Friend',
+  ]) {
+    if (!source.includes(`title: "${expectedTitle}"`)) {
+      throw new Error(
+        `Offizieller Release fehlt in music.data.ts: ${expectedTitle}`,
+      );
+    }
   }
 }
 
 async function run() {
   await ensureAtLeastOneBuiltCss();
+
   const assets = await parsePrioritizedAssets();
   await ensureAllPrioritizedAssetsAreValid(assets);
+  await ensureRequiredPublicFilesExist();
+  await ensureMusicContentUsesOfficialReleaseNames();
+
   console.log(
-    'Production-Artefakte validiert: CSS vorhanden und alle priorisierten Bilddateien existieren und sind dekodierbar.',
+    'Production-Artefakte validiert: CSS, Bilddateien, EPK/Video und offizielle Release-Daten sind vorhanden und konsistent.',
   );
 }
 
