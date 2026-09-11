@@ -17,10 +17,9 @@ import {
   existsSync,
   mkdirSync,
   readFileSync,
-  relative,
   rmSync,
 } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { dirname, relative, resolve } from "node:path";
 
 const root = new URL("..", import.meta.url).pathname.replace(/^\/([A-Z]:)/, "$1");
 const publicRoot = resolve(root, "public");
