@@ -27,6 +27,17 @@ const securityHeaders = [
   }
 ];
 
+const negotiatedContentPaths = [
+  "/",
+  "/music",
+  "/visuals",
+  "/about",
+  "/press",
+  "/contact",
+  "/privacy",
+  "/imprint"
+];
+
 const nextConfig: NextConfig = {
   output: "standalone",
   images: {
@@ -37,7 +48,18 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: securityHeaders
-      }
+      },
+      ...negotiatedContentPaths.map((source) => ({
+        source,
+        headers: [
+          {
+            // HTML and Markdown share the same canonical URL. Caches must keep
+            // the negotiated representations separate.
+            key: "Vary",
+            value: "Accept"
+          }
+        ]
+      }))
     ];
   }
 };

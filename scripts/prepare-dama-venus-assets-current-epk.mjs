@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
+import sharp from 'sharp';
 
 const projectRoot = process.cwd();
 const canonicalEpk = path.resolve(projectRoot, 'docs/Dama Venus EPK.pdf');
@@ -22,6 +23,11 @@ const legacyEnglishEpk = path.resolve(
 const generatedPressEpk = path.resolve(
   projectRoot,
   'public/assets/dama-venus/press/dv_press_epk_document_v01.pdf',
+);
+const homeVisualSource = path.resolve(projectRoot, 'pics/3.jpeg');
+const homeVisualTarget = path.resolve(
+  projectRoot,
+  'public/assets/dama-venus/visuals/dv_visuals_frames_portrait_color_4x3_v01.jpg',
 );
 const assetPreparationScript = path.resolve(
   projectRoot,
@@ -58,6 +64,36 @@ function runNodeScript(scriptPath) {
   });
 }
 
+async function normalizeHomeVisualOrientation() {
+  await assertNonEmptyFile(homeVisualSource, 'Homepage-Visual-Quelle');
+  await fs.mkdir(path.dirname(homeVisualTarget), { recursive: true });
+
+  const temporaryTarget = `${homeVisualTarget}.orientation-${process.pid}.tmp.jpg`;
+
+  try {
+    const output = await sharp(homeVisualSource, { failOn: 'error' })
+      // pics/3.jpeg is stored with the camera frame sideways. Normalize the
+      // actual pixels so browsers do not depend on EXIF interpretation after
+      // the asset pipeline has re-encoded the image.
+      .rotate(90)
+      .jpeg({ quality: 90, mozjpeg: true })
+      .toFile(temporaryTarget);
+
+    if (!output.width || !output.height || output.height <= output.width) {
+      throw new Error(
+        `Homepage-Visual wurde nicht in die erwartete aufrechte Ausrichtung normalisiert (${output.width}x${output.height}).`,
+      );
+    }
+
+    await fs.rename(temporaryTarget, homeVisualTarget);
+    console.log(
+      `[visual] ${path.relative(projectRoot, homeVisualSource)} → ${path.relative(projectRoot, homeVisualTarget)}: 90° clockwise normalisiert (${output.width}x${output.height}).`,
+    );
+  } finally {
+    await fs.rm(temporaryTarget, { force: true });
+  }
+}
+
 async function run() {
   await assertNonEmptyFile(canonicalEpk, 'Kanonisches EPK');
 
@@ -82,6 +118,10 @@ async function run() {
     if (code !== 0) {
       throw new Error(`Asset preparation fehlgeschlagen (Exit-Code ${code}).`);
     }
+
+    // The generic pipeline preserves source pixel orientation. This one legacy
+    // camera asset needs a deterministic physical rotation before delivery.
+    await normalizeHomeVisualOrientation();
 
     await assertNonEmptyFile(publicEpk, 'Öffentliches EPK');
     await assertNonEmptyFile(legacyEnglishEpk, 'Legacy-EPK-Alias');
