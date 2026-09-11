@@ -38,8 +38,9 @@ export type ContactContent = {
 
 export const contactContent: ContactContent = {
   intro: {
-    headline: "Let’s Create the Next Chapter.",
-    subhead: "Bookings. Collaborations. Exclusive partnerships."
+    headline:
+      "Intellectual Property Licensing & Strategic Architectural Partnerships. Accessing the 2027 Performance Framework.",
+    subhead: "Licensing. Strategic partnerships. 2027 Performance Framework access."
   },
   primaryContact: {
     href: "/contact",

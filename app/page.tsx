@@ -126,7 +126,12 @@ export default function HomePage() {
             </p>
 
             <div className="mt-8 flex items-center gap-4 flex-wrap">
-              {["Alternative Pop", "Trap-Pop", "R&B", "Vaporwave"].map((genre, i) => (
+              {[
+                "High-Performance Avant-Garde Rap",
+                "Alternative Trap",
+                "Pop",
+                "High-Fidelity Audio Architecture"
+              ].map((genre, i) => (
                 <span key={genre} className="flex items-center gap-4">
                   {i > 0 && (
                     <span
@@ -180,13 +185,13 @@ export default function HomePage() {
             "Sound",
             "Vision",
             "Reign",
-            "Alternative Pop",
-            "Trap-Pop",
-            "R&B",
-            "Vaporwave",
+            "High-Performance Avant-Garde Rap",
+            "Alternative Trap",
+            "Pop",
+            "High-Fidelity Audio Architecture",
             "Rio de Janeiro",
             "Europe",
-            "Cinematic Artist"
+            "Dama Venus Productions"
           ]}
           speed={40}
         />
@@ -502,7 +507,7 @@ export default function HomePage() {
                   color: "rgba(200,168,126,0.8)"
                 }}
               >
-                Inquiries
+                Strategic Access
               </p>
               <h2
                 id="contact-newsletter-title"
