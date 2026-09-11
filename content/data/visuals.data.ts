@@ -25,8 +25,9 @@ export type VisualsEntry = {
 
 export const visualsIntro: SectionContent & { leadAsset?: { id: string } } = {
   label: "Visuals",
-  headline: "Frames in Motion",
-  subhead: "A visual language crafted in shadow, light, and intention.",
+  headline: "Building musical worlds connecting art & visuals",
+  subhead:
+    "Concept Lead & Visual Author at Dama Venus Productions | High-Fidelity Audio Architect | Proprietary Intellectual Design | Natürlich by Dama Venus",
   cta: {
     label: "View Visuals",
     href: "/visuals"
