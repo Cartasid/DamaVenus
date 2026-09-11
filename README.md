@@ -1,6 +1,6 @@
 # DamaVenus Website
 
-> **Launch-Hinweis:** Not launch-ready, solange `/privacy` und `/imprint` nur Placeholder-Inhalte enthalten.
+> **Launch-Hinweis:** `/privacy` und `/imprint` enthalten produktive Inhalte. Rechtliche Pflichtangaben bei Änderungen am Betreiber-, Hosting- oder Contact-Setup weiterhin gesondert prüfen.
 
 ## Projektüberblick
 DamaVenus ist eine Next.js-Website mit statisch gepflegter Content-Schicht (`content/data`) und einer serverseitigen Contact-API unter `app/api/contact/route.ts`.
@@ -58,13 +58,15 @@ Enthaltene Scripts:
 Asset-Preparation erfolgt über:
 
 ```bash
-node scripts/prepare-dama-venus-assets.mjs
+npm run prepare:dama-venus-assets
 ```
 
 Pipeline-Logik:
-- Liest Quellen aus `pics/` und `assets-src/dama-venus/` (beides reine, nicht-public Input-Pfade der Pipeline).
-- Schreibt optimierte Dateien nach `public/assets/dama-venus/` (dieser Pfad ist der finale Auslieferungspfad; `pics/` ist nie Auslieferung).
-- Generiert Mapping-Dateien:
+- `scripts/prepare-dama-venus-assets.mjs` liest Quellen aus `pics/` und `assets-src/dama-venus/` (beides reine, nicht-public Input-Pfade der Pipeline).
+- Die Pipeline schreibt aufbereitete Dateien nach `public/assets/dama-venus/` (dieser Pfad ist der finale Auslieferungspfad; `pics/` ist nie Auslieferung).
+- Anschließend optimiert `scripts/optimize-dama-venus-assets.mjs` ausschließlich priorisierte JPEG/WebP-Ausgaben, wenn sie größer als 750 KiB oder an einer Kante größer als 2400 px sind. Kleinere Assets bleiben unverändert.
+- Die Nachoptimierung arbeitet ausschließlich buildseitig mit dem bereits vorhandenen `sharp`; es entsteht kein zusätzlicher Runtime-Bilddienst und keine zusätzliche Serverlast pro Request.
+- Generierte Mapping-Dateien:
   - `public/assets/dama-venus/asset-map.json`
   - `public/assets/dama-venus/asset-map.ts`
 - `sharp` ist die zentrale Bild-Engine für Konvertierung/Optimierung (JPEG/WebP) und Zuschnitte innerhalb der Pipeline.
@@ -91,7 +93,7 @@ Zusätzlich relevant:
 
 URL-Resolution-Regel:
 - Primär wird `NEXT_PUBLIC_SITE_URL` verwendet.
-- Ist `NEXT_PUBLIC_SITE_URL` leer oder ungültig, fällt die App auf `https://damavenus.com` zurück.
+- Ist `NEXT_PUBLIC_SITE_URL` leer oder ungültig, fällt die App auf `https://damavenus.eu` zurück.
 - Für Metadaten, `robots.txt` und `sitemap.xml` wird diese zentrale Auflösung verwendet.
 
 ## Deployment-Flow
@@ -111,7 +113,7 @@ Kurzablauf:
 - Contact-Provider `webhook` und `resend` benötigen korrekte ENV-Konfiguration; sonst antwortet die API mit Fehler.
 - Asset-Preparation läuft im Docker-Build über `npm run build`; kein separater Host-Node-Schritt erforderlich.
 
-
 ## Security / Dependency Status
-- Next.js wird auf **15.3.6** festgelegt (gepatchte 15.x-Linie, kein Major-Wechsel).
-- Hintergrund: Entfernung der Nutzung von `next@15.3.1` (Deprecated-Hinweis) durch Upgrade auf gepatchtes 15.x-Release.
+- Next.js ist derzeit auf **15.3.6** festgelegt.
+- Upstream empfiehlt seit dem Security Release vom **25.08.2026** mindestens **15.5.24 (Maintenance LTS)** oder **16.3.3 (Active LTS)** wegen kritischer Sicherheitskorrekturen.
+- Der Versionssprung muss zusammen mit einem korrekt neu erzeugten `package-lock.json` sowie `npm run check` und `npm run build:check` erfolgen; `package.json` und Lockfile dürfen nicht getrennt aktualisiert werden.

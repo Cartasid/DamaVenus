@@ -53,7 +53,7 @@ export default function ImprintPage() {
 
           {/* Responsible Party */}
           <section>
-            <h2 style={sectionHeading}>Information pursuant to § 5 TMG</h2>
+            <h2 style={sectionHeading}>Information pursuant to § 5 DDG</h2>
             <p style={infoLine}>Tamiris Bittencourt da Silva Brasil</p>
             <p style={infoLine}>Av. Mem de Sá 9</p>
             <p style={infoLine}>Centro, Rio de Janeiro</p>
@@ -93,21 +93,11 @@ export default function ImprintPage() {
             <p style={infoLine}>Centro, Rio de Janeiro, Brazil</p>
           </section>
 
-          {/* EU Dispute Resolution */}
+          {/* Consumer dispute resolution */}
           <section>
-            <h2 style={sectionHeading}>EU Online Dispute Resolution</h2>
+            <h2 style={sectionHeading}>Consumer Dispute Resolution</h2>
             <p style={bodyText}>
-              The European Commission provides an online dispute resolution platform at{" "}
-              <a
-                href="https://ec.europa.eu/consumers/odr/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-offWhite hover:text-accent no-underline"
-                style={{ transition: "color 250ms" }}
-              >
-                ec.europa.eu/consumers/odr
-              </a>
-              . We are neither willing nor obliged to participate in dispute resolution proceedings
+              We are neither willing nor obliged to participate in dispute resolution proceedings
               before a consumer arbitration board.
             </p>
           </section>
