@@ -59,7 +59,7 @@ export default function ContactPage() {
 
         <header className="space-y-4">
           <h1 className="sr-only">Contact &amp; Bookings — Dáma Venus</h1>
-          <p className="text-accent" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>Inquiries</p>
+          <p className="text-accent" style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}>Strategic Access</p>
           <p
             role="doc-subtitle"
             className="text-primary"
