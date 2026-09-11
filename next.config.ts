@@ -24,13 +24,18 @@ const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value: "base-uri 'self'; object-src 'none'; frame-ancestors 'none'"
-  },
-  {
-    // HTML and Markdown share the same canonical URL. Caches must keep the
-    // negotiated representations separate.
-    key: "Vary",
-    value: "Accept"
   }
+];
+
+const negotiatedContentPaths = [
+  "/",
+  "/music",
+  "/visuals",
+  "/about",
+  "/press",
+  "/contact",
+  "/privacy",
+  "/imprint"
 ];
 
 const nextConfig: NextConfig = {
@@ -43,7 +48,18 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: securityHeaders
-      }
+      },
+      ...negotiatedContentPaths.map((source) => ({
+        source,
+        headers: [
+          {
+            // HTML and Markdown share the same canonical URL. Caches must keep
+            // the negotiated representations separate.
+            key: "Vary",
+            value: "Accept"
+          }
+        ]
+      }))
     ];
   }
 };
