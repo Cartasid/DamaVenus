@@ -24,6 +24,12 @@ const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value: "base-uri 'self'; object-src 'none'; frame-ancestors 'none'"
+  },
+  {
+    // HTML and Markdown share the same canonical URL. Caches must keep the
+    // negotiated representations separate.
+    key: "Vary",
+    value: "Accept"
   }
 ];
 
