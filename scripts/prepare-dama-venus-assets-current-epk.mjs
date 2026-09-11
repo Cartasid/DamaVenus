@@ -13,6 +13,10 @@ const stagedEpk = path.resolve(
 );
 const publicEpk = path.resolve(
   projectRoot,
+  'public/assets/dama-venus/docs/dama-venus-epk.pdf',
+);
+const legacyEnglishEpk = path.resolve(
+  projectRoot,
   'public/assets/dama-venus/docs/dama-venus-epk-en.pdf',
 );
 const generatedPressEpk = path.resolve(
@@ -63,14 +67,16 @@ async function run() {
   const canonicalHash = await sha256(canonicalEpk);
 
   try {
-    // The repository copy in docs/ is the single source of truth. The existing
-    // asset pipeline expects the curated staging path, so provide it only for
-    // the duration of this build instead of maintaining a second source file.
+    // docs/Dama Venus EPK.pdf is the single source of truth. The existing
+    // asset pipeline still expects its curated staging path, so provide that
+    // source only for the duration of the build.
     await fs.copyFile(canonicalEpk, stagedEpk);
 
-    // Keep the long-standing public download URL current for existing links and
-    // bookmarks while the asset pipeline also emits the canonical press path.
+    // Publish one neutral canonical URL for the website. Keep the historical
+    // English URL synchronized only as a backwards-compatible alias so old
+    // bookmarks never serve an outdated press kit.
     await fs.copyFile(canonicalEpk, publicEpk);
+    await fs.copyFile(canonicalEpk, legacyEnglishEpk);
 
     const code = await runNodeScript(assetPreparationScript);
     if (code !== 0) {
@@ -78,21 +84,27 @@ async function run() {
     }
 
     await assertNonEmptyFile(publicEpk, 'Öffentliches EPK');
+    await assertNonEmptyFile(legacyEnglishEpk, 'Legacy-EPK-Alias');
     await assertNonEmptyFile(generatedPressEpk, 'Generiertes Press-EPK');
 
-    const [publicHash, generatedHash] = await Promise.all([
+    const [publicHash, legacyHash, generatedHash] = await Promise.all([
       sha256(publicEpk),
+      sha256(legacyEnglishEpk),
       sha256(generatedPressEpk),
     ]);
 
-    if (publicHash !== canonicalHash || generatedHash !== canonicalHash) {
+    if (
+      publicHash !== canonicalHash ||
+      legacyHash !== canonicalHash ||
+      generatedHash !== canonicalHash
+    ) {
       throw new Error(
         'EPK-Synchronisierung inkonsistent: öffentliche/generierte Datei stimmt nicht mit docs/Dama Venus EPK.pdf überein.',
       );
     }
 
     console.log(
-      '[epk] docs/Dama Venus EPK.pdf → öffentlicher Download + Press-Asset synchronisiert und verifiziert.',
+      '[epk] docs/Dama Venus EPK.pdf → kanonischer Download + Legacy-Alias + Press-Asset synchronisiert und verifiziert.',
     );
   } finally {
     // Never keep a generated second source copy around after the build.
