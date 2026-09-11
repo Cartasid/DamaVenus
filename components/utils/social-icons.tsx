@@ -1,5 +1,3 @@
-"use client";
-
 const iconStyle = { width: 13, height: 13, fill: "currentColor", opacity: 0.65, flexShrink: 0 };
 
 export default function SocialIcon({ name }: { name: string }) {
