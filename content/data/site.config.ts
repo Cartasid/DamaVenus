@@ -34,7 +34,7 @@ export const siteConfig = {
 const assetObjectPositions: Record<string, string> = {
   "home-lead-portrait": "center 25%",
   "home-release-cover": "center center",
-  "home-visual-preview": "center 25%",
+  "home-visual-preview": "center 42%",
   "home-statement-editorial": "center 20%",
   "home-contact-newsletter": "center center",
   "home-press-preview": "center 20%",
