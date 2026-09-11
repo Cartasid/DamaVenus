@@ -12,15 +12,25 @@ const imageFormatsByExtension = new Map([
 ]);
 
 const requiredPublicFiles = [
-  'assets/dama-venus/docs/dama-venus-epk-en.pdf',
-  'assets/dama-venus/docs/dama-venus-epk-pt.pdf',
+  'assets/dama-venus/docs/dama-venus-epk.pdf',
   'assets/dama-venus/video/lonely-berlin-day-1.mp4',
 ];
 
 const retiredMusicPlaceholders = [
+  'Current Chapter',
   'Midnight Signal',
   'Afterglow Cut',
   'Nocturne Line',
+];
+
+const userFacingSourceFiles = [
+  'app/page.tsx',
+  'app/music/page.tsx',
+  'app/press/page.tsx',
+  'app/visuals/page.tsx',
+  'content/data/music.data.ts',
+  'content/data/press.data.ts',
+  'content/data/visuals.data.ts',
 ];
 
 async function listFiles(dirPath) {
@@ -226,6 +236,36 @@ async function ensureMusicContentUsesOfficialReleaseNames() {
   }
 }
 
+async function ensureNoLegacyPublicCopy() {
+  const violations = [];
+
+  for (const relativePath of userFacingSourceFiles) {
+    const source = await fs.readFile(path.resolve(projectRoot, relativePath), 'utf8');
+
+    if (source.includes('Current Chapter')) {
+      violations.push(`${relativePath}: veraltete Bezeichnung "Current Chapter"`);
+    }
+
+    if (/https:\/\/open\.spotify\.com\/?(?:["'`\s)])/i.test(source)) {
+      violations.push(`${relativePath}: generischer Spotify-Homepage-Link`);
+    }
+
+    if (
+      source.includes('dama-venus-epk-pt.pdf') ||
+      source.includes('EPK — Português') ||
+      source.includes('Portuguese press-kit')
+    ) {
+      violations.push(`${relativePath}: veralteter portugiesischer EPK-Verweis`);
+    }
+  }
+
+  if (violations.length) {
+    throw new Error(
+      `Veraltete öffentliche Copy/Links gefunden: ${violations.join('; ')}`,
+    );
+  }
+}
+
 async function run() {
   await ensureAtLeastOneBuiltCss();
 
@@ -233,9 +273,10 @@ async function run() {
   await ensureAllPrioritizedAssetsAreValid(assets);
   await ensureRequiredPublicFilesExist();
   await ensureMusicContentUsesOfficialReleaseNames();
+  await ensureNoLegacyPublicCopy();
 
   console.log(
-    'Production-Artefakte validiert: CSS, Bilddateien, EPK/Video und offizielle Release-Daten sind vorhanden und konsistent.',
+    'Production-Artefakte validiert: CSS, Bilddateien, aktuelles EPK/Video, Release-Daten und öffentliche Links sind vorhanden und konsistent.',
   );
 }
 

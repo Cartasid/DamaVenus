@@ -16,8 +16,8 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     linkedAssets: ["press-epk"],
     order: 1,
     priority: 1,
-    ctaLabel: "Open Press & EPK Overview",
-    target: "/press",
+    ctaLabel: "Download Current EPK",
+    target: "/press#epk-downloads",
     isPrimaryVisible: true
   },
   {
@@ -25,7 +25,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     title: "Artist Summary",
     shortDescriptor: "Artist positioning for international editorial context.",
     body:
-      "Dama Venus commands the intersection of cinematic sound and high-fashion visual narrative — an international artist redefining alternative pop.",
+      "Dama Venus builds high-performance musical worlds across avant-garde rap, alternative trap, pop, high-fidelity audio architecture, and visual authorship.",
     linkedAssets: ["press-epk"],
     order: 2,
     priority: 2,
@@ -126,10 +126,10 @@ export const pressEpkBlocks: PressEpkBlock[] = [
   },
   {
     id: "downloads",
-    title: "EPK Downloads",
-    shortDescriptor: "Direct English and Portuguese press-kit downloads.",
+    title: "Current EPK",
+    shortDescriptor: "Direct access to the current official press kit.",
     body:
-      "Download the current English or Portuguese EPK directly from the official press page.",
+      "Download the current official Dáma Venus EPK from the canonical press-kit file.",
     linkedAssets: [
       "press-epk",
       "press-featured-portrait-primary",
@@ -137,7 +137,7 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     ],
     order: 9,
     priority: 9,
-    ctaLabel: "Open EPK Downloads",
+    ctaLabel: "Go to EPK Download",
     target: "/press#epk-downloads"
   },
   {
@@ -173,14 +173,13 @@ export const pressContent: SectionContent = {
 export const pressMaterials: PressMaterialItem[] = [
   {
     id: "epk",
-    title: "Electronic Press Kit — English",
+    title: "Current Official EPK",
     description:
-      "Current official EPK with biography, discography, press photos, and contact information.",
+      "Current official EPK with biography, release context, press imagery, and contact information.",
     type: "download",
     accessMode: "direct",
-    url: "/assets/dama-venus/docs/dama-venus-epk-en.pdf",
-    notes:
-      "A Portuguese edition is also available at /assets/dama-venus/docs/dama-venus-epk-pt.pdf.",
+    url: "/assets/dama-venus/docs/dama-venus-epk.pdf",
+    notes: "Canonical source: docs/Dama Venus EPK.pdf.",
     asset: { id: "press-epk" }
   }
 ];

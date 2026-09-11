@@ -29,8 +29,8 @@ export const visualsIntro: SectionContent & { leadAsset?: { id: string } } = {
   subhead:
     "Concept Lead & Visual Author at Dama Venus Productions | High-Fidelity Audio Architect | Proprietary Intellectual Design | Natürlich by Dama Venus",
   cta: {
-    label: "View Visuals",
-    href: "/visuals"
+    label: "Explore Official Releases",
+    href: "/music"
   },
   asset: { id: "visuals-cinderela-lead-241" },
   leadAsset: { id: "visuals-night-portrait-0e9128" }
@@ -112,7 +112,7 @@ export const visualsEntries: (VisualsEntry & { category?: VisualsCategory })[] =
   },
   {
     id: "visuals-linked-current-chapter",
-    title: "Current Chapter — Visual Link",
+    title: "Lonely Berlin — Visual Link",
     category: "cinematic",
     type: "linked-visual",
     role: "supporting",
@@ -121,7 +121,7 @@ export const visualsEntries: (VisualsEntry & { category?: VisualsCategory })[] =
     layoutWeight: "md",
     moduleType: "linked-visual-module",
     assets: ["visuals-linked-current-chapter"],
-    shortText: "Where the visual world meets the sonic chapter.",
+    shortText: "Where the Lonely Berlin visual world meets the sonic release.",
     cropFocusHint: "Keep central motif visible and reserve one side for CTA copy.",
     bwColorSuitability: "color-first",
     altTextNotes: "Mention release relation in alt text where link purpose is not otherwise explicit."
