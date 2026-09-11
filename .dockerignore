@@ -10,3 +10,10 @@ pnpm-debug.log*
 .env
 .env.*
 coverage
+.agents
+.claude
+docs
+AGENTS.md
+README.md
+HOMEPAGE-AUDIT-damavenus.md
+SEO-AUDIT-damavenus.md

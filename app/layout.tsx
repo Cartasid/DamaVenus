@@ -161,18 +161,6 @@ const jsonLdGraph = {
         jobTitle: "Singer, Songwriter, Visual Author, International Actress, Producer",
         knowsLanguage: ["en", "pt", "de"]
       }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": `${siteUrl}/#breadcrumb`,
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
-        { "@type": "ListItem", position: 2, name: "Music", item: `${siteUrl}/music` },
-        { "@type": "ListItem", position: 3, name: "Visuals", item: `${siteUrl}/visuals` },
-        { "@type": "ListItem", position: 4, name: "Bio", item: `${siteUrl}/about` },
-        { "@type": "ListItem", position: 5, name: "Press & EPK", item: `${siteUrl}/press` },
-        { "@type": "ListItem", position: 6, name: "Contact", item: `${siteUrl}/contact` }
-      ]
     }
   ]
 };

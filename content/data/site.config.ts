@@ -25,7 +25,7 @@ export const siteConfig = {
   url: resolveSiteUrl(),
   metadata: {
     title: "Dáma Venus | Official Website | Visual Author & Actress",
-    description: "Official platform for Dáma Venus. Berlin-based producer, actress, and Miss Americas. Exploring the after-dark cinematic architecture. New album June 12th."
+    description: "Official platform for Dáma Venus — Berlin-based singer, songwriter, visual author, producer, and actress. Alternative pop, trap-pop, R&B, vaporwave, and cinematic visuals."
   },
   brandDescriptor: "Sound • Vision • Reign",
   footerLine: "Dama Venus — Sound. Vision. Reign."
