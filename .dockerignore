@@ -12,8 +12,27 @@ pnpm-debug.log*
 coverage
 .agents
 .claude
-docs
+
+# Docker needs only the canonical EPK source from docs/ during asset preparation.
+docs/*
+!docs/Dama Venus EPK.pdf
+
 AGENTS.md
 README.md
 HOMEPAGE-AUDIT-damavenus.md
 SEO-AUDIT-damavenus.md
+
+# These image/document trees are deterministic build outputs regenerated from
+# pics/ + assets-src/ by prepare-dama-venus-assets-current-epk.mjs. Keeping
+# committed generated copies in the Docker context duplicates hundreds of MB.
+# The manually managed video directory remains in the context.
+public/assets/dama-venus/about/
+public/assets/dama-venus/contact/
+public/assets/dama-venus/curated/
+public/assets/dama-venus/docs/
+public/assets/dama-venus/home/
+public/assets/dama-venus/music/
+public/assets/dama-venus/press/
+public/assets/dama-venus/visuals/
+public/assets/dama-venus/asset-map.json
+public/assets/dama-venus/asset-map.ts

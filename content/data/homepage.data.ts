@@ -161,7 +161,7 @@ const expectedHomeModuleCtas: Partial<Record<HomepageModuleId, CTA>> = {
     href: pressContent.cta?.href ?? "/press"
   },
   contactNewsletter: {
-    label: "Send Inquiry",
+    label: contactContent.form.ctaLabel,
     href: contactContent.primaryContact.href
   }
 };
