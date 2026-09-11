@@ -8,7 +8,14 @@ if [ ! -f .env.production ]; then
   exit 1
 fi
 
+DEPLOY_SHA="$(git rev-parse --short HEAD)"
+echo "Deploy: ${DEPLOY_SHA}"
 echo "Info: Asset-Preparation läuft im Docker-Build über 'npm run build'."
+
 docker compose -f docker-compose.prod.yml build --pull
 docker compose -f docker-compose.prod.yml up -d --remove-orphans
 docker compose -f docker-compose.prod.yml ps
+
+node scripts/verify-prod-live.mjs
+
+echo "Production deployment verified: ${DEPLOY_SHA}"
