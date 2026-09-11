@@ -1,7 +1,19 @@
-const iconStyle = { width: 13, height: 13, fill: "currentColor", opacity: 0.65, flexShrink: 0 };
+const iconStyle = {
+  width: 13,
+  height: 13,
+  fill: "currentColor",
+  opacity: 0.65,
+  flexShrink: 0
+};
 
 export default function SocialIcon({ name }: { name: string }) {
   switch (name) {
+    case "Amazon Music":
+      return (
+        <svg viewBox="0 0 24 24" style={iconStyle} aria-hidden="true">
+          <path d="M14 3v11.2a3.8 3.8 0 1 1-2-3.35V6.2l8-1.7v8.7a3.8 3.8 0 1 1-2-3.35V3.05L14 3.9V3zM8.2 17.2a1.8 1.8 0 1 0 3.6 0 1.8 1.8 0 0 0-3.6 0zm6 2a1.8 1.8 0 1 0 3.6 0 1.8 1.8 0 0 0-3.6 0z"/>
+        </svg>
+      );
     case "Spotify":
       return (
         <svg viewBox="0 0 24 24" style={iconStyle} aria-hidden="true">

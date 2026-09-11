@@ -11,12 +11,12 @@ import CustomCursor from "@/components/utils/custom-cursor";
 import ImageLightbox from "@/components/utils/image-lightbox";
 import ImageLoadObserver from "@/components/utils/image-load-observer";
 import { resolveSiteUrl, siteConfig } from "@/content/data/site.config";
+import { artistSameAs } from "@/content/data/official-links";
 
 const siteUrl = resolveSiteUrl();
 
 const bodoni = Bodoni_Moda({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
   style: ["normal", "italic"],
   variable: "--font-bodoni",
   display: "swap"
@@ -24,7 +24,6 @@ const bodoni = Bodoni_Moda({
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
   style: ["normal", "italic"],
   variable: "--font-montserrat",
   display: "swap"
@@ -47,27 +46,17 @@ export const metadata: Metadata = {
     "Visual Author",
     "international actress",
     "producer",
-    "Miss Americas",
     "Berlin artist",
     "Brazilian artist",
     "alternative pop",
-    "synth-pop",
-    "cinematic music",
-    "music",
-    "Rio de Janeiro",
-    "Europe",
-    "fashion artist",
-    "visual artist",
-    "after-dark architecture",
-    "Recording Academy",
-    "GRAMMYs",
-    "Berlin Künstlerin",
-    "Amsterdam",
-    "London",
     "trap-pop",
     "R&B",
     "vaporwave",
-    "cinematic visualizer",
+    "cinematic music",
+    "Lonely Berlin",
+    "Eclipse",
+    "Valentines",
+    "Close Friend",
     "music video",
     "EPK",
     "press kit"
@@ -80,7 +69,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     title: metadataTitle.default,
     description: metadataDescription,
-    images: [{ url: "/og-default.png", width: 1200, height: 630, alt: "Dama Venus — Artist" }]
+    images: [
+      {
+        url: "/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "Dáma Venus — Artist"
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
@@ -122,50 +118,41 @@ const jsonLdGraph = {
       url: siteUrl,
       description: metadataDescription,
       inLanguage: "en",
-      publisher: { "@id": `${siteUrl}/#musicgroup` }
+      publisher: { "@id": `${siteUrl}/#artist` }
     },
     {
-      "@type": "MusicGroup",
-      "@id": `${siteUrl}/#musicgroup`,
+      "@type": "Person",
+      "@id": `${siteUrl}/#artist`,
       name: "Dáma Venus",
-      alternateName: ["Dama Venus", "DamaVenus"],
+      alternateName: ["Dama Venus", "Tamiris Dama Venus"],
       description: metadataDescription,
       url: siteUrl,
-      genre: ["Alternative Pop", "Trap Pop", "R&B", "Vaporwave"],
-      foundingLocation: {
-        "@type": "Place",
-        name: "Rio de Janeiro, Brazil"
+      nationality: {
+        "@type": "Country",
+        name: "Brazil"
       },
-      location: {
-        "@type": "Place",
-        name: "Berlin, Germany"
-      },
+      jobTitle: [
+        "Singer",
+        "Songwriter",
+        "Visual Author",
+        "International Actress",
+        "Producer"
+      ],
+      knowsLanguage: ["en", "pt", "de"],
       image: {
         "@type": "ImageObject",
         url: `${siteUrl}/og-default.png`,
         width: 1200,
         height: 630
       },
-      sameAs: [
-        "https://open.spotify.com/artist/damavenus",
-        "https://www.instagram.com/ichbindamavenus",
-        "https://www.youtube.com/@damavenus",
-        "https://www.linkedin.com/in/damavenus",
-        "https://www.filmmakers.eu/de/actors/tamiris-bittencourt-da-silva-brasil"
-      ],
-      member: {
-        "@type": "Person",
-        "@id": `${siteUrl}/#person`,
-        name: "Dáma Venus",
-        nationality: { "@type": "Country", name: "Brazil" },
-        jobTitle: "Singer, Songwriter, Visual Author, International Actress, Producer",
-        knowsLanguage: ["en", "pt", "de"]
-      }
+      sameAs: artistSameAs
     }
   ]
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default function RootLayout({
+  children
+}: Readonly<{ children: ReactNode }>) {
   return (
     <html lang={siteConfig.language}>
       <head>
@@ -174,11 +161,15 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
         />
       </head>
-      <body className={`${bodoni.variable} ${montserrat.variable} premium-site min-h-screen flex flex-col`}>
+      <body
+        className={`${bodoni.variable} ${montserrat.variable} premium-site min-h-screen flex flex-col`}
+      >
         <noscript>
-          <style>{
-            ".reveal,.reveal-fade{opacity:1!important;transform:none!important}img[loading='lazy']{opacity:1!important}"
-          }</style>
+          <style>
+            {
+              ".reveal,.reveal-fade{opacity:1!important;transform:none!important}img[loading='lazy']{opacity:1!important}"
+            }
+          </style>
         </noscript>
         <ScrollProgress />
         <CustomCursor />

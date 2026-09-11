@@ -7,11 +7,17 @@ type ContactPayload = {
   companyWebsite?: string;
 };
 
-type ContactErrorCode = "validation_error" | "rate_limit_error" | "provider_error" | "unknown_error";
+type ContactErrorCode =
+  | "validation_error"
+  | "rate_limit_error"
+  | "provider_error"
+  | "unknown_error";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
+const RATE_MAP_MAX_IPS = 1000;
+const PROVIDER_TIMEOUT_MS = 12_000;
 
 const rateMap = new Map<string, number[]>();
 
@@ -25,9 +31,33 @@ function getClientIp(request: Request): string {
   return realIp?.trim() || "unknown";
 }
 
+function pruneRateMap(now: number): void {
+  for (const [ip, timestamps] of rateMap) {
+    const recent = timestamps.filter((value) => now - value < RATE_WINDOW_MS);
+    if (recent.length) {
+      rateMap.set(ip, recent);
+    } else {
+      rateMap.delete(ip);
+    }
+  }
+
+  while (rateMap.size >= RATE_MAP_MAX_IPS) {
+    const oldestKey = rateMap.keys().next().value as string | undefined;
+    if (!oldestKey) break;
+    rateMap.delete(oldestKey);
+  }
+}
+
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
-  const recent = (rateMap.get(ip) || []).filter((value) => now - value < RATE_WINDOW_MS);
+
+  if (rateMap.size >= RATE_MAP_MAX_IPS) {
+    pruneRateMap(now);
+  }
+
+  const recent = (rateMap.get(ip) || []).filter(
+    (value) => now - value < RATE_WINDOW_MS
+  );
 
   if (recent.length >= RATE_LIMIT_MAX) {
     rateMap.set(ip, recent);
@@ -40,7 +70,15 @@ function isRateLimited(ip: string): boolean {
 }
 
 function errorResponse(code: ContactErrorCode, message: string, status: number) {
-  return NextResponse.json({ ok: false, code, message }, { status });
+  return NextResponse.json(
+    { ok: false, code, message },
+    {
+      status,
+      headers: {
+        "Cache-Control": "no-store"
+      }
+    }
+  );
 }
 
 function validatePayload(payload: ContactPayload): string | null {
@@ -68,8 +106,36 @@ function validatePayload(payload: ContactPayload): string | null {
   return null;
 }
 
+function getContactProvider(): string {
+  const configuredProvider = process.env.CONTACT_PROVIDER?.trim().toLowerCase();
+
+  if (process.env.NODE_ENV === "production") {
+    if (!configuredProvider || configuredProvider === "noop") {
+      throw new Error(
+        "CONTACT_PROVIDER must be configured as webhook or resend in production"
+      );
+    }
+  }
+
+  return configuredProvider || "noop";
+}
+
+async function providerFetch(url: string, init: RequestInit): Promise<Response> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), PROVIDER_TIMEOUT_MS);
+
+  try {
+    return await fetch(url, {
+      ...init,
+      signal: controller.signal
+    });
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 async function sendWithProvider(payload: ContactPayload): Promise<void> {
-  const provider = (process.env.CONTACT_PROVIDER || "noop").toLowerCase();
+  const provider = getContactProvider();
 
   if (provider === "noop") {
     return;
@@ -78,14 +144,18 @@ async function sendWithProvider(payload: ContactPayload): Promise<void> {
   if (provider === "webhook") {
     const webhookUrl = process.env.CONTACT_WEBHOOK_URL;
     if (!webhookUrl) {
-      throw new Error("CONTACT_WEBHOOK_URL is required for CONTACT_PROVIDER=webhook");
+      throw new Error(
+        "CONTACT_WEBHOOK_URL is required for CONTACT_PROVIDER=webhook"
+      );
     }
 
-    const response = await fetch(webhookUrl, {
+    const response = await providerFetch(webhookUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        ...(process.env.CONTACT_API_KEY ? { Authorization: `Bearer ${process.env.CONTACT_API_KEY}` } : {})
+        ...(process.env.CONTACT_API_KEY
+          ? { Authorization: `Bearer ${process.env.CONTACT_API_KEY}` }
+          : {})
       },
       body: JSON.stringify({
         to: process.env.CONTACT_TO_EMAIL,
@@ -95,7 +165,7 @@ async function sendWithProvider(payload: ContactPayload): Promise<void> {
     });
 
     if (!response.ok) {
-      throw new Error("Webhook provider request failed");
+      throw new Error(`Webhook provider request failed with ${response.status}`);
     }
 
     return;
@@ -107,10 +177,12 @@ async function sendWithProvider(payload: ContactPayload): Promise<void> {
     const fromEmail = process.env.CONTACT_FROM_EMAIL;
 
     if (!resendApiKey || !toEmail || !fromEmail) {
-      throw new Error("RESEND_API_KEY, CONTACT_TO_EMAIL and CONTACT_FROM_EMAIL are required for CONTACT_PROVIDER=resend");
+      throw new Error(
+        "RESEND_API_KEY, CONTACT_TO_EMAIL and CONTACT_FROM_EMAIL are required for CONTACT_PROVIDER=resend"
+      );
     }
 
-    const response = await fetch("https://api.resend.com/emails", {
+    const response = await providerFetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -120,12 +192,13 @@ async function sendWithProvider(payload: ContactPayload): Promise<void> {
         from: fromEmail,
         to: [toEmail],
         subject: `New contact inquiry from ${payload.fullName}`,
+        reply_to: payload.email,
         text: `Name: ${payload.fullName}\nEmail: ${payload.email}\n\nMessage:\n${payload.message}`
       })
     });
 
     if (!response.ok) {
-      throw new Error("Resend provider request failed");
+      throw new Error(`Resend provider request failed with ${response.status}`);
     }
 
     return;
@@ -139,7 +212,11 @@ export async function POST(request: Request) {
     const ip = getClientIp(request);
 
     if (isRateLimited(ip)) {
-      return errorResponse("rate_limit_error", "Too many requests in a short time. Please try again in a few minutes.", 429);
+      return errorResponse(
+        "rate_limit_error",
+        "Too many requests in a short time. Please try again in a few minutes.",
+        429
+      );
     }
 
     const payload = (await request.json()) as ContactPayload;
@@ -153,12 +230,27 @@ export async function POST(request: Request) {
       await sendWithProvider(payload);
     } catch (error) {
       console.error("Contact provider submit failed", error);
-      return errorResponse("provider_error", "Your request could not be sent right now. Please try again later.", 502);
+      return errorResponse(
+        "provider_error",
+        "Your request could not be sent right now. Please try again later.",
+        502
+      );
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json(
+      { ok: true },
+      {
+        headers: {
+          "Cache-Control": "no-store"
+        }
+      }
+    );
   } catch (error) {
     console.error("Contact submit failed", error);
-    return errorResponse("unknown_error", "Your request could not be sent right now. Please try again later.", 500);
+    return errorResponse(
+      "unknown_error",
+      "Your request could not be sent right now. Please try again later.",
+      500
+    );
   }
 }

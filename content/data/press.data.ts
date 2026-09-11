@@ -1,11 +1,18 @@
-import { getCtaActionKind, type PressEpkBlock, type PressMaterialItem, type SectionContent, validateCta } from "@/lib/types";
+import {
+  getCtaActionKind,
+  type PressEpkBlock,
+  type PressMaterialItem,
+  type SectionContent,
+  validateCta
+} from "@/lib/types";
 
 export const pressEpkBlocks: PressEpkBlock[] = [
   {
     id: "pageIntro",
     title: "Press & EPK",
     shortDescriptor: "Complete press materials for editorial use.",
-    body: "High-resolution imagery, artist biography, and comprehensive release materials for editorial and broadcast use.",
+    body:
+      "High-resolution imagery, artist biography, and comprehensive release materials for editorial and broadcast use.",
     linkedAssets: ["press-epk"],
     order: 1,
     priority: 1,
@@ -17,7 +24,8 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     id: "artistSummary",
     title: "Artist Summary",
     shortDescriptor: "Artist positioning for international editorial context.",
-    body: "Dama Venus commands the intersection of cinematic sound and high-fashion visual narrative — an international artist redefining alternative pop.",
+    body:
+      "Dama Venus commands the intersection of cinematic sound and high-fashion visual narrative — an international artist redefining alternative pop.",
     linkedAssets: ["press-epk"],
     order: 2,
     priority: 2,
@@ -28,7 +36,8 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     id: "veryShortBio",
     title: "Very Short Bio",
     shortDescriptor: "One-line artist bio for quick press use.",
-    body: "International cinematic pop artist. Sound-first. Vision-driven. Uncompromising.",
+    body:
+      "International cinematic pop artist. Sound-first. Vision-driven. Uncompromising.",
     linkedAssets: ["press-epk"],
     order: 3,
     priority: 3,
@@ -68,7 +77,12 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     title: "Featured Press Images",
     shortDescriptor: "Selected approved visuals for editorial use.",
     body: "Portrait and campaign visuals approved for press publication.",
-    linkedAssets: ["press-featured-portrait-primary", "press-featured-portrait-secondary", "press-editorial-landscape", "press-detail-still"],
+    linkedAssets: [
+      "press-featured-portrait-primary",
+      "press-featured-portrait-secondary",
+      "press-editorial-landscape",
+      "press-detail-still"
+    ],
     order: 5,
     priority: 5,
     ctaLabel: "Open Image Selection",
@@ -78,65 +92,78 @@ export const pressEpkBlocks: PressEpkBlock[] = [
     id: "musicListeningLinks",
     title: "Music Listening Links",
     shortDescriptor: "Official listening destinations for coverage.",
-    body: "Official links for streaming and direct listening contexts.",
+    body:
+      "Verified release links for Lonely Berlin, Valentines, Eclipse, and Close Friend are available on the music page.",
     linkedAssets: ["music-current-chapter-cover"],
     order: 6,
     priority: 6,
-    ctaLabel: "Open Listening Links",
+    ctaLabel: "Open Official Releases",
     target: "/music"
   },
   {
     id: "videoVisualLinks",
     title: "Video & Visual Links",
-    shortDescriptor: "Official video and visual release links.",
-    body: "Curated video links for editorial embedding and visual references.",
-    linkedAssets: ["music-current-chapter-visual", "music-nocturne-line-visual"],
+    shortDescriptor: "Official video and visual material.",
+    body:
+      "Curated visual material for editorial reference and embedding contexts.",
+    linkedAssets: ["music-current-chapter-visual"],
     order: 7,
     priority: 7,
-    ctaLabel: "Open Video Links",
+    ctaLabel: "Open Visuals",
     target: "/visuals"
   },
   {
     id: "socialStreamingLinks",
-    title: "Social & Streaming Links",
-    shortDescriptor: "Official social and streaming profiles.",
-    body: "Official social and streaming endpoints for profile linking.",
+    title: "Official Profiles",
+    shortDescriptor: "Official artist and professional profiles.",
+    body:
+      "Verified and maintained profile destinations are linked throughout the official website.",
     linkedAssets: [],
     order: 8,
     priority: 8,
-    ctaLabel: "Open Link Hub",
-    target: "/contact"
+    ctaLabel: "Open Artist Profile",
+    target: "/about"
+  },
+  {
+    id: "downloads",
+    title: "EPK Downloads",
+    shortDescriptor: "Direct English and Portuguese press-kit downloads.",
+    body:
+      "Download the current English or Portuguese EPK directly from the official press page.",
+    linkedAssets: [
+      "press-epk",
+      "press-featured-portrait-primary",
+      "press-editorial-landscape"
+    ],
+    order: 9,
+    priority: 9,
+    ctaLabel: "Open EPK Downloads",
+    target: "/press#epk-downloads"
   },
   {
     id: "contactBlock",
     title: "Contact",
     shortDescriptor: "Direct contact point for press inquiries.",
-    body: "For interviews, features, and media usage requests, use the direct contact route.",
+    body:
+      "For interviews, features, and media usage requests, use the direct contact route.",
     linkedAssets: [],
     order: 10,
     priority: 10,
     ctaLabel: "Contact Press",
     target: "/contact",
     isPrimaryVisible: true
-  },
-  {
-    id: "downloads",
-    title: "Downloads",
-    shortDescriptor: "Download section for press assets.",
-    body: "Downloads are currently provided on request after editorial approval.",
-    linkedAssets: ["press-epk", "press-featured-portrait-primary", "press-editorial-landscape"],
-    order: 9,
-    priority: 9,
-    ctaLabel: "Open Downloads",
-    target: "/press#downloads"
   }
 ];
 
-const primaryIntroBlock = pressEpkBlocks.find((block) => block.id === "pageIntro") ?? pressEpkBlocks[0];
+const primaryIntroBlock =
+  pressEpkBlocks.find((block) => block.id === "pageIntro") ?? pressEpkBlocks[0];
 
 export const pressContent: SectionContent = {
   headline: primaryIntroBlock.title,
-  subhead: typeof primaryIntroBlock.body === "string" ? primaryIntroBlock.body : primaryIntroBlock.body[0],
+  subhead:
+    typeof primaryIntroBlock.body === "string"
+      ? primaryIntroBlock.body
+      : primaryIntroBlock.body[0],
   cta: {
     label: primaryIntroBlock.ctaLabel,
     href: primaryIntroBlock.target
@@ -146,18 +173,24 @@ export const pressContent: SectionContent = {
 export const pressMaterials: PressMaterialItem[] = [
   {
     id: "epk",
-    title: "Electronic Press Kit",
-    description: "Approved media material for editorial use.",
+    title: "Electronic Press Kit — English",
+    description:
+      "Current official EPK with biography, discography, press photos, and contact information.",
     type: "download",
-    accessMode: "request",
-    url: "/contact",
-    notes: "Download follows in the next step; currently available on request.",
+    accessMode: "direct",
+    url: "/assets/dama-venus/docs/dama-venus-epk-en.pdf",
+    notes:
+      "A Portuguese edition is also available at /assets/dama-venus/docs/dama-venus-epk-pt.pdf.",
     asset: { id: "press-epk" }
   }
 ];
 
 for (const block of pressEpkBlocks) {
-  validateCta({ label: block.ctaLabel, href: block.target }, `press block ${block.id}`);
+  validateCta(
+    { label: block.ctaLabel, href: block.target },
+    `press block ${block.id}`
+  );
+
   if (getCtaActionKind(block.target) === "mailto") {
     throw new Error(`Press block "${block.id}" must use route-based CTA targets.`);
   }
