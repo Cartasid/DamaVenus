@@ -158,6 +158,23 @@ export default function HomePage() {
                 </span>
               ))}
             </div>
+
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <a
+                href={officialReleaseLinks.lonelyBerlin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-primary no-underline"
+              >
+                Listen on Amazon Music
+              </a>
+              <Link href="/music" className="cta-secondary no-underline">
+                Explore Releases
+              </Link>
+              <Link href="/contact" className="cta-soft no-underline">
+                Bookings &amp; Inquiries
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -198,47 +215,73 @@ export default function HomePage() {
       </div>
 
       <section className="reveal section-gap-lg" aria-label="Press quote">
-        <div className="site-container text-center" style={{ maxWidth: "52rem", margin: "0 auto" }}>
-          <p
+        <div className="site-container" style={{ maxWidth: "58rem", margin: "0 auto" }}>
+          <div
+            className="p-10 md:p-14 text-center shine-hover relative overflow-hidden"
             style={{
-              fontFamily: "var(--font-montserrat), system-ui, sans-serif",
-              fontSize: "0.55rem",
-              fontWeight: 700,
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              color: "rgba(200,168,126,0.5)",
-              marginBottom: "1.5rem"
+              border: "1px solid rgba(200,168,126,0.15)",
+              background: "linear-gradient(180deg, rgba(200,168,126,0.03) 0%, rgba(5,5,5,0.8) 100%)"
             }}
           >
-            Press
-          </p>
-          <blockquote
-            style={{
-              fontFamily: "var(--font-bodoni), Georgia, serif",
-              fontSize: "clamp(1.2rem, 2.5vw, 1.7rem)",
-              fontWeight: 300,
-              fontStyle: "italic",
-              lineHeight: 1.6,
-              color: "rgba(245,240,235,0.75)",
-              margin: 0
-            }}
-          >
-            &ldquo;Dáma Venus blends atmospheric depth with a unique sonic vision, marking her as a
-            rising force in the international scene.&rdquo;
-          </blockquote>
-          <p
-            className="mt-4"
-            style={{
-              fontFamily: "var(--font-montserrat), system-ui, sans-serif",
-              fontSize: "0.55rem",
-              fontWeight: 600,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: "rgba(200,168,126,0.4)"
-            }}
-          >
-            — The Review Geek
-          </p>
+            <div
+              className="mx-auto mb-6 w-8 h-px"
+              style={{ background: "rgba(200,168,126,0.4)" }}
+              aria-hidden="true"
+            />
+            <p
+              style={{
+                fontFamily: "var(--font-montserrat), system-ui, sans-serif",
+                fontSize: "0.58rem",
+                fontWeight: 700,
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                color: "rgba(200,168,126,0.7)",
+                marginBottom: "1.5rem"
+              }}
+            >
+              Press Acclaim — The Review Geek
+            </p>
+            <blockquote
+              style={{
+                fontFamily: "var(--font-bodoni), Georgia, serif",
+                fontSize: "clamp(1.3rem, 2.8vw, 1.9rem)",
+                fontWeight: 300,
+                fontStyle: "italic",
+                lineHeight: 1.55,
+                color: "rgba(245,240,235,0.9)",
+                margin: 0
+              }}
+            >
+              &ldquo;Dáma Venus blends atmospheric depth with a unique sonic vision, marking her as a
+              rising force in the international scene.&rdquo;
+            </blockquote>
+            <p
+              className="mt-6"
+              style={{
+                fontFamily: "var(--font-montserrat), system-ui, sans-serif",
+                fontSize: "0.58rem",
+                fontWeight: 600,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "rgba(200,168,126,0.5)"
+              }}
+            >
+              — The Review Geek
+            </p>
+            <div className="mt-8 flex justify-center gap-4 flex-wrap">
+              <a
+                href="https://www.thereviewgeek.com/damavenus-eclipsebossanovaedition-review/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ghost-btn no-underline"
+              >
+                Read Review
+              </a>
+              <Link href="/press" className="cta-secondary no-underline">
+                Press &amp; EPK
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

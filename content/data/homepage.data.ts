@@ -3,7 +3,7 @@ import { contactContent } from "@/content/data/contact.data";
 import { pressContent } from "@/content/data/press.data";
 
 export const homepageIntro = {
-  statement: "Dama Venus Productions"
+  statement: "Alternative Pop · Cinematic Vision · Rio to Berlin"
 };
 
 export const homepageRelease: ReleaseItem = {
