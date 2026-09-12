@@ -94,48 +94,6 @@ export default function ContactPage() {
           <div className="h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
 
           <ContactForm />
-
-          {contactContent.alternatePaths.length ? (
-            <>
-              <div className="h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
-              <section className="space-y-4" aria-label="Strategic access routes">
-                <p
-                  className="text-muted"
-                  style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}
-                >
-                  Access Routes
-                </p>
-                <div className="space-y-4">
-                  {contactContent.alternatePaths.map((path) => (
-                    <div key={path.id}>
-                      {path.href ? (
-                        <a
-                          href={path.href}
-                          className="text-offWhite underline underline-offset-4"
-                          style={{ textDecorationColor: "rgba(200,168,126,0.6)" }}
-                        >
-                          {path.label}
-                        </a>
-                      ) : path.email ? (
-                        <a
-                          href={`mailto:${path.email}`}
-                          className="text-offWhite underline underline-offset-4"
-                          style={{ textDecorationColor: "rgba(200,168,126,0.6)" }}
-                        >
-                          {path.label}
-                        </a>
-                      ) : (
-                        <span className="text-offWhite">{path.label}</span>
-                      )}
-                      <p className="mt-1 text-muted" style={{ fontSize: "0.8rem" }}>
-                        {path.note}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            </>
-          ) : null}
         </section>
       </div>
     </div>

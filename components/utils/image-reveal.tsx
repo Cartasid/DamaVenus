@@ -2,6 +2,8 @@
 
 import type { CSSProperties, MouseEvent, ReactNode } from "react";
 
+import { ambientAccentBySrc } from "@/content/data/ambient-accents.generated";
+
 interface ImageRevealProps {
   children: ReactNode;
   className?: string;
@@ -10,6 +12,11 @@ interface ImageRevealProps {
   lightboxSrc?: string;
   /** Alt text passed to the lightbox. */
   lightboxAlt?: string;
+  /**
+   * Public asset path used to look up the ambient hover colour.
+   * Defaults to `lightboxSrc`, which already points at the displayed image.
+   */
+  accentSrc?: string;
 }
 
 interface OpenLightboxDetail {
@@ -28,7 +35,8 @@ export default function ImageReveal({
   className = "",
   style,
   lightboxSrc,
-  lightboxAlt
+  lightboxAlt,
+  accentSrc
 }: ImageRevealProps) {
   const openLightbox = (trigger: HTMLElement) => {
     if (!lightboxSrc) return;
@@ -49,10 +57,13 @@ export default function ImageReveal({
     ...style,
     cursor: lightboxSrc ? "zoom-in" : undefined
   };
+  // Drives the page-wide ambient hover background. Unknown assets simply get no
+  // attribute, which leaves the page background untouched.
+  const ambientAccent = ambientAccentBySrc[accentSrc ?? lightboxSrc ?? ""];
 
   if (!lightboxSrc) {
     return (
-      <div className={sharedClassName} style={sharedStyle}>
+      <div className={sharedClassName} style={sharedStyle} data-ambient-accent={ambientAccent}>
         {children}
       </div>
     );
@@ -63,6 +74,7 @@ export default function ImageReveal({
       type="button"
       className={`image-reveal-button ${sharedClassName}`}
       style={sharedStyle}
+      data-ambient-accent={ambientAccent}
       aria-haspopup="dialog"
       aria-label={`Open full-size image${lightboxAlt ? `: ${lightboxAlt}` : ""}`}
       onClick={(event: MouseEvent<HTMLButtonElement>) => openLightbox(event.currentTarget)}
