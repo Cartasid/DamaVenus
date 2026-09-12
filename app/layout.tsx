@@ -8,6 +8,7 @@ import SiteHeader from "@/components/layout/site-header";
 import ScrollRevealProvider from "@/components/utils/scroll-reveal-provider";
 import ScrollProgress from "@/components/utils/scroll-progress";
 import CustomCursor from "@/components/utils/custom-cursor";
+import AmbientHoverBackground from "@/components/utils/ambient-hover-background";
 import ImageLightbox from "@/components/utils/image-lightbox";
 import ImageLoadObserver from "@/components/utils/image-load-observer";
 import { resolveSiteUrl, siteConfig } from "@/content/data/site.config";
@@ -164,6 +165,7 @@ export default function RootLayout({
       <body
         className={`${bodoni.variable} ${montserrat.variable} premium-site min-h-screen flex flex-col`}
       >
+        <AmbientHoverBackground />
         <noscript>
           <style>
             {

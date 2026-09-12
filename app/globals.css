@@ -50,12 +50,86 @@
 
 html {
   scroll-behavior: smooth;
+  /* The page ground lives on <html> so the ambient hover layer (z-index: -1,
+     painted above the root background but below every in-flow background)
+     stays visible through the transparent body. */
+  background-color: #000000;
 }
 
 body {
-  @apply bg-background text-primary antialiased;
+  @apply text-primary antialiased;
   font-family: var(--font-montserrat), var(--font-montserrat), system-ui, sans-serif;
-  background-color: #000000;
+  background-color: transparent;
+}
+
+/* ─────────────────────────────────────────────
+   AMBIENT HOVER BACKGROUND
+
+   Hovering (or keyboard-focusing) an image tile tints the
+   whole page in that image's dominant colour, plus a soft
+   glow anchored to the hovered tile. Colour values come from
+   content/data/ambient-accents.generated.ts.
+
+   Purely additive — the BW → colour image reveal below is
+   untouched: only custom properties on :root change.
+───────────────────────────────────────────── */
+:root {
+  --dv-ambient-rgb: 200 168 126;
+  --dv-ambient-base-alpha: 0;
+  --dv-ambient-glow-alpha: 0;
+  --dv-ambient-x: 50vw;
+  --dv-ambient-y: 42vh;
+}
+
+:root[data-ambient-active="true"] {
+  --dv-ambient-base-alpha: 0.2;
+  --dv-ambient-glow-alpha: 0.42;
+}
+
+.page-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: rgb(var(--dv-ambient-rgb) / var(--dv-ambient-base-alpha));
+  transition: background-color 1200ms var(--transition-dramatic);
+}
+
+/* Only rendered where masking is available — without the soft radial mask the
+   glow would be a hard-edged block. */
+.page-ambient__glow {
+  display: none;
+}
+
+@supports (mask-image: radial-gradient(#000, transparent)) or
+  (-webkit-mask-image: radial-gradient(#000, transparent)) {
+  .page-ambient__glow {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150vmax;
+    height: 150vmax;
+    margin: -75vmax 0 0 -75vmax;
+    background-color: rgb(var(--dv-ambient-rgb) / var(--dv-ambient-glow-alpha));
+    -webkit-mask-image: radial-gradient(circle closest-side, #000 0%, rgba(0, 0, 0, 0.5) 40%, transparent 72%);
+    mask-image: radial-gradient(circle closest-side, #000 0%, rgba(0, 0, 0, 0.5) 40%, transparent 72%);
+    transform: translate3d(var(--dv-ambient-x), var(--dv-ambient-y), 0);
+    transition:
+      background-color 1200ms var(--transition-dramatic),
+      transform 900ms var(--transition-dramatic);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-ambient {
+    transition-duration: 400ms;
+  }
+
+  .page-ambient__glow {
+    transition: background-color 400ms linear;
+  }
 }
 
 /* ─────────────────────────────────────────────
@@ -431,6 +505,13 @@ a:hover {
     border-color: #FF00FF;
     color: #FF00FF;
     box-shadow: 0 0 30px -8px rgba(255,0,255,0.25);
+  }
+
+  /* Prominent variant — used where the button carries a whole section. */
+  .ghost-btn--lg {
+    font-size: 0.72rem;
+    letter-spacing: 0.26em;
+    padding: 20px 52px;
   }
 
   .text-link {

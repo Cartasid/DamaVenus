@@ -108,6 +108,27 @@ Nicht erlaubt:
 - Wenn Kontrast nicht stabil erreichbar ist: Motiv wechseln, Overlay verstärken oder Text aus dem Bild herauslösen.
 - CTA auf Bild benötigt klar erkennbare Zustände (Default/Hover/Focus/Active) mit ausreichendem Kontrast.
 
+### 4.5 Ambient Hover Background (seitenweiter Farbwechsel)
+Ergänzung zum bestehenden SW→Farbe-Hover der Bilder; dieser bleibt unverändert.
+
+Mechanik:
+- Hover/Fokus auf einer `ImageReveal`-Kachel setzt die Custom Properties `--dv-ambient-rgb`, `--dv-ambient-x/y` und das Flag `data-ambient-active` auf `:root` (`components/utils/ambient-hover-background.tsx`).
+- Die Layer `.page-ambient` (fix, `z-index: -1`) färbt den gesamten Seitenhintergrund; `.page-ambient__glow` legt einen weichen, an der Kachel verankerten Schein darüber (`app/globals.css`).
+- Damit die Layer unter allen Inhalten sichtbar bleibt, trägt `html` die schwarze Grundfarbe und `body` ist transparent. Das ist Voraussetzung — ein Hintergrund auf `body` würde die Layer verdecken.
+- Alpha-Werte: Grundton `0.2`, Glow `0.42`. Der Farbwechsel läuft über `background-color`-Transitions (1200 ms), die Glow-Position über `transform` — beide kompositorfreundlich.
+
+Farbquelle (verbindlich):
+- Die prägnante Farbe je Asset wird aus der realen Bilddatei extrahiert (gewichtetes Hue-Histogramm) und liegt in `content/data/ambient-accents.generated.ts`.
+- Generator: `npm run generate:ambient-accents`; nach Asset-Wechsel erneut ausführen. `--check` meldet Drift, ohne zu schreiben.
+- Keine händisch geschätzten Farbwerte. Nahezu monochrome Motive erhalten bewusst einen neutralen Graphit-Ton statt eines erfundenen Farbtons.
+- Assets ohne Eintrag bekommen kein `data-ambient-accent` — der Hintergrund bleibt dann schwarz (sicherer Default).
+- Verifiziert: Die Werte sind gegenüber der Asset-Pipeline stabil. Ein Vergleich der Map mit den neu erzeugten Build-Kopien (`.next/standalone/public`) ergab nur Abweichungen von 1–2 Punkten je Kanal (Re-Encoding), kein Farbtonwechsel. Ein Re-Generieren nach jedem Build ist deshalb nicht nötig — nur bei neuen oder ausgetauschten Motiven.
+
+Grenzen:
+- Nur auf Zeigegeräten mit echtem Hover aktiv (`hover: hover` und `pointer: fine`); Tastaturfokus löst den Effekt zusätzlich aus.
+- Bei `prefers-reduced-motion: reduce` entfällt die Glow-Bewegung, die Farbblende wird verkürzt.
+- Textkontrast bleibt gewahrt: Der Grundton liegt bei 20 % Deckkraft über Schwarz, wodurch die Fläche dunkel bleibt.
+
 ---
 
 ## 5. Navigations- und Footer-Systemregeln (global)
