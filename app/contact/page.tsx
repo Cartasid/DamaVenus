@@ -2,11 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import ImageReveal from "@/components/utils/image-reveal";
 import { contactContent } from "@/content/data/contact.data";
-import { assetMap } from "@/content/data/site.config";
 import { ContactForm } from "./ContactForm";
 
 const CONTACT_MOOD_IMAGE =
-  assetMap["music-current-chapter-cover"]?.src ??
   "/assets/dama-venus/music/dv_music_current_chapter_cover_color_4x5_v01.jpg";
 
 export const metadata: Metadata = {
@@ -43,8 +41,8 @@ export default function ContactPage() {
     <div className="site-container py-24 pb-36">
       <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         <ImageReveal
-          className="relative hidden lg:block overflow-hidden"
-          style={{ minHeight: "600px" }}
+          className="relative hidden w-full self-start overflow-hidden lg:block"
+          style={{ aspectRatio: "9 / 16" }}
           lightboxSrc={CONTACT_MOOD_IMAGE}
           lightboxAlt="Dáma Venus — editorial portrait"
         >
@@ -53,8 +51,8 @@ export default function ContactPage() {
             alt="Dáma Venus — editorial portrait"
             fill
             loading="lazy"
-            sizes="40vw"
-            className="object-cover"
+            sizes="(min-width: 1024px) 42vw, 100vw"
+            className="object-contain"
             style={{ objectPosition: "center center" }}
           />
         </ImageReveal>
