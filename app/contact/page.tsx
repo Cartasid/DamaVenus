@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import ImageReveal from "@/components/utils/image-reveal";
 import { contactContent } from "@/content/data/contact.data";
+import { assetMap } from "@/content/data/site.config";
 import { ContactForm } from "./ContactForm";
 
+const CONTACT_MOOD_ASSET = assetMap["home-contact-newsletter"];
 const CONTACT_MOOD_IMAGE =
-  "/assets/dama-venus/music/dv_music_current_chapter_cover_color_4x5_v01.jpg";
+  CONTACT_MOOD_ASSET?.src ??
+  "/assets/dama-venus/home/dv_home_release_cover_primary_color_4x5_v01.jpg";
+const CONTACT_MOOD_ALT = CONTACT_MOOD_ASSET?.alt || "Dáma Venus — editorial portrait";
 
 export const metadata: Metadata = {
   title: { absolute: "Strategic Access | Dáma Venus — IP Licensing & Partnerships" },
@@ -44,16 +48,16 @@ export default function ContactPage() {
           className="relative hidden w-full self-start overflow-hidden lg:block"
           style={{ aspectRatio: "9 / 16" }}
           lightboxSrc={CONTACT_MOOD_IMAGE}
-          lightboxAlt="Dáma Venus — editorial portrait"
+          lightboxAlt={CONTACT_MOOD_ALT}
         >
           <Image
             src={CONTACT_MOOD_IMAGE}
-            alt="Dáma Venus — editorial portrait"
+            alt={CONTACT_MOOD_ALT}
             fill
             loading="lazy"
             sizes="(min-width: 1024px) 42vw, 100vw"
             className="object-contain"
-            style={{ objectPosition: "center center" }}
+            style={{ objectPosition: CONTACT_MOOD_ASSET?.objectPosition ?? "center center" }}
           />
         </ImageReveal>
 

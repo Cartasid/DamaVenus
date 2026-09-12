@@ -95,6 +95,8 @@ for (const path of [
   "assets/dama-venus/press/press-hero-bnj7p-v01.jpg",
   "assets/dama-venus/video/lonely-berlin-day-1.mp4",
   "assets/dama-venus/visuals/dv_visuals_cinderela_hover_video_v01.mp4",
+  "assets/dama-venus/visuals/dv_visuals_still_new_left_v02.jpeg",
+  "assets/dama-venus/visuals/dv_visuals_still_new_right_v02.jpeg",
 ]) {
   runtimeAssets.add(path);
 }

@@ -87,11 +87,21 @@ const assetAltOverrides: Record<string, string> = {
   "visuals-linked-current-chapter": "Lonely Berlin — linked visual by Dáma Venus"
 };
 
+// These two stills intentionally use immutable v2 URLs. The source photos were
+// replaced while the old public URLs stayed stable, so browsers/CDNs could keep
+// serving stale imagery after deployment.
+const assetSrcOverrides: Record<string, string> = {
+  "visuals-still-unnamed-1":
+    "/assets/dama-venus/visuals/dv_visuals_still_new_left_v02.jpeg",
+  "visuals-still-unnamed-3":
+    "/assets/dama-venus/visuals/dv_visuals_still_new_right_v02.jpeg"
+};
+
 export const assetMap: Record<string, AssetMapItem> = Object.fromEntries(
   prioritizedAssets.map((asset) => [
     asset.id,
     {
-      src: asset.finalPath,
+      src: assetSrcOverrides[asset.id] ?? asset.finalPath,
       alt: assetAltOverrides[asset.id] ?? asset.altDraft,
       cropHint: asset.cropHint,
       focusHint: asset.focusHint,
