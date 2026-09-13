@@ -374,18 +374,21 @@ a:hover {
     @apply w-full;
   }
 
-  /* ── BRAND NAV ITEM — Natürlich shop link stays pink ── */
+  /* ── BRAND NAV ITEM — Natürlich shop link stays pink ──
+     Colour extracted from the real product photos (scripts/generate-ambient-accents.mjs
+     extractAccent, hue ~332°) rather than the site's generic magenta accent, so the
+     nav link matches the actual brush colour. */
   .nav-link--brand {
-    color: #FF66FF;
+    color: #f0569e;
   }
 
   .nav-link--brand:hover,
   .nav-link--brand.nav-link--active {
-    color: #FF00FF;
+    color: #dc0e6d;
   }
 
   .nav-link--brand::after {
-    background: #FF00FF;
+    background: #dc0e6d;
   }
 
   /* ── FULLSCREEN MOBILE MENU ── */
@@ -434,16 +437,16 @@ a:hover {
   }
 
   .mobile-menu-overlay .mobile-nav-link--brand {
-    color: rgba(255, 102, 255, 0.75);
+    color: rgba(240, 86, 158, 0.75);
   }
 
   .mobile-menu-overlay .mobile-nav-link--brand:hover,
   .mobile-menu-overlay .mobile-nav-link--brand[aria-current="page"] {
-    color: #FF00FF;
+    color: #dc0e6d;
   }
 
   .mobile-menu-overlay .mobile-nav-link--brand[aria-current="page"]::before {
-    background: #FF00FF;
+    background: #dc0e6d;
   }
 
   /* ── CTA BUTTONS — PREMIUM ── */

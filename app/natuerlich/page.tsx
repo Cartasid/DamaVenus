@@ -55,7 +55,7 @@ export default function NatuerlichPage() {
                 background: "rgba(8,8,8,0.4)",
                 backdropFilter: "blur(8px)",
                 WebkitBackdropFilter: "blur(8px)",
-                borderBottom: "1px solid rgba(255,102,255,0.4)"
+                borderBottom: "1px solid rgba(220,14,109,0.4)"
               }}
             >
               <span
@@ -88,7 +88,7 @@ export default function NatuerlichPage() {
         </div>
 
         <div className="max-w-xl lg:pt-4">
-          <p style={{ ...labelStyle, color: "#FF66FF" }}>♥ Limited Edition</p>
+          <p style={{ ...labelStyle, color: "#f0569e" }}>♥ Limited Edition</p>
 
           <h1
             className="mt-4 text-primary"
@@ -109,7 +109,7 @@ export default function NatuerlichPage() {
               fontStyle: "italic",
               fontWeight: 300,
               fontSize: "clamp(1.25rem, 2.4vw, 1.6rem)",
-              color: "#FF66FF",
+              color: "#f0569e",
               lineHeight: 1.3
             }}
           >
@@ -128,7 +128,7 @@ export default function NatuerlichPage() {
 
           <div
             className="mt-6 h-px"
-            style={{ background: "rgba(255,102,255,0.2)", width: "40px" }}
+            style={{ background: "rgba(220,14,109,0.25)", width: "40px" }}
           />
 
           <div className="mt-8 flex items-center gap-6">
@@ -136,17 +136,22 @@ export default function NatuerlichPage() {
               className="text-primary"
               style={{ fontFamily: "var(--font-bodoni), Georgia, serif", fontSize: "1.9rem", fontWeight: 400 }}
             >
-              19,99&nbsp;€
+              &euro;19.99
             </span>
             <button
               type="button"
               disabled
               aria-disabled="true"
               className="cta-primary"
-              style={{ opacity: 0.45, filter: "grayscale(0.6)", pointerEvents: "none" }}
+              style={{
+                background: "linear-gradient(135deg, #dc0e6d, #f0569e)",
+                opacity: 0.45,
+                filter: "grayscale(0.6)",
+                pointerEvents: "none"
+              }}
               title="Currently sold out"
             >
-              Kaufen
+              Buy Now
             </button>
           </div>
 
