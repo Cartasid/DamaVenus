@@ -2,8 +2,6 @@
 
 import type { CSSProperties, MouseEvent, ReactNode } from "react";
 
-import { ambientAccentBySrc } from "@/content/data/ambient-accents.generated";
-
 interface ImageRevealProps {
   children: ReactNode;
   className?: string;
@@ -12,11 +10,6 @@ interface ImageRevealProps {
   lightboxSrc?: string;
   /** Alt text passed to the lightbox. */
   lightboxAlt?: string;
-  /**
-   * Public asset path used to look up the ambient hover colour.
-   * Defaults to `lightboxSrc`, which already points at the displayed image.
-   */
-  accentSrc?: string;
 }
 
 interface OpenLightboxDetail {
@@ -29,14 +22,17 @@ interface OpenLightboxDetail {
  * Wraps an image/group with the BW-to-color reveal effect.
  * When a lightbox source is present, native button semantics provide reliable
  * keyboard and assistive-technology support without additional listeners.
+ *
+ * Every instance carries `.img-color-reveal`, which also drives the page-wide
+ * ambient pink hover background (see AmbientHoverBackground /
+ * .page-ambient in globals.css) — no extra wiring needed here.
  */
 export default function ImageReveal({
   children,
   className = "",
   style,
   lightboxSrc,
-  lightboxAlt,
-  accentSrc
+  lightboxAlt
 }: ImageRevealProps) {
   const openLightbox = (trigger: HTMLElement) => {
     if (!lightboxSrc) return;
@@ -57,13 +53,10 @@ export default function ImageReveal({
     ...style,
     cursor: lightboxSrc ? "zoom-in" : undefined
   };
-  // Drives the page-wide ambient hover background. Unknown assets simply get no
-  // attribute, which leaves the page background untouched.
-  const ambientAccent = ambientAccentBySrc[accentSrc ?? lightboxSrc ?? ""];
 
   if (!lightboxSrc) {
     return (
-      <div className={sharedClassName} style={sharedStyle} data-ambient-accent={ambientAccent}>
+      <div className={sharedClassName} style={sharedStyle}>
         {children}
       </div>
     );
@@ -74,7 +67,6 @@ export default function ImageReveal({
       type="button"
       className={`image-reveal-button ${sharedClassName}`}
       style={sharedStyle}
-      data-ambient-accent={ambientAccent}
       aria-haspopup="dialog"
       aria-label={`Open full-size image${lightboxAlt ? `: ${lightboxAlt}` : ""}`}
       onClick={(event: MouseEvent<HTMLButtonElement>) => openLightbox(event.currentTarget)}

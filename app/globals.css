@@ -65,16 +65,17 @@ body {
 /* ─────────────────────────────────────────────
    AMBIENT HOVER BACKGROUND
 
-   Hovering (or keyboard-focusing) an image tile tints the
-   whole page in that image's dominant colour, plus a soft
-   glow anchored to the hovered tile. Colour values come from
-   content/data/ambient-accents.generated.ts.
+   Hovering (or keyboard-focusing) any .img-color-reveal tile
+   tints the whole page in a fixed brand pink, plus a soft glow
+   anchored to the hovered tile. No colour extraction — the tint
+   is always the same brand pink regardless of which image is
+   hovered.
 
    Purely additive — the BW → colour image reveal below is
    untouched: only custom properties on :root change.
 ───────────────────────────────────────────── */
 :root {
-  --dv-ambient-rgb: 200 168 126;
+  --dv-ambient-rgb: 255 0 255; /* brand pink, matches --accent / .cta-primary */
   --dv-ambient-base-alpha: 0;
   --dv-ambient-glow-alpha: 0;
   --dv-ambient-x: 50vw;
