@@ -201,7 +201,8 @@ export default function SiteHeader() {
                     aria-current={isActiveHref(item.href, pathname) ? "page" : undefined}
                     className={[
                       "nav-link inline-flex min-h-11 items-center focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-current md:min-h-0",
-                      isActiveHref(item.href, pathname) ? "nav-link--active" : ""
+                      isActiveHref(item.href, pathname) ? "nav-link--active" : "",
+                      item.href === "/natuerlich" ? "nav-link--brand" : ""
                     ]
                       .filter(Boolean)
                       .join(" ")}
@@ -237,7 +238,11 @@ export default function SiteHeader() {
                 ref={index === 0 ? firstMobileLinkRef : undefined}
                 tabIndex={isMenuOpen ? undefined : -1}
                 aria-current={isActiveHref(item.href, pathname) ? "page" : undefined}
-                className="mobile-nav-link block"
+                className={
+                  item.href === "/natuerlich"
+                    ? "mobile-nav-link mobile-nav-link--brand block"
+                    : "mobile-nav-link block"
+                }
                 onClick={() => setIsMenuOpen(false)}
                 style={{
                   fontFamily: "var(--font-bodoni), Georgia, serif",

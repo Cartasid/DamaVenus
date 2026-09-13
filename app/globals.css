@@ -374,6 +374,20 @@ a:hover {
     @apply w-full;
   }
 
+  /* ── BRAND NAV ITEM — Natürlich shop link stays pink ── */
+  .nav-link--brand {
+    color: #FF66FF;
+  }
+
+  .nav-link--brand:hover,
+  .nav-link--brand.nav-link--active {
+    color: #FF00FF;
+  }
+
+  .nav-link--brand::after {
+    background: #FF00FF;
+  }
+
   /* ── FULLSCREEN MOBILE MENU ── */
   .mobile-menu-overlay {
     @apply fixed inset-0 z-40 flex flex-col justify-center items-start;
@@ -417,6 +431,19 @@ a:hover {
     background: var(--gold);
     margin-right: 20px;
     vertical-align: middle;
+  }
+
+  .mobile-menu-overlay .mobile-nav-link--brand {
+    color: rgba(255, 102, 255, 0.75);
+  }
+
+  .mobile-menu-overlay .mobile-nav-link--brand:hover,
+  .mobile-menu-overlay .mobile-nav-link--brand[aria-current="page"] {
+    color: #FF00FF;
+  }
+
+  .mobile-menu-overlay .mobile-nav-link--brand[aria-current="page"]::before {
+    background: #FF00FF;
   }
 
   /* ── CTA BUTTONS — PREMIUM ── */

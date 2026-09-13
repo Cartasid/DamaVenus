@@ -10,7 +10,7 @@ export type PrioritizedAsset = {
   finalPath: string;
   /** Pipeline-Inputpfad aus nicht-public Quellen (pics/ oder assets-src/dama-venus/), niemals public/. */
   sourcePath: string;
-  area: "home" | "music" | "visuals" | "about" | "press";
+  area: "home" | "music" | "visuals" | "about" | "press" | "shop";
   recommendedModuleType: string;
   altDraft: string;
   cropHint: string;
@@ -501,6 +501,34 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     overlaySuitability: "no-overlay",
     priority: 4,
     role: "decorative"
+  },
+  {
+    id: "shop-natuerlich-hero",
+    finalPath: "/assets/dama-venus/shop/dv_shop_natuerlich_brush_hero_color_1x1_v01.webp",
+    sourcePath: "pics/Codex-Bild 13. Sept. 2026, 14_24_41.png",
+    area: "shop",
+    recommendedModuleType: "product-hero",
+    altDraft: "Natürlich by Dama Venus — pink glitter hairbrush with packaging box",
+    cropHint: "Square crop, product centered",
+    focusHint: "Keep brush and box fully visible, centered",
+    swColorMode: "excellent",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 1,
+    role: "informative"
+  },
+  {
+    id: "shop-natuerlich-detail",
+    finalPath: "/assets/dama-venus/shop/dv_shop_natuerlich_brush_detail_color_4x5_v01.webp",
+    sourcePath: "pics/Codex-Bild 13. Sept. 2026, 14_32_01.png",
+    area: "shop",
+    recommendedModuleType: "product-detail",
+    altDraft: "Natürlich by Dama Venus — hairbrush front and back detail view",
+    cropHint: "Portrait crop, both brushes centered",
+    focusHint: "Keep both brushes fully visible in frame",
+    swColorMode: "excellent",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 2,
+    role: "informative"
   },
   {
     id: "press-epk",
