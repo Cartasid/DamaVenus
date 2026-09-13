@@ -225,6 +225,13 @@ Aktueller Schwerpunkt: **Kuratierung und technische Normalisierung des bereits i
 - Die Nicht-Blockierung gilt ausschließlich für den klar markierten Fall „HEIC-Skip wegen fehlendem Tooling“; alle anderen Verarbeitungsfehler bleiben build-blockierend.
 - Der Metadaten-Report enthält dafür einen eigenen Abschnitt `heicStatus` (Support-Status, gewähltes Tool, Fallback-Nutzung, Skip-Zähler, TODO-Liste).
 
+### Technischer Grenzfall: Same-Extension-Kopie kann optimierte Assets regressieren (verbindlich)
+- In `ensurePrioritizedAssetOutputs()` (`scripts/prepare-dama-venus-assets.mjs`) gilt: Wenn `sourcePath`-Extension und `finalPath`-Extension identisch sind, wird die Quelldatei **byteidentisch kopiert** — ohne Resize/Kompression über `sharp`.
+- Verifiziert (2026-09-13): Für mehrere ältere `prioritizedAssets`-Einträge (z. B. `about-supporting-visual-calm-01`, `sourcePath: pics/Cinderela-210.JPEG`) lag die committete Auslieferungsdatei bei ~151 KB (bereits optimiert), während die aktuell in `pics/` liegende Quelldatei die unbearbeitete Kameraoriginal-Größe hat (~5 MB, gleiche Extension `.JPEG`/`.jpeg`). Ein regulärer Lauf von `npm run prepare:dama-venus-assets` kopiert dadurch die 5-MB-Rohdatei über die 151-KB-Auslieferung — eine stille Performance-Regression ohne Fehlermeldung (Exitcode bleibt 0).
+- Konsequenz für jede zukünftige Umsetzung: Nach jedem Lauf der Pipeline `git diff --stat -- public/assets/dama-venus/` prüfen, bevor committet wird. Ungewöhnlich große Byte-Sprünge bei bereits bestehenden (nicht neuen) Auslieferungsdateien sind ein Regressionssignal und dürfen nicht committet werden — nur gezielt die tatsächlich benötigten neuen/geänderten Dateien stagen.
+- Zusätzlich erzeugt derselbe Lauf über den generischen Vollscan (`run()`) für **alle** Dateien in `pics/` Ableitungen unter `public/assets/dama-venus/<bereich>/<motiv>/…` sowie einen neu geschriebenen `asset-map.json`/`.ts`. Diese Dateien werden von keiner Route unter `app/**` importiert (nur vom Script selbst referenziert) und sind in der bisherigen Commit-Historie nie mitversioniert worden — sie sind lokaler Build-Output und sollten nicht mitcommittet werden.
+- Ursache noch nicht behoben (Scope dieser Änderung war ausschließlich das neue Shop-Asset-Paar); eine Fixempfehlung wäre, `ensurePrioritizedAssetOutputs()` bei gleicher Extension trotzdem verbindlich über `sharp` zu leiten (Re-Encode statt Rohkopie) oder eine Content-Hash-Prüfung gegen die zuletzt committete Auslieferungsdatei zu ergänzen.
+
 ### Konkrete Empfehlungen für Nachlieferung
 1. Mindestens 20–40 Realassets in einem ersten Pool bereitstellen (Portraits, Editorial-Stills, Wide Frames, Detailshots).
 2. Davon gezielt:
