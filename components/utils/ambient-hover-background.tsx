@@ -3,34 +3,20 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-const ACCENT_ATTRIBUTE = "data-ambient-accent";
+const HOVER_SELECTOR = ".img-color-reveal";
 const ACTIVE_ATTRIBUTE = "data-ambient-active";
 
-const rgbCache = new Map<string, string>();
-
-/** "#d51670" → "213 22 112" (space-separated for `rgb(... / <alpha>)`). */
-function toRgbTriplet(hex: string): string | null {
-  const key = hex.trim();
-  const cached = rgbCache.get(key);
-  if (cached) return cached;
-
-  const match = /^#([0-9a-f]{6})$/i.exec(key);
-  if (!match) return null;
-
-  const value = Number.parseInt(match[1], 16);
-  const triplet = `${(value >> 16) & 255} ${(value >> 8) & 255} ${value & 255}`;
-  rgbCache.set(key, triplet);
-  return triplet;
-}
-
 /**
- * Page-wide ambient colour that follows the hovered image.
+ * Page-wide ambient pink that follows the hovered image.
  *
- * Elements opt in by carrying `data-ambient-accent="#rrggbb"` (set by
- * `ImageReveal` from the generated accent map). Hovering or focusing such an
- * element writes the colour plus the tile centre onto :root, where the
- * `.page-ambient` layer picks them up. The existing BW → colour image reveal is
- * untouched; this only adds a background layer behind all content.
+ * Any element carrying `.img-color-reveal` (every `ImageReveal` tile, plus the
+ * hero/press sections that apply the class directly) triggers it — the same
+ * elements that already run the BW → colour image effect. Hovering or
+ * keyboard-focusing one writes the tile's centre onto :root and flips
+ * `data-ambient-active`, which `.page-ambient` in globals.css reads to tint
+ * the whole page a fixed brand pink. The colour itself is a CSS constant
+ * (`--dv-ambient-rgb`), not derived from the image — this component only
+ * tracks *whether* and *where* the effect should show.
  */
 export default function AmbientHoverBackground() {
   const pathname = usePathname();
@@ -42,20 +28,17 @@ export default function AmbientHoverBackground() {
     let focused: HTMLElement | null = null;
 
     const resolve = (node: EventTarget | null): HTMLElement | null =>
-      node instanceof Element ? node.closest<HTMLElement>(`[${ACCENT_ATTRIBUTE}]`) : null;
+      node instanceof Element ? node.closest<HTMLElement>(HOVER_SELECTOR) : null;
 
     const sync = () => {
       const target = hovered ?? focused;
-      const triplet = target ? toRgbTriplet(target.getAttribute(ACCENT_ATTRIBUTE) ?? "") : null;
 
-      if (!target || !triplet) {
-        // Keep the last hue so the tint fades out in its own colour.
+      if (!target) {
         root.removeAttribute(ACTIVE_ATTRIBUTE);
         return;
       }
 
       const rect = target.getBoundingClientRect();
-      root.style.setProperty("--dv-ambient-rgb", triplet);
       root.style.setProperty("--dv-ambient-x", `${Math.round(rect.left + rect.width / 2)}px`);
       root.style.setProperty("--dv-ambient-y", `${Math.round(rect.top + rect.height / 2)}px`);
       root.setAttribute(ACTIVE_ATTRIBUTE, "true");
