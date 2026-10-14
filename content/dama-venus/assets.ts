@@ -111,6 +111,20 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
 
   {
+    id: "music-kitsune-pt-2-cover",
+    finalPath: "/assets/dama-venus/music/dv_music_kitsune_pt_2_cover_v01.jpeg",
+    sourcePath: "pics/Dama 1.jpeg",
+    area: "music",
+    recommendedModuleType: "featured-release",
+    altDraft: "Kitsune, Pt. 2 — Dáma Venus with pink hair and headphones, reading against a pink backdrop",
+    cropHint: "Preserve the upright portrait and keep the face fully visible",
+    focusHint: "Keep the face in the upper center with headroom",
+    swColorMode: "good",
+    overlaySuitability: "no-overlay",
+    priority: 1,
+    role: "informative"
+  },
+  {
     id: "music-current-chapter-cover",
     finalPath: "/assets/dama-venus/visuals/editorial/cover-neon-portrait-v01.png",
     sourcePath: "pics/cover.png",

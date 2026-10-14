@@ -8,6 +8,7 @@ export const officialLinks = {
 } as const;
 
 export const officialReleaseLinks = {
+  kitsunePt2: "https://music.amazon.com/albums/B0HC3YQYTN",
   lonelyBerlin: "https://music.amazon.com/albums/B0GYGDDD5V",
   valentines: "https://music.amazon.in/albums/B0GPKXTGF9",
   eclipse: "https://music.amazon.com/albums/B0FG2WH6TG",
