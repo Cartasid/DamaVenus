@@ -138,7 +138,7 @@ export const aboutPageModel = {
         shortText: "Supports short and medium bio passages without overtaking them.",
         mediumText: "Used as calm transition between intro and method section.",
         cropFocusHint: "mid-frame-subject",
-        altTextNote: "Supporting visual close to text for calm transitions.",
+        altTextNote: "Dáma Venus in a pink dress, seated beneath a cherry-blossom mural.",
         role: "supporting",
         sectionPriority: 2
       },
