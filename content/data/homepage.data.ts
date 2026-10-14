@@ -1,19 +1,28 @@
 import { getCtaActionKind, type CTA, type ReleaseItem, type SectionContent, validateCta } from "@/lib/types";
 import { contactContent } from "@/content/data/contact.data";
 import { pressContent } from "@/content/data/press.data";
+import { musicData } from "@/content/data/music.data";
+
+const latestRelease =
+  musicData.releases.find((release) => release.id === musicData.featuredReleaseId) ??
+  musicData.releases[0];
+
+export const homepageListeningCta: CTA = latestRelease.primaryCta;
 
 export const homepageIntro = {
   statement: "HIGH-FASHION AESTHETICS · AVANT-GARDE RAP · ALTERNATIVE POP · SONIC WORLDBUILDING"
 };
 
 export const homepageRelease: ReleaseItem = {
-  title: "Lonely Berlin",
-  description: "Latest official single — released April 24, 2026.",
+  title: latestRelease.title,
+  description: latestRelease.releaseDate
+    ? `Latest official single — released ${new Date(`${latestRelease.releaseDate}T00:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}. ${latestRelease.shortText}`
+    : latestRelease.shortText,
   cta: {
     label: "Explore Release",
-    href: "/music#lonely-berlin"
+    href: `/music#${latestRelease.id}`
   },
-  coverAsset: { id: "home-release-cover" }
+  coverAsset: latestRelease.coverAsset
 };
 
 export const homepageVisuals: SectionContent = {
@@ -86,7 +95,7 @@ export const homepageCoreModules: HomepageModule[] = [
   {
     id: "featuredRelease",
     assetId: homepageRelease.coverAsset.id,
-    alt: "Dáma Venus release visual for Lonely Berlin",
+    alt: `Dáma Venus release visual for ${homepageRelease.title}`,
     cropFocusHint: "center-subject",
     priority: "high",
     swColorLogic: "derive-from-cover",
@@ -154,7 +163,7 @@ export const homepageCoreModules: HomepageModule[] = [
 ];
 
 const expectedHomeModuleCtas: Partial<Record<HomepageModuleId, CTA>> = {
-  featuredRelease: { label: "Explore Release", href: "/music#lonely-berlin" },
+  featuredRelease: { label: "Explore Release", href: `/music#${latestRelease.id}` },
   visuals: { label: "View Visuals", href: "/visuals" },
   press: {
     label: pressContent.cta?.label ?? "Open Press & EPK",
