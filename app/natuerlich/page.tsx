@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import ProductGallery from "@/components/shop/product-gallery";
 import { assetMap } from "@/content/data/site.config";
 
 const HERO_ASSET = assetMap["shop-natuerlich-hero"];
@@ -35,60 +36,21 @@ const labelStyle = {
 export default function NatuerlichPage() {
   return (
     <div className="site-container py-16 pb-32">
-      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <div>
-          <div
-            className="relative overflow-hidden"
-            style={{ aspectRatio: "1 / 1", background: "#0a0a0a" }}
-          >
-            <Image
-              src={HERO_ASSET?.src ?? FALLBACK_IMAGE}
-              alt={HERO_ASSET?.alt ?? "Natürlich by Dama Venus — pink glitter hairbrush"}
-              fill
-              priority
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
-              style={{ objectPosition: HERO_ASSET?.objectPosition ?? "center center" }}
-            />
-            <div
-              className="absolute inset-x-0 top-0 z-10 flex justify-center py-3"
-              style={{
-                background: "rgba(8,8,8,0.4)",
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-                borderBottom: "1px solid rgba(220,14,109,0.4)"
-              }}
-            >
-              <span
-                style={{
-                  ...labelStyle,
-                  fontSize: "0.78rem",
-                  letterSpacing: "0.4em",
-                  color: "#fff"
-                }}
-              >
-                Sold Out
-              </span>
-            </div>
-          </div>
+      <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+        <ProductGallery images={[
+          {
+            src: HERO_ASSET?.src ?? FALLBACK_IMAGE,
+            alt: "Natürlich pink glitter hairbrush — front and back view",
+            label: "Front & back"
+          },
+          {
+            src: DETAIL_ASSET?.src ?? FALLBACK_IMAGE,
+            alt: "Natürlich pink glitter hairbrush in its signature gift box",
+            label: "Gift box"
+          }
+        ]} />
 
-          <div
-            className="relative mt-4 overflow-hidden"
-            style={{ aspectRatio: "4 / 5", background: "#0a0a0a" }}
-          >
-            <Image
-              src={DETAIL_ASSET?.src ?? FALLBACK_IMAGE}
-              alt={DETAIL_ASSET?.alt ?? "Natürlich by Dama Venus — hairbrush front and back detail"}
-              fill
-              loading="lazy"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
-              style={{ objectPosition: DETAIL_ASSET?.objectPosition ?? "center center" }}
-            />
-          </div>
-        </div>
-
-        <div className="max-w-xl lg:pt-4">
+        <div className="max-w-xl lg:self-center">
           <p style={{ ...labelStyle, color: "#f0569e" }}>♥ Limited Edition</p>
 
           <h1
