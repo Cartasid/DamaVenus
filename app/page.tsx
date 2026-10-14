@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { homepageCoreModules, homepageIntro } from "@/content/data/homepage.data";
+import { homepageCoreModules, homepageIntro, homepageListeningCta } from "@/content/data/homepage.data";
 import { assetMap } from "@/content/data/site.config";
-import { officialReleaseLinks } from "@/content/data/official-links";
 import HeroTextReveal from "@/components/utils/hero-text-reveal";
 import Marquee from "@/components/utils/marquee";
 import ParallaxHero from "@/components/utils/parallax-hero";
@@ -161,12 +160,12 @@ export default function HomePage() {
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <a
-                href={officialReleaseLinks.lonelyBerlin}
+                href={homepageListeningCta.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cta-primary no-underline"
               >
-                Listen on Amazon Music
+                {homepageListeningCta.label}
               </a>
               <Link href="/music" className="cta-secondary no-underline">
                 Explore Releases
@@ -298,14 +297,13 @@ export default function HomePage() {
             >
               {featuredReleaseAsset ? (
                 <ImageReveal
-                  className="relative overflow-hidden"
-                  style={{ minHeight: "560px" }}
+                  className="relative aspect-[913/1600] overflow-hidden"
                   lightboxSrc={featuredReleaseAsset.src}
-                  lightboxAlt="Dáma Venus — Lonely Berlin release visual"
+                  lightboxAlt={featuredReleaseAsset.alt ?? featuredReleaseModule.alt}
                 >
                   <Image
                     src={featuredReleaseAsset.src}
-                    alt="Dáma Venus — Lonely Berlin release visual"
+                    alt={featuredReleaseAsset.alt ?? featuredReleaseModule.alt}
                     fill
                     loading="lazy"
                     sizes="(max-width: 768px) 100vw, 40vw"
@@ -358,12 +356,12 @@ export default function HomePage() {
                     </Link>
                   ) : null}
                   <a
-                    href={officialReleaseLinks.lonelyBerlin}
+                    href={homepageListeningCta.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="cta-secondary no-underline"
                   >
-                    Listen on Amazon Music
+                    {homepageListeningCta.label}
                   </a>
                 </div>
               </div>
