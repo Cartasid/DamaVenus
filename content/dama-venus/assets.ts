@@ -545,6 +545,20 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     role: "informative"
   },
   {
+    id: "shop-natuerlich-eco-bag",
+    finalPath: "/assets/dama-venus/shop/dv_shop_natuerlich_eco_bag_v01.jpg",
+    sourcePath: "pics/Naturlich.jpg",
+    area: "shop",
+    recommendedModuleType: "product-hero",
+    altDraft: "Natürlich Eco Bag — reusable tote with the Dáma Venus signature against a pink background",
+    cropHint: "Upright portrait, preserve the complete bag and handles",
+    focusHint: "Keep the bag and printed signature fully visible",
+    swColorMode: "good",
+    overlaySuitability: "no-overlay",
+    priority: 3,
+    role: "informative"
+  },
+  {
     id: "press-epk",
     finalPath: "/assets/dama-venus/press/dv_press_epk_document_v01.pdf",
     sourcePath: "assets-src/dama-venus/curated/dv_curated_press_epk_document_v01.pdf",
