@@ -230,6 +230,19 @@ export default function NatuerlichPage() {
             A reusable tote with the Dáma Venus ♥ Natürlich signature. Made for your everyday essentials
             and the moments in between.
           </p>
+          <p className="mt-5 text-muted" style={{ fontSize: "0.92rem", lineHeight: 1.8, maxWidth: "34rem" }}>
+            100% of the sales revenue from the Natürlich Eco Bag is donated to{" "}
+            <a
+              href="https://www.suipa.org.br/index.asp?pg=donations.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+              aria-label="SUIPA donation page (opens in new tab)"
+            >
+              SUIPA
+            </a>
+            , supporting animal protection and care.
+          </p>
           <div className="mt-6 h-px" style={{ background: "rgba(220,14,109,0.25)", width: "40px" }} />
           <div className="mt-8 flex items-center gap-6">
             <span
