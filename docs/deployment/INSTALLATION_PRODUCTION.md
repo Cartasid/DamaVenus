@@ -145,7 +145,7 @@ npm run build:check
 
 Damit werden Lint + Typecheck und zusätzlich ein vollständiger Produktions-Build vorab auf dem Host validiert.
 Interne Aufschlüsselung: `npm run build:check` entspricht `npm run build` + `npm run build:verify`.
-Der **offizielle Pflicht-Deploypfad** bleibt jedoch containerzentriert (ENV -> Deploy-Script -> Nginx/TLS), da Build und Asset-Preparation bereits im Docker-Build stattfinden.
+Der **offizielle Pflicht-Deploypfad** bleibt containerzentriert (ENV -> Deploy-Script -> Nginx/TLS). Das Deploy-Script baut und validiert einmal auf dem Host; Docker verpackt anschließend die fertige Standalone-Ausgabe.
 
 Klarer Ablauf im Pflichtpfad:
 1. `8) Produktions-ENV erstellen`
@@ -156,9 +156,9 @@ Klarer Ablauf im Pflichtpfad:
 
 ---
 
-## 10) App bauen und starten (Docker, inkl. Asset-Preparation)
+## 10) App bauen und starten (Host-Build und Docker)
 
-Die Asset-Pipeline läuft beim Deploy automatisch im Docker-Build über `npm run build`; kein separater Host-Node-Schritt erforderlich.
+Die Asset-Pipeline läuft beim Deploy automatisch auf dem Host über `npm run build`. Der Docker-Build kopiert danach nur `.next/standalone`, einschließlich der geprüften statischen Dateien und öffentlichen Assets.
 Pipeline-Input ist ausschließlich nicht-public (`pics/` und `assets-src/dama-venus/`); Delivery bleibt ausschließlich `public/assets/dama-venus/`.
 Die Pipeline verwendet `sharp` als primäre Engine für Bildverarbeitung (Konvertierung/Optimierung und Derivate).
 
@@ -166,6 +166,25 @@ HEIC-Hinweis:
 - Wenn `sharp` ein HEIC direkt lesen kann, reicht `sharp` allein.
 - Nur wenn `sharp` für eine HEIC-Datei fehlschlägt, greift das Script auf externe Fallback-Tools zurück (`magick`, `convert`, `heif-convert`, `sips`).
 - Ist kein Fallback-Tool verfügbar, werden diese HEIC-Dateien non-blocking übersprungen und im Mapping-Status ausgewiesen.
+
+Nach erfolgreicher Buildprüfung entfernt das Deploy-Script `.next/cache` und bereinigt ungenutzte Docker-Build-Caches, bevor Docker sein Basisimage entpackt. Der Compiler-Cache wird bei späteren Builds neu erzeugt; `.next/standalone` und die statischen Dateien bleiben erhalten. Container, verwendete Images und Volumes werden dabei nicht entfernt.
+
+Bei `no space left on device` zuerst den freien Platz auf den betroffenen Dateisystemen prüfen:
+
+```bash
+df -h / /var/lib/containerd /var/lib/docker /opt/dama-venus
+du -sh /opt/dama-venus/.next/cache /opt/dama-venus/.next/standalone
+```
+
+Ist die Buildprüfung bereits erfolgreich abgeschlossen, kann der Compiler-Cache auch vor einem erneuten Deploy gezielt entfernt werden:
+
+```bash
+cd /opt/dama-venus
+rm -rf -- .next/cache
+docker builder prune -a -f
+```
+
+Reicht der freie Platz danach weiterhin nicht aus, muss zusätzlicher Speicherplatz verfügbar gemacht oder das Dateisystem vergrößert werden. `.next/standalone` bleibt die geprüfte Grundlage der Docker-Verpackung.
 
 ```bash
 cd /opt/dama-venus
