@@ -33,9 +33,17 @@ if [ ! -f .next/standalone/server.js ]; then
   exit 1
 fi
 
-# Reclaim only unused/dangling Docker data before creating the new runtime
-# image. Images used by the currently running production container are kept.
-docker builder prune -f >/dev/null || true
+# The compiler cache is only needed to accelerate future builds. Release it
+# after validation so Docker can extract the base image and copy the runtime.
+# Keep the validated standalone runtime and its static files intact.
+if [ -d .next/cache ]; then
+  echo "Info: gebe Next.js-Compiler-Cache vor der Docker-Verpackung frei."
+  rm -rf -- .next/cache
+fi
+
+# Reclaim all unused build cache, including completed build layers. This keeps
+# running containers and their images; image pruning only removes dangling data.
+docker builder prune -a -f >/dev/null || true
 docker image prune -f >/dev/null || true
 
 # The Docker build context contains only the already-built standalone runtime;
