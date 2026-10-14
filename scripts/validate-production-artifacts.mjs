@@ -216,7 +216,7 @@ async function ensureCurrentPositioningCopy() {
   const expectations = [
     ['app/page.tsx', 'High-Performance Avant-Garde Rap'],
     ['app/page.tsx', 'High-Fidelity Audio Architecture'],
-    ['content/data/homepage.data.ts', 'HIGH-FASHION AESTHETICS · AVANT-GARDE RAP · ALTERNATIVE POP · SONIC WORLDBUILDING'],
+    ['content/data/homepage.data.ts', 'statement: "Cinematic"'],
     ['content/data/homepage.data.ts', 'Where sound becomes cinema, and identity becomes art.'],
     ['content/data/visuals.data.ts', 'Where sound becomes cinema, and identity becomes art.'],
     [

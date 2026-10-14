@@ -6,7 +6,7 @@ const REQUIRE_PUBLIC = process.env.DAMA_VENUS_REQUIRE_PUBLIC_VERIFY === "1";
 
 const requiredMarkers = [
   "High-Performance Avant-Garde Rap",
-  "HIGH-FASHION AESTHETICS · AVANT-GARDE RAP · ALTERNATIVE POP · SONIC WORLDBUILDING",
+  "Cinematic",
   "Where sound becomes cinema, and identity becomes art.",
   "Strategic Access",
   "Latest Official Release",

@@ -416,6 +416,7 @@ export default function MusicPage() {
       </section>
 
       {/* ── VISUAL RELEASES ── */}
+      {musicData.visualReleases.length ? (
       <section id="visual-releases" className="reveal mt-28">
         <div className="site-container">
           <div className="mb-8 pb-8" style={{ borderBottom: "1px solid rgba(200,168,126,0.08)" }}>
