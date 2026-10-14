@@ -25,6 +25,8 @@ const retiredMusicPlaceholders = [
 
 const retiredHomepageCopy = [
   'Alternative Pop Trap-Pop R&B Vaporwave',
+  'Alternative Pop · Cinematic Vision · Rio to Berlin',
+  'Building musical worlds connecting art & visuals',
   'Frames in Motion',
   'Let’s Create the Next Chapter.',
 ];
@@ -203,7 +205,7 @@ async function ensureMusicContentUsesOfficialReleaseNames() {
     throw new Error(`Veraltete Platzhalter-Releases gefunden: ${staleTitles.join(', ')}`);
   }
 
-  for (const expectedTitle of ['Lonely Berlin', 'Valentines', 'Eclipse', 'Close Friend']) {
+  for (const expectedTitle of ['Kitsune, Pt. 2', 'Lonely Berlin', 'Valentines', 'Eclipse', 'Close Friend']) {
     if (!source.includes(`title: "${expectedTitle}"`)) {
       throw new Error(`Offizieller Release fehlt in music.data.ts: ${expectedTitle}`);
     }
@@ -214,7 +216,8 @@ async function ensureCurrentPositioningCopy() {
   const expectations = [
     ['app/page.tsx', 'High-Performance Avant-Garde Rap'],
     ['app/page.tsx', 'High-Fidelity Audio Architecture'],
-    ['content/data/homepage.data.ts', 'Building musical worlds connecting art & visuals'],
+    ['content/data/homepage.data.ts', 'Where sound becomes cinema, and identity becomes art.'],
+    ['content/data/visuals.data.ts', 'Where sound becomes cinema, and identity becomes art.'],
     [
       'content/data/homepage.data.ts',
       'Concept Lead & Visual Author at Dama Venus Productions | High-Fidelity Audio Architect | Proprietary Intellectual Design | Natürlich by Dama Venus',

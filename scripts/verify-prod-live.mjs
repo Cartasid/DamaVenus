@@ -6,14 +6,16 @@ const REQUIRE_PUBLIC = process.env.DAMA_VENUS_REQUIRE_PUBLIC_VERIFY === "1";
 
 const requiredMarkers = [
   "High-Performance Avant-Garde Rap",
-  "Building musical worlds connecting art & visuals",
+  "Where sound becomes cinema, and identity becomes art.",
   "Strategic Access",
   "Latest Official Release",
-  "Lonely Berlin"
+  "Kitsune, Pt. 2"
 ];
 
 const retiredMarkers = [
   "Alternative Pop Trap-Pop R&B Vaporwave",
+  "Alternative Pop · Cinematic Vision · Rio to Berlin",
+  "Building musical worlds connecting art & visuals",
   "Frames in Motion",
   "Let’s Create the Next Chapter."
 ];
