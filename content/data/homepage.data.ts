@@ -3,7 +3,7 @@ import { contactContent } from "@/content/data/contact.data";
 import { pressContent } from "@/content/data/press.data";
 
 export const homepageIntro = {
-  statement: "Alternative Pop · Cinematic Vision · Rio to Berlin"
+  statement: "HIGH-FASHION AESTHETICS · AVANT-GARDE RAP · ALTERNATIVE POP · SONIC WORLDBUILDING"
 };
 
 export const homepageRelease: ReleaseItem = {
@@ -17,7 +17,7 @@ export const homepageRelease: ReleaseItem = {
 };
 
 export const homepageVisuals: SectionContent = {
-  headline: "Building musical worlds connecting art & visuals",
+  headline: "Where sound becomes cinema, and identity becomes art.",
   subhead:
     "Concept Lead & Visual Author at Dama Venus Productions | High-Fidelity Audio Architect | Proprietary Intellectual Design | Natürlich by Dama Venus",
   cta: {
