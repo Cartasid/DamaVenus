@@ -30,16 +30,34 @@ export const musicIntro: SectionContent = {
 
 export const musicReleases: MusicRelease[] = [
   {
+    id: "kitsune-pt-2",
+    title: "Kitsune, Pt. 2",
+    subtitle: "Latest Official Single",
+    shortText: "Kitsune was written to leave a door open. Your decide whether you just walk through it.",
+    releaseType: "single",
+    status: "active",
+    releaseDate: "2026-07-29",
+    year: "2026",
+    featured: true,
+    priority: 1,
+    coverAsset: { id: "music-kitsune-pt-2-cover" },
+    listeningLinks: [
+      buildAction("listen", officialReleaseLinks.kitsunePt2, musicCtaLabels.listen)
+    ],
+    primaryCta: buildAction("listen", officialReleaseLinks.kitsunePt2, musicCtaLabels.listen),
+    secondaryCta: buildAction("view-release", "/music#kitsune-pt-2", musicCtaLabels.viewRelease)
+  },
+  {
     id: "lonely-berlin",
     title: "Lonely Berlin",
-    subtitle: "Latest Official Single",
+    subtitle: "Official Single",
     shortText: "Released April 24, 2026 — a Berlin-centered chapter in the after-dark world of Dáma Venus.",
     releaseType: "single",
     status: "active",
     releaseDate: "2026-04-24",
     year: "2026",
     featured: true,
-    priority: 1,
+    priority: 2,
     coverAsset: { id: "music-current-chapter-cover" },
     alternateVisualAsset: { id: "music-current-chapter-visual" },
     listeningLinks: [
@@ -58,7 +76,7 @@ export const musicReleases: MusicRelease[] = [
     releaseDate: "2026-02-16",
     year: "2026",
     featured: false,
-    priority: 2,
+    priority: 3,
     coverAsset: { id: "music-midnight-signal-cover" },
     listeningLinks: [
       buildAction("listen", officialReleaseLinks.valentines, musicCtaLabels.listen)
@@ -75,7 +93,7 @@ export const musicReleases: MusicRelease[] = [
     releaseDate: "2025-06-30",
     year: "2025",
     featured: false,
-    priority: 3,
+    priority: 4,
     coverAsset: { id: "music-afterglow-cut-cover" },
     listeningLinks: [
       buildAction("listen", officialReleaseLinks.eclipse, musicCtaLabels.listen)
@@ -92,7 +110,7 @@ export const musicReleases: MusicRelease[] = [
     releaseDate: "2025-01-11",
     year: "2025",
     featured: false,
-    priority: 4,
+    priority: 5,
     coverAsset: { id: "music-nocturne-line-visual" },
     listeningLinks: [
       buildAction("listen", officialReleaseLinks.closeFriend, musicCtaLabels.listen)
@@ -106,7 +124,7 @@ export const musicVisualReleases: MusicRelease[] = [];
 export const musicData = {
   intro: musicIntro,
   ctaLabels: musicCtaLabels,
-  featuredReleaseId: "lonely-berlin",
+  featuredReleaseId: "kitsune-pt-2",
   releases: musicReleases,
   visualReleases: musicVisualReleases
 } as const;

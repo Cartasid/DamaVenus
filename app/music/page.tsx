@@ -7,7 +7,7 @@ import { assetMap } from "@/content/data/site.config";
 export const metadata: Metadata = {
   title: { absolute: "Music & Releases | Dáma Venus — Official Singles" },
   description:
-    "Explore official releases by Dáma Venus, including Lonely Berlin, Valentines, Eclipse, and Close Friend, with direct listening links.",
+    "Explore official releases by Dáma Venus, including Kitsune, Pt. 2, Lonely Berlin, Valentines, Eclipse, and Close Friend.",
   openGraph: {
     title: "Music & Releases | Dáma Venus",
     description:
@@ -29,6 +29,18 @@ const labelStyle = {
   letterSpacing: "0.22em",
   textTransform: "uppercase" as const
 };
+
+const featuredImagePositions: Record<string, string> = {
+  "kitsune-pt-2": "center top",
+  "lonely-berlin": "34% center"
+};
+
+const releaseDateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "2-digit",
+  year: "numeric",
+  timeZone: "UTC"
+});
 
 const musicJsonLd = {
   "@context": "https://schema.org",
@@ -53,17 +65,13 @@ const musicJsonLd = {
 };
 
 export default function MusicPage() {
-  const featured =
-    musicData.releases.find((release) => release.id === musicData.featuredReleaseId) ??
-    musicData.releases[0];
+  const featuredReleases = musicData.releases
+    .filter((release) => release.featured || release.id === musicData.featuredReleaseId)
+    .sort((a, b) => a.priority - b.priority);
 
   const selectedReleases = [...musicData.releases]
     .sort((a, b) => a.priority - b.priority)
-    .filter((release) => release.id !== featured.id);
-
-  const featuredAsset =
-    assetMap[featured.coverAsset.id] ??
-    (featured.alternateVisualAsset ? assetMap[featured.alternateVisualAsset.id] : undefined);
+    .filter((release) => !featuredReleases.some((featured) => featured.id === release.id));
 
   return (
     <div className="pb-28">
@@ -103,91 +111,106 @@ export default function MusicPage() {
         <div className="mt-10 h-px" style={{ background: "rgba(200,168,126,0.08)" }} />
       </div>
 
-      <section
-        id={featured.id}
-        aria-labelledby="featured-release-title"
-        className="reveal mt-0"
-      >
-        <div className="site-container">
-          <div
-            className="grid gap-0 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
-            style={{ borderBottom: "1px solid rgba(200,168,126,0.08)" }}
-          >
-            {featuredAsset ? (
-              <ImageReveal
-                className="relative overflow-hidden"
-                style={{ minHeight: "680px" }}
-                lightboxSrc={featuredAsset.src}
-                lightboxAlt={`${featured.title} — Dáma Venus release visual`}
-              >
-                <Image
-                  src={featuredAsset.src}
-                  alt={`${featured.title} — Dáma Venus release visual`}
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-cover"
-                  style={{
-                    objectPosition: featuredAsset.objectPosition ?? "center 15%"
-                  }}
-                />
-              </ImageReveal>
-            ) : null}
+      {featuredReleases.map((featured, index) => {
+        const featuredAsset =
+          assetMap[featured.coverAsset.id] ??
+          (featured.alternateVisualAsset ? assetMap[featured.alternateVisualAsset.id] : undefined);
 
-            <div
-              className="flex flex-col justify-end px-8 py-12 md:px-12"
-              style={{ borderLeft: "1px solid rgba(200,168,126,0.12)" }}
-            >
-              <p
-                className="mb-2"
-                style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}
+        return (
+          <section
+            key={featured.id}
+            id={featured.id}
+            aria-labelledby={`${featured.id}-title`}
+            className="reveal mt-0"
+          >
+            <div className="site-container">
+              <div
+                className="grid gap-0 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
+                style={{ borderBottom: "1px solid rgba(200,168,126,0.08)" }}
               >
-                Featured Release
-              </p>
-              <h2
-                id="featured-release-title"
-                className="text-primary"
-                style={{
-                  fontFamily: "var(--font-bodoni), Georgia, serif",
-                  fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                  fontWeight: 300,
-                  lineHeight: 1.05
-                }}
-              >
-                {featured.title}
-              </h2>
-              {featured.subtitle ? (
-                <p
-                  className="mt-2 text-muted"
-                  style={{
-                    fontFamily: "var(--font-bodoni), Georgia, serif",
-                    fontSize: "1.1rem",
-                    fontStyle: "italic"
-                  }}
+                {featuredAsset ? (
+                  <ImageReveal
+                    className={`relative overflow-hidden ${featured.id === "kitsune-pt-2" ? "aspect-[913/1600]" : "aspect-[4/5] md:aspect-auto md:min-h-[480px] lg:min-h-[680px]"}`}
+                    lightboxSrc={featuredAsset.src}
+                    lightboxAlt={`${featured.title} — Dáma Venus release visual`}
+                  >
+                    <Image
+                      src={featuredAsset.src}
+                      alt={`${featured.title} — Dáma Venus release visual`}
+                      fill
+                      priority={index === 0}
+                      sizes="(max-width: 768px) 100vw, 40vw"
+                      className="object-cover"
+                      style={{
+                        objectPosition: featuredImagePositions[featured.id] ?? featuredAsset.objectPosition ?? "center 15%"
+                      }}
+                    />
+                  </ImageReveal>
+                ) : null}
+
+                <div
+                  className="flex flex-col justify-end px-8 py-12 md:px-12"
+                  style={{ borderLeft: "1px solid rgba(200,168,126,0.12)" }}
                 >
-                  {featured.subtitle}
-                </p>
-              ) : null}
-              <p
-                className="mt-4 text-muted"
-                style={{ fontSize: "0.9rem", lineHeight: 1.6, maxWidth: "28rem" }}
-              >
-                {featured.shortText}
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href={featured.primaryCta.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-primary no-underline"
-                >
-                  {featured.primaryCta.label}
-                </a>
+                  <p
+                    className="mb-2"
+                    style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}
+                  >
+                    Featured Release
+                  </p>
+                  {featured.releaseDate ? (
+                    <p className="mb-4 text-muted" style={labelStyle}>
+                      <time dateTime={featured.releaseDate}>
+                        {releaseDateFormatter.format(new Date(`${featured.releaseDate}T00:00:00Z`)).replace(",", "").toUpperCase()}
+                      </time>
+                    </p>
+                  ) : null}
+                  <h2
+                    id={`${featured.id}-title`}
+                    className="text-primary"
+                    style={{
+                      fontFamily: "var(--font-bodoni), Georgia, serif",
+                      fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                      fontWeight: 300,
+                      lineHeight: 1.05
+                    }}
+                  >
+                    {featured.title}
+                  </h2>
+                  {featured.subtitle ? (
+                    <p
+                      className="mt-2 text-muted"
+                      style={{
+                        fontFamily: "var(--font-bodoni), Georgia, serif",
+                        fontSize: "1.1rem",
+                        fontStyle: "italic"
+                      }}
+                    >
+                      {featured.subtitle}
+                    </p>
+                  ) : null}
+                  <p
+                    className="mt-4 text-muted"
+                    style={{ fontSize: "0.9rem", lineHeight: 1.6, maxWidth: "28rem" }}
+                  >
+                    {featured.shortText}
+                  </p>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <a
+                      href={featured.primaryCta.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cta-primary no-underline"
+                    >
+                      {featured.primaryCta.label}
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        );
+      })}
 
       {selectedReleases.length ? (
         <section id="selected-releases" className="reveal mt-28" aria-labelledby="selected-releases-heading">
