@@ -10,7 +10,7 @@ const latestRelease =
 export const homepageListeningCta: CTA = latestRelease.primaryCta;
 
 export const homepageIntro = {
-  statement: "HIGH-FASHION AESTHETICS · AVANT-GARDE RAP · ALTERNATIVE POP · SONIC WORLDBUILDING"
+  statement: "Cinematic"
 };
 
 export const homepageRelease: ReleaseItem = {

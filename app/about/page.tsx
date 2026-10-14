@@ -9,7 +9,7 @@ import ImageReveal from "@/components/utils/image-reveal";
 
 export const metadata: Metadata = {
   title: { absolute: "Bio | Dáma Venus — Singer & Actress from Rio de Janeiro" },
-  description: "Dáma Venus — Brazilian singer, songwriter, visual author, and actress based in Berlin. From Rio de Janeiro to Europe, where sound, fashion, and cinematic vision converge.",
+  description: "Dáma Venus — Brazilian singer, songwriter, visual author, independent producer, and actress based in Berlin. From Rio de Janeiro to Europe, where sound, fashion, and cinematic vision converge.",
   openGraph: {
     title: "Bio | Dáma Venus — Singer & Actress",
     description: "Brazilian singer, songwriter, visual author, and actress — from Rio de Janeiro to Berlin.",
