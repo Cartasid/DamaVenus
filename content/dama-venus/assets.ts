@@ -434,8 +434,8 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "about-supporting-visual-calm-02",
-    finalPath: "/assets/dama-venus/about/dv_about_supporting_img7138_v01.jpg",
-    sourcePath: "pics/IMG_7138.HEIC",
+    finalPath: "/assets/dama-venus/about/dv_about_supporting_dama_2_v01.jpeg",
+    sourcePath: "pics/Dama 2.jpeg",
     area: "about",
     recommendedModuleType: "about-supporting-visual",
     altDraft: "",
