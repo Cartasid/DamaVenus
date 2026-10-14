@@ -6,7 +6,8 @@ export const navigationItems: NavigationItem[] = [
   { label: "Visuals", href: "/visuals" },
   { label: "Bio", href: "/about" },
   { label: "Press", href: "/press" },
-  { label: "Contact", href: "/contact" }
+  { label: "Contact", href: "/contact" },
+  { label: "♥ Natürlich", href: "/natuerlich" }
 ];
 
 /** Extended navigation — used in footer and sitemap. */
@@ -15,5 +16,6 @@ export const extendedNavigationItems: NavigationItem[] = [
   { label: "Visuals", href: "/visuals" },
   { label: "Bio", href: "/about" },
   { label: "Press", href: "/press" },
-  { label: "Contact", href: "/contact" }
+  { label: "Contact", href: "/contact" },
+  { label: "♥ Natürlich", href: "/natuerlich" }
 ];

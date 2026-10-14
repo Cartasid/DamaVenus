@@ -1,8 +1,6 @@
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: dama-venus-app:local
     container_name: dama-venus-app
     restart: unless-stopped
     env_file:

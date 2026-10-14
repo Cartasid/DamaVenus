@@ -10,7 +10,7 @@ export type PrioritizedAsset = {
   finalPath: string;
   /** Pipeline-Inputpfad aus nicht-public Quellen (pics/ oder assets-src/dama-venus/), niemals public/. */
   sourcePath: string;
-  area: "home" | "music" | "visuals" | "about" | "press";
+  area: "home" | "music" | "visuals" | "about" | "press" | "shop";
   recommendedModuleType: string;
   altDraft: string;
   cropHint: string;
@@ -110,6 +110,20 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     role: "informative"
   },
 
+  {
+    id: "music-kitsune-pt-2-cover",
+    finalPath: "/assets/dama-venus/music/dv_music_kitsune_pt_2_cover_v01.jpeg",
+    sourcePath: "pics/Dama 1.jpeg",
+    area: "music",
+    recommendedModuleType: "featured-release",
+    altDraft: "Kitsune, Pt. 2 — Dáma Venus with pink hair and headphones, reading against a pink backdrop",
+    cropHint: "Preserve the upright portrait and keep the face fully visible",
+    focusHint: "Keep the face in the upper center with headroom",
+    swColorMode: "good",
+    overlaySuitability: "no-overlay",
+    priority: 1,
+    role: "informative"
+  },
   {
     id: "music-current-chapter-cover",
     finalPath: "/assets/dama-venus/visuals/editorial/cover-neon-portrait-v01.png",
@@ -224,8 +238,8 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "visuals-cinderela-frame-243",
-    finalPath: "/assets/dama-venus/visuals/dv_visuals_cinderela_frame_243_bw_3x4_v01.jpeg",
-    sourcePath: "pics/Cinderela-243.JPEG",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_ret_portrait_v01.png",
+    sourcePath: "pics/RET.png",
     area: "visuals",
     recommendedModuleType: "series-section",
     altDraft: "Cinderela series portrait with editorial lighting",
@@ -294,8 +308,8 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "visuals-portrait-tamiris-12",
-    finalPath: "/assets/dama-venus/visuals/dv_visuals_portrait_tamiris_zrztf_v01.jpg",
-    sourcePath: "pics/ZRZTF.png",
+    finalPath: "/assets/dama-venus/visuals/dv_visuals_portrait_img4671_v01.jpg",
+    sourcePath: "pics/IMG_4671.JPEG",
     area: "visuals",
     recommendedModuleType: "large-image-block",
     altDraft: "Dáma Venus — close-up portrait",
@@ -309,12 +323,12 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "visuals-still-unnamed-1",
     finalPath: "/assets/dama-venus/visuals/dv_visuals_still_unnamed_01_bw_1x1_v01.webp",
-    sourcePath: "pics/unnamed.webp",
+    sourcePath: "pics/1 neu.jpeg",
     area: "visuals",
     recommendedModuleType: "grid",
     altDraft: "Square still for texture break",
-    cropHint: "1:1 unchanged",
-    focusHint: "Center detail for small tile rendering",
+    cropHint: "Square crop from portrait source",
+    focusHint: "Keep the subject centered for square tile rendering",
     swColorMode: "excellent",
     overlaySuitability: "no-overlay",
     priority: 8,
@@ -337,12 +351,12 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   {
     id: "visuals-still-unnamed-3",
     finalPath: "/assets/dama-venus/visuals/dv_visuals_still_unnamed_03_bw_1x1_v01.webp",
-    sourcePath: "pics/unnamed (3).webp",
+    sourcePath: "pics/2 neu.jpeg",
     area: "visuals",
     recommendedModuleType: "grid",
     altDraft: "Square still used as calm spacer image",
-    cropHint: "1:1 unchanged",
-    focusHint: "Center-safe composition",
+    cropHint: "Square crop from portrait source",
+    focusHint: "Keep the subject centered for square tile rendering",
     swColorMode: "excellent",
     overlaySuitability: "no-overlay",
     priority: 10,
@@ -405,9 +419,23 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     role: "decorative"
   },
   {
-    id: "about-supporting-visual-calm-02",
+    id: "about-press-feature-tamiris",
     finalPath: "/assets/dama-venus/about/dv_about_supporting_visual_calm_02_color_3x4_v01.jpeg",
     sourcePath: "pics/Tamiris-12.JPEG",
+    area: "about",
+    recommendedModuleType: "about-supporting-visual",
+    altDraft: "Dáma Venus — editorial portrait",
+    cropHint: "Portrait 3:4 crop with face-safe area",
+    focusHint: "Keep face upper center",
+    swColorMode: "excellent",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 5,
+    role: "informative"
+  },
+  {
+    id: "about-supporting-visual-calm-02",
+    finalPath: "/assets/dama-venus/about/dv_about_supporting_dama_2_v01.jpeg",
+    sourcePath: "pics/Dama 2.jpeg",
     area: "about",
     recommendedModuleType: "about-supporting-visual",
     altDraft: "",
@@ -420,8 +448,8 @@ export const prioritizedAssets: PrioritizedAsset[] = [
   },
   {
     id: "about-supporting-visual-calm-reserve-03",
-    finalPath: "/assets/dama-venus/about/dv_about_supporting_visual_calm_reserve_03_color_3x4_v01.jpg",
-    sourcePath: "pics/349343D2-8AD2-4A03-8893-E2C94FC1D7BF.JPG",
+    finalPath: "/assets/dama-venus/about/dv_about_supporting_img4671_v01.jpg",
+    sourcePath: "pics/IMG_4671.JPEG",
     area: "about",
     recommendedModuleType: "about-supporting-visual",
     altDraft: "",
@@ -487,6 +515,48 @@ export const prioritizedAssets: PrioritizedAsset[] = [
     overlaySuitability: "no-overlay",
     priority: 4,
     role: "decorative"
+  },
+  {
+    id: "shop-natuerlich-hero",
+    finalPath: "/assets/dama-venus/shop/dv_shop_natuerlich_brush_hero_color_1x1_v01.webp",
+    sourcePath: "pics/Codex-Bild 13. Sept. 2026, 14_24_41.png",
+    area: "shop",
+    recommendedModuleType: "product-hero",
+    altDraft: "Natürlich by Dama Venus — pink glitter hairbrush with packaging box",
+    cropHint: "Square crop, product centered",
+    focusHint: "Keep brush and box fully visible, centered",
+    swColorMode: "excellent",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 1,
+    role: "informative"
+  },
+  {
+    id: "shop-natuerlich-detail",
+    finalPath: "/assets/dama-venus/shop/dv_shop_natuerlich_brush_detail_color_4x5_v01.webp",
+    sourcePath: "pics/Codex-Bild 13. Sept. 2026, 14_32_01.png",
+    area: "shop",
+    recommendedModuleType: "product-detail",
+    altDraft: "Natürlich by Dama Venus — hairbrush front and back detail view",
+    cropHint: "Portrait crop, both brushes centered",
+    focusHint: "Keep both brushes fully visible in frame",
+    swColorMode: "excellent",
+    overlaySuitability: "supports-dark-overlay",
+    priority: 2,
+    role: "informative"
+  },
+  {
+    id: "shop-natuerlich-eco-bag",
+    finalPath: "/assets/dama-venus/shop/dv_shop_natuerlich_eco_bag_v01.jpg",
+    sourcePath: "pics/Naturlich.jpg",
+    area: "shop",
+    recommendedModuleType: "product-hero",
+    altDraft: "Natürlich Eco Bag — reusable tote with the Dáma Venus signature against a pink background",
+    cropHint: "Upright portrait, preserve the complete bag and handles",
+    focusHint: "Keep the bag and printed signature fully visible",
+    swColorMode: "good",
+    overlaySuitability: "no-overlay",
+    priority: 3,
+    role: "informative"
   },
   {
     id: "press-epk",

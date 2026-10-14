@@ -108,6 +108,25 @@ Nicht erlaubt:
 - Wenn Kontrast nicht stabil erreichbar ist: Motiv wechseln, Overlay verstärken oder Text aus dem Bild herauslösen.
 - CTA auf Bild benötigt klar erkennbare Zustände (Default/Hover/Focus/Active) mit ausreichendem Kontrast.
 
+### 4.5 Ambient Hover Background (seitenweiter Farbwechsel)
+Ergänzung zum bestehenden SW→Farbe-Hover der Bilder; dieser bleibt unverändert.
+
+Mechanik:
+- Hover/Fokus auf jedem Element mit `.img-color-reveal` (jede `ImageReveal`-Kachel, plus die zwei Hero-/Press-Sections, die die Klasse direkt tragen) setzt die Custom Properties `--dv-ambient-x/y` und das Flag `data-ambient-active` auf `:root` (`components/utils/ambient-hover-background.tsx`).
+- Die Layer `.page-ambient` (fix, `z-index: -1`) färbt den gesamten Seitenhintergrund; `.page-ambient__glow` legt einen weichen, an der Kachel verankerten Schein darüber (`app/globals.css`).
+- Damit die Layer unter allen Inhalten sichtbar bleibt, trägt `html` die schwarze Grundfarbe und `body` ist transparent. Das ist Voraussetzung — ein Hintergrund auf `body` würde die Layer verdecken.
+- Alpha-Werte: Grundton `0.2`, Glow `0.42`. Der Farbwechsel läuft über `background-color`-Transitions (1200 ms), die Glow-Position über `transform` — beide kompositorfreundlich.
+
+Farbe (verbindlich):
+- **Keine Farbextraktion aus dem Bild.** Die Tönung ist eine feste CSS-Konstante `--dv-ambient-rgb: 255 0 255` (Markenpink, identisch zu `--accent` / `.cta-primary`) in `app/globals.css`. Jedes Bild löst beim Hover dieselbe Farbe aus.
+- `AmbientHoverBackground` verfolgt nur noch *ob* und *wo* (Kachel-Mittelpunkt) der Effekt sichtbar ist — keine Farblogik, kein Pfad-Lookup mehr in der Komponente.
+- Frühere Iteration hatte je Bild eine gemessene Farbe (`scripts/generate-ambient-accents.mjs`, `content/data/ambient-accents.generated.ts`). Beides wurde entfernt.
+
+Grenzen:
+- Nur auf Zeigegeräten mit echtem Hover aktiv (`hover: hover` und `pointer: fine`); Tastaturfokus löst den Effekt zusätzlich aus.
+- Bei `prefers-reduced-motion: reduce` entfällt die Glow-Bewegung, die Farbblende wird verkürzt.
+- Textkontrast bleibt gewahrt: Der Grundton liegt bei 20 % Deckkraft über Schwarz, wodurch die Fläche dunkel bleibt.
+
 ---
 
 ## 5. Navigations- und Footer-Systemregeln (global)

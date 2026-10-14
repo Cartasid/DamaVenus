@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 
 interface LightboxState {
@@ -9,118 +9,131 @@ interface LightboxState {
   alt: string;
 }
 
+interface OpenLightboxDetail {
+  src?: string;
+  alt?: string;
+  trigger?: HTMLElement;
+}
+
 const initialState: LightboxState = { isOpen: false, src: "", alt: "" };
 
-/**
- * Global lightbox that listens for custom "open-lightbox" events.
- * Any image wrapped in ImageReveal can trigger it.
- */
+/** Global accessible lightbox triggered by ImageReveal. */
 export default function ImageLightbox() {
   const [state, setState] = useState<LightboxState>(initialState);
   const [visible, setVisible] = useState(false);
-  const backdropRef = useRef<HTMLDivElement>(null);
+  const captionId = useId();
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+  const previousOverflowRef = useRef("");
+  const closeTimerRef = useRef<number>(0);
 
-  const open = useCallback((src: string, alt: string) => {
-    setState({ isOpen: true, src, alt });
-    requestAnimationFrame(() => setVisible(true));
+  const open = useCallback((src: string, alt: string, trigger?: HTMLElement) => {
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = 0;
+    }
+
+    returnFocusRef.current = trigger ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
+    previousOverflowRef.current = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    setState({ isOpen: true, src, alt });
+
+    window.requestAnimationFrame(() => {
+      setVisible(true);
+      closeButtonRef.current?.focus();
+    });
   }, []);
 
   const close = useCallback(() => {
     setVisible(false);
-    setTimeout(() => {
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const delay = reduceMotion ? 0 : 360;
+
+    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = window.setTimeout(() => {
       setState(initialState);
-      document.body.style.overflow = "";
-    }, 400);
+      document.body.style.overflow = previousOverflowRef.current;
+      returnFocusRef.current?.focus();
+      closeTimerRef.current = 0;
+    }, delay);
   }, []);
 
   useEffect(() => {
-    const handler = (e: Event) => {
-      const detail = (e as CustomEvent).detail;
-      if (detail?.src) open(detail.src, detail.alt ?? "");
+    const handler = (event: Event) => {
+      const detail = (event as CustomEvent<OpenLightboxDetail>).detail;
+      if (detail?.src) open(detail.src, detail.alt ?? "", detail.trigger);
     };
+
     window.addEventListener("open-lightbox", handler);
     return () => window.removeEventListener("open-lightbox", handler);
   }, [open]);
 
   useEffect(() => {
     if (!state.isOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        close();
+        return;
+      }
+
+      if (event.key === "Tab") {
+        event.preventDefault();
+        closeButtonRef.current?.focus();
+      }
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, [state.isOpen, close]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
+      document.body.style.overflow = previousOverflowRef.current;
+    };
+  }, []);
 
   if (!state.isOpen) return null;
 
   return (
     <div
-      ref={backdropRef}
       role="dialog"
       aria-modal="true"
       aria-label={state.alt || "Image preview"}
-      onClick={close}
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: visible ? "rgba(5,5,5,0.95)" : "rgba(5,5,5,0)",
-        backdropFilter: visible ? "blur(20px)" : "blur(0px)",
-        transition: "background 400ms cubic-bezier(0.25,0.46,0.45,0.94), backdrop-filter 400ms cubic-bezier(0.25,0.46,0.45,0.94)",
-        cursor: "zoom-out",
-        padding: "2rem"
+      aria-describedby={state.alt ? captionId : undefined}
+      className="lightbox-backdrop"
+      data-visible={visible ? "true" : "false"}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) close();
       }}
     >
-      {/* Image — click anywhere to close */}
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          maxWidth: "1200px",
-          height: "85vh",
-          opacity: visible ? 1 : 0,
-          transform: visible ? "scale(1)" : "scale(0.92)",
-          transition: "opacity 500ms cubic-bezier(0.16,1,0.3,1), transform 500ms cubic-bezier(0.16,1,0.3,1)"
-        }}
+      <button
+        ref={closeButtonRef}
+        type="button"
+        className="lightbox-close"
+        onClick={close}
+        aria-label="Close full-size image"
       >
+        Close
+      </button>
+
+      <div className="lightbox-frame">
         <Image
           src={state.src}
           alt={state.alt}
           fill
-          sizes="(max-width: 768px) 95vw, 85vw"
+          sizes="(max-width: 768px) 96vw, 88vw"
           className="img-always-color"
-          style={{
-            objectFit: "contain"
-          }}
+          style={{ objectFit: "contain" }}
           priority
         />
       </div>
 
-      {/* Alt caption */}
       {state.alt ? (
-        <p
-          style={{
-            position: "absolute",
-            bottom: "1.5rem",
-            left: "50%",
-            transform: "translateX(-50%)",
-            fontFamily: "var(--font-montserrat), system-ui, sans-serif",
-            fontSize: "0.5rem",
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: "rgba(200,168,126,0.4)",
-            opacity: visible ? 1 : 0,
-            transition: "opacity 600ms 200ms",
-            whiteSpace: "nowrap",
-            maxWidth: "80vw",
-            overflow: "hidden",
-            textOverflow: "ellipsis"
-          }}
-        >
+        <p id={captionId} className="lightbox-caption">
           {state.alt}
         </p>
       ) : null}

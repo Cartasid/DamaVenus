@@ -2,76 +2,108 @@
 
 import { useEffect, useRef } from "react";
 
+const INTERACTIVE_SELECTOR = "a, button, [role='button'], .img-color-reveal";
+
 export default function CustomCursor() {
   const outerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
-  const posRef = useRef({ x: 0, y: 0 });
+  const targetRef = useRef({ x: 0, y: 0 });
   const smoothRef = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number>(0);
   const visibleRef = useRef(false);
 
   useEffect(() => {
-    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) return;
+    const pointerQuery = window.matchMedia(
+      "(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)"
+    );
+    if (!pointerQuery.matches) return;
 
     const outer = outerRef.current;
     const inner = innerRef.current;
     if (!outer || !inner) return;
 
-    const onMove = (e: MouseEvent) => {
-      posRef.current = { x: e.clientX, y: e.clientY };
-      inner.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
-      if (!visibleRef.current) {
-        visibleRef.current = true;
-        outer.style.opacity = "1";
-        inner.style.opacity = "1";
+    const animate = () => {
+      const deltaX = targetRef.current.x - smoothRef.current.x;
+      const deltaY = targetRef.current.y - smoothRef.current.y;
+
+      smoothRef.current.x += deltaX * 0.16;
+      smoothRef.current.y += deltaY * 0.16;
+      outer.style.transform = `translate3d(${smoothRef.current.x - 20}px, ${smoothRef.current.y - 20}px, 0)`;
+
+      if (Math.abs(deltaX) > 0.1 || Math.abs(deltaY) > 0.1) {
+        rafRef.current = window.requestAnimationFrame(animate);
+      } else {
+        smoothRef.current = { ...targetRef.current };
+        rafRef.current = 0;
       }
     };
 
-    const onLeave = () => {
+    const startAnimation = () => {
+      if (!rafRef.current) {
+        rafRef.current = window.requestAnimationFrame(animate);
+      }
+    };
+
+    const show = () => {
+      if (visibleRef.current) return;
+      visibleRef.current = true;
+      outer.style.opacity = "1";
+      inner.style.opacity = "1";
+    };
+
+    const hide = () => {
       visibleRef.current = false;
       outer.style.opacity = "0";
       inner.style.opacity = "0";
-    };
-
-    const onHover = () => {
-      outer.classList.add("cursor-hover");
-    };
-    const onUnhover = () => {
       outer.classList.remove("cursor-hover");
     };
 
-    const attachHoverListeners = () => {
-      document.querySelectorAll("a, button, [role='button'], .img-color-reveal").forEach((el) => {
-        el.addEventListener("mouseenter", onHover);
-        el.addEventListener("mouseleave", onUnhover);
-      });
+    const onPointerMove = (event: PointerEvent) => {
+      targetRef.current = { x: event.clientX, y: event.clientY };
+      inner.style.transform = `translate3d(${event.clientX - 4}px, ${event.clientY - 4}px, 0)`;
+
+      if (!visibleRef.current) {
+        smoothRef.current = { x: event.clientX, y: event.clientY };
+        outer.style.transform = `translate3d(${event.clientX - 20}px, ${event.clientY - 20}px, 0)`;
+      }
+
+      show();
+      startAnimation();
     };
 
-    const animate = () => {
-      smoothRef.current.x += (posRef.current.x - smoothRef.current.x) * 0.12;
-      smoothRef.current.y += (posRef.current.y - smoothRef.current.y) * 0.12;
-      outer.style.transform = `translate(${smoothRef.current.x - 20}px, ${smoothRef.current.y - 20}px)`;
-      rafRef.current = requestAnimationFrame(animate);
+    const onPointerOver = (event: PointerEvent) => {
+      if (event.target instanceof Element && event.target.closest(INTERACTIVE_SELECTOR)) {
+        outer.classList.add("cursor-hover");
+      }
     };
 
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseleave", onLeave);
-    rafRef.current = requestAnimationFrame(animate);
-    attachHoverListeners();
+    const onPointerOut = (event: PointerEvent) => {
+      if (!(event.target instanceof Element)) return;
 
-    let debounceTimer: ReturnType<typeof setTimeout>;
-    const observer = new MutationObserver(() => {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(attachHoverListeners, 300);
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
+      const currentInteractive = event.target.closest(INTERACTIVE_SELECTOR);
+      const nextInteractive =
+        event.relatedTarget instanceof Element
+          ? event.relatedTarget.closest(INTERACTIVE_SELECTOR)
+          : null;
+
+      if (currentInteractive && currentInteractive !== nextInteractive) {
+        outer.classList.remove("cursor-hover");
+      }
+    };
+
+    document.addEventListener("pointermove", onPointerMove, { passive: true });
+    document.addEventListener("pointerover", onPointerOver, { passive: true });
+    document.addEventListener("pointerout", onPointerOut, { passive: true });
+    document.documentElement.addEventListener("mouseleave", hide);
+    window.addEventListener("blur", hide);
 
     return () => {
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseleave", onLeave);
-      cancelAnimationFrame(rafRef.current);
-      observer.disconnect();
+      document.removeEventListener("pointermove", onPointerMove);
+      document.removeEventListener("pointerover", onPointerOver);
+      document.removeEventListener("pointerout", onPointerOut);
+      document.documentElement.removeEventListener("mouseleave", hide);
+      window.removeEventListener("blur", hide);
+      if (rafRef.current) window.cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
@@ -93,7 +125,8 @@ export default function CustomCursor() {
           zIndex: 9999,
           opacity: 0,
           transition: "width 0.3s, height 0.3s, border-color 0.3s, opacity 0.3s",
-          mixBlendMode: "difference"
+          mixBlendMode: "difference",
+          willChange: "transform"
         }}
       />
       <div
@@ -110,7 +143,8 @@ export default function CustomCursor() {
           pointerEvents: "none",
           zIndex: 9999,
           opacity: 0,
-          transition: "opacity 0.3s"
+          transition: "opacity 0.3s",
+          willChange: "transform"
         }}
       />
     </>

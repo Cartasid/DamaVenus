@@ -1,24 +1,34 @@
 import { getCtaActionKind, type CTA, type ReleaseItem, type SectionContent, validateCta } from "@/lib/types";
 import { contactContent } from "@/content/data/contact.data";
 import { pressContent } from "@/content/data/press.data";
+import { musicData } from "@/content/data/music.data";
+
+const latestRelease =
+  musicData.releases.find((release) => release.id === musicData.featuredReleaseId) ??
+  musicData.releases[0];
+
+export const homepageListeningCta: CTA = latestRelease.primaryCta;
 
 export const homepageIntro = {
   statement: "Cinematic"
 };
 
 export const homepageRelease: ReleaseItem = {
-  title: "Current Chapter",
-  description: "The latest sonic chapter — dark, luminous, unforgettable.",
+  title: latestRelease.title,
+  description: latestRelease.releaseDate
+    ? `Latest official single — released ${new Date(`${latestRelease.releaseDate}T00:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}. ${latestRelease.shortText}`
+    : latestRelease.shortText,
   cta: {
-    label: "Listen Now",
-    href: "/music"
+    label: "Explore Release",
+    href: `/music#${latestRelease.id}`
   },
-  coverAsset: { id: "home-release-cover" }
+  coverAsset: latestRelease.coverAsset
 };
 
 export const homepageVisuals: SectionContent = {
-  headline: "Frames in Motion",
-  subhead: "A visual language crafted in shadow, light, and intention.",
+  headline: "Where sound becomes cinema, and identity becomes art.",
+  subhead:
+    "Concept Lead & Visual Author at Dama Venus Productions | High-Fidelity Audio Architect | Proprietary Intellectual Design | Natürlich by Dama Venus",
   cta: {
     label: "View Visuals",
     href: "/visuals"
@@ -85,7 +95,7 @@ export const homepageCoreModules: HomepageModule[] = [
   {
     id: "featuredRelease",
     assetId: homepageRelease.coverAsset.id,
-    alt: "Cover image of the current chapter release",
+    alt: `Dáma Venus release visual for ${homepageRelease.title}`,
     cropFocusHint: "center-subject",
     priority: "high",
     swColorLogic: "derive-from-cover",
@@ -153,18 +163,31 @@ export const homepageCoreModules: HomepageModule[] = [
 ];
 
 const expectedHomeModuleCtas: Partial<Record<HomepageModuleId, CTA>> = {
-  featuredRelease: { label: "Listen Now", href: "/music" },
+  featuredRelease: { label: "Explore Release", href: `/music#${latestRelease.id}` },
   visuals: { label: "View Visuals", href: "/visuals" },
-  press: { label: pressContent.cta?.label ?? "Zum Press & EPK Überblick", href: pressContent.cta?.href ?? "/press" },
-  contactNewsletter: { label: "Send Inquiry", href: contactContent.primaryContact.href }
+  press: {
+    label: pressContent.cta?.label ?? "Open Press & EPK",
+    href: pressContent.cta?.href ?? "/press"
+  },
+  contactNewsletter: {
+    label: contactContent.form.ctaLabel,
+    href: contactContent.primaryContact.href
+  }
 };
 
-const primaryToSecondaryCtaSequence: HomepageModuleId[] = ["featuredRelease", "visuals", "press", "contactNewsletter"];
+const primaryToSecondaryCtaSequence: HomepageModuleId[] = [
+  "featuredRelease",
+  "visuals",
+  "press",
+  "contactNewsletter"
+];
 
 function validateHomeModuleCtasAndFlow(modules: HomepageModule[]): void {
   const moduleById = new Map(modules.map((module) => [module.id, module]));
 
-  for (const [moduleId, expectedCta] of Object.entries(expectedHomeModuleCtas) as [HomepageModuleId, CTA][]) {
+  for (const [moduleId, expectedCta] of Object.entries(
+    expectedHomeModuleCtas
+  ) as [HomepageModuleId, CTA][]) {
     const cta = moduleById.get(moduleId)?.copy.cta;
     if (!cta || cta.label !== expectedCta.label || cta.href !== expectedCta.href) {
       throw new Error(`Invalid CTA config for home module: ${moduleId}`);
@@ -172,17 +195,29 @@ function validateHomeModuleCtasAndFlow(modules: HomepageModule[]): void {
     validateCta(cta, `homepage module ${moduleId}`);
   }
 
-  const sequenceIndexes = primaryToSecondaryCtaSequence.map((moduleId) => modules.findIndex((module) => module.id === moduleId));
+  const sequenceIndexes = primaryToSecondaryCtaSequence.map((moduleId) =>
+    modules.findIndex((module) => module.id === moduleId)
+  );
+
   for (let index = 1; index < sequenceIndexes.length; index += 1) {
-    if (sequenceIndexes[index - 1] === -1 || sequenceIndexes[index] === -1 || sequenceIndexes[index - 1] > sequenceIndexes[index]) {
-      throw new Error("Invalid home CTA sequence: expected Release/Visuals -> Press/EPK -> Contact");
+    if (
+      sequenceIndexes[index - 1] === -1 ||
+      sequenceIndexes[index] === -1 ||
+      sequenceIndexes[index - 1] > sequenceIndexes[index]
+    ) {
+      throw new Error(
+        "Invalid home CTA sequence: expected Release/Visuals -> Press/EPK -> Contact"
+      );
     }
   }
 }
 
 validateHomeModuleCtasAndFlow(homepageCoreModules);
 
-const contactModuleCta = homepageCoreModules.find((module) => module.id === "contactNewsletter")?.copy.cta;
+const contactModuleCta = homepageCoreModules.find(
+  (module) => module.id === "contactNewsletter"
+)?.copy.cta;
+
 if (!contactModuleCta || getCtaActionKind(contactModuleCta.href) !== "internal") {
   throw new Error("Homepage contact CTA must use internal contact endpoint.");
 }

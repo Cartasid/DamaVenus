@@ -7,7 +7,7 @@
     "build": "npm run prepare:dama-venus-assets && next build && node scripts/copy-standalone-static.mjs",
     "start": "next start",
     "lint": "tsc --noEmit --pretty false",
-    "prepare:dama-venus-assets": "node scripts/prepare-dama-venus-assets.mjs",
+    "prepare:dama-venus-assets": "node scripts/prepare-dama-venus-assets-current-epk.mjs",
     "typecheck": "tsc --noEmit",
     "build:check": "npm run build && npm run build:verify",
     "check": "npm run lint && npm run typecheck",

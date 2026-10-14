@@ -2380,15 +2380,21 @@ export const damaVenusAssetMap = {
         "status": "copied"
       },
       {
-        "id": "about-supporting-visual-calm-02",
+        "id": "about-press-feature-tamiris",
         "finalPath": "/assets/dama-venus/about/dv_about_supporting_visual_calm_02_color_3x4_v01.jpeg",
         "sourcePath": "pics/Tamiris-12.JPEG",
         "status": "copied"
       },
       {
+        "id": "about-supporting-visual-calm-02",
+        "finalPath": "/assets/dama-venus/about/dv_about_supporting_img7138_v01.jpg",
+        "sourcePath": "pics/IMG_7138.HEIC",
+        "status": "copied"
+      },
+      {
         "id": "about-supporting-visual-calm-reserve-03",
-        "finalPath": "/assets/dama-venus/about/dv_about_supporting_visual_calm_reserve_03_color_3x4_v01.jpg",
-        "sourcePath": "pics/349343D2-8AD2-4A03-8893-E2C94FC1D7BF.JPG",
+        "finalPath": "/assets/dama-venus/about/dv_about_supporting_img4671_v01.jpg",
+        "sourcePath": "pics/IMG_4671.JPEG",
         "status": "copied"
       },
       {
@@ -2502,8 +2508,8 @@ export const damaVenusAssetMap = {
       },
       {
         "id": "visuals-cinderela-frame-243",
-        "finalPath": "/assets/dama-venus/visuals/dv_visuals_cinderela_frame_243_bw_3x4_v01.jpeg",
-        "sourcePath": "pics/Cinderela-243.JPEG",
+        "finalPath": "/assets/dama-venus/visuals/dv_visuals_ret_portrait_v01.png",
+        "sourcePath": "pics/RET.png",
         "status": "copied"
       },
       {
@@ -2532,8 +2538,8 @@ export const damaVenusAssetMap = {
       },
       {
         "id": "visuals-portrait-tamiris-12",
-        "finalPath": "/assets/dama-venus/visuals/dv_visuals_portrait_tamiris_zrztf_v01.jpg",
-        "sourcePath": "pics/ZRZTF.png",
+        "finalPath": "/assets/dama-venus/visuals/dv_visuals_portrait_img4671_v01.jpg",
+        "sourcePath": "pics/IMG_4671.JPEG",
         "status": "copied"
       },
       {

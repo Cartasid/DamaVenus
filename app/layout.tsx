@@ -2,29 +2,32 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Bodoni_Moda, Montserrat } from "next/font/google";
 import "./globals.css";
+import "./premium-polish.css";
 import SiteFooter from "@/components/layout/site-footer";
 import SiteHeader from "@/components/layout/site-header";
 import ScrollRevealProvider from "@/components/utils/scroll-reveal-provider";
 import ScrollProgress from "@/components/utils/scroll-progress";
 import CustomCursor from "@/components/utils/custom-cursor";
+import AmbientHoverBackground from "@/components/utils/ambient-hover-background";
 import ImageLightbox from "@/components/utils/image-lightbox";
 import ImageLoadObserver from "@/components/utils/image-load-observer";
 import { resolveSiteUrl, siteConfig } from "@/content/data/site.config";
+import { artistSameAs } from "@/content/data/official-links";
 
 const siteUrl = resolveSiteUrl();
 
 const bodoni = Bodoni_Moda({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
   style: ["normal", "italic"],
-  variable: "--font-bodoni"
+  variable: "--font-bodoni",
+  display: "swap"
 });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
   style: ["normal", "italic"],
-  variable: "--font-montserrat"
+  variable: "--font-montserrat",
+  display: "swap"
 });
 
 const metadataTitle = {
@@ -44,27 +47,17 @@ export const metadata: Metadata = {
     "Visual Author",
     "international actress",
     "producer",
-    "Miss Americas",
     "Berlin artist",
     "Brazilian artist",
     "alternative pop",
-    "synth-pop",
-    "cinematic music",
-    "music",
-    "Rio de Janeiro",
-    "Europe",
-    "fashion artist",
-    "visual artist",
-    "after-dark architecture",
-    "Recording Academy",
-    "GRAMMYs",
-    "Berlin Künstlerin",
-    "Amsterdam",
-    "London",
     "trap-pop",
     "R&B",
     "vaporwave",
-    "cinematic visualizer",
+    "cinematic music",
+    "Lonely Berlin",
+    "Eclipse",
+    "Valentines",
+    "Close Friend",
     "music video",
     "EPK",
     "press kit"
@@ -77,7 +70,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     title: metadataTitle.default,
     description: metadataDescription,
-    images: [{ url: "/og-default.png", width: 1200, height: 630, alt: "Dama Venus — Artist" }]
+    images: [
+      {
+        url: "/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "Dáma Venus — Artist"
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
@@ -119,24 +119,27 @@ const jsonLdGraph = {
       url: siteUrl,
       description: metadataDescription,
       inLanguage: "en",
-      publisher: { "@id": `${siteUrl}/#musicgroup` }
+      publisher: { "@id": `${siteUrl}/#artist` }
     },
     {
-      "@type": "MusicGroup",
-      "@id": `${siteUrl}/#musicgroup`,
+      "@type": "Person",
+      "@id": `${siteUrl}/#artist`,
       name: "Dáma Venus",
-      alternateName: ["Dama Venus", "DamaVenus"],
+      alternateName: ["Dama Venus", "Tamiris Dama Venus"],
       description: metadataDescription,
       url: siteUrl,
-      genre: ["Alternative Pop", "Trap Pop", "R&B", "Vaporwave"],
-      foundingLocation: {
-        "@type": "Place",
-        name: "Rio de Janeiro, Brazil"
+      nationality: {
+        "@type": "Country",
+        name: "Brazil"
       },
-      location: {
-        "@type": "Place",
-        name: "Berlin, Germany"
-      },
+      jobTitle: [
+        "Singer",
+        "Songwriter",
+        "Visual Author",
+        "International Actress",
+        "Producer"
+      ],
+      knowsLanguage: ["en", "pt", "de"],
       image: {
         "@type": "ImageObject",
         url: `${siteUrl}/og-default.png`,
@@ -175,23 +178,27 @@ const jsonLdGraph = {
   ]
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default function RootLayout({
+  children
+}: Readonly<{ children: ReactNode }>) {
   return (
     <html lang={siteConfig.language}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://open.spotify.com" />
-        <link rel="dns-prefetch" href="https://www.instagram.com" />
-        <link rel="dns-prefetch" href="https://www.youtube.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }}
         />
       </head>
-      <body className={`${bodoni.variable} ${montserrat.variable} min-h-screen flex flex-col`}>
+      <body
+        className={`${bodoni.variable} ${montserrat.variable} premium-site min-h-screen flex flex-col`}
+      >
+        <AmbientHoverBackground />
         <noscript>
-          <style>{".reveal,.reveal-fade{opacity:1!important;transform:none!important}"}</style>
+          <style>
+            {
+              ".reveal,.reveal-fade{opacity:1!important;transform:none!important}img[loading='lazy']{opacity:1!important}"
+            }
+          </style>
         </noscript>
         <ScrollProgress />
         <CustomCursor />

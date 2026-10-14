@@ -240,7 +240,7 @@ export default function AboutPage() {
 
           {/* Portrait Visual */}
           {(() => {
-            const pressPortrait = assetMap["about-supporting-visual-calm-02"] ?? assetMap["about-intro-entry-portrait-primary"];
+            const pressPortrait = assetMap["about-press-feature-tamiris"] ?? assetMap["about-supporting-visual-calm-02"] ?? assetMap["about-intro-entry-portrait-primary"];
             return pressPortrait ? (
               <ImageReveal
                 className="relative overflow-hidden hidden md:block"
