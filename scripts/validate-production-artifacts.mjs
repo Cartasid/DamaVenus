@@ -2,6 +2,7 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
+import { assertNoFycDateReferences, reportFycReview } from './lib/fyc-content.mjs';
 
 const projectRoot = process.cwd();
 const imageFormatsByExtension = new Map([
@@ -281,7 +282,7 @@ async function run() {
   await ensureMusicContentUsesOfficialReleaseNames();
   await ensureCurrentPositioningCopy();
   await ensureNoLegacyPublicCopy();
-  await ensureFycRuntime();
+  await reportFycReview(ensureFycRuntime);
 
   console.log(
     'Production-Artefakte validiert: CSS, Bilddateien, aktuelles EPK/Video, Release-Daten, Positionierungs-Copy und öffentliche Links sind vorhanden und konsistent.',
@@ -307,13 +308,13 @@ async function ensureFycRuntime() {
     /entry\s+(?:list\s+)?number|web\s+id|official entry protocol|registry matrix/i,
     /sync portal|technical sync credentials|registry compliance|one-stop|application submitted/i,
     /for recording academy voting members considering|listen to the first-person delivery/i,
-    /\b20\d{2}\b|\b\d+(?:st|nd|rd|th)\s+GRAMMY/i,
     /\bGrammy\b/,
     /\bGRAMMY\b(?!®|&reg;|&#174;|&#x0*ae;)/,
   ];
   for (const pattern of prohibitedFycContent) {
     if (pattern.test(html)) throw new Error(`Unzulässiger FYC-Inhalt im Produktions-HTML: ${pattern}`);
   }
+  assertNoFycDateReferences(html);
   for (const name of ['description', 'og:description', 'twitter:description']) {
     const tag = [...html.matchAll(/<meta\b[^>]*>/g)].find(([tag]) =>
       tag.includes(`name="${name}"`) || tag.includes(`property="${name}"`)

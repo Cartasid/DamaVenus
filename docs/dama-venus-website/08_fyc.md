@@ -32,13 +32,22 @@ identification, not a personal sign-off or autograph.
 | Opt-out required for FYC communications, including websites (p. 2) | Top opt-out link, explicit bottom opt-out button and visible email/subject instructions; metadata descriptions and supplied artwork also include opt-out details. |
 | Academy guidelines link permitted (p. 2) | Public voting and solicitation guidelines link, labelled as an external Academy resource without a logo or endorsement claim. |
 
-The generated production HTML is checked for mandatory opt-out and source
-links, forbidden identifiers/legacy claims, year/telecast references, trademark
-formatting and opt-out descriptions in search/social metadata. The campaign
-artwork must be present at its full 2400×1350 dimensions in the standalone
-runtime. Browser checks also inspect the rendered page and Markdown response.
-These checks guard against specific regressions; they are not a general-purpose
-or authoritative certification of every possible FYC tactic.
+The generated production HTML is reviewed for opt-out and source links,
+identifiers/legacy claims, year/telecast references, trademark formatting and
+opt-out descriptions in search/social metadata. FYC-specific findings are
+advisory warnings: they do not block deployment of corrections. The general
+production asset/build checks retain their existing error behavior. Browser
+checks also inspect the rendered page and Markdown response. These checks are
+not an authoritative certification of every possible FYC tactic.
+
+Date references are checked in rendered copy, titles, text metadata, image and
+accessibility descriptions, and textual JSON-LD fields. Technical values such
+as Next.js module IDs, resource URLs, image dimensions and SVG path coordinates
+are excluded from that date check. Private entry identifiers are still detected
+throughout the complete HTML, including serialized framework data. Run
+`node --test scripts/fyc-content.test.mjs` to verify both legitimate technical
+numbers and rejected campaign dates. Date failures report the text source,
+matched value and a short excerpt rather than only a regular expression.
 
 ## Recording presentation
 
