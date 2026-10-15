@@ -34,6 +34,7 @@ const negotiatedContentPaths = [
   "/about",
   "/press",
   "/contact",
+  "/fyc",
   "/privacy",
   "/imprint"
 ];

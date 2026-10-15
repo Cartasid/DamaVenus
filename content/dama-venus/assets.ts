@@ -26,6 +26,20 @@ export type PrioritizedAsset = {
 
 export const prioritizedAssets: PrioritizedAsset[] = [
   {
+    id: "fyc-kitsune-landscape",
+    finalPath: "/assets/dama-venus/fyc/kitsune-pt-2-fyc-landscape.jpg",
+    sourcePath: "pics/Dama_Venus_FYC_Send_To_Member_v5_Safe_Font/01_PORTAL_UPLOAD_IMAGES/Dama_Venus_Kitsune_Pt2_FYC_Landscape_2400x1350.jpg",
+    area: "music",
+    recommendedModuleType: "image",
+    altDraft: "Dama Venus — Kitsune Pt 2, For Your GRAMMY® Consideration in Best Rap Performance",
+    cropHint: "Preserve the complete 16:9 campaign artwork",
+    focusHint: "Keep all text and the portrait visible",
+    swColorMode: "good",
+    overlaySuitability: "no-overlay",
+    priority: 100,
+    role: "informative"
+  },
+  {
     id: "home-lead-portrait",
     finalPath: "/assets/dama-venus/visuals/editorial/img-4821-portrait-v01.jpg",
     sourcePath: "pics/IMG_4821.jpg",

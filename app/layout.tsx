@@ -4,11 +4,8 @@ import { Bodoni_Moda, Montserrat } from "next/font/google";
 import "./globals.css";
 import "./premium-polish.css";
 import SiteFooter from "@/components/layout/site-footer";
-import SiteHeader from "@/components/layout/site-header";
+import SitePresentation from "@/components/layout/site-presentation";
 import ScrollRevealProvider from "@/components/utils/scroll-reveal-provider";
-import ScrollProgress from "@/components/utils/scroll-progress";
-import CustomCursor from "@/components/utils/custom-cursor";
-import AmbientHoverBackground from "@/components/utils/ambient-hover-background";
 import ImageLightbox from "@/components/utils/image-lightbox";
 import ImageLoadObserver from "@/components/utils/image-load-observer";
 import { resolveSiteUrl, siteConfig } from "@/content/data/site.config";
@@ -192,7 +189,6 @@ export default function RootLayout({
       <body
         className={`${bodoni.variable} ${montserrat.variable} premium-site min-h-screen flex flex-col`}
       >
-        <AmbientHoverBackground />
         <noscript>
           <style>
             {
@@ -200,16 +196,11 @@ export default function RootLayout({
             }
           </style>
         </noscript>
-        <ScrollProgress />
-        <CustomCursor />
-        <a href="#main-content" className="skip-link">
-          Skip to content
-        </a>
-        <SiteHeader />
-        <main id="main-content" className="flex-1 min-w-0">
-          <ScrollRevealProvider>{children}</ScrollRevealProvider>
-        </main>
-        <SiteFooter />
+        <SitePresentation footer={<SiteFooter />}>
+          <main id="main-content" className="flex-1 min-w-0">
+            <ScrollRevealProvider>{children}</ScrollRevealProvider>
+          </main>
+        </SitePresentation>
         <ImageLightbox />
         <ImageLoadObserver />
       </body>

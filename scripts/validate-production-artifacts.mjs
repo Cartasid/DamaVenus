@@ -281,10 +281,38 @@ async function run() {
   await ensureMusicContentUsesOfficialReleaseNames();
   await ensureCurrentPositioningCopy();
   await ensureNoLegacyPublicCopy();
+  await ensureFycRuntime();
 
   console.log(
     'Production-Artefakte validiert: CSS, Bilddateien, aktuelles EPK/Video, Release-Daten, Positionierungs-Copy und öffentliche Links sind vorhanden und konsistent.',
   );
+}
+
+async function ensureFycRuntime() {
+  const html = await fs.readFile(path.resolve(projectRoot, '.next/server/app/fyc.html'), 'utf8');
+  for (const marker of [
+    'FOR YOUR GRAMMY® CONSIDERATION',
+    'Kitsune Pt 2',
+    'Best Rap Performance',
+    '011293',
+    '10149486',
+    'https://youtu.be/h6OUAxJmKRw',
+    'href="/fyc"',
+  ]) {
+    if (!html.includes(marker)) throw new Error(`FYC-Seite im Build unvollständig: ${marker}`);
+  }
+  if (/<iframe\b/i.test(html)) {
+    throw new Error('FYC-Streaming darf erst nach Benutzerinteraktion geladen werden.');
+  }
+  if (/href="[^"]*(?:drive\.google\.com|\.wav(?:\?|"))/i.test(html)) {
+    throw new Error('FYC-Seite enthält einen nicht gewünschten Drive-/WAV-Link.');
+  }
+  const artwork = 'assets/dama-venus/fyc/kitsune-pt-2-fyc-landscape.jpg';
+  const runtimeArtwork = path.resolve(projectRoot, '.next/standalone/public', artwork);
+  const { width, height } = await sharp(runtimeArtwork).metadata();
+  if (width !== 2400 || height !== 1350) {
+    throw new Error('FYC-Kampagnenmotiv fehlt im Standalone-Runtime oder wurde beschnitten.');
+  }
 }
 
 run().catch((error) => {
