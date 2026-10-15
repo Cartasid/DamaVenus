@@ -294,12 +294,33 @@ async function ensureFycRuntime() {
     'FOR YOUR GRAMMY® CONSIDERATION',
     'Kitsune Pt 2',
     'Best Rap Performance',
-    '011293',
-    '10149486',
     'https://youtu.be/h6OUAxJmKRw',
     'href="/fyc"',
+    'mailto:contact@damavenus.eu?subject=STOP%20FYC',
+    'Opt out of FYC communications',
+    'https://www.recordingacademy.com/awards/voting-and-solicitation-guidelines',
   ]) {
     if (!html.includes(marker)) throw new Error(`FYC-Seite im Build unvollständig: ${marker}`);
+  }
+  const prohibitedFycContent = [
+    /011293|10149486/i,
+    /entry\s+(?:list\s+)?number|web\s+id|official entry protocol|registry matrix/i,
+    /sync portal|technical sync credentials|registry compliance|one-stop|application submitted/i,
+    /for recording academy voting members considering|listen to the first-person delivery/i,
+    /\b20\d{2}\b|\b\d+(?:st|nd|rd|th)\s+GRAMMY/i,
+    /\bGrammy\b/,
+    /\bGRAMMY\b(?!®|&reg;|&#174;|&#x0*ae;)/,
+  ];
+  for (const pattern of prohibitedFycContent) {
+    if (pattern.test(html)) throw new Error(`Unzulässiger FYC-Inhalt im Produktions-HTML: ${pattern}`);
+  }
+  for (const name of ['description', 'og:description', 'twitter:description']) {
+    const tag = [...html.matchAll(/<meta\b[^>]*>/g)].find(([tag]) =>
+      tag.includes(`name="${name}"`) || tag.includes(`property="${name}"`)
+    )?.[0];
+    if (!tag?.includes('FYC opt-out: contact@damavenus.eu; subject: STOP FYC.')) {
+      throw new Error(`FYC-Opt-out fehlt in Vorschau-Metadaten: ${name}`);
+    }
   }
   if (/<iframe\b/i.test(html)) {
     throw new Error('FYC-Streaming darf erst nach Benutzerinteraktion geladen werden.');

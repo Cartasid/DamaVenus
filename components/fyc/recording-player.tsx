@@ -34,8 +34,8 @@ export default function RecordingPlayer() {
   return (
     <section id="listen" className={styles.listen} aria-labelledby="listen-title">
       <div className={styles.sectionHeader}>
-        <h2 id="listen-title">Listen to the recording</h2>
-        <span className={styles.micro}>01 / Listen</span>
+        <h2 id="listen-title">Recording</h2>
+        <span className={styles.micro}>Audio &amp; video</span>
       </div>
 
       <div className={styles.player} data-provider={provider} data-active={activated}>
@@ -84,7 +84,7 @@ export default function RecordingPlayer() {
           : `${selected.name} loads here. Preview length and full-track access depend on the provider, your account and region.`}
         {" "}<a href="/privacy">Privacy</a>
       </p>
-      <noscript><p className={styles.playerNote}>Use the direct recording link to listen without JavaScript.</p></noscript>
+      <noscript><p className={styles.playerNote}>The direct recording link is available without JavaScript.</p></noscript>
     </section>
   );
 }
