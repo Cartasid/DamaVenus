@@ -193,7 +193,7 @@ export default function SiteHeader() {
                 </span>
               </button>
 
-              <nav aria-label="Primary Navigation" className="hidden items-center gap-10 md:flex">
+              <nav aria-label="Primary Navigation" className="hidden items-center gap-5 md:flex lg:gap-8 xl:gap-10">
                 {navigationItems.map((item) => (
                   <Link
                     key={item.href}

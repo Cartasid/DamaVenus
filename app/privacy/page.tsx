@@ -134,10 +134,12 @@ export default function PrivacyPage() {
 
             <h3 style={subHeading}>5.2 Embedded Content</h3>
             <p style={bodyText}>
-              Our website may embed content from third-party platforms such as Spotify and YouTube.
-              When you interact with embedded content, these providers may collect data in accordance
-              with their own privacy policies. We recommend reviewing the privacy policies of
-              Spotify (spotify.com/privacy) and Google/YouTube (policies.google.com/privacy).
+              The FYC page offers YouTube, Spotify and Amazon Music players. A player connects to its provider
+              only after you activate it. The provider then receives technical data such as your IP
+              address and may use cookies or account information under its own privacy policy.
+              YouTube uses its privacy-enhanced embed domain. Review the privacy policies of
+              Google/YouTube (policies.google.com/privacy), Spotify (spotify.com/privacy) and Amazon (amazon.com/privacy).
+              You can also use the direct recording links without loading a player on this website.
             </p>
 
             <h3 style={subHeading}>5.3 External Links</h3>

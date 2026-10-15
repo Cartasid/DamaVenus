@@ -5,6 +5,7 @@ const MARKDOWN_PATHS = new Set([
   "/about",
   "/press",
   "/contact",
+  "/fyc",
   "/privacy",
   "/imprint"
 ]);

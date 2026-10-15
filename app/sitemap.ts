@@ -10,6 +10,7 @@ const routes = [
   "/about",
   "/press",
   "/contact",
+  "/fyc",
   "/privacy",
   "/imprint"
 ] as const;

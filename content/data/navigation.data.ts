@@ -7,7 +7,8 @@ export const navigationItems: NavigationItem[] = [
   { label: "Bio", href: "/about" },
   { label: "Press", href: "/press" },
   { label: "Contact", href: "/contact" },
-  { label: "♥ Natürlich", href: "/natuerlich" }
+  { label: "♥ Natürlich", href: "/natuerlich" },
+  { label: "FYC", href: "/fyc" }
 ];
 
 /** Extended navigation — used in footer and sitemap. */
@@ -17,5 +18,6 @@ export const extendedNavigationItems: NavigationItem[] = [
   { label: "Bio", href: "/about" },
   { label: "Press", href: "/press" },
   { label: "Contact", href: "/contact" },
-  { label: "♥ Natürlich", href: "/natuerlich" }
+  { label: "♥ Natürlich", href: "/natuerlich" },
+  { label: "FYC", href: "/fyc" }
 ];

@@ -1,0 +1,92 @@
+.page {
+  --fyc-silver: #b8b8bd;
+  --fyc-line: #333338;
+  --fyc-pink: #ff38a7;
+  max-width: 1328px;
+  margin-inline: auto;
+  padding: 3rem clamp(1.25rem, 4vw, 4rem) 4rem;
+  color: #fff;
+  background: #000;
+}
+
+.page a { color: inherit; text-decoration-color: #73737b; text-underline-offset: 5px; }
+.page :is(a, button):focus-visible { outline: 2px solid var(--fyc-pink); outline-offset: 5px; }
+.page button { cursor: pointer; }
+.masthead, .sectionHeader { display: flex; justify-content: space-between; gap: 1.5rem; align-items: baseline; }
+.masthead { padding-block: 1.25rem; border-block: 1px solid var(--fyc-line); border-top-color: var(--fyc-pink); }
+.masthead h1, .sectionHeader h2, .micro { font-size: .72rem; line-height: 1.6; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
+.micro { color: var(--fyc-pink); }
+.titleRow { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; padding-block: 3rem; }
+.artist { font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 1rem; }
+.trackTitle { font-family: var(--font-montserrat), sans-serif; font-size: clamp(3.1rem, 7.8vw, 7rem); font-weight: 500; line-height: 1.02; letter-spacing: -.07em; }
+.trackTitle span { color: var(--fyc-silver); white-space: nowrap; }
+.listenLink { display: flex; gap: 2.5rem; align-items: center; padding-block: .8rem; border-bottom: 1px solid #fff; font-size: .75rem; text-decoration: none; white-space: nowrap; }
+.listenLink span { font-size: 1.6rem; }
+.entryData { display: grid; grid-template-columns: 1.3fr 1.3fr .8fr .8fr; gap: 1.5rem; padding-block: 1.5rem; border-block: 1px solid var(--fyc-line); }
+.entryData dt, .rightsData dt { color: var(--fyc-silver); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; line-height: 1.6; }
+.entryData dd { margin-top: .5rem; font-size: .85rem; line-height: 1.6; }
+.number { font-variant-numeric: tabular-nums; letter-spacing: .12em; }
+.listen { margin-top: 3rem; }
+.sectionHeader { margin-bottom: 1.25rem; }
+.player { position: relative; aspect-ratio: 16 / 9; display: grid; place-items: center; background: #0a0a0b; border: 1px solid var(--fyc-line); overflow: hidden; }
+.artwork { width: 100%; height: 100%; object-fit: contain; }
+.playButton { position: absolute; right: 2rem; bottom: 2rem; display: flex; gap: 1rem; align-items: center; justify-content: center; min-height: 56px; padding: 1rem 1.4rem; color: #000; background: #fff; font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; transition: background 180ms ease; }
+.playButton:hover { background: var(--fyc-pink); }
+.videoFrame { width: 100%; height: 100%; border: 0; position: absolute; inset: 0; }
+.amazonFrame { width: min(100%, 660px); height: 352px; max-height: 100%; border: 0; }
+.spotifyFrame { width: 100%; height: 152px; border: 0; }
+.player[data-active="true"][data-provider="spotify"] { aspect-ratio: auto; padding: clamp(.5rem, 2vw, 1.5rem); }
+.playerControls { display: flex; gap: 1rem; justify-content: space-between; align-items: center; padding-top: .5rem; border-bottom: 1px solid var(--fyc-line); }
+.providerButtons { display: flex; gap: 1.5rem; }
+.providerButtons button { min-height: 48px; font-size: .8rem; color: var(--fyc-silver); border-bottom: 2px solid transparent; }
+.providerButtons button[aria-pressed="true"] { color: #fff; border-bottom-color: var(--fyc-pink); }
+.playerControls > a { font-size: .72rem; color: var(--fyc-silver); padding-block: .8rem; }
+.playerNote { color: var(--fyc-silver); font-size: .75rem; line-height: 1.8; margin-top: .9rem; max-width: 52rem; }
+.recordingNotes { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding-block: 5rem; }
+.recordingNotes h2 { font-size: clamp(1.7rem, 3.2vw, 2.6rem); letter-spacing: -.04em; font-weight: 400; line-height: 1.25; margin-top: 1.5rem; }
+.notesBody > p { color: var(--fyc-silver); font-size: .95rem; line-height: 1.85; margin-bottom: 1.5rem; }
+.notesBody > p:first-child { color: #fff; }
+.notesBody blockquote { margin-top: 2.5rem; padding-left: 1.5rem; border-left: 1px solid var(--fyc-pink); font-size: 1.4rem; letter-spacing: -.03em; }
+.notesBody cite { display: block; font-style: normal; font-size: .72rem; color: var(--fyc-silver); margin-top: .75rem; letter-spacing: .04em; }
+.credentials { border-top: 1px solid #fff; padding-top: 1.5rem; }
+.rightsData { margin-top: 2rem; }
+.rightsData > div { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; border-top: 1px solid var(--fyc-line); padding-block: 1.25rem; }
+.rightsData dd { font-size: .9rem; line-height: 1.75; }
+.contactRow { display: flex; gap: 2rem; justify-content: space-between; align-items: center; border-top: 1px solid var(--fyc-line); padding-block: 2rem; }
+.contactRow p { color: var(--fyc-silver); font-size: .75rem; line-height: 1.8; }
+.page .contactButton { display: flex; align-items: center; justify-content: space-between; gap: 2rem; border: 1px solid #fff; padding: 1.25rem; text-decoration: none; font-size: .65rem; line-height: 1.6; text-transform: uppercase; letter-spacing: .06em; transition: background 180ms ease, color 180ms ease; }
+.page .contactButton:hover { color: #000; background: #fff; }
+.colophon { border-top: 1px solid var(--fyc-line); padding-top: 2rem; color: var(--fyc-silver); font-size: .75rem; line-height: 1.9; }
+.colophon p { max-width: 50rem; margin-bottom: .75rem; }
+.colophon > a { display: inline-block; padding-block: 1rem; }
+
+@media (max-width: 800px) {
+  .masthead > span { display: none; }
+  .titleRow { align-items: flex-start; flex-direction: column; gap: 1.5rem; padding-block: 2rem; }
+  .entryData { grid-template-columns: 1fr 1fr; }
+  .recordingNotes { gap: 2rem; padding-block: 3rem; }
+  .contactRow { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 540px) {
+  .page { padding-top: 1.5rem; }
+  .masthead h1 { font-size: .65rem; letter-spacing: .08em; }
+  .entryData { gap: 1.25rem 1rem; }
+  .entryData dd { font-size: .8rem; }
+  .listen { margin-top: 2rem; }
+  .sectionHeader { align-items: flex-start; flex-direction: column; gap: .5rem; }
+  .sectionHeader .micro { font-size: .65rem; }
+  .playButton { right: .5rem; bottom: .5rem; padding: .75rem; min-height: 44px; font-size: .55rem; gap: .6rem; }
+  .playButton svg { width: 12px; height: 14px; }
+  .player[data-provider="amazon"] { min-height: 352px; }
+  .playerControls { flex-wrap: wrap; gap: 0 .75rem; padding-bottom: .25rem; }
+  .providerButtons { gap: 1.25rem; }
+  .playerControls > a { font-size: .72rem; }
+  .recordingNotes { grid-template-columns: 1fr; }
+  .recordingNotes h2 { margin-top: 1rem; }
+  .rightsData > div { grid-template-columns: 1fr; gap: .5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .playButton, .contactButton { transition: none; }
+}
