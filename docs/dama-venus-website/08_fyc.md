@@ -1,102 +1,103 @@
-# FYC: sources, implementation and publication checks
+# FYC page: review against the supplied rules
 
-## Source material
+## Review basis
 
-The page uses the existing package
-`pics/Dama_Venus_FYC_Send_To_Member_v5_Safe_Font`:
+All five pages of the owner-supplied `grammy.pdf` (FYC Rules and Policies), and
+the FYC wording in the accompanying Bongo Boy Records email, were reviewed.
+The supplied PDF's SHA-256 is
+`a41f29f76405f6abb4dbb56609005c1956f040a08892be740a986ad5b1cf8419`.
+It is a review source, not a website download; its reproduction restriction is
+respected. This document summarises the checks without republishing the PDF.
 
-- `02_COPY_PASTE_TEXT/PORTAL_COPY_READY.txt` supplies the artist, recording,
-  category, description and recording URL `https://youtu.be/h6OUAxJmKRw`.
-- `WEBSITE_DESCRIPTION.txt` supplies the first-person perspective, desire and
-  connection, recurring “no drama, no stress” refrain, and nocturnal imagery.
-- `OPT_OUT_ONLY.txt` supplies the `STOP FYC` email instructions.
-- `01_PORTAL_UPLOAD_IMAGES/Dama_Venus_Kitsune_Pt2_FYC_Landscape_2400x1350.jpg`
-  is displayed whole, without a crop or new artwork. The asset registry ensures
-  it is prepared and included in the production standalone image.
-- `Dama_Venus_Final_FYC_Copy_EN.pdf` confirms the public copy. Neither this PDF
-  nor the private submitting-member guide is published as a download.
+The recording's artist, title, category, description and YouTube link come from
+`pics/Dama_Venus_FYC_Send_To_Member_v5_Safe_Font/02_COPY_PASTE_TEXT`.
+Spotify and Amazon links were supplied by the owner. The landscape campaign
+artwork from `01_PORTAL_UPLOAD_IMAGES` is displayed whole. Visual review found
+the artist/title/category, the correctly marked GRAMMY® name, the artist's
+portrait and opt-out contact; no Academy logo, entry identifiers, campaign year,
+chart/stream/sales figures or nomination claim. The artist-name typography is
+identification, not a personal sign-off or autograph.
 
-The owner supplied entry number `011293`, Web ID `10149486`, one-stop rights,
-pending BMI application and Berlin base information explicitly for this page.
-The private guide says **“Keep Entry Number 011293 and Web ID 10149486 private”**
-and **“Do not add the Entry Number, Web ID, Academy logo, or any request for
-votes.”** The current implementation follows the owner's explicit website
-instruction to display the two identifiers. This discrepancy needs attention
-when reviewing public FYC presentation; these IDs do not establish a nomination
-or independently verify acceptance of the entry.
+## Website checks
 
-## Research status — 15 October 2026
+| PDF requirement | Implementation |
+| --- | --- |
+| Proprietary entry, category and ballot numbers excluded (pp. 2–3) | Entry number and Web ID removed from the public data model, visible page and serialized data; no numbered FYC section labels. |
+| Short, unembellished recording information (p. 2) | Artist, recording, full category name and one factual paragraph based on the supplied recording description. |
+| No exaggeration, comparative claims or personal pleas (pp. 2–3) | Removed voting-member listening appeal, promotional slogan, sync/rights sales section and compliance/fidelity claims. Playback controls are neutral navigation labels. |
+| Proper name-only GRAMMY® use; no Academy logo (pp. 2–3) | Correct spelling/registered mark in headings, metadata and image descriptions; supplied artwork visually checked. |
+| No awards year or telecast number (p. 3) | No cycle/date labels or year in the FYC footer. The regular footer is no longer passed as hidden serialized FYC content. |
+| No unsupported nomination/award claims or statistics (pp. 2–3) | None displayed. Category remains “Best Rap Performance”; the page does not assert nomination, award or verified entry acceptance. |
+| Product artwork and listening links permitted (p. 2) | Existing artwork plus optional YouTube, Spotify and Amazon players and direct links to the recording. |
+| Opt-out required for FYC communications, including websites (p. 2) | Top opt-out link, explicit bottom opt-out button and visible email/subject instructions; metadata descriptions and supplied artwork also include opt-out details. |
+| Academy guidelines link permitted (p. 2) | Public voting and solicitation guidelines link, labelled as an external Academy resource without a logo or endorsement claim. |
 
-The provided material has been read, including both PDFs. It distinguishes
-public FYC copy from private submission instructions and calls for verification
-of the accepted entry, awards cycle, category and artist spelling. The site
-therefore uses “For Your GRAMMY® Consideration”, does not call the artist a
-nominee, does not display an Academy logo, and makes no request for votes,
-exchange of votes, incentives, chart-position claims or comparisons with other
-artists. The copy describes the recording itself and invites listening.
+The generated production HTML is checked for mandatory opt-out and source
+links, forbidden identifiers/legacy claims, year/telecast references, trademark
+formatting and opt-out descriptions in search/social metadata. The campaign
+artwork must be present at its full 2400×1350 dimensions in the standalone
+runtime. Browser checks also inspect the rendered page and Markdown response.
+These checks guard against specific regressions; they are not a general-purpose
+or authoritative certification of every possible FYC tactic.
 
-**Current official online rules have not yet been verified.** Requests to the
-Recording Academy were blocked by the cloud environment's egress proxy with
-HTTP 403 before reaching the destination. The user's requested all-domain
-network access has been saved in the environment configuration draft; saving
-alone does not activate it. Do not describe this draft as Academy-approved or
-as a completed current-cycle compliance review.
+## Recording presentation
 
-Official research starting points, to retrieve after network activation:
+The YouTube privacy-enhanced player, the owner-supplied Spotify track
+`0aZbNd2vuGDZKKDKPO6vDD`, and Amazon album `B0HC3YQYTN` load only after activation.
+Switching provider replaces the previous iframe. Direct recording links remain
+available; no WAV upload, Drive folder, incentive, gift, subscription offer or
+third-party member-list acquisition is implemented.
 
-- https://www.recordingacademy.com/awards/rules-guidelines
-- https://www.recordingacademy.com/awards/voting-process
+Provider interfaces are controlled by those providers. Preview duration, login,
+region availability, video recommendations, advertising and provider-displayed
+statistics cannot be certified from this source repository. No fidelity promise
+or false guarantee that recommendations are disabled is made. External player
+playback and the Academy destination URL remain unverified because the cloud
+egress proxy returns HTTP 403 before reaching those hosts. The supplied PDF,
+rather than an inaccessible online rulebook, is the basis of this review.
 
-Review the current cycle's rulebook and solicitation/campaign rules, including
-public FYC wording, use of identifiers and trademarks, eligible release dates,
-submission acceptance, and the distinction between first-round voting for
-nominations and final-round voting for winners. No cycle dates or nomination
-status are inferred on the page. BMI application status and sync rights are
-artist-supplied information, separate from Grammy eligibility or nomination.
+## Other campaign activity and entry status
 
-## Listening and page metadata
+The PDF also covers gifts and hospitality, event tickets, mailings to Academy
+offices, telephone lobbying, third-party member-list vendors, member-hosted
+activity and duplicate/miscategorised posts in the Academy's own FYC feature
+(pp. 3–5). A website edit does not validate or authorise any of those activities.
+No messages, portal submissions or distribution to members were performed.
 
-The exact title and description requested by the owner are implemented using
-Next.js metadata with an absolute title and canonical `/fyc`. The page is also
-in the sitemap and the existing HTML/Markdown negotiation route list.
+The owner/submitting member must verify accepted-entry status, creator credits,
+category and use of the Academy's portal against the actual entry. The site
+does not invent missing credits, assert eligibility or identify a voting cycle.
+The Academy retains authority over interpretation and compliance; the supplied
+PDF identifies `awards@grammy.com` for questions and advance review. This change
+does not claim Academy approval or guarantee an entry cannot be disqualified.
 
-YouTube's privacy-enhanced iframe is created only after a click. `playsinline=1`
-supports inline mobile playback; `rel=0` limits recommendations rather than
-guaranteeing their complete removal. `iv_load_policy=3` requests hidden legacy
-annotations. No parameter guarantees uncompressed audio or changes the
-provider's encoding. The page does not make either promise.
+## Reusable factual communication
 
-Amazon uses the existing official album ID `B0HC3YQYTN` in its embed endpoint.
-The Amazon integration's **live playback is unverified while network access is
-blocked**. Preview length, login and availability belong to Amazon. All
-providers retain visible direct links; switching providers unmounts the old
-iframe to stop simultaneous playback. No provider iframe loads on initial
-page view. No analytics, social widgets or third-party media assets are loaded
-by the FYC component before activation.
+If the owner prepares a separate FYC message, keep its own opt-out with it:
 
-The owner additionally supplied the direct Spotify track link
-`https://open.spotify.com/intl-de/track/0aZbNd2vuGDZKKDKPO6vDD`.
-The Spotify option embeds that exact track ID using Spotify's dark 152px player;
-it does not search for or infer a different recording. Clicking a provider
-button loads that provider immediately. Spotify's real playback, account and
-region behavior also require the pending external check.
+> For Your GRAMMY® Consideration
+>
+> Dama Venus — Kitsune Pt 2
+>
+> Best Rap Performance
 
-Per the owner's later instruction, there are no Drive links, fabricated archive
-buttons, WAV uploads, or promises that absent master/instrumental files exist.
-The closing action is a recording/sync contact email, and the privacy page
-describes the optional embedded services.
+> “Kitsune Pt 2” features first-person lyrics about desire and connection, a
+> recurring “no drama, no stress” refrain, and imagery of constellations,
+> lanterns and midnight.
 
-## Deployment and Cloudflare
+> Recording: https://youtu.be/h6OUAxJmKRw
+>
+> FYC page: https://damavenus.eu/fyc
+>
+> Guidelines: https://www.recordingacademy.com/awards/voting-and-solicitation-guidelines
+>
+> FYC opt-out: contact@damavenus.eu; subject: STOP FYC.
 
-The route and artwork can be verified locally and in the standalone build.
-Publishing a PR does not deploy `https://damavenus.eu/fyc`.
+## Publication
 
-No Cloudflare account, zone binding or API credentials are available in this
-environment. Consequently no cache purge, Bot Fight Mode change, AI Labyrinth
-change, or verification of those settings has been performed. After the page
-is deployed, use the existing zone dashboard to verify those settings and
-purge the cache as requested. Then verify public `/fyc` returns HTTP 200 with
-the new page, its image returns 200, the canonical is correct, and both players
-work from an ordinary visitor session. Bot protections and AI Labyrinth do
-not guarantee that every automated client is blocked or that desired crawlers
-can index the page; verify the intended crawling behavior separately.
+The corrective PR updates the FYC implementation merged through PR #198.
+Merging the correction and deploying the new build are required before the live
+site shows the changes; clearing Cloudflare alone does not publish them.
+No Cloudflare access or production-server session is available here.
+Cache changes, firewall settings and public production HTTP status are not
+claimed as verified by this work.

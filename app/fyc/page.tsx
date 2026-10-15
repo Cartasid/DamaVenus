@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import RecordingPlayer from "@/components/fyc/recording-player";
 import { fycData } from "@/content/data/fyc.data";
 import styles from "./fyc.module.css";
 
-const title = "Dama Venus | For Your Grammy® Consideration & Sync Portal";
-const description = "Official independent media gateway for Dama Venus Productions. High-fidelity audio assets, metadata clearance matrices, and registry compliance.";
+const title = fycData.metadataTitle;
+const description = fycData.metadataDescription;
 
 export const metadata: Metadata = {
   title: { absolute: title },
   description,
+  keywords: [fycData.artist, fycData.title, fycData.category, "For Your GRAMMY® Consideration"],
+  authors: [{ name: fycData.artist }],
+  creator: fycData.artist,
   alternates: { canonical: "/fyc" },
   openGraph: {
     title,
@@ -27,21 +29,20 @@ export default function FycPage() {
       <header className={styles.intro}>
         <div className={styles.masthead}>
           <h1 id="fyc-title">FOR YOUR GRAMMY® CONSIDERATION</h1>
-          <span className={styles.micro}>Dama Venus Productions</span>
+          <a className={styles.optOutLink} href={fycData.optOutUrl}>FYC opt-out</a>
         </div>
         <div className={styles.titleRow}>
           <div>
             <p className={styles.artist}>{fycData.artist}</p>
             <h2 className={styles.trackTitle}>Kitsune <span>Pt 2</span></h2>
           </div>
-          <a className={styles.listenLink} href="#listen">Listen to the recording <span aria-hidden="true">↓</span></a>
+          <a className={styles.listenLink} href="#listen">Recording <span aria-hidden="true">↓</span></a>
         </div>
 
         <dl className={styles.entryData}>
-          <div><dt>Track title / Artist</dt><dd>{fycData.title} / {fycData.artist}</dd></div>
+          <div><dt>Recording</dt><dd>{fycData.title}</dd></div>
+          <div><dt>Artist</dt><dd>{fycData.artist}</dd></div>
           <div><dt>Category</dt><dd>{fycData.category}</dd></div>
-          <div><dt>Entry number</dt><dd className={styles.number}>{fycData.entryNumber}</dd></div>
-          <div><dt>Web ID</dt><dd className={styles.number}>{fycData.webId}</dd></div>
         </dl>
       </header>
 
@@ -49,37 +50,19 @@ export default function FycPage() {
 
       <section className={styles.recordingNotes} aria-labelledby="recording-notes-title">
         <div>
-          <p className={styles.micro}>02 / The recording</p>
-          <h2 id="recording-notes-title">Desire. Connection.<br />After midnight.</h2>
+          <h2 id="recording-notes-title">About the recording</h2>
         </div>
         <div className={styles.notesBody}>
           <p>{fycData.description}</p>
-          <p>For Recording Academy voting members considering Best Rap Performance: listen to the first-person delivery and the return of the refrain within that nocturnal setting.</p>
-          <blockquote>“no drama, no stress”<cite>Recurring refrain · Kitsune Pt 2</cite></blockquote>
         </div>
       </section>
 
-      <section className={styles.credentials} aria-labelledby="credentials-title">
-        <div className={styles.sectionHeader}>
-          <h2 id="credentials-title">Technical sync credentials</h2>
-          <span className={styles.micro}>03 / Rights &amp; contact</span>
-        </div>
-        <dl className={styles.rightsData}>
-          <div><dt>Clearance status</dt><dd>{fycData.clearance}</dd></div>
-          <div><dt>Performing Rights Organization (PRO)</dt><dd>{fycData.pro}</dd></div>
-          <div><dt>Base hub</dt><dd>{fycData.base}</dd></div>
-        </dl>
-        <div className={styles.contactRow}>
-          <p>Questions about the recording, credits or sync licensing?<br />Contact Dama Venus Productions directly.</p>
-          <a className={styles.contactButton} href={`mailto:${fycData.contact}?subject=Kitsune%20Pt%202%20%E2%80%94%20recording%20enquiry`}>Contact Dama Venus Productions <span aria-hidden="true">↗</span></a>
-        </div>
+      <section className={styles.colophon} aria-labelledby="fyc-information-title">
+        <h2 id="fyc-information-title">FYC information</h2>
+        <p><a href={fycData.guidelinesUrl} target="_blank" rel="noopener noreferrer">Recording Academy voting and solicitation guidelines<span className="sr-only"> (new tab)</span></a></p>
+        <p>To opt out of further FYC communications, email <a href={fycData.optOutUrl}>{fycData.contact}</a> with the subject “STOP FYC”.</p>
+        <a className={styles.optOutButton} href={fycData.optOutUrl}>Opt out of FYC communications</a>
       </section>
-
-      <div className={styles.colophon}>
-        <p>Independent artist FYC presentation. This page does not announce a GRAMMY nomination or imply Recording Academy endorsement.</p>
-        <p>To opt out of further FYC communications, email <a href={`mailto:${fycData.contact}?subject=STOP%20FYC`}>{fycData.contact}</a> with the subject “STOP FYC”.</p>
-        <Link href="/music">Explore the music <span aria-hidden="true">↗</span></Link>
-      </div>
     </article>
   );
 }

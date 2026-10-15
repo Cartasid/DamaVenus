@@ -3,7 +3,6 @@ import type { ReactNode } from "react";
 import { Bodoni_Moda, Montserrat } from "next/font/google";
 import "./globals.css";
 import "./premium-polish.css";
-import SiteFooter from "@/components/layout/site-footer";
 import SitePresentation from "@/components/layout/site-presentation";
 import ScrollRevealProvider from "@/components/utils/scroll-reveal-provider";
 import ImageLightbox from "@/components/utils/image-lightbox";
@@ -196,7 +195,7 @@ export default function RootLayout({
             }
           </style>
         </noscript>
-        <SitePresentation footer={<SiteFooter />}>
+        <SitePresentation>
           <main id="main-content" className="flex-1 min-w-0">
             <ScrollRevealProvider>{children}</ScrollRevealProvider>
           </main>

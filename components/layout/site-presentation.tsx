@@ -4,11 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import SiteHeader from "@/components/layout/site-header";
+import SiteFooter from "@/components/layout/site-footer";
 import AmbientHoverBackground from "@/components/utils/ambient-hover-background";
 import ScrollProgress from "@/components/utils/scroll-progress";
 import CustomCursor from "@/components/utils/custom-cursor";
 
-export default function SitePresentation({ children, footer }: { children: ReactNode; footer: ReactNode }) {
+export default function SitePresentation({ children }: { children: ReactNode }) {
   const isFyc = usePathname() === "/fyc";
 
   return (
@@ -19,10 +20,10 @@ export default function SitePresentation({ children, footer }: { children: React
       {children}
       {isFyc ? (
         <footer className="fyc-footer">
-          <p>© {new Date().getFullYear()} Dama Venus Productions</p>
+          <p>Dama Venus</p>
           <nav aria-label="Legal"><Link href="/privacy">Privacy</Link><Link href="/imprint">Imprint</Link></nav>
         </footer>
-      ) : footer}
+      ) : <SiteFooter />}
     </div>
   );
 }
