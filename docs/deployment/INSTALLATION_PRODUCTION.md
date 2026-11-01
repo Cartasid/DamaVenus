@@ -276,6 +276,10 @@ cd /opt/dama-venus
 ./scripts/update-prod.sh
 ```
 
+`update-prod.sh` erledigt alles in einem Schritt: `git fetch`, Zurücksetzen lokal neu erzeugter Build-Artefakte,
+`git pull --ff-only`, `npm ci` (nur bei fehlendem `node_modules` oder geänderten `package*.json`) und anschließend
+`deploy-prod.sh` (Check, Build, Docker-Handover, Live-Verifikation).
+
 Falls nur neu bauen/neu starten nötig:
 
 ```bash

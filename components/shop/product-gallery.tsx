@@ -5,15 +5,62 @@ import Image from "next/image";
 import styles from "./product-gallery.module.css";
 
 interface ProductImage {
+  /** Still image; for a video slide it is the poster and the thumbnail. */
   src: string;
   alt: string;
   label: string;
+  /** Turns the slide into a muted, looping video that plays automatically. */
+  video?: { src: string; type: string };
+  /** How long automatic rotation stays on this slide, in ms. */
+  dwell?: number;
 }
 
 const ROTATION_DELAY = 7000;
 const TRANSITION_DURATION = 1400;
 
-export default function ProductGallery({ images }: { images: readonly ProductImage[] }) {
+function SlideVideo({ image, video, active, playing }: {
+  image: ProductImage;
+  video: NonNullable<ProductImage["video"]>;
+  active: boolean;
+  playing: boolean;
+}) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!active && ref.current) ref.current.currentTime = 0;
+  }, [active]);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    if (active && playing) {
+      // Autoplay can still be refused by the browser; the poster stays visible then.
+      element.play().catch(() => undefined);
+    } else {
+      element.pause();
+    }
+  }, [active, playing]);
+
+  return (
+    <video
+      ref={ref}
+      className="absolute inset-0 h-full w-full object-contain"
+      poster={image.src}
+      aria-label={image.alt}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+    >
+      <source src={video.src} type={video.type} />
+    </video>
+  );
+}
+
+export default function ProductGallery({ images, label = "Natürlich hairbrush product images" }: {
+  images: readonly ProductImage[];
+  label?: string;
+}) {
   // Two copies at either end keep the neighbouring previews visible at the loop boundary.
   const cloneCount = Math.min(2, images.length);
   const [position, setPosition] = useState(cloneCount);
@@ -25,6 +72,7 @@ export default function ProductGallery({ images }: { images: readonly ProductIma
   const [pageVisible, setPageVisible] = useState(true);
   const [hovered, setHovered] = useState(false);
   const [imagesReady, setImagesReady] = useState(false);
+  const [videoToggled, setVideoToggled] = useState(false);
   const stageId = useId();
   const galleryRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -37,6 +85,9 @@ export default function ProductGallery({ images }: { images: readonly ProductIma
   const activeIndex = (position - cloneCount + images.length) % images.length;
   const activeImage = images[activeIndex];
   const playing = automatic && motionAllowed && inView && pageVisible && !hovered && imagesReady;
+  // Videos start on their own unless reduced motion is requested; a click flips that default.
+  const videoPlaying = (motionAllowed !== videoToggled) && inView && pageVisible;
+  const dwell = activeImage?.dwell ?? ROTATION_DELAY;
 
   useEffect(() => {
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -97,9 +148,9 @@ export default function ProductGallery({ images }: { images: readonly ProductIma
 
   useEffect(() => {
     if (!playing || transitioning || !animated || images.length < 2) return;
-    const timer = window.setTimeout(() => move(1), ROTATION_DELAY);
+    const timer = window.setTimeout(() => move(1), dwell);
     return () => window.clearTimeout(timer);
-  }, [animated, images.length, move, playing, position, transitioning]);
+  }, [animated, dwell, images.length, move, playing, position, transitioning]);
 
   useEffect(() => {
     if (!transitioning) return;
@@ -133,7 +184,7 @@ export default function ProductGallery({ images }: { images: readonly ProductIma
       style={{ "--carousel-transition": `${TRANSITION_DURATION}ms` } as CSSProperties}
       role="region"
       aria-roledescription="carousel"
-      aria-label="Natürlich hairbrush product images"
+      aria-label={label}
       onPointerEnter={(event) => { if (event.pointerType !== "touch") setHovered(true); }}
       onPointerLeave={(event) => { if (event.pointerType !== "touch") setHovered(false); }}
       onFocusCapture={(event) => {
@@ -189,9 +240,14 @@ export default function ProductGallery({ images }: { images: readonly ProductIma
               <button
                 type="button"
                 className={styles.imageButton}
+                style={image.video ? { cursor: "pointer" } : undefined}
                 tabIndex={index === position ? 0 : -1}
-                aria-haspopup={index === position ? "dialog" : undefined}
-                aria-label={`Enlarge ${image.label.toLowerCase()} photo`}
+                aria-haspopup={index === position && !image.video ? "dialog" : undefined}
+                aria-label={image.video
+                  ? index === position
+                    ? `Play or pause ${image.label.toLowerCase()} video`
+                    : `Show ${image.label.toLowerCase()} video`
+                  : `Enlarge ${image.label.toLowerCase()} photo`}
                 onClick={(event) => {
                   if (swiped.current && event.detail !== 0) {
                     swiped.current = false;
@@ -203,29 +259,39 @@ export default function ProductGallery({ images }: { images: readonly ProductIma
                     return;
                   }
                   setAutomatic(false);
+                  if (image.video) {
+                    setVideoToggled((current) => !current);
+                    return;
+                  }
                   window.dispatchEvent(new CustomEvent("open-lightbox", {
                     detail: { src: image.src, alt: image.alt, trigger: event.currentTarget }
                   }));
                 }}
               >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  priority={index === cloneCount}
-                  loading={index === cloneCount ? undefined : "eager"}
-                  sizes="(min-width: 1024px) 45vw, 90vw"
-                  className="object-contain"
-                  onLoad={() => {
-                    loadedSources.current.add(image.src);
-                    if (loadedSources.current.size === new Set(images.map((item) => item.src)).size) setImagesReady(true);
-                  }}
-                />
-                <span className={styles.expand} aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
-                    <path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7" />
-                  </svg>
-                </span>
+                {image.video ? (
+                  <SlideVideo image={image} video={image.video} active={index === position} playing={videoPlaying} />
+                ) : (
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    priority={index === cloneCount}
+                    loading={index === cloneCount ? undefined : "eager"}
+                    sizes="(min-width: 1024px) 45vw, 90vw"
+                    className="object-contain"
+                    onLoad={() => {
+                      loadedSources.current.add(image.src);
+                      if (loadedSources.current.size === new Set(images.filter((item) => !item.video).map((item) => item.src)).size) setImagesReady(true);
+                    }}
+                  />
+                )}
+                {!image.video && (
+                  <span className={styles.expand} aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
+                      <path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7" />
+                    </svg>
+                  </span>
+                )}
               </button>
             </div>
           ))}
@@ -250,7 +316,7 @@ export default function ProductGallery({ images }: { images: readonly ProductIma
                 key={image.src}
                 type="button"
                 className={styles.thumbnail}
-                aria-label={`Show ${image.label.toLowerCase()} photo`}
+                aria-label={`Show ${image.label.toLowerCase()} ${image.video ? "video" : "photo"}`}
                 aria-controls={stageId}
                 aria-pressed={index === activeIndex}
                 aria-disabled={transitioning}
@@ -260,6 +326,11 @@ export default function ProductGallery({ images }: { images: readonly ProductIma
                 }}
               >
                 <Image src={image.src} alt="" fill sizes="64px" loading="eager" className="object-contain" />
+                {image.video && (
+                  <span className={styles.videoBadge} aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="m9 6 9 6-9 6Z" /></svg>
+                  </span>
+                )}
               </button>
             ))}
           </div>
