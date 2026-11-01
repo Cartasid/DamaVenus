@@ -3,7 +3,7 @@
 ## Aktueller Stand
 - App-Routen sind vorhanden für `/`, `/music`, `/visuals`, `/about`, `/press`, `/contact`, `/privacy`, `/imprint`, `/natuerlich` (`app/.../page.tsx`).
 - `/natuerlich`: Produktseite für „Natürlich by Dama Venus“ (Haarbürste), shopähnliches Layout mit Preis (19,99 €), deaktiviertem „Kaufen“-Button und transparentem „Sold Out“-Banner über dem Produktbild. Nav-Link (♥ Natürlich, pink) in Header/Footer neben Contact verlinkt. Kein echtes Zahlungs-/Checkout-Backend vorhanden — Button ist bewusst nicht-funktional, da Produkt als ausverkauft markiert ist.
-- `/natuerlich`: zweites Produkt „Natürlich by Dama Venus — Lilac Glitter Dream“ (19,99 €, Sold Out) unter dem ersten Produkt; Karussell mit zwei Fotos und einem automatisch abspielenden, stummen Loop-Video (`Naturlich2 3.mp4`). Das erste Produkt hat zusätzlich das Kampagnenfoto `Naturlich 1.jpeg`. Neue Assets sind in `content/dama-venus/assets.ts` registriert; die Galerie (`components/shop/product-gallery.tsx`) unterstützt Video-Slides.
+- `/natuerlich`: zweites Produkt „Natürlich by Dama Venus — Cotton Candy“ (19,99 €, Sold Out) unter dem ersten Produkt; Karussell mit zwei Fotos und einem automatisch abspielenden, stummen Loop-Video (`Naturlich2 3.mp4`). Das erste Produkt hat zusätzlich das Kampagnenfoto `Naturlich 1.jpeg`. Neue Assets sind in `content/dama-venus/assets.ts` registriert; die Galerie (`components/shop/product-gallery.tsx`) unterstützt Video-Slides.
 - Kontakt-Flow ist technisch vorhanden: Formular unter `app/contact/page.tsx`/`app/contact/ContactForm.tsx`, API-Route unter `app/api/contact/route.ts`.
 - SEO-Basisrouten sind vorhanden: `app/robots.ts` und `app/sitemap.ts`.
 - Navigation enthält Legal-Links auf `/privacy` und `/imprint` in `content/data/navigation.data.ts`.

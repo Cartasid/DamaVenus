@@ -16,16 +16,16 @@ const FALLBACK_IMAGE = "/og-default.png";
 export const metadata: Metadata = {
   title: { absolute: "Natürlich by Dama Venus | Hairbrush & Eco Bag" },
   description:
-    "Natürlich by Dama Venus — the Pink Glitter Dream and Lilac Glitter Dream hairbrushes and the Natürlich Eco Bag. Signature accessories for your everyday rituals. Currently sold out.",
+    "Natürlich by Dama Venus — the Pink Glitter Dream and Cotton Candy hairbrushes and the Natürlich Eco Bag. Signature accessories for your everyday rituals. Currently sold out.",
   openGraph: {
     title: "Natürlich by Dama Venus",
-    description: "Pink Glitter Dream and Lilac Glitter Dream hairbrushes and Natürlich Eco Bag — signature accessories for your everyday rituals. Currently sold out.",
+    description: "Pink Glitter Dream and Cotton Candy hairbrushes and Natürlich Eco Bag — signature accessories for your everyday rituals. Currently sold out.",
     url: "/natuerlich",
     images: [{ url: HERO_ASSET?.src ?? FALLBACK_IMAGE }]
   },
   twitter: {
     title: "Natürlich by Dama Venus",
-    description: "Pink Glitter Dream and Lilac Glitter Dream hairbrushes and Natürlich Eco Bag — signature accessories for your everyday rituals. Currently sold out.",
+    description: "Pink Glitter Dream and Cotton Candy hairbrushes and Natürlich Eco Bag — signature accessories for your everyday rituals. Currently sold out.",
     images: [HERO_ASSET?.src ?? FALLBACK_IMAGE]
   },
   alternates: { canonical: "/natuerlich" }
@@ -134,13 +134,13 @@ export default function NatuerlichPage() {
         </div>
       </div>
       <section
-        id="lilac-glitter-dream"
-        aria-labelledby="lilac-glitter-dream-title"
+        id="cotton-candy"
+        aria-labelledby="cotton-candy-title"
         className="mt-24 grid items-start gap-12 border-t pt-16 lg:grid-cols-2 lg:gap-16"
         style={{ borderColor: "rgba(220,14,109,0.25)" }}
       >
         <ProductGallery
-          label="Natürlich Lilac Glitter Dream product images"
+          label="Natürlich Cotton Candy product images"
           images={[
             {
               src: LILAC_HERO_ASSET?.src ?? FALLBACK_IMAGE,
@@ -167,7 +167,7 @@ export default function NatuerlichPage() {
           <p style={{ ...labelStyle, color: "#f0569e" }}>♥ Limited Edition</p>
 
           <h2
-            id="lilac-glitter-dream-title"
+            id="cotton-candy-title"
             className="mt-4 text-primary"
             style={{
               fontFamily: "var(--font-bodoni), Georgia, serif",
@@ -190,12 +190,11 @@ export default function NatuerlichPage() {
               lineHeight: 1.3
             }}
           >
-            Lilac Glitter Dream
+            Cotton Candy
           </p>
 
           <p className="mt-3 text-muted" style={{ fontSize: "1rem", lineHeight: 1.8, maxWidth: "34rem" }}>
-            Calm on the surface, magnetic underneath. An accessory for soft power. Your glow drifts in
-            like a cloud and attracts what you desire.
+            Sweetness is a distraction … this is Cotton Candy Collection.
           </p>
 
           <p className="mt-5 text-muted" style={{ fontSize: "0.92rem", lineHeight: 1.8, maxWidth: "34rem" }}>
