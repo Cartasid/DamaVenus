@@ -91,6 +91,7 @@ const runtimeAssets = parsePrioritizedAssetPaths();
 for (const path of [
   "assets/dama-venus/docs/dama-venus-epk.pdf",
   "assets/dama-venus/docs/dama-venus-epk-en.pdf",
+  "assets/dama-venus/docs/dama-venus-epk-pt.pdf",
   "assets/dama-venus/press/dv_press_epk_document_v01.pdf",
   "assets/dama-venus/press/press-hero-bnj7p-v01.jpg",
   "assets/dama-venus/video/lonely-berlin-day-1.mp4",

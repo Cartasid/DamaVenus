@@ -14,6 +14,8 @@ const imageFormatsByExtension = new Map([
 
 const requiredPublicFiles = [
   'assets/dama-venus/docs/dama-venus-epk.pdf',
+  'assets/dama-venus/docs/dama-venus-epk-en.pdf',
+  'assets/dama-venus/docs/dama-venus-epk-pt.pdf',
   'assets/dama-venus/video/lonely-berlin-day-1.mp4',
 ];
 
@@ -251,14 +253,6 @@ async function ensureNoLegacyPublicCopy() {
 
     if (/https:\/\/open\.spotify\.com\/?(?:["'`\s)])/i.test(source)) {
       violations.push(`${relativePath}: generischer Spotify-Homepage-Link`);
-    }
-
-    if (
-      source.includes('dama-venus-epk-pt.pdf') ||
-      source.includes('EPK — Português') ||
-      source.includes('Portuguese press-kit')
-    ) {
-      violations.push(`${relativePath}: veralteter portugiesischer EPK-Verweis`);
     }
 
     for (const marker of retiredHomepageCopy) {

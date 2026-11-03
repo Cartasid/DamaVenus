@@ -172,14 +172,25 @@ export const pressContent: SectionContent = {
 
 export const pressMaterials: PressMaterialItem[] = [
   {
-    id: "epk",
-    title: "Current Official EPK",
+    id: "epk-en",
+    title: "Current Official EPK — English",
     description:
-      "Current official EPK with biography, release context, press imagery, and contact information.",
+      "Current official EPK in English with biography, release context, press imagery, and contact information.",
     type: "download",
     accessMode: "direct",
-    url: "/assets/dama-venus/docs/dama-venus-epk.pdf",
-    notes: "Canonical source: docs/Dama Venus EPK.pdf.",
+    url: "/assets/dama-venus/docs/dama-venus-epk-en.pdf",
+    notes: "Canonical source: docs/EPK EN.pdf.",
+    asset: { id: "press-epk" }
+  },
+  {
+    id: "epk-pt",
+    title: "EPK Oficial Atual — Português",
+    description:
+      "Press kit eletrônico oficial atual em português, com biografia, contexto de lançamento, imagens de imprensa e contato.",
+    type: "download",
+    accessMode: "direct",
+    url: "/assets/dama-venus/docs/dama-venus-epk-pt.pdf",
+    notes: "Canonical source: docs/EPK PT.pdf.",
     asset: { id: "press-epk" }
   }
 ];

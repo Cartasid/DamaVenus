@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * Marks lazy images as loaded for the existing fade-in treatment.
@@ -8,6 +9,10 @@ import { useEffect } from "react";
  * subtree MutationObserver or one listener per image.
  */
 export default function ImageLoadObserver() {
+  // Re-scan after each client-side navigation so lazy images that were already
+  // complete (cached) when inserted are not left at opacity 0.
+  const pathname = usePathname();
+
   useEffect(() => {
     const markLoaded = (img: HTMLImageElement) => {
       if (img.loading !== "lazy") return;
@@ -32,7 +37,7 @@ export default function ImageLoadObserver() {
       document.removeEventListener("load", handleImageCompletion, true);
       document.removeEventListener("error", handleImageCompletion, true);
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }

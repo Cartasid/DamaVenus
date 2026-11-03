@@ -13,9 +13,10 @@ coverage
 .agents
 .claude
 
-# Docker needs only the canonical EPK source from docs/ during asset preparation.
+# Docker needs only the canonical EPK sources (EN + PT) from docs/ during asset preparation.
 docs/*
-!docs/Dama Venus EPK.pdf
+!docs/EPK EN.pdf
+!docs/EPK PT.pdf
 
 AGENTS.md
 README.md
