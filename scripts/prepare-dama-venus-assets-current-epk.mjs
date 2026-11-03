@@ -7,7 +7,9 @@ import { spawn } from 'node:child_process';
 import sharp from 'sharp';
 
 const projectRoot = process.cwd();
-const canonicalEpk = path.resolve(projectRoot, 'docs/Dama Venus EPK.pdf');
+// Canonical sources: one EPK per language, maintained in docs/.
+const canonicalEpk = path.resolve(projectRoot, 'docs/EPK EN.pdf');
+const canonicalEpkPt = path.resolve(projectRoot, 'docs/EPK PT.pdf');
 const stagedEpk = path.resolve(
   projectRoot,
   'assets-src/dama-venus/curated/dv_curated_press_epk_document_v01.pdf',
@@ -16,9 +18,13 @@ const publicEpk = path.resolve(
   projectRoot,
   'public/assets/dama-venus/docs/dama-venus-epk.pdf',
 );
-const legacyEnglishEpk = path.resolve(
+const publicEpkEn = path.resolve(
   projectRoot,
   'public/assets/dama-venus/docs/dama-venus-epk-en.pdf',
+);
+const publicEpkPt = path.resolve(
+  projectRoot,
+  'public/assets/dama-venus/docs/dama-venus-epk-pt.pdf',
 );
 const generatedPressEpk = path.resolve(
   projectRoot,
@@ -95,24 +101,28 @@ async function normalizeHomeVisualOrientation() {
 }
 
 async function run() {
-  await assertNonEmptyFile(canonicalEpk, 'Kanonisches EPK');
+  await assertNonEmptyFile(canonicalEpk, 'Kanonisches EPK (EN)');
+  await assertNonEmptyFile(canonicalEpkPt, 'Kanonisches EPK (PT)');
 
   await fs.mkdir(path.dirname(stagedEpk), { recursive: true });
   await fs.mkdir(path.dirname(publicEpk), { recursive: true });
 
-  const canonicalHash = await sha256(canonicalEpk);
+  const [canonicalHash, canonicalHashPt] = await Promise.all([
+    sha256(canonicalEpk),
+    sha256(canonicalEpkPt),
+  ]);
 
   try {
-    // docs/Dama Venus EPK.pdf is the single source of truth. The existing
-    // asset pipeline still expects its curated staging path, so provide that
-    // source only for the duration of the build.
+    // docs/EPK EN.pdf and docs/EPK PT.pdf are the single sources of truth.
+    // The existing asset pipeline still expects its curated staging path
+    // (English edition), so provide that source only for the duration of the build.
     await fs.copyFile(canonicalEpk, stagedEpk);
 
-    // Publish one neutral canonical URL for the website. Keep the historical
-    // English URL synchronized only as a backwards-compatible alias so old
-    // bookmarks never serve an outdated press kit.
+    // Publish language-specific downloads. The neutral URL stays an English
+    // alias so old bookmarks never serve an outdated press kit.
     await fs.copyFile(canonicalEpk, publicEpk);
-    await fs.copyFile(canonicalEpk, legacyEnglishEpk);
+    await fs.copyFile(canonicalEpk, publicEpkEn);
+    await fs.copyFile(canonicalEpkPt, publicEpkPt);
 
     const code = await runNodeScript(assetPreparationScript);
     if (code !== 0) {
@@ -124,27 +134,30 @@ async function run() {
     await normalizeHomeVisualOrientation();
 
     await assertNonEmptyFile(publicEpk, 'Öffentliches EPK');
-    await assertNonEmptyFile(legacyEnglishEpk, 'Legacy-EPK-Alias');
+    await assertNonEmptyFile(publicEpkEn, 'Öffentliches EPK (EN)');
+    await assertNonEmptyFile(publicEpkPt, 'Öffentliches EPK (PT)');
     await assertNonEmptyFile(generatedPressEpk, 'Generiertes Press-EPK');
 
-    const [publicHash, legacyHash, generatedHash] = await Promise.all([
+    const [publicHash, enHash, ptHash, generatedHash] = await Promise.all([
       sha256(publicEpk),
-      sha256(legacyEnglishEpk),
+      sha256(publicEpkEn),
+      sha256(publicEpkPt),
       sha256(generatedPressEpk),
     ]);
 
     if (
       publicHash !== canonicalHash ||
-      legacyHash !== canonicalHash ||
-      generatedHash !== canonicalHash
+      enHash !== canonicalHash ||
+      generatedHash !== canonicalHash ||
+      ptHash !== canonicalHashPt
     ) {
       throw new Error(
-        'EPK-Synchronisierung inkonsistent: öffentliche/generierte Datei stimmt nicht mit docs/Dama Venus EPK.pdf überein.',
+        'EPK-Synchronisierung inkonsistent: öffentliche/generierte Dateien stimmen nicht mit docs/EPK EN.pdf bzw. docs/EPK PT.pdf überein.',
       );
     }
 
     console.log(
-      '[epk] docs/Dama Venus EPK.pdf → kanonischer Download + Legacy-Alias + Press-Asset synchronisiert und verifiziert.',
+      '[epk] docs/EPK EN.pdf + docs/EPK PT.pdf → EN/PT-Downloads, neutraler Alias und Press-Asset synchronisiert und verifiziert.',
     );
   } finally {
     // Never keep a generated second source copy around after the build.

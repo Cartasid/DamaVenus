@@ -33,7 +33,7 @@ const labelStyle = {
 export default function PressPage() {
   const introBlock = pressEpkBlocks.find((block) => block.id === "pageIntro");
   const summaryBlock = pressEpkBlocks.find((block) => block.id === "artistSummary");
-  const currentEpk = pressMaterials[0];
+  const epkDownloads = pressMaterials.filter((item) => item.type === "download");
 
   return (
     <div className="pb-28">
@@ -117,44 +117,52 @@ export default function PressPage() {
         <p className="text-muted mb-8" style={labelStyle}>
           Electronic Press Kit
         </p>
-        <div
-          className="max-w-4xl p-10 md:p-14"
-          style={{
-            background: "rgba(200,168,126,0.03)",
-            border: "1px solid rgba(200,168,126,0.1)"
-          }}
-        >
-          <p
-            className="text-accent mb-3"
-            style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}
-          >
-            Current Official Edition
-          </p>
-          <h2
-            className="text-primary mb-5"
-            style={{
-              fontFamily: "var(--font-bodoni), Georgia, serif",
-              fontSize: "clamp(2.4rem, 6vw, 4rem)",
-              fontWeight: 300,
-              lineHeight: 1.02
-            }}
-          >
-            {currentEpk?.title ?? "Current Official EPK"}
-          </h2>
-          <p
-            className="text-muted"
-            style={{ fontSize: "1.05rem", lineHeight: 1.8, maxWidth: "44rem" }}
-          >
-            {currentEpk?.description ??
-              "Current official press kit with biography, release context, press imagery, and contact information."}
-          </p>
-          <a
-            href={currentEpk?.url ?? "/assets/dama-venus/docs/dama-venus-epk.pdf"}
-            download
-            className="mt-9 ghost-btn ghost-btn--lg no-underline inline-block"
-          >
-            Download Current EPK
-          </a>
+        <div className="grid gap-6 md:grid-cols-2 max-w-5xl">
+          {epkDownloads.map((epk) => {
+            const isPt = epk.id === "epk-pt";
+            return (
+              <div
+                key={epk.id}
+                className="p-10 md:p-12"
+                style={{
+                  background: "rgba(200,168,126,0.03)",
+                  border: "1px solid rgba(200,168,126,0.1)"
+                }}
+              >
+                <p
+                  className="text-accent mb-3"
+                  style={{ ...labelStyle, color: "rgba(200,168,126,0.6)" }}
+                >
+                  {isPt ? "Português" : "English"}
+                </p>
+                <h2
+                  className="text-primary mb-5"
+                  style={{
+                    fontFamily: "var(--font-bodoni), Georgia, serif",
+                    fontSize: "clamp(2rem, 4.5vw, 3rem)",
+                    fontWeight: 300,
+                    lineHeight: 1.05
+                  }}
+                >
+                  {epk.title}
+                </h2>
+                <p
+                  className="text-muted"
+                  style={{ fontSize: "1rem", lineHeight: 1.8 }}
+                >
+                  {epk.description}
+                </p>
+                <a
+                  href={epk.url}
+                  download
+                  hrefLang={isPt ? "pt" : "en"}
+                  className="mt-9 ghost-btn ghost-btn--lg no-underline inline-block"
+                >
+                  {isPt ? "Baixar EPK" : "Download EPK"}
+                </a>
+              </div>
+            );
+          })}
         </div>
       </section>
     </div>
